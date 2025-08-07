@@ -1,0 +1,31 @@
+.settings-tabs .mantine-Tabs-list {
+    width: 229px;
+}
+
+.settings-tabs .mantine-Tabs-list button {
+    border: none;
+}
+
+.settings-tabs .mantine-focus-auto {
+    padding: 0;
+}
+
+.settings-tabs .mantine-TextInput-error {
+    color: red;
+    font-size: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .settings-tabs .mantine-Tabs-root {
+        flex-direction: column;
+    }
+
+    .settings-tabs .mantine-Tabs-list {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .settings-tabs .mantine-Tabs-list::before {
+        display: none;
+    }
+}

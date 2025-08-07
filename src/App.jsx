@@ -2,6 +2,7 @@ import { Navbar } from "./components/common/Navbar";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { Footer } from "./components/common/Footer";
+import "./App.css"; 
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,7 +19,7 @@ export default function App() {
   return (
     <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-      <div className={`relative min-h-[calc(100dvh-156px)]`}>
+      <div className={`relative min-h-[calc(100dvh-160px)]`}>
         <Outlet context={{ darkMode, setDarkMode }} />
       </div>
       <Footer darkMode={darkMode} />
