@@ -15,7 +15,16 @@
     font-size: 12px;
 }
 
-@media screen and (max-width: 768px) {
+.mantine-Tabs-tab[data-active='true']:focus {
+    outline: none;
+    background: transparent !important;
+}
+
+.settings-tabs .mantine-Tabs-list::before {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
     .settings-tabs .mantine-Tabs-root {
         flex-direction: column;
     }
@@ -25,7 +34,5 @@
         width: 100%;
     }
 
-    .settings-tabs .mantine-Tabs-list::before {
-        display: none;
-    }
+
 }

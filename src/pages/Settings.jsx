@@ -18,11 +18,15 @@ export const Settings = () => {
       <SubHeader darkMode={darkMode} title="Settings" />
       <div className="settings-tabs py-6 px-4 md:p-0">
         <Tabs value={activeTab} onChange={setActiveTab} orientation="vertical">
-          <Tabs.List className="md:min-h-[calc(100dvh-266px)] border-[#E7E7E7]  md:py-4 md:px-6">
+          <Tabs.List className="md:min-h-[calc(100dvh-266px)] border-r border-[#E7E7E7] dark:border-[#222222]  md:py-4 md:px-6">
             <Tabs.Tab value="Profile">
               <div
                 className={`flex gap-2 items-center py-2 px-3 ${
-                  activeTab === "Profile"
+                  darkMode
+                    ? activeTab === "Profile"
+                      ? "text-white border-white border-b md:border-0"
+                      : "text-[#A1A1A1]"
+                    : activeTab === "Profile"
                     ? "text-[#272727] border-b border-[#272727] md:border-0"
                     : "text-[#A1A1A1]"
                 }`}
@@ -34,8 +38,12 @@ export const Settings = () => {
             <hr className="hidden md:block border-[#E7E7E7] my-4" />
             <Tabs.Tab value="Password">
               <div
-                className={`flex gap-2 items-center py-2 px-3 ${
-                  activeTab === "Password"
+                className={`flex gap-2 items-center py-2 px-3 hover:bg-transparent ${
+                  darkMode
+                    ? activeTab === "Password"
+                      ? "text-white border-white border-b  md:border-0"
+                      : "text-[#A1A1A1]"
+                    : activeTab === "Password"
                     ? "text-[#272727] border-b border-[#272727] md:border-0"
                     : "text-[#A1A1A1]"
                 }`}

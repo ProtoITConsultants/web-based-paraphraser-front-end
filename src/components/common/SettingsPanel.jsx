@@ -1,9 +1,39 @@
+import { useEffect, useRef } from "react";
 import { Settings, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
+  const panelRef = useRef(null); // Create a ref for the settings panel
+
+  // Close the settings panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (panelRef.current && !panelRef.current.contains(event.target)) {
+        onClose(); // Call the `onClose` function passed from parent to close the panel
+      }
+    };
+
+    // Add event listener for clicks outside
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
+  // Apply dark mode to the body element when `darkMode` changes
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
+
   return (
     <div
+      ref={panelRef} // Attach the ref to the settings panel div
       className={`rounded-xl shadow-lg border p-4 w-64 transition-colors duration-300 ${
         darkMode ? "bg-[#101214] border-gray-900" : "bg-white border-gray-200"
       }`}

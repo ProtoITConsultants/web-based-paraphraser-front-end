@@ -80,7 +80,7 @@ export const Profile = () => {
         <div className="flex gap-3 flex-col md:flex-row">
           {/* First Name Input */}
           <div className="flex flex-col w-full mb-4">
-            <div className="flex flex-col h-[80px] bg-[#F6F6F6] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+            <div className="flex flex-col h-[80px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
               <TextInput
                 {...form.getInputProps("firstName")}
                 id="firstName"
@@ -98,7 +98,7 @@ export const Profile = () => {
 
           {/* Last Name Input */}
           <div className="flex flex-col w-full mb-4">
-            <div className="flex flex-col h-[80px] bg-[#F6F6F6] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+            <div className="flex flex-col h-[80px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
               <TextInput
                 {...form.getInputProps("lastName")}
                 id="lastName"
@@ -111,14 +111,13 @@ export const Profile = () => {
                     "w-full border-none outline-none focus:ring-0 focus:border-none",
                 }}
               />
-
             </div>
           </div>
         </div>
 
         {/* Email Input */}
         <div className="flex flex-col mb-4">
-          <div className="flex flex-col h-[80px] bg-[#F6F6F6] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+          <div className="flex flex-col h-[80px] bg-[#F6F6F6]  dark:bg-[#17191C]  border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
             <TextInput
               {...form.getInputProps("email")}
               id="email"
