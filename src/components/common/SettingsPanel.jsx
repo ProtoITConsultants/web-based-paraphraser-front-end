@@ -69,7 +69,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
       </div>
 
       {/* Settings Option Link */}
-      <div className="mt-6">
+      {/* <div className="mt-6">
         <Link
           to="/settings"
           className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 hover:text-lime-400"
@@ -87,7 +87,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
             Settings
           </span>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
