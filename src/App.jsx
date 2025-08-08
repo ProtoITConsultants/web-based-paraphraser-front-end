@@ -6,7 +6,6 @@ import "./App.css";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  // Toggle dark mode class on root element
     useEffect(() => {
       const root = document.documentElement;
       if (darkMode) {

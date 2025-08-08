@@ -5,13 +5,18 @@ import "./index.css";
 import { router } from "./Router.jsx"; 
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import QueryProvider from "./providers/QueryProvider.jsx";
+import { Toaster } from "sonner";
 const theme = createTheme({
 });
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <MantineProvider theme={theme}>
-      <RouterProvider router={router} />
+      <QueryProvider>
+        <RouterProvider router={router} />
+      </QueryProvider>
+      <Toaster position="bottom-right" />
     </MantineProvider>
   </StrictMode>
 );
