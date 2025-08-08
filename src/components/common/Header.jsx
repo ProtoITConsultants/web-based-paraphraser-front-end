@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Header({ showSettings, setShowSettings, darkMode }) {
   return (
     <div
-      className={`flex py-4 px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
+      className={`flex py-4 px-8 border-b border-gray-700 items-center justify-between lg:justify-start ${
         darkMode ? "bg-[#101214]" : "bg-white"
       } transition-colors duration-300`}
     >
