@@ -1,41 +1,57 @@
-import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const { darkMode } = useOutletContext()
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { darkMode } = useOutletContext();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     const formData = {
       email,
       password,
-      rememberMe
-    }
-    
-    console.log('Login Form Data:', formData)
-  }
+      rememberMe,
+    };
+
+    console.log("Login Form Data:", formData);
+  };
 
   return (
-    <div className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${darkMode ? '' : 'bg-white'}`}>
+    <div
+      className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${
+        darkMode ? "" : "bg-white"
+      }`}
+    >
       <div className="w-full overflow-hidden">
         <div className="flex">
           {/* Left side - Form */}
           <div className="flex-1 p-8 lg:p-12 xl:p-16">
             {/* Title */}
-            <h1 className={`text-3xl lg:text-4xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} mb-8`}>
+            <h1
+              className={`text-3xl lg:text-4xl font-bold ${
+                darkMode ? "text-white" : "text-gray-900"
+              } mb-8`}
+            >
               Login to your account
             </h1>
 
             {/* Form */}
             <div className="space-y-6">
               {/* Email field */}
-              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
                   Email Address
                 </label>
                 <input
@@ -43,13 +59,25 @@ export default function LoginForm() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
+                  className={`w-full bg-transparent border-none outline-none ${
+                    darkMode
+                      ? "placeholder-gray-500 text-white"
+                      : "placeholder-gray-400 text-gray-900"
+                  }`}
                 />
               </div>
 
               {/* Password field */}
-              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
                   Password
                 </label>
                 <div className="relative">
@@ -58,12 +86,20 @@ export default function LoginForm() {
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
+                    className={`w-full bg-transparent border-none outline-none ${
+                      darkMode
+                        ? "placeholder-gray-500 text-white"
+                        : "placeholder-gray-400 text-gray-900"
+                    } pr-8`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${darkMode ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}
+                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
+                      darkMode
+                        ? "text-gray-500 hover:text-gray-300"
+                        : "text-gray-400 hover:text-gray-600"
+                    }`}
                   >
                     <svg
                       className="w-5 h-5"
@@ -103,31 +139,45 @@ export default function LoginForm() {
                   />
                   <label
                     htmlFor="remember-me"
-                    className={`ml-2 text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                    className={`ml-2 text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
                   >
                     Remember me
                   </label>
                 </div>
                 <a
                   href="#"
-                  className={`text-sm ${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
+                  className={`text-sm ${
+                    darkMode ? "text-lime-400" : "text-gray-900"
+                  } font-medium hover:underline`}
                 >
                   Forgot password
                 </a>
               </div>
-
-              {/* Login button */}
-              <button
-                onClick={handleSubmit}
-                className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-xl transition-colors duration-200"
-              >
-                Login and Paraphrase
-              </button>
+              <div className="flex items-center gap-4">
+                {/* Login button */}
+                <button
+                  className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                >
+                  Continue as Guest
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                >
+                  Login and Paraphrase
+                </button>
+              </div>
 
               {/* Google login button */}
               <button
                 type="button"
-                className={`w-full cursor-pointer ${darkMode ? 'bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'} border font-medium py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center gap-3`}
+                className={`w-full cursor-pointer ${
+                  darkMode
+                    ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
+                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
+                } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -152,10 +202,16 @@ export default function LoginForm() {
 
               {/* Signup link */}
               <div className="text-center">
-                <span className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Don't have an account? </span>
+                <span
+                  className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
+                >
+                  Don't have an account?{" "}
+                </span>
                 <a
                   href="#"
-                  className={`${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
+                  className={`${
+                    darkMode ? "text-lime-400" : "text-gray-900"
+                  } font-medium hover:underline`}
                 >
                   Sign up
                 </a>
@@ -165,10 +221,14 @@ export default function LoginForm() {
 
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
-            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-3xl">
+            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <svg className="w-full h-full object-cover" viewBox="0 0 400 600" fill="none">
+                <svg
+                  className="w-full h-full object-cover"
+                  viewBox="0 0 400 600"
+                  fill="none"
+                >
                   {/* Decorative leaf shapes */}
                   <path
                     d="M100 150C120 130, 180 120, 200 160C220 200, 180 240, 140 230C100 220, 80 170, 100 150Z"
@@ -202,7 +262,7 @@ export default function LoginForm() {
                   />
                 </svg>
               </div>
-              
+
               {/* Gradient overlay for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
             </div>
@@ -210,5 +270,5 @@ export default function LoginForm() {
         </div>
       </div>
     </div>
-  )
+  );
 }
