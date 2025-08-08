@@ -14,7 +14,7 @@ export default function ParaphrasingTool( { darkMode, setDarkMode }) {
         setOutputText("");
         try {
           const apiProtocol = window.location.protocol === 'https:' ? 'https' : 'http';
-          const apiUrl = `${apiProtocol}://35.193.25.179:8000/paraphraser`;
+          const apiUrl = `https://api.paraphraser.co/paraphraser`;
           const response = await fetch(apiUrl, {
             method: "POST",
             headers: {
