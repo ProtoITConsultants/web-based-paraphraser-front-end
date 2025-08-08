@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -26,8 +26,7 @@ export default function LoginForm() {
         darkMode ? "" : "bg-white"
       }`}
     >
-      <div className="w-full overflow-hidden">
-        <div className="flex">
+        <div className="flex w-full px-10">
           {/* Left side - Form */}
           <div className="flex-1 p-8 lg:p-12 xl:p-16">
             {/* Title */}
@@ -205,18 +204,17 @@ export default function LoginForm() {
                 >
                   Don't have an account?{" "}
                 </span>
-                <a
-                  href="#"
+                <Link
+                  to="/signup"
                   className={`${
                     darkMode ? "text-lime-400" : "text-gray-900"
                   } font-medium hover:underline`}
                 >
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </div>
-
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
@@ -233,7 +231,6 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
