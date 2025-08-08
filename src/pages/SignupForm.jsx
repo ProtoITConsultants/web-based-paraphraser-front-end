@@ -1,13 +1,24 @@
 import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
-  const { darkMode } = useOutletContext()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [darkMode, setDarkMode] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
+    
+    const formData = {
+      firstName,
+      lastName,
+      email,
+      password
+    }
+    
+    console.log('Signup Form Data:', formData)
   }
 
   return (
@@ -32,6 +43,8 @@ export default function SignupForm() {
                   <input
                     type="text"
                     placeholder="Enter your first name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
                   />
                 </div>
@@ -42,6 +55,8 @@ export default function SignupForm() {
                   <input
                     type="text"
                     placeholder="Enter your last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
                   />
                 </div>
@@ -55,6 +70,8 @@ export default function SignupForm() {
                 <input
                   type="email"
                   placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
                 />
               </div>
@@ -68,6 +85,8 @@ export default function SignupForm() {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
                   />
                   <button

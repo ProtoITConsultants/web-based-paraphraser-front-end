@@ -4,11 +4,20 @@ import { useOutletContext } from 'react-router-dom'
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const { darkMode } = useOutletContext()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission here
+    
+    const formData = {
+      email,
+      password,
+      rememberMe
+    }
+    
+    console.log('Login Form Data:', formData)
   }
 
   return (
@@ -32,6 +41,8 @@ export default function LoginForm() {
                 <input
                   type="email"
                   placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
                 />
               </div>
@@ -45,6 +56,8 @@ export default function LoginForm() {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
                   />
                   <button
@@ -141,7 +154,7 @@ export default function LoginForm() {
               <div className="text-center">
                 <span className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Don't have an account? </span>
                 <a
-                  href="/signup"
+                  href="#"
                   className={`${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
                 >
                   Sign up
