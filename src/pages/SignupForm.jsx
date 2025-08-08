@@ -1,3 +1,4 @@
+import { useState } from "react";
 <<<<<<< HEAD
 import { useState } from "react";
 
@@ -16,6 +17,11 @@ export default function SignupForm() {
       firstName,
       lastName,
       email,
+      password,
+    };
+
+    console.log("Signup Form Data:", formData);
+  };
       password,
     };
 
@@ -42,6 +48,11 @@ export default function SignupForm() {
   }
 
   return (
+    <div
+      className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${
+        darkMode ? "" : "bg-white"
+      }`}
+    >
     <div className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${darkMode ? '' : 'bg-white'}`}>
 >>>>>>> 65a80fc (Made login/Signup Pages)
       <div className="w-full overflow-hidden">
@@ -49,6 +60,11 @@ export default function SignupForm() {
           {/* Left side - Form */}
           <div className="flex-1 p-8 lg:p-12 xl:p-16">
             {/* Title */}
+            <h1
+              className={`text-3xl lg:text-4xl font-bold ${
+                darkMode ? "text-white" : "text-gray-900"
+              } mb-8`}
+            >
 <<<<<<< HEAD
             <h1
               className={`text-3xl lg:text-4xl font-bold ${
@@ -65,6 +81,16 @@ export default function SignupForm() {
             <div className="space-y-6">
               {/* Name fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  className={`${
+                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                  } rounded-3xl p-4`}
+                >
+                  <label
+                    className={`block text-sm font-medium ${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    } mb-2`}
+                  >
 <<<<<<< HEAD
                 <div
                   className={`${
@@ -93,6 +119,11 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     }`}
+                    className={`w-full bg-transparent border-none outline-none ${
+                      darkMode
+                        ? "placeholder-gray-500 text-white"
+                        : "placeholder-gray-400 text-gray-900"
+                    }`}
                   />
                 </div>
                 <div
@@ -109,6 +140,16 @@ export default function SignupForm() {
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
                   />
                 </div>
+                <div
+                  className={`${
+                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                  } rounded-3xl p-4`}
+                >
+                  <label
+                    className={`block text-sm font-medium ${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    } mb-2`}
+                  >
                 <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
                   <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
 >>>>>>> 65a80fc (Made login/Signup Pages)
@@ -125,6 +166,11 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     }`}
+                    className={`w-full bg-transparent border-none outline-none ${
+                      darkMode
+                        ? "placeholder-gray-500 text-white"
+                        : "placeholder-gray-400 text-gray-900"
+                    }`}
 =======
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
 >>>>>>> 65a80fc (Made login/Signup Pages)
@@ -133,6 +179,16 @@ export default function SignupForm() {
               </div>
 
               {/* Email field */}
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
 <<<<<<< HEAD
               <div
                 className={`${
@@ -161,6 +217,11 @@ export default function SignupForm() {
                       ? "placeholder-gray-500 text-white"
                       : "placeholder-gray-400 text-gray-900"
                   }`}
+                  className={`w-full bg-transparent border-none outline-none ${
+                    darkMode
+                      ? "placeholder-gray-500 text-white"
+                      : "placeholder-gray-400 text-gray-900"
+                  }`}
 =======
                   className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
 >>>>>>> 65a80fc (Made login/Signup Pages)
@@ -168,6 +229,16 @@ export default function SignupForm() {
               </div>
 
               {/* Password field */}
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
 <<<<<<< HEAD
               <div
                 className={`${
@@ -197,6 +268,11 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     } pr-8`}
+                    className={`w-full bg-transparent border-none outline-none ${
+                      darkMode
+                        ? "placeholder-gray-500 text-white"
+                        : "placeholder-gray-400 text-gray-900"
+                    } pr-8`}
 =======
                     className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
 >>>>>>> 65a80fc (Made login/Signup Pages)
@@ -204,6 +280,11 @@ export default function SignupForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
+                      darkMode
+                        ? "text-gray-500 hover:text-gray-300"
+                        : "text-gray-400 hover:text-gray-600"
+                    }`}
 <<<<<<< HEAD
                     className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
                       darkMode
@@ -269,6 +350,11 @@ export default function SignupForm() {
               {/* Google sign up button */}
               <button
                 type="button"
+                className={`w-full cursor-pointer ${
+                  darkMode
+                    ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
+                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
+                } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
 <<<<<<< HEAD
                 className={`w-full cursor-pointer ${
                   darkMode
@@ -302,6 +388,11 @@ export default function SignupForm() {
 
               {/* Login link */}
               <div className="text-center">
+                <span
+                  className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
+                >
+                  Do you have an account?{" "}
+                </span>
 <<<<<<< HEAD
                 <span
                   className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
@@ -317,6 +408,9 @@ export default function SignupForm() {
                 <span className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Do you have an account? </span>
                 <a
                   href="#"
+                  className={`${
+                    darkMode ? "text-lime-400" : "text-gray-900"
+                  } font-medium hover:underline`}
                   className={`${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
 >>>>>>> 65a80fc (Made login/Signup Pages)
                 >
@@ -328,6 +422,7 @@ export default function SignupForm() {
 
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
+            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
 <<<<<<< HEAD
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
@@ -376,6 +471,7 @@ export default function SignupForm() {
                   />
                 </svg>
               </div>
+
 <<<<<<< HEAD
 
 =======
@@ -388,10 +484,12 @@ export default function SignupForm() {
         </div>
       </div>
     </div>
+  );
 <<<<<<< HEAD
   );
 }
 =======
   )
 }
+
 >>>>>>> 65a80fc (Made login/Signup Pages)

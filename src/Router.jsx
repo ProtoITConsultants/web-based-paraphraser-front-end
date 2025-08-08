@@ -7,6 +7,7 @@ import { Disclaimer } from "./pages/Disclaimer";
 import { Settings } from "./pages/Settings";
 import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
+import { Settings } from "./pages/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupForm />,
+
 
       },
       {
