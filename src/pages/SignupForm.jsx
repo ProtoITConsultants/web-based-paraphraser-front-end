@@ -186,7 +186,7 @@ export default function SignupForm() {
                   onClick={handleSubmit}
                   className="w-full border border-lime-400 cursor-pointet text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
-                  Sign up
+                  Continue as Guest
                 </button>
                 <button
                   onClick={handleSubmit}
