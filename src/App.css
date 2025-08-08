@@ -24,6 +24,15 @@
     display: none;
 }
 
+.mantine-PasswordInput-input {
+    background: transparent !important;
+    border: none !important;
+}
+
+.dark .mantine-PasswordInput-input {
+    color: white;
+}
+
 @media screen and (max-width: 767px) {
     .settings-tabs .mantine-Tabs-root {
         flex-direction: column;

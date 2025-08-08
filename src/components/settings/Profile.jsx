@@ -78,7 +78,6 @@ export const Profile = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="flex gap-3 flex-col md:flex-row">
-          {/* First Name Input */}
           <div className="flex flex-col w-full mb-4">
             <div className="flex flex-col h-[80px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
               <TextInput
@@ -114,8 +113,6 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-
-        {/* Email Input */}
         <div className="flex flex-col mb-4">
           <div className="flex flex-col h-[80px] bg-[#F6F6F6]  dark:bg-[#17191C]  border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
             <TextInput
@@ -132,7 +129,6 @@ export const Profile = () => {
             />
           </div>
         </div>
-
         <Button
           unstyled
           type="submit"

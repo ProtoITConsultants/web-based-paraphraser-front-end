@@ -35,7 +35,7 @@ export const Settings = () => {
                 <h4 className="text-[18px]/[100%]">Profile</h4>
               </div>
             </Tabs.Tab>
-            <hr className="hidden md:block border-[#E7E7E7] my-4" />
+            <hr className="hidden md:block border-[#E7E7E7] dark:border-[#222222] my-4" />
             <Tabs.Tab value="Password">
               <div
                 className={`flex gap-2 items-center py-2 px-3 hover:bg-transparent ${
