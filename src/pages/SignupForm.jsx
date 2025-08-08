@@ -427,7 +427,8 @@ export default function SignupForm() {
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <svg
+                <img
+                  src="/Rectangle 34624674.png"
                   className="w-full h-full object-cover"
                   viewBox="0 0 400 600"
                   fill="none"

@@ -157,9 +157,7 @@ export default function LoginForm() {
               </div>
               <div className="flex items-center gap-4">
                 {/* Login button */}
-                <button
-                  className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
-                >
+                <button className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200">
                   Continue as Guest
                 </button>
                 <button
@@ -224,43 +222,10 @@ export default function LoginForm() {
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <svg
+                <img
+                  src="/Rectangle 34624674 (1).png"
                   className="w-full h-full object-cover"
-                  viewBox="0 0 400 600"
-                  fill="none"
-                >
-                  {/* Decorative leaf shapes */}
-                  <path
-                    d="M100 150C120 130, 180 120, 200 160C220 200, 180 240, 140 230C100 220, 80 170, 100 150Z"
-                    fill="rgba(251, 191, 36, 0.6)"
-                    transform="rotate(15)"
-                  />
-                  <path
-                    d="M300 250C320 230, 380 220, 400 260C420 300, 380 340, 340 330C300 320, 280 270, 300 250Z"
-                    fill="rgba(59, 130, 246, 0.4)"
-                    transform="rotate(-20)"
-                  />
-                  <path
-                    d="M150 350C170 330, 230 320, 250 360C270 400, 230 440, 190 430C150 420, 130 370, 150 350Z"
-                    fill="rgba(251, 191, 36, 0.7)"
-                    transform="rotate(30)"
-                  />
-                  <path
-                    d="M50 450C70 430, 130 420, 150 460C170 500, 130 540, 90 530C50 520, 30 470, 50 450Z"
-                    fill="rgba(29, 78, 216, 0.5)"
-                    transform="rotate(-45)"
-                  />
-                  <path
-                    d="M320 100C340 80, 400 70, 420 110C440 150, 400 190, 360 180C320 170, 300 120, 320 100Z"
-                    fill="rgba(251, 191, 36, 0.5)"
-                    transform="rotate(60)"
-                  />
-                  <path
-                    d="M200 500C220 480, 280 470, 300 510C320 550, 280 590, 240 580C200 570, 180 520, 200 500Z"
-                    fill="rgba(59, 130, 246, 0.6)"
-                    transform="rotate(-30)"
-                  />
-                </svg>
+                />
               </div>
 
               {/* Gradient overlay for depth */}
