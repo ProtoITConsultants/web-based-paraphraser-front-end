@@ -1,6 +1,4 @@
 import { useState } from "react";
-<<<<<<< HEAD
-import { useState } from "react";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,11 +20,6 @@ export default function SignupForm() {
 
     console.log("Signup Form Data:", formData);
   };
-      password,
-    };
-
-    console.log("Signup Form Data:", formData);
-  };
 
   return (
     <div
@@ -34,27 +27,6 @@ export default function SignupForm() {
         darkMode ? "" : "bg-white"
       }`}
     >
-=======
-import { useState } from 'react'
-import { useOutletContext } from 'react-router-dom'
-
-export default function SignupForm() {
-  const [showPassword, setShowPassword] = useState(false)
-  const { darkMode } = useOutletContext()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission here
-  }
-
-  return (
-    <div
-      className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${
-        darkMode ? "" : "bg-white"
-      }`}
-    >
-    <div className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${darkMode ? '' : 'bg-white'}`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
       <div className="w-full overflow-hidden">
         <div className="flex">
           {/* Left side - Form */}
@@ -65,15 +37,6 @@ export default function SignupForm() {
                 darkMode ? "text-white" : "text-gray-900"
               } mb-8`}
             >
-<<<<<<< HEAD
-            <h1
-              className={`text-3xl lg:text-4xl font-bold ${
-                darkMode ? "text-white" : "text-gray-900"
-              } mb-8`}
-            >
-=======
-            <h1 className={`text-3xl lg:text-4xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} mb-8`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
               Create an account
             </h1>
 
@@ -91,27 +54,11 @@ export default function SignupForm() {
                       darkMode ? "text-gray-300" : "text-gray-700"
                     } mb-2`}
                   >
-<<<<<<< HEAD
-                <div
-                  className={`${
-                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                  } rounded-3xl p-4`}
-                >
-                  <label
-                    className={`block text-sm font-medium ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    } mb-2`}
-                  >
-=======
-                <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                  <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
                     First Name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your first name"
-<<<<<<< HEAD
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -119,11 +66,6 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     }`}
-                    className={`w-full bg-transparent border-none outline-none ${
-                      darkMode
-                        ? "placeholder-gray-500 text-white"
-                        : "placeholder-gray-400 text-gray-900"
-                    }`}
                   />
                 </div>
                 <div
@@ -136,29 +78,11 @@ export default function SignupForm() {
                       darkMode ? "text-gray-300" : "text-gray-700"
                     } mb-2`}
                   >
-=======
-                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
-                  />
-                </div>
-                <div
-                  className={`${
-                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                  } rounded-3xl p-4`}
-                >
-                  <label
-                    className={`block text-sm font-medium ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    } mb-2`}
-                  >
-                <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                  <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
                     Last Name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your last name"
-<<<<<<< HEAD
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -166,14 +90,6 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     }`}
-                    className={`w-full bg-transparent border-none outline-none ${
-                      darkMode
-                        ? "placeholder-gray-500 text-white"
-                        : "placeholder-gray-400 text-gray-900"
-                    }`}
-=======
-                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
->>>>>>> 65a80fc (Made login/Signup Pages)
                   />
                 </div>
               </div>
@@ -189,27 +105,11 @@ export default function SignupForm() {
                     darkMode ? "text-gray-300" : "text-gray-700"
                   } mb-2`}
                 >
-<<<<<<< HEAD
-              <div
-                className={`${
-                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                } rounded-3xl p-4`}
-              >
-                <label
-                  className={`block text-sm font-medium ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  } mb-2`}
-                >
-=======
-              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
                   Email Address
                 </label>
                 <input
                   type="email"
                   placeholder="Enter your email address"
-<<<<<<< HEAD
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={`w-full bg-transparent border-none outline-none ${
@@ -217,14 +117,6 @@ export default function SignupForm() {
                       ? "placeholder-gray-500 text-white"
                       : "placeholder-gray-400 text-gray-900"
                   }`}
-                  className={`w-full bg-transparent border-none outline-none ${
-                    darkMode
-                      ? "placeholder-gray-500 text-white"
-                      : "placeholder-gray-400 text-gray-900"
-                  }`}
-=======
-                  className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
->>>>>>> 65a80fc (Made login/Signup Pages)
                 />
               </div>
 
@@ -239,28 +131,12 @@ export default function SignupForm() {
                     darkMode ? "text-gray-300" : "text-gray-700"
                   } mb-2`}
                 >
-<<<<<<< HEAD
-              <div
-                className={`${
-                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                } rounded-3xl p-4`}
-              >
-                <label
-                  className={`block text-sm font-medium ${
-                    darkMode ? "text-gray-300" : "text-gray-700"
-                  } mb-2`}
-                >
-=======
-              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
-                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
->>>>>>> 65a80fc (Made login/Signup Pages)
                   Password
                 </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-<<<<<<< HEAD
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -268,14 +144,6 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     } pr-8`}
-                    className={`w-full bg-transparent border-none outline-none ${
-                      darkMode
-                        ? "placeholder-gray-500 text-white"
-                        : "placeholder-gray-400 text-gray-900"
-                    } pr-8`}
-=======
-                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
->>>>>>> 65a80fc (Made login/Signup Pages)
                   />
                   <button
                     type="button"
@@ -285,15 +153,6 @@ export default function SignupForm() {
                         ? "text-gray-500 hover:text-gray-300"
                         : "text-gray-400 hover:text-gray-600"
                     }`}
-<<<<<<< HEAD
-                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
-                      darkMode
-                        ? "text-gray-500 hover:text-gray-300"
-                        : "text-gray-400 hover:text-gray-600"
-                    }`}
-=======
-                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${darkMode ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}
->>>>>>> 65a80fc (Made login/Signup Pages)
                   >
                     <svg
                       className="w-5 h-5"
@@ -321,7 +180,6 @@ export default function SignupForm() {
                 </div>
               </div>
 
-<<<<<<< HEAD
               <div className="flex items-center gap-4">
                 {/* Sign up button */}
                 <button
@@ -337,15 +195,6 @@ export default function SignupForm() {
                   Sign up
                 </button>
               </div>
-=======
-              {/* Sign up button */}
-              <button
-                onClick={handleSubmit}
-                className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-xl transition-colors duration-200"
-              >
-                Sign up
-              </button>
->>>>>>> 65a80fc (Made login/Signup Pages)
 
               {/* Google sign up button */}
               <button
@@ -355,15 +204,6 @@ export default function SignupForm() {
                     ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
                     : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
                 } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
-<<<<<<< HEAD
-                className={`w-full cursor-pointer ${
-                  darkMode
-                    ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
-                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
-                } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
-=======
-                className={`w-full cursor-pointer ${darkMode ? 'bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'} border font-medium py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center gap-3`}
->>>>>>> 65a80fc (Made login/Signup Pages)
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -393,26 +233,11 @@ export default function SignupForm() {
                 >
                   Do you have an account?{" "}
                 </span>
-<<<<<<< HEAD
-                <span
-                  className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
-                >
-                  Do you have an account?{" "}
-                </span>
                 <a
                   href="#"
                   className={`${
                     darkMode ? "text-lime-400" : "text-gray-900"
                   } font-medium hover:underline`}
-=======
-                <span className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Do you have an account? </span>
-                <a
-                  href="#"
-                  className={`${
-                    darkMode ? "text-lime-400" : "text-gray-900"
-                  } font-medium hover:underline`}
-                  className={`${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
->>>>>>> 65a80fc (Made login/Signup Pages)
                 >
                   Login
                 </a>
@@ -423,61 +248,14 @@ export default function SignupForm() {
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
-<<<<<<< HEAD
-            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
                 <img
                   src="/Rectangle 34624674.png"
                   className="w-full h-full object-cover"
-                  viewBox="0 0 400 600"
-                  fill="none"
-                >
-=======
-            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-3xl">
-              {/* Abstract leaf pattern overlay */}
-              <div className="absolute inset-0 opacity-80">
-                <svg className="w-full h-full object-cover" viewBox="0 0 400 600" fill="none">
->>>>>>> 65a80fc (Made login/Signup Pages)
-                  {/* Decorative leaf shapes */}
-                  <path
-                    d="M100 150C120 130, 180 120, 200 160C220 200, 180 240, 140 230C100 220, 80 170, 100 150Z"
-                    fill="rgba(251, 191, 36, 0.6)"
-                    transform="rotate(15)"
-                  />
-                  <path
-                    d="M300 250C320 230, 380 220, 400 260C420 300, 380 340, 340 330C300 320, 280 270, 300 250Z"
-                    fill="rgba(59, 130, 246, 0.4)"
-                    transform="rotate(-20)"
-                  />
-                  <path
-                    d="M150 350C170 330, 230 320, 250 360C270 400, 230 440, 190 430C150 420, 130 370, 150 350Z"
-                    fill="rgba(251, 191, 36, 0.7)"
-                    transform="rotate(30)"
-                  />
-                  <path
-                    d="M50 450C70 430, 130 420, 150 460C170 500, 130 540, 90 530C50 520, 30 470, 50 450Z"
-                    fill="rgba(29, 78, 216, 0.5)"
-                    transform="rotate(-45)"
-                  />
-                  <path
-                    d="M320 100C340 80, 400 70, 420 110C440 150, 400 190, 360 180C320 170, 300 120, 320 100Z"
-                    fill="rgba(251, 191, 36, 0.5)"
-                    transform="rotate(60)"
-                  />
-                  <path
-                    d="M200 500C220 480, 280 470, 300 510C320 550, 280 590, 240 580C200 570, 180 520, 200 500Z"
-                    fill="rgba(59, 130, 246, 0.6)"
-                    transform="rotate(-30)"
-                  />
-                </svg>
+                />
               </div>
 
-<<<<<<< HEAD
-
-=======
-              
->>>>>>> 65a80fc (Made login/Signup Pages)
               {/* Gradient overlay for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
             </div>
@@ -486,11 +264,4 @@ export default function SignupForm() {
       </div>
     </div>
   );
-<<<<<<< HEAD
-  );
 }
-=======
-  )
-}
-
->>>>>>> 65a80fc (Made login/Signup Pages)
