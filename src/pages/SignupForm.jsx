@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 
 export default function SignupForm() {
@@ -27,16 +28,36 @@ export default function SignupForm() {
         darkMode ? "" : "bg-white"
       }`}
     >
+=======
+import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
+
+export default function SignupForm() {
+  const [showPassword, setShowPassword] = useState(false)
+  const { darkMode } = useOutletContext()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Handle form submission here
+  }
+
+  return (
+    <div className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${darkMode ? '' : 'bg-white'}`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
       <div className="w-full overflow-hidden">
         <div className="flex">
           {/* Left side - Form */}
           <div className="flex-1 p-8 lg:p-12 xl:p-16">
             {/* Title */}
+<<<<<<< HEAD
             <h1
               className={`text-3xl lg:text-4xl font-bold ${
                 darkMode ? "text-white" : "text-gray-900"
               } mb-8`}
             >
+=======
+            <h1 className={`text-3xl lg:text-4xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} mb-8`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
               Create an account
             </h1>
 
@@ -44,6 +65,7 @@ export default function SignupForm() {
             <div className="space-y-6">
               {/* Name fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<<<<<<< HEAD
                 <div
                   className={`${
                     darkMode ? "bg-[#17191C]" : "bg-gray-50"
@@ -54,11 +76,16 @@ export default function SignupForm() {
                       darkMode ? "text-gray-300" : "text-gray-700"
                     } mb-2`}
                   >
+=======
+                <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
+                  <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
                     First Name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your first name"
+<<<<<<< HEAD
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -78,11 +105,19 @@ export default function SignupForm() {
                       darkMode ? "text-gray-300" : "text-gray-700"
                     } mb-2`}
                   >
+=======
+                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
+                  />
+                </div>
+                <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
+                  <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
                     Last Name
                   </label>
                   <input
                     type="text"
                     placeholder="Enter your last name"
+<<<<<<< HEAD
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -90,11 +125,15 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     }`}
+=======
+                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   />
                 </div>
               </div>
 
               {/* Email field */}
+<<<<<<< HEAD
               <div
                 className={`${
                   darkMode ? "bg-[#17191C]" : "bg-gray-50"
@@ -105,11 +144,16 @@ export default function SignupForm() {
                     darkMode ? "text-gray-300" : "text-gray-700"
                   } mb-2`}
                 >
+=======
+              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   Email Address
                 </label>
                 <input
                   type="email"
                   placeholder="Enter your email address"
+<<<<<<< HEAD
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={`w-full bg-transparent border-none outline-none ${
@@ -117,10 +161,14 @@ export default function SignupForm() {
                       ? "placeholder-gray-500 text-white"
                       : "placeholder-gray-400 text-gray-900"
                   }`}
+=======
+                  className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'}`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
                 />
               </div>
 
               {/* Password field */}
+<<<<<<< HEAD
               <div
                 className={`${
                   darkMode ? "bg-[#17191C]" : "bg-gray-50"
@@ -131,12 +179,17 @@ export default function SignupForm() {
                     darkMode ? "text-gray-300" : "text-gray-700"
                   } mb-2`}
                 >
+=======
+              <div className={`${darkMode ? 'bg-[#17191C]' : 'bg-gray-50'} rounded-xl p-4`}>
+                <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   Password
                 </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
+<<<<<<< HEAD
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
@@ -144,15 +197,22 @@ export default function SignupForm() {
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
                     } pr-8`}
+=======
+                    className={`w-full bg-transparent border-none outline-none ${darkMode ? 'placeholder-gray-500 text-white' : 'placeholder-gray-400 text-gray-900'} pr-8`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
+<<<<<<< HEAD
                     className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
                       darkMode
                         ? "text-gray-500 hover:text-gray-300"
                         : "text-gray-400 hover:text-gray-600"
                     }`}
+=======
+                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${darkMode ? 'text-gray-500 hover:text-gray-300' : 'text-gray-400 hover:text-gray-600'}`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   >
                     <svg
                       className="w-5 h-5"
@@ -180,6 +240,7 @@ export default function SignupForm() {
                 </div>
               </div>
 
+<<<<<<< HEAD
               <div className="flex items-center gap-4">
                 {/* Sign up button */}
                 <button
@@ -195,15 +256,28 @@ export default function SignupForm() {
                   Sign up
                 </button>
               </div>
+=======
+              {/* Sign up button */}
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-xl transition-colors duration-200"
+              >
+                Sign up
+              </button>
+>>>>>>> 65a80fc (Made login/Signup Pages)
 
               {/* Google sign up button */}
               <button
                 type="button"
+<<<<<<< HEAD
                 className={`w-full cursor-pointer ${
                   darkMode
                     ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
                     : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
                 } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
+=======
+                className={`w-full cursor-pointer ${darkMode ? 'bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'} border font-medium py-4 px-6 rounded-xl transition-colors duration-200 flex items-center justify-center gap-3`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -228,6 +302,7 @@ export default function SignupForm() {
 
               {/* Login link */}
               <div className="text-center">
+<<<<<<< HEAD
                 <span
                   className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
                 >
@@ -238,6 +313,12 @@ export default function SignupForm() {
                   className={`${
                     darkMode ? "text-lime-400" : "text-gray-900"
                   } font-medium hover:underline`}
+=======
+                <span className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Do you have an account? </span>
+                <a
+                  href="#"
+                  className={`${darkMode ? 'text-lime-400' : 'text-gray-900'} font-medium hover:underline`}
+>>>>>>> 65a80fc (Made login/Signup Pages)
                 >
                   Login
                 </a>
@@ -247,6 +328,7 @@ export default function SignupForm() {
 
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
+<<<<<<< HEAD
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
@@ -255,6 +337,12 @@ export default function SignupForm() {
                   viewBox="0 0 400 600"
                   fill="none"
                 >
+=======
+            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-3xl">
+              {/* Abstract leaf pattern overlay */}
+              <div className="absolute inset-0 opacity-80">
+                <svg className="w-full h-full object-cover" viewBox="0 0 400 600" fill="none">
+>>>>>>> 65a80fc (Made login/Signup Pages)
                   {/* Decorative leaf shapes */}
                   <path
                     d="M100 150C120 130, 180 120, 200 160C220 200, 180 240, 140 230C100 220, 80 170, 100 150Z"
@@ -288,7 +376,11 @@ export default function SignupForm() {
                   />
                 </svg>
               </div>
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> 65a80fc (Made login/Signup Pages)
               {/* Gradient overlay for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
             </div>
@@ -296,5 +388,10 @@ export default function SignupForm() {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   );
 }
+=======
+  )
+}
+>>>>>>> 65a80fc (Made login/Signup Pages)
