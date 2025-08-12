@@ -35,7 +35,7 @@ export default function SignupForm() {
           darkMode ? "" : "bg-white"
         }`}
       >
-        <div className="w-full overflow-hidden">
+        <div className="w-full overflow-hidden px-8">
           <div className="flex">
             {/* Left side - Form */}
             <div className="flex-1 p-8 lg:p-12 xl:p-16">
