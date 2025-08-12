@@ -1,5 +1,7 @@
 import { userProfileAPIs } from "../api/user";
 import { useQueryWithErrorToast, useMutationWithToast } from "../utils/tanstackInstance";
+import { useQuery } from "@tanstack/react-query";
+
 /** -------------------------------
  * 📋 Get User Profile
  ---------------------------------- */
@@ -55,15 +57,16 @@ export const useLogout = (onSuccessCallback) =>
 // ** -------------------------------
 //  * 🔐 Check Auth Status
 //  ---------------------------------- */
-export const useCheckAuthStatus = (onSuccessCallback) =>
-    useQueryWithErrorToast(
-        {
-            queryKey: ["authStatus"],
-            queryFn: userProfileAPIs.checkAuthStatus,
-        },
-        "Failed to check authentication status",
-        onSuccessCallback
-    );
+export const useCheckAuthStatus = (skipCheck = false) => {
+    const { data, isPending } = useQuery({
+        queryKey: ["authStatus"],
+        queryFn: userProfileAPIs.checkAuthStatus,
+        enabled: !skipCheck,
+        retry: false,
+    });
+
+    return { data, isPending };
+};
 /** -------------------------------
  * 📝 Update User Profile
  * ---------------------------------- */

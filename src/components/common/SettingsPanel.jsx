@@ -1,28 +1,26 @@
 import { useEffect, useRef } from "react";
-import { Settings, Moon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Settings, Moon, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/user";
 
 export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
-  const panelRef = useRef(null); // Create a ref for the settings panel
-
-  // Close the settings panel when clicking outside
+  const navigate = useNavigate();
+  const panelRef = useRef(null);
+  const { mutate, isPending } = useLogout(() => {
+    onClose();
+    navigate("/login");
+  });
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (panelRef.current && !panelRef.current.contains(event.target)) {
-        onClose(); // Call the `onClose` function passed from parent to close the panel
+        onClose(); 
       }
     };
-
-    // Add event listener for clicks outside
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Clean up the event listener on component unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
-
-  // Apply dark mode to the body element when `darkMode` changes
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
@@ -33,12 +31,11 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
 
   return (
     <div
-      ref={panelRef} // Attach the ref to the settings panel div
+      ref={panelRef}
       className={`rounded-xl shadow-lg border p-4 w-64 transition-colors duration-300 ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
       }`}
     >
-      {/* Dark Mode Toggle */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Moon
@@ -67,9 +64,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
           />
         </button>
       </div>
-
-      {/* Settings Option Link */}
-      {/* <div className="mt-6">
+      <div className="mt-6">
         <Link
           to="/settings"
           className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 hover:text-lime-400"
@@ -87,7 +82,26 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
             Settings
           </span>
         </Link>
-      </div> */}
+      </div>
+      <div className="mt-6">
+        <button
+          onClick={() => mutate()} 
+          className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 cursor-pointer hover:text-lime-400"
+        >
+          <LogOut
+            className={`w-5 h-5 ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`transition-colors duration-300 ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Log Out
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

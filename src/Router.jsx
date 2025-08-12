@@ -7,9 +7,6 @@ import { Disclaimer } from "./pages/Disclaimer";
 import { Settings } from "./pages/Settings";
 import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
-import { Settings } from "./pages/Settings";
-import SignupForm from "./pages/SignupForm";
-import LoginForm from "./pages/Login";
 
 export const router = createBrowserRouter([
   {
