@@ -1,7 +1,7 @@
 import { userProfileAPIs } from "../api/user";
 import { useQueryWithErrorToast, useMutationWithToast } from "../utils/tanstackInstance";
 import { useQuery } from "@tanstack/react-query";
-
+import { useQueryClient } from "@tanstack/react-query";
 /** -------------------------------
  * 📋 Get User Profile
  ---------------------------------- */
@@ -53,6 +53,12 @@ export const useLogout = (onSuccessCallback) =>
         successMsg: "Logout successful!",
         errorMsg: "Failed to log out",
         onSuccess: onSuccessCallback,
+        onError: () => {
+            const queryClient = useQueryClient();
+            console.error("Logout failed, redirecting to login");
+            navigate("/login");
+            queryClient.invalidateQueries(["authStatus"]);
+        }
     });
 // ** -------------------------------
 //  * 🔐 Check Auth Status

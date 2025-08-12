@@ -92,7 +92,6 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
             <button
               onClick={() => {
                 mutate();
-                setIsAuthenticated(false);
               }}
               className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 cursor-pointer hover:text-lime-400"
             >
