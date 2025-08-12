@@ -192,7 +192,7 @@ export default function LoginForm() {
                 </div>
 
                 {/* Google login button */}
-                <button
+                {/* <button
                   onClick={() => login()}
                   type="button"
                   className={`w-full cursor-pointer ${
@@ -220,7 +220,7 @@ export default function LoginForm() {
                     />
                   </svg>
                   Sign in with Google
-                </button>
+                </button> */}
 
                 {/* Signup link */}
                 <div className="text-center">
