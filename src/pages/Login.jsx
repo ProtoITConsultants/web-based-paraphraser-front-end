@@ -3,8 +3,10 @@ import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import { useLogin } from "../hooks/user";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
 import { useQueryClient } from "@tanstack/react-query";
-
+import { useGoogleLogin } from "@react-oauth/google";
+import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
 export default function LoginForm() {
+  const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +18,18 @@ export default function LoginForm() {
     navigate("/");
     queryClient.invalidateQueries(["authStatus"]);
   });
-
+  const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } = useFetchGoogleUserProfile((data)=> {
+    setUserProfile(data);
+    console.log("Google User Profile:", data);
+    navigate("/");
+    queryClient.invalidateQueries(["authStatus"]);
+    });
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log("Google Login Success:", tokenResponse);
+      fetchGoogleProfile(tokenResponse?.access_token);
+    }
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -180,6 +193,7 @@ export default function LoginForm() {
 
                 {/* Google login button */}
                 <button
+                  onClick={() => login()}
                   type="button"
                   className={`w-full cursor-pointer ${
                     darkMode
