@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "@mantine/form";
 import { TextInput, Button } from "@mantine/core";
-import EditIcon from "../../assets/icons/editicon";import {
+import EditIcon from "../../assets/icons/editicon";
+import {
   useGetUserProfile,
   useUpdateUserProfilePicture,
 } from "../../hooks/user";
@@ -15,7 +16,6 @@ export const Profile = () => {
     useUpdateUserProfilePicture(() => {
       refetch();
     });
-    console.log("data", data);
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -32,16 +32,19 @@ export const Profile = () => {
     },
   });
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImage(reader.result); 
+        };
+        reader.readAsDataURL(file);
+        if (file) {
+          updateProfilePicture(file); 
+        }
+      }
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +55,24 @@ export const Profile = () => {
       console.log(form.values);
     }
   };
-
+  useEffect(() => {
+    if (data) {
+      if (
+        data?.user?.firstName !== form.values.firstName ||
+        data?.user?.lastName !== form.values.lastName ||
+        data?.user?.email !== form.values.email
+      ) {
+        form.setValues({
+          firstName: data?.user?.firstName || "",
+          lastName: data?.user?.lastName || "",
+          email: data?.user?.email || "",
+        });
+      }
+      if (data?.user?.profilePicture) {
+        setImage(data.user.profilePicture.url);
+      }
+    }
+  }, [data, form.values.firstName, form.values.lastName, form.values.email]);
   return (
     <>
       {(isPending || isUploading) && <LoadingBackdrop />}
@@ -125,7 +145,7 @@ export const Profile = () => {
             </div>
           </div>
           <div className="flex flex-col mb-4">
-            <div className="flex flex-col h-[80px] bg-[#F6F6F6]  dark:bg-[#17191C]  border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+            <div className="flex flex-col h-[80px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
               <TextInput
                 {...form.getInputProps("email")}
                 id="email"
