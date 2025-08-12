@@ -76,3 +76,13 @@ export const useUpdateUserProfile = (onSuccessCallback) =>
         errorMsg: "Failed to update profile",
         onSuccess: onSuccessCallback,
     });
+/** -------------------------------
+ * 🔐 Change Password
+ * ---------------------------------- */
+export const useChangePassword = (onSuccessCallback) =>
+    useMutationWithToast({
+        mutationFn: userProfileAPIs.changePassword,
+        successMsg: "Password changed successfully!",
+        errorMsg: "Failed to change password",
+        onSuccess: onSuccessCallback,
+    });

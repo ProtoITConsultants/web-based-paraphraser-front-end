@@ -89,5 +89,16 @@ export const userProfileAPIs = {
             );
         }
     },
+    changePassword: async (passwordData) => {
+        try {
+            const response = await axiosInstance.patch("/user/changePassword", passwordData);
+            return response.data;
+        } catch (error) {
+            console.error("Change password error:", error);
+            throw new Error(
+                error?.response?.data?.message || "Failed to change password. Please try again."
+            );
+        }
+    },
 
 };
