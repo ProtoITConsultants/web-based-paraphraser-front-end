@@ -1,5 +1,4 @@
 import { useState } from "react";
-import  { Link } from "react-router-dom";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,9 +27,10 @@ export default function SignupForm() {
         darkMode ? "" : "bg-white"
       }`}
     >
-        <div className="flex px-10 w-full">
+      <div className="w-full overflow-hidden">
+        <div className="flex">
           {/* Left side - Form */}
-          <div className="flex-1 p-8 lg:p-12 lg:pl-0 xl:p-16">
+          <div className="flex-1 p-8 lg:p-12 xl:p-16">
             {/* Title */}
             <h1
               className={`text-3xl lg:text-4xl font-bold ${
@@ -233,14 +233,14 @@ export default function SignupForm() {
                 >
                   Do you have an account?{" "}
                 </span>
-                <Link
-                  to="/login"
+                <a
+                  href="#"
                   className={`${
                     darkMode ? "text-lime-400" : "text-gray-900"
                   } font-medium hover:underline`}
                 >
                   Login
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -261,6 +261,7 @@ export default function SignupForm() {
             </div>
           </div>
         </div>
+      </div>
     </div>
   );
 }
