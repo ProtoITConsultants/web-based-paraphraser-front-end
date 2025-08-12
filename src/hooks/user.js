@@ -53,7 +53,7 @@ export const useLogout = (onSuccessCallback) =>
         successMsg: "Logout successful!",
         errorMsg: "Failed to log out",
         onSuccess: onSuccessCallback,
-        onError: () => {
+        onSettled: () => {
             const queryClient = useQueryClient();
             console.error("Logout failed, redirecting to login");
             navigate("/login");

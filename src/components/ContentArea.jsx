@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ParaphraseButton from "./ParaphraseButton";
 import jsPDF from 'jspdf';
 import { Document, Packer, Paragraph, TextRun, Header, AlignmentType } from 'docx';
@@ -9,6 +9,8 @@ import { toast } from "sonner";
 export default function ContentArea({ inputText, setInputText, outputText, darkMode, loading,data }) {
   const [copied, setCopied] = useState(false);
   const [showExportPopup, setShowExportPopup] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
   };
@@ -120,18 +122,25 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
     setShowExportPopup(false);
   };
   const handleParaphrase = () => {
-    if(!data){
-      const usedCount = localStorage.getItem('usedCount') || 0;
-      const usedCountDate = localStorage.getItem('usedCountDate') || getCurrentDate();
+    if (!isUserLoggedIn) {
+      const usedCount = localStorage.getItem("usedCount") || 0;
+      const usedCountDate =
+        localStorage.getItem("usedCountDate") || getCurrentDate();
       const currentDate = getCurrentDate();
       if (usedCount >= 3 && usedCountDate === currentDate) {
-        toast.error("You have reached your daily limit of 3 paraphrases. Please try again tomorrow. or login to get unlimited paraphrases.");
+        toast.error(
+          "You have reached your daily limit of 3 paraphrases. Please try again tomorrow or login to get unlimited paraphrases."
+        );
         return;
       }
       // Increment usedCount and update localStorage
-      localStorage.setItem('usedCount', parseInt(usedCount) + 1);
-      localStorage.setItem('usedCountDate', currentDate);
-      toast.success(`You have used ${parseInt(usedCount) + 1} out of 3 paraphrases for today.`);
+      localStorage.setItem("usedCount", parseInt(usedCount) + 1);
+      localStorage.setItem("usedCountDate", currentDate);
+      toast.success(
+        `You have used ${
+          parseInt(usedCount) + 1
+        } out of 3 paraphrases for today.`
+      );
     }
     if (!loading && inputText.trim()) {
       window.dispatchEvent(
@@ -139,6 +148,18 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
       );
     }
   }
+
+
+   useEffect(() => {
+      const isUserLoggedIn = localStorage.getItem("isUserLoggedIn");
+      if (isUserLoggedIn === "true") {
+        setIsUserLoggedIn(true);
+      } else {
+        setIsUserLoggedIn(false);
+      }
+  
+    }, [])
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

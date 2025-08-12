@@ -1,18 +1,30 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Settings, Moon, LogOut } from "lucide-react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { useLogout } from "../../hooks/user";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCheckAuthStatus, useLogout } from "../../hooks/user";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { userProfileAPIs } from "../../api/user";
 
 export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, isAuthRoute }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  const [showLogoutButton, setShowLogoutButton] = useState(false);
+
   const panelRef = useRef(null);
+
   const { mutate, isPending } = useLogout(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["authStatus"],
+    });
+    localStorage.removeItem("isUserLoggedIn");
     onClose();
     navigate("/login");
-    queryClient.invalidateQueries(["authStatus"]);
+    console.error("Logout successful, redirecting to login");
   });
+
+  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (panelRef.current && !panelRef.current.contains(event.target)) {
@@ -31,6 +43,17 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
       document.body.classList.remove("dark");
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    const isUserLoggedIn = localStorage.getItem("isUserLoggedIn");
+
+    if (isUserLoggedIn === "true") {
+      setShowLogoutButton(true);
+    } else {
+      setShowLogoutButton(false);
+    }
+
+  }, [])
 
   return (
     <div
@@ -67,7 +90,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
           />
         </button>
       </div>
-      {data && !isAuthRoute && (
+      {showLogoutButton && (
         <>
           <div className="mt-6">
             <Link

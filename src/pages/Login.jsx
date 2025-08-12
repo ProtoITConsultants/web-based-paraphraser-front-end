@@ -16,13 +16,18 @@ export default function LoginForm() {
   const { darkMode } = useOutletContext();
   const { mutate, isPending  } = useLogin(()=> {
     navigate("/");
-    queryClient.invalidateQueries(["authStatus"]);
+    localStorage.setItem("isUserLoggedIn", "true");
+    queryClient.invalidateQueries({
+      queryKey: ["authStatus"],
+    });
   });
   const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } = useFetchGoogleUserProfile((data)=> {
     setUserProfile(data);
     console.log("Google User Profile:", data);
     navigate("/");
-    queryClient.invalidateQueries(["authStatus"]);
+    queryClient.invalidateQueries({
+      queryKey: ["authStatus"],
+    });
     });
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
