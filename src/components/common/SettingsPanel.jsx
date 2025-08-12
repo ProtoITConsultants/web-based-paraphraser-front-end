@@ -1,19 +1,22 @@
 import { useEffect, useRef } from "react";
 import { Settings, Moon, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useLogout } from "../../hooks/user";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
+export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, isAuthRoute }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const panelRef = useRef(null);
   const { mutate, isPending } = useLogout(() => {
     onClose();
     navigate("/login");
+    queryClient.invalidateQueries(["authStatus"]);
   });
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (panelRef.current && !panelRef.current.contains(event.target)) {
-        onClose(); 
+        onClose();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -64,44 +67,51 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
           />
         </button>
       </div>
-      <div className="mt-6">
-        <Link
-          to="/settings"
-          className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 hover:text-lime-400"
-        >
-          <Settings
-            className={`w-5 h-5 ${
-              darkMode ? "text-gray-300" : "text-gray-600"
-            }`}
-          />
-          <span
-            className={`transition-colors duration-300 ${
-              darkMode ? "text-gray-200" : "text-gray-700"
-            }`}
-          >
-            Settings
-          </span>
-        </Link>
-      </div>
-      <div className="mt-6">
-        <button
-          onClick={() => mutate()} 
-          className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 cursor-pointer hover:text-lime-400"
-        >
-          <LogOut
-            className={`w-5 h-5 ${
-              darkMode ? "text-gray-300" : "text-gray-600"
-            }`}
-          />
-          <span
-            className={`transition-colors duration-300 ${
-              darkMode ? "text-gray-200" : "text-gray-700"
-            }`}
-          >
-            Log Out
-          </span>
-        </button>
-      </div>
+      {data && !isAuthRoute && (
+        <>
+          <div className="mt-6">
+            <Link
+              to="/settings"
+              className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 hover:text-lime-400"
+            >
+              <Settings
+                className={`w-5 h-5 ${
+                  darkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              />
+              <span
+                className={`transition-colors duration-300 ${
+                  darkMode ? "text-gray-200" : "text-gray-700"
+                }`}
+              >
+                Settings
+              </span>
+            </Link>
+          </div>
+          <div className="mt-6">
+            <button
+              onClick={() => {
+                mutate();
+                setIsAuthenticated(false);
+              }}
+              className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 cursor-pointer hover:text-lime-400"
+            >
+              <LogOut
+                className={`w-5 h-5 ${
+                  darkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              />
+              <span
+                className={`transition-colors duration-300 ${
+                  darkMode ? "text-gray-200" : "text-gray-700"
+                }`}
+              >
+                Log Out
+              </span>
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

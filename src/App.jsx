@@ -7,18 +7,10 @@ import { useCheckAuthStatus } from "./hooks/user";
 import LoadingBackdrop from "./components/common/LoadingBackdrop";
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
   const location = useLocation();
   const isAuthRoute =
     location.pathname === "/login" || location.pathname === "/signup";
   const { data, isPending } = useCheckAuthStatus();
-  useEffect(() => {
-    if (data) {
-      setIsAuthenticated(true);
-      setUserProfile(data);
-    }
-  }, [data]);
   useEffect(() => {
     const root = document.documentElement;
     if (darkMode) {
@@ -31,9 +23,14 @@ export default function App() {
     <>
       {isPending && !isAuthRoute && <LoadingBackdrop />}{" "}
       <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          data={data}
+          isAuthRoute={isAuthRoute}
+        />
         <div className={`relative min-h-[calc(100dvh-160px)]`}>
-          <Outlet context={{ darkMode, setDarkMode, isAuthenticated }} />
+          <Outlet context={{ darkMode, setDarkMode, data }} />
         </div>
         <Footer darkMode={darkMode} />
       </div>

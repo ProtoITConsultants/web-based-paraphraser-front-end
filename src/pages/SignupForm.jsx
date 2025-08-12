@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSignUp } from "../hooks/user";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
 
 export default function SignupForm() {
@@ -191,7 +191,7 @@ export default function SignupForm() {
                 <div className="flex items-center gap-4">
                   {/* Sign up button */}
                   <button
-                    onClick={handleSubmit}
+                    onClick={() => navigate("/")}
                     className="w-full border border-lime-400 cursor-pointet text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                   >
                     Continue as Guest
@@ -243,14 +243,14 @@ export default function SignupForm() {
                   >
                     Do you have an account?{" "}
                   </span>
-                  <a
-                    href="#"
+                  <Link
+                    to="/login"
                     className={`${
                       darkMode ? "text-lime-400" : "text-gray-900"
                     } font-medium hover:underline`}
                   >
                     Login
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

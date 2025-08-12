@@ -57,11 +57,10 @@ export const useLogout = (onSuccessCallback) =>
 // ** -------------------------------
 //  * 🔐 Check Auth Status
 //  ---------------------------------- */
-export const useCheckAuthStatus = (skipCheck = false) => {
+export const useCheckAuthStatus = () => {
     const { data, isPending } = useQuery({
         queryKey: ["authStatus"],
         queryFn: userProfileAPIs.checkAuthStatus,
-        enabled: !skipCheck,
         retry: false,
     });
 

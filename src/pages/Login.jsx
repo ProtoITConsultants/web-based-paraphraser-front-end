@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import { useLogin } from "../hooks/user";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ export default function LoginForm() {
   const { darkMode } = useOutletContext();
   const { mutate, isPending  } = useLogin(()=> {
     navigate("/");
+    queryClient.invalidateQueries(["authStatus"]);
   });
 
   const handleSubmit = (e) => {
@@ -164,7 +167,7 @@ export default function LoginForm() {
                 </div>
                 <div className="flex items-center gap-4">
                   {/* Login button */}
-                  <button className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200">
+                  <button onClick={() => navigate("/")} className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200">
                     Continue as Guest
                   </button>
                   <button
@@ -214,14 +217,14 @@ export default function LoginForm() {
                   >
                     Don't have an account?{" "}
                   </span>
-                  <a
-                    href="#"
+                  <Link
+                    to="/signup"
                     className={`${
                       darkMode ? "text-lime-400" : "text-gray-900"
                     } font-medium hover:underline`}
                   >
                     Sign up
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
