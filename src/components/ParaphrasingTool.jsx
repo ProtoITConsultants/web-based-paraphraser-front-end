@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ModeSelector from "./ModeSelector"
 import ContentArea from "./ContentArea"
-export default function ParaphrasingTool( { darkMode, setDarkMode }) {
+export default function ParaphrasingTool( { darkMode, setDarkMode, data } ) {
   const [activeMode, setActiveMode] = useState("Standard")
   const [inputText, setInputText] = useState("")
   const [outputText, setOutputText] = useState("")
@@ -48,6 +48,7 @@ export default function ParaphrasingTool( { darkMode, setDarkMode }) {
         {/* Content Area */}
         <div className="mt-2 px-8">
           <ContentArea
+            data={data}
             inputText={inputText}
             setInputText={setInputText}
             outputText={outputText}

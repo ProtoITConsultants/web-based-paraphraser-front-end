@@ -3,10 +3,24 @@ import ParaphraseButton from "./ParaphraseButton";
 import jsPDF from 'jspdf';
 import { Document, Packer, Paragraph, TextRun, Header, AlignmentType } from 'docx';
 import { X } from "lucide-react";
+import { toast } from "sonner";
 
-export default function ContentArea({ inputText, setInputText, outputText, darkMode, loading }) {
+
+export default function ContentArea({ inputText, setInputText, outputText, darkMode, loading,data }) {
   const [copied, setCopied] = useState(false);
   const [showExportPopup, setShowExportPopup] = useState(false);
+  const countWords = (text) => {
+    return text.trim().split(/\s+/).length;
+  };
+  const handleInputChange = (e) => {
+    const text = e.target.value;
+    const wordCount = countWords(text);
+    if (wordCount <= 500) {
+      setInputText(text);
+    } else {
+      toast.error("You cannot enter more than 500 words!");
+    }
+  };
 
   const getCurrentDate = () => {
     return new Date().toLocaleDateString('en-US', {
@@ -105,7 +119,26 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
     URL.revokeObjectURL(url);
     setShowExportPopup(false);
   };
-
+  const handleParaphrase = () => {
+    if(!data){
+      const usedCount = localStorage.getItem('usedCount') || 0;
+      const usedCountDate = localStorage.getItem('usedCountDate') || getCurrentDate();
+      const currentDate = getCurrentDate();
+      if (usedCount >= 3 && usedCountDate === currentDate) {
+        toast.error("You have reached your daily limit of 3 paraphrases. Please try again tomorrow. or login to get unlimited paraphrases.");
+        return;
+      }
+      // Increment usedCount and update localStorage
+      localStorage.setItem('usedCount', parseInt(usedCount) + 1);
+      localStorage.setItem('usedCountDate', currentDate);
+      toast.success(`You have used ${parseInt(usedCount) + 1} out of 3 paraphrases for today.`);
+    }
+    if (!loading && inputText.trim()) {
+      window.dispatchEvent(
+        new CustomEvent("paraphrase", { detail: inputText })
+      );
+    }
+  }
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -122,17 +155,15 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
           </h2>
           <textarea
             value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            onChange={(e) => handleInputChange(e)}
             placeholder="To rewrite text, enter or paste text here and press 'Paraphrase'."
-            className={`w-full min-h-80 h-80 lg:h-96 font-light py-2 border-none focus:border-none outline-none focus:outline-none resize-vertical ${darkMode ? "text-gray-400 bg-black" : "text-black bg-gray-100"}`}
+            className={`w-full min-h-80 h-80 lg:h-96 font-light py-2 border-none focus:border-none outline-none focus:outline-none resize-vertical ${
+              darkMode ? "text-gray-400 bg-black" : "text-black bg-gray-100"
+            }`}
           />
           <div className="flex justify-end">
             <ParaphraseButton
-              onClick={() => {
-                if (!loading && inputText.trim()) {
-                  window.dispatchEvent(new CustomEvent('paraphrase', { detail: inputText }));
-                }
-              }}
+              onClick={handleParaphrase}
               loading={loading}
             />
           </div>
@@ -140,7 +171,9 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
 
         {/* Output Area */}
         <div
-          className={`rounded-2xl p-6 relative ${darkMode ? "bg-black" : "bg-gray-100"}`}
+          className={`rounded-2xl p-6 relative ${
+            darkMode ? "bg-black" : "bg-gray-100"
+          }`}
         >
           <div className="flex items-center justify-between">
             <h2
@@ -153,7 +186,13 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
             {outputText && (
               <button
                 className={`ml-2 px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
-                  ${copied ? "bg-lime-400 text-black" : darkMode ? "bg-[#101214] text-white hover:bg-gray-700" : "bg-gray-200 text-gray-900 hover:bg-gray-300"}`}
+                  ${
+                    copied
+                      ? "bg-lime-400 text-black"
+                      : darkMode
+                      ? "bg-[#101214] text-white hover:bg-gray-700"
+                      : "bg-gray-200 text-gray-900 hover:bg-gray-300"
+                  }`}
                 onClick={() => {
                   navigator.clipboard.writeText(outputText);
                   setCopied(true);
@@ -164,16 +203,56 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
               >
                 {copied ? (
                   <>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline-block align-middle">
-                      <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="inline-block align-middle"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                     Copied!
                   </>
                 ) : (
                   <>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="inline-block align-middle">
-                      <rect x="9" y="9" width="13" height="13" rx="2" strokeWidth="2" stroke="currentColor" fill="none"/>
-                      <rect x="3" y="3" width="13" height="13" rx="2" strokeWidth="2" stroke="currentColor" fill="none"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="inline-block align-middle"
+                    >
+                      <rect
+                        x="9"
+                        y="9"
+                        width="13"
+                        height="13"
+                        rx="2"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                      />
+                      <rect
+                        x="3"
+                        y="3"
+                        width="13"
+                        height="13"
+                        rx="2"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                      />
                     </svg>
                     Copy
                   </>
@@ -182,14 +261,21 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
             )}
           </div>
           <div
-            className={`w-full min-h-80 h-80 lg:h-96 py-2 font-light ${darkMode ? "text-gray-400 bg-black" : "text-black bg-gray-100"}`}
+            className={`w-full min-h-80 h-80 lg:h-96 py-2 font-light ${
+              darkMode ? "text-gray-400 bg-black" : "text-black bg-gray-100"
+            }`}
           >
-            {outputText ? outputText : (
-              <span className={`transition-colors duration-300 ${darkMode ? "text-gray-500" : "text-gray-400"}`}>
-              </span>
+            {outputText ? (
+              outputText
+            ) : (
+              <span
+                className={`transition-colors duration-300 ${
+                  darkMode ? "text-gray-500" : "text-gray-400"
+                }`}
+              ></span>
             )}
           </div>
-          
+
           {/* Export Button */}
           {outputText && (
             <button
@@ -197,8 +283,20 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
               className={`absolute bottom-4 right-4 p-3 rounded-xl flex items-center gap-2 bg-gray-200 cursor-pointer hover:bg-gray-300 transition`}
               title="Export Content"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
               </svg>
               Export
             </button>
@@ -217,9 +315,11 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
             >
               <X size={24} />
             </button>
-            
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Export your text</h2>
-            
+
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              Export your text
+            </h2>
+
             <div className="grid grid-cols-2 gap-4">
               {/* Download Docs File */}
               <button
@@ -227,20 +327,34 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
                 className="flex flex-col cursor-pointer items-center p-6 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors group"
               >
                 <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center mb-3 group-hover:bg-gray-300 transition-colors">
-                  <img src="/material-symbols-light_docs-outline-rounded.png" alt="DOCX Icon" width="32" height="32" />
+                  <img
+                    src="/material-symbols-light_docs-outline-rounded.png"
+                    alt="DOCX Icon"
+                    width="32"
+                    height="32"
+                  />
                 </div>
-                <span className="text-sm font-medium text-gray-700 text-center">Download Docs File</span>
+                <span className="text-sm font-medium text-gray-700 text-center">
+                  Download Docs File
+                </span>
               </button>
-              
+
               {/* Download PDF */}
               <button
                 onClick={generatePDF}
                 className="flex flex-col cursor-pointer items-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group"
               >
                 <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-200 transition-colors">
-                  <img src="/material-icon-theme_pdf.png" alt="PDF Icon" width="32" height="32" />
+                  <img
+                    src="/material-icon-theme_pdf.png"
+                    alt="PDF Icon"
+                    width="32"
+                    height="32"
+                  />
                 </div>
-                <span className="text-sm font-medium text-gray-700 text-center">Download PDF</span>
+                <span className="text-sm font-medium text-gray-700 text-center">
+                  Download PDF
+                </span>
               </button>
             </div>
           </div>

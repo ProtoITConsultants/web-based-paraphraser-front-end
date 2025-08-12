@@ -6,7 +6,7 @@ export default function Home() {
     useOutletContext(); 
   return (
     <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
-      <ParaphrasingTool darkMode={darkMode} setDarkMode={setDarkMode} />
+      <ParaphrasingTool darkMode={darkMode} setDarkMode={setDarkMode} data={data} />
     </div>
   );
 }
