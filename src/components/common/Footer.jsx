@@ -13,7 +13,7 @@ export const Footer = ({ darkMode }) => {
     >
       <p className="text-center">
         © Copyright 2025 All rights reserved.
-        <span className="flex mt-2 items-center justify-center">
+        <span className="flex mt-2 items-center justify-center text-sm md:text-lg">
           <Link to="/privacy" className="ml-2 hover:underline">
             Privacy Policy
           </Link>

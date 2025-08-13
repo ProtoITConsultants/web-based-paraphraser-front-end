@@ -23,7 +23,7 @@ export default function ModeSelector({ activeMode, setActiveMode, darkMode }) {
             <button
               key={mode}
               onClick={() => setActiveMode(mode)}
-              className={`relative pb-4 text-sm  self-start cursor-pointer
+              className={`relative pb-2 text-sm  self-start cursor-pointer
                 ${darkMode
                   ? activeMode === mode
                     ? "text-white"

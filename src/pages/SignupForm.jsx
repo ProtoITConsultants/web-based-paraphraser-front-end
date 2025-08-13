@@ -55,7 +55,7 @@ export default function SignupForm() {
           darkMode ? "" : "bg-white"
         }`}
       >
-        <div className="flex gap-10 w-full p-11 h-[100dvh]">
+        <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)]">
           {/* Left side - Form */}
           <div className="flex-1 flex flex-col justify-center lg:w-[40.417vw]">
             <div className="flex items-center space-x-4 mb-10">
@@ -247,7 +247,7 @@ export default function SignupForm() {
 
               {/* Google sign up button */}
               <button
-               onClick={() => login()}
+                onClick={() => login()}
                 type="button"
                 className={`w-full cursor-pointer ${
                   darkMode
@@ -300,7 +300,7 @@ export default function SignupForm() {
             <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <img src="signup.png" className="w-full h-full object-cover" />
+                <img src="signup.jpg" className="w-full h-full object-cover" />
               </div>
 
               {/* Gradient overlay for depth */}
