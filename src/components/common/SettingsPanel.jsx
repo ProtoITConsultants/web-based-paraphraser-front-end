@@ -23,6 +23,8 @@ export default function SettingsPanel({
       queryKey: ["authStatus"],
     });
     localStorage.removeItem("isUserLoggedIn");
+    localStorage.removeItem("googleLogin");
+    localStorage.removeItem("userProfile");
     onClose();
     navigate("/login");
     console.error("Logout successful, redirecting to login");

@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useSignUp } from "../hooks/user";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
-
+import { useGoogleLogin } from "@react-oauth/google";
+import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
+import { useQueryClient } from "@tanstack/react-query";
 export default function SignupForm() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,7 +18,23 @@ export default function SignupForm() {
     navigate("/");
     localStorage.setItem("isUserLoggedIn", "true");
   });
-
+    const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } =
+      useFetchGoogleUserProfile((data) => {
+        localStorage.setItem("isUserLoggedIn", "true");
+        localStorage.setItem("googleLogin", "true");
+        localStorage.setItem("userProfile", JSON.stringify(data));
+        navigate("/");
+        queryClient.invalidateQueries({
+          queryKey: ["authStatus"],
+        });
+      });
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      localStorage.setItem("isUserLoggedIn", "true");
+      localStorage.setItem("googleLogin", "true");
+      fetchGoogleProfile(tokenResponse?.access_token);
+    },
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -227,7 +246,8 @@ export default function SignupForm() {
               </div>
 
               {/* Google sign up button */}
-              {/* <button
+              <button
+               onClick={() => login()}
                 type="button"
                 className={`w-full cursor-pointer ${
                   darkMode
@@ -254,7 +274,7 @@ export default function SignupForm() {
                   />
                 </svg>
                 Continue with Google
-              </button> */}
+              </button>
 
               {/* Login link */}
               <div className="text-center">

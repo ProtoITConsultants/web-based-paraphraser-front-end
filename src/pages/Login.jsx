@@ -6,7 +6,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
 export default function LoginForm() {
-  const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
@@ -23,8 +22,9 @@ export default function LoginForm() {
   });
   const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } =
     useFetchGoogleUserProfile((data) => {
-      setUserProfile(data);
-      console.log("Google User Profile:", data);
+      localStorage.setItem("isUserLoggedIn", "true");
+      localStorage.setItem("googleLogin", "true");
+      localStorage.setItem("userProfile", JSON.stringify(data));
       navigate("/");
       queryClient.invalidateQueries({
         queryKey: ["authStatus"],
@@ -223,7 +223,7 @@ export default function LoginForm() {
               </div>
 
               {/* Google login button */}
-              {/* <button
+              <button
                 onClick={() => login()}
                 type="button"
                 className={`w-full cursor-pointer ${
@@ -251,7 +251,7 @@ export default function LoginForm() {
                   />
                 </svg>
                 Continue with Google
-              </button> */}
+              </button>
 
               {/* Signup link */}
               <div className="text-center">
