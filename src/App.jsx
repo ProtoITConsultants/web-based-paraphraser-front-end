@@ -23,16 +23,18 @@ export default function App() {
     <>
       {isPending && !isAuthRoute && <LoadingBackdrop />}{" "}
       <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
-        <Navbar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-          data={data}
-          isAuthRoute={isAuthRoute}
-        />
+        {!isAuthRoute && (
+          <Navbar
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+            data={data}
+            isAuthRoute={isAuthRoute}
+          />
+        )}
         <div className={`relative min-h-[calc(100dvh-160px)]`}>
-          <Outlet context={{ darkMode, setDarkMode, data }} />
+          <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />
         </div>
-        <Footer darkMode={darkMode} />
+        {!isAuthRoute && <Footer darkMode={darkMode} />}
       </div>
     </>
   );

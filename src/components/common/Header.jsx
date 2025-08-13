@@ -5,29 +5,29 @@ export default function Header({ showSettings, setShowSettings, darkMode }) {
     <div
       className={`flex py-4 px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white"
-      } transition-colors duration-300`}
+      } `}
     >
       <div className="flex items-center space-x-4">
         {/* Link wrapping the entire Logo and Title */}
         <Link
           to="/"
-          className="flex items-center space-x-3 transition-colors duration-300"
+          className="flex items-center space-x-3 "
         >
           {/* Logo */}
           <div
-            className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${
+            className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
               darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
             <img
               src="/Logo.png"
-              className={`w-8 h-8 rounded-full transition-colors duration-300`}
+              className={`w-8 h-8 rounded-full `}
             />
           </div>
 
           {/* Title */}
           <h1
-            className={`text-2xl lg:text-3xl font-medium transition-colors duration-300 ${
+            className={`text-2xl lg:text-3xl font-medium  ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >

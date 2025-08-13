@@ -14,26 +14,27 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { darkMode } = useOutletContext();
-  const { mutate, isPending  } = useLogin(()=> {
+  const { mutate, isPending } = useLogin(() => {
     navigate("/");
     localStorage.setItem("isUserLoggedIn", "true");
     queryClient.invalidateQueries({
       queryKey: ["authStatus"],
     });
   });
-  const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } = useFetchGoogleUserProfile((data)=> {
-    setUserProfile(data);
-    console.log("Google User Profile:", data);
-    navigate("/");
-    queryClient.invalidateQueries({
-      queryKey: ["authStatus"],
-    });
+  const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } =
+    useFetchGoogleUserProfile((data) => {
+      setUserProfile(data);
+      console.log("Google User Profile:", data);
+      navigate("/");
+      queryClient.invalidateQueries({
+        queryKey: ["authStatus"],
+      });
     });
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log("Google Login Success:", tokenResponse);
       fetchGoogleProfile(tokenResponse?.access_token);
-    }
+    },
   });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,160 +45,184 @@ export default function LoginForm() {
       rememberMe,
     };
     mutate(formData);
-  }
+  };
 
   return (
     <>
       {isPending && <LoadingBackdrop />}
       <div
-        className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${
+        className={`flex items-center justify-center w-full ${
           darkMode ? "" : "bg-white"
         }`}
       >
-        <div className="w-full overflow-hidden px-8">
-          <div className="flex">
-            {/* Left side - Form */}
-            <div className="flex-1 p-8 lg:p-12 xl:p-16">
-              {/* Title */}
-              <h1
-                className={`text-3xl lg:text-4xl font-bold ${
-                  darkMode ? "text-white" : "text-gray-900"
-                } mb-8`}
-              >
-                Login to your account
-              </h1>
-
-              {/* Form */}
-              <div className="space-y-6">
-                {/* Email field */}
+        <div className="flex gap-10 w-full p-11 h-[100dvh]">
+          {/* Left side - Form */}
+          <div className="flex-1 flex flex-col justify-center lg:w-[40.417vw]">
+            <div className="flex items-center space-x-4 mb-10">
+              {/* Link wrapping the entire Logo and Title */}
+              <Link to="/" className="flex items-center space-x-3 ">
+                {/* Logo */}
                 <div
-                  className={`${
-                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                  } rounded-3xl p-4`}
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
+                    darkMode ? "bg-gray-700" : "bg-gray-100"
+                  }`}
                 >
-                  <label
-                    className={`block text-sm font-medium ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    } mb-2`}
-                  >
-                    Email Address
-                  </label>
+                  <img src="/Logo.png" className={`w-8 h-8 rounded-full `} />
+                </div>
+
+                {/* Title */}
+                <h1
+                  className={`text-2xl lg:text-3xl font-medium  ${
+                    darkMode ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  Paraphraser
+                </h1>
+              </Link>
+            </div>
+            {/* Title */}
+            <h1
+              className={`text-3xl lg:text-4xl font-bold ${
+                darkMode ? "text-white" : "text-gray-900"
+              } mb-8`}
+            >
+              Login to your account
+            </h1>
+
+            {/* Form */}
+            <div className="space-y-6">
+              {/* Email field */}
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={`w-full bg-transparent border-none outline-none ${
+                    darkMode
+                      ? "placeholder-gray-500 text-white"
+                      : "placeholder-gray-400 text-gray-900"
+                  }`}
+                />
+              </div>
+
+              {/* Password field */}
+              <div
+                className={`${
+                  darkMode ? "bg-[#17191C]" : "bg-gray-50"
+                } rounded-3xl p-4`}
+              >
+                <label
+                  className={`block text-sm font-medium ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  } mb-2`}
+                >
+                  Password
+                </label>
+                <div className="relative">
                   <input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`w-full bg-transparent border-none outline-none ${
                       darkMode
                         ? "placeholder-gray-500 text-white"
                         : "placeholder-gray-400 text-gray-900"
-                    }`}
+                    } pr-8`}
                   />
-                </div>
-
-                {/* Password field */}
-                <div
-                  className={`${
-                    darkMode ? "bg-[#17191C]" : "bg-gray-50"
-                  } rounded-3xl p-4`}
-                >
-                  <label
-                    className={`block text-sm font-medium ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    } mb-2`}
-                  >
-                    Password
-                  </label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={`w-full bg-transparent border-none outline-none ${
-                        darkMode
-                          ? "placeholder-gray-500 text-white"
-                          : "placeholder-gray-400 text-gray-900"
-                      } pr-8`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
-                        darkMode
-                          ? "text-gray-500 hover:text-gray-300"
-                          : "text-gray-400 hover:text-gray-600"
-                      }`}
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        {showPassword ? (
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
-                          />
-                        ) : (
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                          />
-                        )}
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Remember me and Forgot password */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="remember-me"
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="w-4 h-4 text-lime-400 bg-transparent border-2 border-gray-300 rounded focus:ring-lime-400 focus:ring-2"
-                    />
-                    <label
-                      htmlFor="remember-me"
-                      className={`ml-2 text-sm ${
-                        darkMode ? "text-gray-300" : "text-gray-700"
-                      }`}
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                  <a
-                    href="#"
-                    className={`text-sm ${
-                      darkMode ? "text-lime-400" : "text-gray-900"
-                    } font-medium hover:underline`}
-                  >
-                    Forgot password
-                  </a>
-                </div>
-                <div className="flex items-center gap-4">
-                  {/* Login button */}
-                  <button onClick={() => navigate("/")} className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200">
-                    Continue as Guest
-                  </button>
                   <button
-                    onClick={handleSubmit}
-                    className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${
+                      darkMode
+                        ? "text-gray-500 hover:text-gray-300"
+                        : "text-gray-400 hover:text-gray-600"
+                    }`}
                   >
-                    Login and Paraphrase
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      {showPassword ? (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                        />
+                      ) : (
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      )}
+                    </svg>
                   </button>
                 </div>
+              </div>
 
-                {/* Google login button */}
-                {/* <button
+              {/* Remember me and Forgot password */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="w-4 h-4 text-lime-400 bg-transparent border-2 border-gray-300 rounded focus:ring-lime-400 focus:ring-2"
+                  />
+                  <label
+                    htmlFor="remember-me"
+                    className={`ml-2 text-sm ${
+                      darkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    Remember me
+                  </label>
+                </div>
+                <a
+                  href="#"
+                  className={`text-sm ${
+                    darkMode ? "text-lime-400" : "text-gray-900"
+                  } font-medium hover:underline`}
+                >
+                  Forgot password
+                </a>
+              </div>
+              <div className="flex items-center gap-4">
+                {/* Login button */}
+                <button
+                  onClick={() => navigate("/")}
+                  className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                >
+                  Continue as Guest
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                >
+                  Login and Paraphrase
+                </button>
+              </div>
+
+              {/* Google login button */}
+              {/* <button
                   onClick={() => login()}
                   type="button"
                   className={`w-full cursor-pointer ${
@@ -227,41 +252,38 @@ export default function LoginForm() {
                   Sign in with Google
                 </button> */}
 
-                {/* Signup link */}
-                <div className="text-center">
-                  <span
-                    className={`${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Don't have an account?{" "}
-                  </span>
-                  <Link
-                    to="/signup"
-                    className={`${
-                      darkMode ? "text-lime-400" : "text-gray-900"
-                    } font-medium hover:underline`}
-                  >
-                    Sign up
-                  </Link>
-                </div>
+              {/* Signup link */}
+              <div className="text-center">
+                <span
+                  className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
+                >
+                  Don't have an account?{" "}
+                </span>
+                <Link
+                  to="/signup"
+                  className={`${
+                    darkMode ? "text-lime-400" : "text-gray-900"
+                  } font-medium hover:underline`}
+                >
+                  Sign up
+                </Link>
               </div>
             </div>
+          </div>
 
-            {/* Right side - Image (hidden on smaller screens) */}
-            <div className="hidden lg:block flex-1 relative">
-              <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
-                {/* Abstract leaf pattern overlay */}
-                <div className="absolute inset-0 opacity-80">
-                  <img
-                    src="/Rectangle 34624674 (1).png"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Gradient overlay for depth */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
+          {/* Right side - Image (hidden on smaller screens) */}
+          <div className="hidden lg:block flex-1 relative lg:w-[53.403vw]">
+            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
+              {/* Abstract leaf pattern overlay */}
+              <div className="absolute inset-0 opacity-80">
+                <img
+                  src="/public/login.png"
+                  className="w-full h-full object-cover"
+                />
               </div>
+
+              {/* Gradient overlay for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
             </div>
           </div>
         </div>

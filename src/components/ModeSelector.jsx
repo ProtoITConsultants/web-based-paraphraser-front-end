@@ -12,7 +12,7 @@ export default function ModeSelector({ activeMode, setActiveMode, darkMode }) {
     <div className="flex flex-col space-y-4 font-light">
       <div className="flex items-center space-x-6">
         <span
-          className={`text-sm font-medium px-8 py-2 border rounded-full transition-colors duration-300 ${
+          className={`text-sm font-medium px-8 py-2 border rounded-full  ${
             darkMode ? "text-gray-200 border-lime-400" : "text-black"
           }`}
         >
@@ -23,7 +23,7 @@ export default function ModeSelector({ activeMode, setActiveMode, darkMode }) {
             <button
               key={mode}
               onClick={() => setActiveMode(mode)}
-              className={`relative pb-4 text-sm transition-colors duration-300 self-start cursor-pointer
+              className={`relative pb-4 text-sm  self-start cursor-pointer
                 ${darkMode
                   ? activeMode === mode
                     ? "text-white"
