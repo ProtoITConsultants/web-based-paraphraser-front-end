@@ -6,7 +6,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.get("/user/getProfile");
             return response.data;
         } catch (error) {
-            console.error("Get profile error:", error);
+            // console.error("Get profile error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to fetch user profile. Please try again."
             );
@@ -16,7 +16,8 @@ export const userProfileAPIs = {
     /** Update Profile Picture (multipart/form-data) */
     updateProfilePicture: async (file) => {
         try {
-            const formData = new FormData();
+            const formData = new FormData(); console.error("Get profile error:", error);
+
             formData.append("image", file);
             const response = await axiosInstance.patch("/user/updateProfilePicture", formData, {
                 headers: {
@@ -25,7 +26,7 @@ export const userProfileAPIs = {
             });
             return response.data;
         } catch (error) {
-            console.error("Update profile picture error:", error);
+            // console.error("Update profile picture error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to update profile picture. Please try again."
             );
@@ -37,7 +38,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.post("/user/signup", userData);
             return response.data;
         } catch (error) {
-            console.error("Sign up error:", error);
+            // console.error("Sign up error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to sign up. Please try again."
             );
@@ -49,7 +50,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.post("/user/login", credentials);
             return response.data;
         } catch (error) {
-            console.error("Login error:", error);
+            // console.error("Login error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to log in. Please try again."
             );
@@ -61,7 +62,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.post("/user/logout");
             return response.data;
         } catch (error) {
-            console.error("Logout error:", error);
+            // console.error("Logout error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to log out. Please try again."
             );
@@ -72,7 +73,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.get("/user/checkAuthStatus");
             return response.data;
         } catch (error) {
-            console.error("Check auth status error:", error);
+            // console.error("Check auth status error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to check authentication status. Please try again."
             );
@@ -83,7 +84,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.patch("/user/updateProfile", profileData);
             return response.data;
         } catch (error) {
-            console.error("Update profile error:", error);
+            // console.error("Update profile error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to update profile. Please try again."
             );
@@ -94,7 +95,7 @@ export const userProfileAPIs = {
             const response = await axiosInstance.patch("/user/changePassword", passwordData);
             return response.data;
         } catch (error) {
-            console.error("Change password error:", error);
+            // console.error("Change password error:", error);
             throw new Error(
                 error?.response?.data?.message || "Failed to change password. Please try again."
             );

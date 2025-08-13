@@ -6,7 +6,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
 export default function LoginForm() {
-  const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
@@ -23,8 +22,9 @@ export default function LoginForm() {
   });
   const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } =
     useFetchGoogleUserProfile((data) => {
-      setUserProfile(data);
-      console.log("Google User Profile:", data);
+      localStorage.setItem("isUserLoggedIn", "true");
+      localStorage.setItem("googleLogin", "true");
+      localStorage.setItem("userProfile", JSON.stringify(data));
       navigate("/");
       queryClient.invalidateQueries({
         queryKey: ["authStatus"],
@@ -56,7 +56,7 @@ export default function LoginForm() {
           darkMode ? "" : "bg-white"
         }`}
       >
-        <div className="flex gap-10 w-full p-11 h-[100dvh]">
+        <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)]">
           {/* Left side - Form */}
           <div className="flex-1 flex flex-col justify-center lg:w-[40.417vw]">
             <div className="flex items-center space-x-4 mb-10">
@@ -178,34 +178,6 @@ export default function LoginForm() {
                 </div>
               </div>
 
-              {/* Remember me and Forgot password */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className="w-4 h-4 text-lime-400 bg-transparent border-2 border-gray-300 rounded focus:ring-lime-400 focus:ring-2"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className={`ml-2 text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
-                  >
-                    Remember me
-                  </label>
-                </div>
-                <a
-                  href="#"
-                  className={`text-sm ${
-                    darkMode ? "text-lime-400" : "text-gray-900"
-                  } font-medium hover:underline`}
-                >
-                  Forgot password
-                </a>
-              </div>
               <div className="flex items-center gap-4">
                 {/* Login button */}
                 <button
@@ -223,7 +195,7 @@ export default function LoginForm() {
               </div>
 
               {/* Google login button */}
-              {/* <button
+              <button
                 onClick={() => login()}
                 type="button"
                 className={`w-full cursor-pointer ${
@@ -251,7 +223,7 @@ export default function LoginForm() {
                   />
                 </svg>
                 Continue with Google
-              </button> */}
+              </button>
 
               {/* Signup link */}
               <div className="text-center">
@@ -274,10 +246,10 @@ export default function LoginForm() {
 
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative lg:w-[53.403vw]">
-            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
+            <div className="h-full relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <img src="login.png" className="w-full h-full object-cover" />
+                <img src="login.jpg" className="w-full h-full object-cover" />
               </div>
 
               {/* Gradient overlay for depth */}

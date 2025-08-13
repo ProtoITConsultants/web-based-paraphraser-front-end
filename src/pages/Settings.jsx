@@ -5,11 +5,28 @@ import { Profile } from "../components/settings/Profile";
 import { Password } from "../components/settings/Password";
 import ProfileIcon from "../assets/icons/profileicon";
 import PasswordIcon from "../assets/icons/passwordicon";
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 export const Settings = () => {
   const { darkMode, setDarkMode } = useOutletContext();
    const [activeTab, setActiveTab] = useState("Profile");
-
+   const [googleLogin, setGoogleLogin] = useState(false);
+   const [profle, setProfile] = useState(false);
+    useEffect(() => {
+    const isGoogleLogin = localStorage.getItem("googleLogin");  
+    const profileData = localStorage.getItem("userProfile")
+      ? JSON.parse(localStorage.getItem("userProfile"))
+      : null;
+    if (isGoogleLogin === "true") {
+      setGoogleLogin(true);
+      setProfile(profileData?.profile);
+      setActiveTab("Profile");
+    }
+      else {
+        setGoogleLogin(false);
+        setProfile(false);
+        setActiveTab("Password");
+      }
+    }, []);
 
   return (
     <div
@@ -36,26 +53,28 @@ export const Settings = () => {
               </div>
             </Tabs.Tab>
             <hr className="hidden md:block border-[#E7E7E7] dark:border-[#222222] my-4" />
-            <Tabs.Tab value="Password">
-              <div
-                className={`flex gap-2 items-center py-2 px-3 hover:bg-transparent ${
-                  darkMode
-                    ? activeTab === "Password"
-                      ? "text-white border-white border-b  md:border-0"
+            {!googleLogin && (
+              <Tabs.Tab value="Password">
+                <div
+                  className={`flex gap-2 items-center py-2 px-3 hover:bg-transparent ${
+                    darkMode
+                      ? activeTab === "Password"
+                        ? "text-white border-white border-b  md:border-0"
+                        : "text-[#A1A1A1]"
+                      : activeTab === "Password"
+                      ? "text-[#272727] border-b border-[#272727] md:border-0"
                       : "text-[#A1A1A1]"
-                    : activeTab === "Password"
-                    ? "text-[#272727] border-b border-[#272727] md:border-0"
-                    : "text-[#A1A1A1]"
-                }`}
-              >
-                <PasswordIcon />
-                <h4 className="text-[18px]/[100%]">Password</h4>
-              </div>
-            </Tabs.Tab>
+                  }`}
+                >
+                  <PasswordIcon />
+                  <h4 className="text-[18px]/[100%]">Password</h4>
+                </div>
+              </Tabs.Tab>
+            )}
           </Tabs.List>
 
           <Tabs.Panel value="Profile">
-            <Profile />
+            <Profile isGoogleLogin={googleLogin} profile={profle}/>
           </Tabs.Panel>
           <Tabs.Panel value="Password">
             <Password />

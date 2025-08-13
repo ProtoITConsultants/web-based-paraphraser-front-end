@@ -5,11 +5,13 @@ import { useQueryClient } from "@tanstack/react-query";
 /** -------------------------------
  * 📋 Get User Profile
  ---------------------------------- */
+const isGoogleLogin = localStorage.getItem("googleLogin");
 export const useGetUserProfile = (onSuccessCallback) =>
     useQueryWithErrorToast(
         {
             queryKey: ["userProfile"],
             queryFn: () => userProfileAPIs.getProfile(),
+            enabled: !isGoogleLogin
         },
         "Failed to fetch user profile",
         onSuccessCallback

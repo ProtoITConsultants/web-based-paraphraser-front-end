@@ -23,6 +23,8 @@ export default function SettingsPanel({
       queryKey: ["authStatus"],
     });
     localStorage.removeItem("isUserLoggedIn");
+    localStorage.removeItem("googleLogin");
+    localStorage.removeItem("userProfile");
     onClose();
     navigate("/login");
     console.error("Logout successful, redirecting to login");
@@ -60,7 +62,11 @@ export default function SettingsPanel({
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           />
-          <span className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
             Dark Mode
           </span>
         </div>
@@ -90,7 +96,9 @@ export default function SettingsPanel({
                 }`}
               />
               <span
-                className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}
+                className={`text-sm ${
+                  darkMode ? "text-gray-200" : "text-gray-700"
+                }`}
               >
                 Settings
               </span>
@@ -109,7 +117,9 @@ export default function SettingsPanel({
                 }`}
               />
               <span
-                className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}
+                className={`text-sm ${
+                  darkMode ? "text-gray-200" : "text-gray-700"
+                }`}
               >
                 Log Out
               </span>

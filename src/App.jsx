@@ -34,7 +34,7 @@ export default function App() {
         <div className={`relative min-h-[calc(100dvh-160px)]`}>
           <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />
         </div>
-        {!isAuthRoute && <Footer darkMode={darkMode} />}
+         <Footer darkMode={darkMode} />
       </div>
     </>
   );
