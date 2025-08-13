@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ showSettings, setShowSettings, darkMode }) {
+export default function Header({ showSettings, setShowSettings, darkMode, showLogoutButton }) {
   return (
     <div
       className={`flex py-4 px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
@@ -9,7 +9,7 @@ export default function Header({ showSettings, setShowSettings, darkMode }) {
     >
       <div className="flex items-center space-x-4">
         {/* Link wrapping the entire Logo and Title */}
-        <Link to="/" className="flex items-center space-x-3 ">
+        <Link to="/" className="flex items-center space-x-3">
           {/* Logo */}
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
@@ -31,7 +31,7 @@ export default function Header({ showSettings, setShowSettings, darkMode }) {
       </div>
       {/* Settings Trigger - Green circle that opens settings */}
       <div className="ml-auto flex items-center gap-8">
-        <Link to="/login">Login</Link>
+        {!showLogoutButton && <Link className="dark:text-white hover:underline" to="/login">Login</Link>}
 
         <button
           onClick={() => setShowSettings(!showSettings)}

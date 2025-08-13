@@ -3,7 +3,7 @@ export default function ParaphraseButton({ onClick, loading }) {
     <button
       onClick={onClick}
       disabled={loading}
-      className={`bg-lime-300 hover:bg-lime-400 text-gray-900 font-medium px-8 py-3 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-1 ms-auto flex items-center justify-center gap-2 ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
+      className={`bg-lime-300 cursor-pointer hover:bg-lime-400 text-gray-900 font-medium px-8 py-3 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-1 ms-auto flex items-center justify-center gap-2 ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
     >
       {loading ? (
         <svg className="animate-spin h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
