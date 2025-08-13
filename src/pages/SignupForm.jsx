@@ -297,7 +297,7 @@ export default function SignupForm() {
 
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
-            <div className="h-full bg-gradient-to-br from-blue-900 via-blue-800 to-amber-600 relative overflow-hidden rounded-4xl">
+            <div className="h-full  relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
                 <img src="signup.jpg" className="w-full h-full object-cover" />
