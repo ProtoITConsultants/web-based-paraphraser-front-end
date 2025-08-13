@@ -280,7 +280,7 @@ export default function SignupForm() {
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
                 <img
-                  src="/public/signup.png"
+                  src="signup.png"
                   className="w-full h-full object-cover"
                 />
               </div>

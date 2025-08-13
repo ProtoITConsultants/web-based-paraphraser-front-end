@@ -277,7 +277,7 @@ export default function LoginForm() {
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
                 <img
-                  src="/public/login.png"
+                  src="login.png"
                   className="w-full h-full object-cover"
                 />
               </div>
