@@ -9,20 +9,14 @@ export default function Header({ showSettings, setShowSettings, darkMode }) {
     >
       <div className="flex items-center space-x-4">
         {/* Link wrapping the entire Logo and Title */}
-        <Link
-          to="/"
-          className="flex items-center space-x-3 "
-        >
+        <Link to="/" className="flex items-center space-x-3 ">
           {/* Logo */}
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
               darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
-            <img
-              src="/Logo.png"
-              className={`w-8 h-8 rounded-full `}
-            />
+            <img src="/Logo.png" className={`w-8 h-8 rounded-full `} />
           </div>
 
           {/* Title */}
@@ -35,9 +29,10 @@ export default function Header({ showSettings, setShowSettings, darkMode }) {
           </h1>
         </Link>
       </div>
-
       {/* Settings Trigger - Green circle that opens settings */}
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center gap-8">
+        <Link to="/login">Login</Link>
+
         <button
           onClick={() => setShowSettings(!showSettings)}
           className="w-12 h-12 cursor-pointer bg-lime-400 hover:bg-lime-500 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
