@@ -8,7 +8,7 @@ import {
 } from "../../hooks/user";
 import LoadingBackdrop from "../common/LoadingBackdrop";
 
-export const Profile = () => {
+export const Profile = ({ isGoogleLogin, profile }) => {
   const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
   const { data, isPending, refetch } = useGetUserProfile();
@@ -32,19 +32,19 @@ export const Profile = () => {
     },
   });
 
-    const handleImageChange = (e) => {
-      const file = e.target.files[0];
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
       if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setImage(reader.result); 
-        };
-        reader.readAsDataURL(file);
-        if (file) {
-          updateProfilePicture(file); 
-        }
+        updateProfilePicture(file);
       }
-    };
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,6 +55,7 @@ export const Profile = () => {
       console.log(form.values);
     }
   };
+
   useEffect(() => {
     if (data) {
       if (
@@ -73,9 +74,32 @@ export const Profile = () => {
       }
     }
   }, [data, form.values.firstName, form.values.lastName, form.values.email]);
+
+  // Handle the case when Google login is true
+  const handleGoogleLoginProfile = () => {
+    if (profile) {
+      const fullName = profile.given_name.split(" "); 
+      const firstName = fullName.slice(0, -1).join(" ");
+      const lastName = fullName[fullName.length - 1];
+      form.setValues({
+        firstName: firstName,
+        lastName: lastName,
+        email: profile.email,
+      });
+      setImage(profile.picture); // Setting Google Profile Image
+    }
+  };
+
+  // If Google login is true, avoid editing
+  useEffect(() => {
+    if (isGoogleLogin) {
+      handleGoogleLoginProfile();
+    }
+  }, [isGoogleLogin, profile]);
+
   return (
     <>
-      {(isPending || isUploading) && <LoadingBackdrop />}
+      {(isPending || isUploading) && !isGoogleLogin && <LoadingBackdrop />}
       <div className="md:px-[30px] py-7 lg:w-[53.403vw]">
         <h2 className="text-2xl font-medium mb-4.5">Profile</h2>
 
@@ -87,6 +111,7 @@ export const Profile = () => {
             onChange={handleImageChange}
             className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer rounded-full"
             ref={fileInputRef}
+            disabled={isGoogleLogin} // Disable input if Google login
           />
           {image ? (
             <img
@@ -99,10 +124,12 @@ export const Profile = () => {
               <EditIcon className="w-8 h-8 cursor-pointer" />
             </div>
           )}
-          <EditIcon
-            className="absolute bottom-[-10px] right-[-10px] m-2 cursor-pointer"
-            onClick={() => fileInputRef.current.click()}
-          />
+          {!isGoogleLogin && (
+            <EditIcon
+              className="absolute bottom-[-10px] right-[-10px] m-2 cursor-pointer"
+              onClick={() => fileInputRef.current.click()}
+            />
+          )}
         </div>
 
         <hr className="border-[#E7E7E7] my-6" />
@@ -122,6 +149,7 @@ export const Profile = () => {
                     input:
                       "w-full border-none outline-none focus:ring-0 focus:border-none",
                   }}
+                  disabled={isGoogleLogin} // Disable input if Google login
                 />
               </div>
             </div>
@@ -140,6 +168,7 @@ export const Profile = () => {
                     input:
                       "w-full border-none outline-none focus:ring-0 focus:border-none",
                   }}
+                  disabled={isGoogleLogin} // Disable input if Google login
                 />
               </div>
             </div>
@@ -157,16 +186,19 @@ export const Profile = () => {
                   input:
                     "w-full border-none outline-none focus:ring-0 focus:border-none",
                 }}
+                disabled={isGoogleLogin} // Disable input if Google login
               />
             </div>
           </div>
-          <Button
-            unstyled
-            type="submit"
-            className="py-4 px-6 bg-[#D2F159] rounded-[18px] text-[#272727] font-medium mt-10 cursor-pointer"
-          >
-            Save Changes
-          </Button>
+          {!isGoogleLogin && (
+            <Button
+              unstyled
+              type="submit"
+              className="py-4 px-6 bg-[#D2F159] rounded-[18px] text-[#272727] font-medium mt-10 cursor-pointer"
+            >
+              Save Changes
+            </Button>
+          )}
         </form>
       </div>
     </>
