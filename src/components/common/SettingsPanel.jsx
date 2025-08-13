@@ -58,19 +58,19 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
   return (
     <div
       ref={panelRef}
-      className={`rounded-xl shadow-lg border p-4 w-64 transition-colors duration-300 ${
+      className={`rounded-xl shadow-lg border p-4 w-64  ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
       }`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Moon
-            className={`w-4 h-4 transition-colors duration-300 ${
+            className={`w-4 h-4  ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           />
           <span
-            className={`transition-colors duration-300 ${
+            className={` ${
               darkMode ? "text-gray-200" : "text-gray-700"
             }`}
           >
@@ -79,7 +79,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
         </div>
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 ${
+          className={`relative inline-flex h-6 w-11 items-center rounded-full  ${
             darkMode ? "bg-lime-400" : "bg-gray-300"
           }`}
         >
@@ -95,7 +95,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
           <div className="mt-6">
             <Link
               to="/settings"
-              className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 hover:text-lime-400"
+              className="flex items-center space-x-2 text-sm font-medium  hover:text-lime-400"
             >
               <Settings
                 className={`w-5 h-5 ${
@@ -103,7 +103,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
                 }`}
               />
               <span
-                className={`transition-colors duration-300 ${
+                className={` ${
                   darkMode ? "text-gray-200" : "text-gray-700"
                 }`}
               >
@@ -116,7 +116,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
               onClick={() => {
                 mutate();
               }}
-              className="flex items-center space-x-2 text-sm font-medium transition-colors duration-300 cursor-pointer hover:text-lime-400"
+              className="flex items-center space-x-2 text-sm font-medium  cursor-pointer hover:text-lime-400"
             >
               <LogOut
                 className={`w-5 h-5 ${
@@ -124,7 +124,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
                 }`}
               />
               <span
-                className={`transition-colors duration-300 ${
+                className={` ${
                   darkMode ? "text-gray-200" : "text-gray-700"
                 }`}
               >

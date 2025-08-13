@@ -7,7 +7,7 @@ export const SubHeader = ({darkMode,title}) => {
     <div className="p-9 border-y border-gray-300 dark:border-gray-700 flex items-center justify-between">
       <Link
         to="/"
-        className="flex items-center gap-2 text-[#C7CBD1] hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-300"
+        className="flex items-center gap-2 text-[#C7CBD1] hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 "
       >
         <BackIcon />
         <span

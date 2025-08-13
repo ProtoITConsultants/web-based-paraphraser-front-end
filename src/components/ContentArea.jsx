@@ -168,7 +168,7 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
           className={`rounded-2xl p-6 ${darkMode ? "bg-black" : "bg-gray-100"}`}
         >
           <h2
-            className={`text-xl font-semibold transition-colors duration-300 ${
+            className={`text-xl font-semibold  ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
@@ -198,7 +198,7 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
         >
           <div className="flex items-center justify-between">
             <h2
-              className={`text-xl font-semibold transition-colors duration-300 ${
+              className={`text-xl font-semibold  ${
                 darkMode ? "text-white" : "text-gray-900"
               }`}
             >
@@ -290,7 +290,7 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
               outputText
             ) : (
               <span
-                className={`transition-colors duration-300 ${
+                className={` ${
                   darkMode ? "text-gray-500" : "text-gray-400"
                 }`}
               ></span>
