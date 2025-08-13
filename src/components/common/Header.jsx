@@ -9,7 +9,7 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
     >
       <div className="flex items-center space-x-4">
         {/* Link wrapping the entire Logo and Title */}
-        <Link to="/" className="flex items-center space-x-3 ">
+        <Link to="/" className="flex items-center space-x-3">
           {/* Logo */}
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
@@ -31,7 +31,7 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
       </div>
       {/* Settings Trigger - Green circle that opens settings */}
       <div className="ml-auto flex items-center gap-8">
-        {!showLogoutButton && <Link className="dark:text-white" to="/login">Login</Link>}
+        {!showLogoutButton && <Link className="dark:text-white hover:underline" to="/login">Login</Link>}
 
         <button
           onClick={() => setShowSettings(!showSettings)}

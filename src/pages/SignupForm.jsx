@@ -13,6 +13,7 @@ export default function SignupForm() {
   const [darkMode, setDarkMode] = useState(false);
   const { mutate, isPending } = useSignUp(()=> {
     navigate("/");
+    localStorage.setItem("isUserLoggedIn", "true");
   });
 
   const handleSubmit = (e) => {
@@ -226,7 +227,7 @@ export default function SignupForm() {
               </div>
 
               {/* Google sign up button */}
-              {/* <button
+              <button
                   type="button"
                   className={`w-full cursor-pointer ${
                     darkMode
@@ -253,7 +254,7 @@ export default function SignupForm() {
                     />
                   </svg>
                   Sign up with Google
-                </button> */}
+                </button>
 
               {/* Login link */}
               <div className="text-center">
