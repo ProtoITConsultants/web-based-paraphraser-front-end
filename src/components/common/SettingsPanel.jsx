@@ -5,11 +5,16 @@ import { useCheckAuthStatus, useLogout } from "../../hooks/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userProfileAPIs } from "../../api/user";
 
-export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, isAuthRoute }) {
+export default function SettingsPanel({
+  darkMode,
+  setDarkMode,
+  data,
+  onClose,
+  isAuthRoute,
+  showLogoutButton,
+}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const [showLogoutButton, setShowLogoutButton] = useState(false);
 
   const panelRef = useRef(null);
 
@@ -22,8 +27,6 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
     navigate("/login");
     console.error("Logout successful, redirecting to login");
   });
-
-  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,18 +46,6 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
       document.body.classList.remove("dark");
     }
   }, [darkMode]);
-
-  useEffect(() => {
-    const isUserLoggedIn = localStorage.getItem("isUserLoggedIn");
-
-    if (isUserLoggedIn === "true") {
-      setShowLogoutButton(true);
-    } else {
-      setShowLogoutButton(false);
-    }
-
-  }, [])
-
   return (
     <div
       ref={panelRef}
@@ -69,17 +60,13 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           />
-          <span
-            className={` ${
-              darkMode ? "text-gray-200" : "text-gray-700"
-            }`}
-          >
+          <span className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
             Dark Mode
           </span>
         </div>
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full  ${
+          className={`relative inline-flex h-6 w-11 items-center rounded-full cursor-pointer  ${
             darkMode ? "bg-lime-400" : "bg-gray-300"
           }`}
         >
@@ -103,9 +90,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
                 }`}
               />
               <span
-                className={` ${
-                  darkMode ? "text-gray-200" : "text-gray-700"
-                }`}
+                className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}
               >
                 Settings
               </span>
@@ -124,9 +109,7 @@ export default function SettingsPanel({ darkMode, setDarkMode, data, onClose, is
                 }`}
               />
               <span
-                className={` ${
-                  darkMode ? "text-gray-200" : "text-gray-700"
-                }`}
+                className={` ${darkMode ? "text-gray-200" : "text-gray-700"}`}
               >
                 Log Out
               </span>
