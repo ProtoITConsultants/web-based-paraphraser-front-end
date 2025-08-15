@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://node.paraphraser.co/api",
+    baseURL: "http://localhost:5001/api",
     withCredentials: true,
 });
 

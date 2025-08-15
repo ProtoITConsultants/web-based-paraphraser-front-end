@@ -5,16 +5,12 @@ import { useQueryClient } from "@tanstack/react-query";
 /** -------------------------------
  * 📋 Get User Profile
  ---------------------------------- */
-const isGoogleLogin = localStorage.getItem("googleLogin");
-export const useGetUserProfile = (onSuccessCallback) =>
-    useQueryWithErrorToast(
+export const useGetUserProfile = () =>
+    useQuery(
         {
             queryKey: ["userProfile"],
             queryFn: () => userProfileAPIs.getProfile(),
-            enabled: !isGoogleLogin
-        },
-        "Failed to fetch user profile",
-        onSuccessCallback
+        }
     );
 /** -------------------------------
  * 🖼️ Update User Profile Picture
@@ -59,7 +55,11 @@ export const useLogout = (onSuccessCallback) =>
             const queryClient = useQueryClient();
             console.error("Logout failed, redirecting to login");
             navigate("/login");
-            queryClient.invalidateQueries(["authStatus"]);
+            queryClient.invalidateQueries(
+                {
+                    queryKey: ["authStatus"],
+                }
+            );
         }
     });
 // ** -------------------------------

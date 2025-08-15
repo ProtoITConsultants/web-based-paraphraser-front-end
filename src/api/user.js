@@ -16,19 +16,20 @@ export const userProfileAPIs = {
     /** Update Profile Picture (multipart/form-data) */
     updateProfilePicture: async (file) => {
         try {
-            const formData = new FormData(); console.error("Get profile error:", error);
+            const formData = new FormData();
+            formData.append("image", file); // 'image' matches backend's expected field
 
-            formData.append("image", file);
-            const response = await axiosInstance.patch("/user/updateProfilePicture", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            // DO NOT set 'Content-Type' manually — let Axios handle it with boundary
+            const response = await axiosInstance.patch("/user/updateProfilePicture", formData);
+
             return response.data;
         } catch (error) {
-            // console.error("Update profile picture error:", error);
+            // Properly log full error for debugging
+            console.error("Update profile picture error:", error.response || error);
+
             throw new Error(
-                error?.response?.data?.message || "Failed to update profile picture. Please try again."
+                error?.response?.data?.message ||
+                "Failed to update profile picture. Please try again."
             );
         }
     },

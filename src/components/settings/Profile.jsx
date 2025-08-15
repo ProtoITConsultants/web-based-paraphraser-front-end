@@ -5,17 +5,27 @@ import EditIcon from "../../assets/icons/editicon";
 import {
   useGetUserProfile,
   useUpdateUserProfilePicture,
+  useUpdateUserProfile,
 } from "../../hooks/user";
 import LoadingBackdrop from "../common/LoadingBackdrop";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const Profile = ({ isGoogleLogin, profile }) => {
+  const queryClient = useQueryClient();
   const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
-  const { data, isPending, refetch } = useGetUserProfile();
+  const { data, isPending } = useGetUserProfile();
   const { mutate: updateProfilePicture, isPending: isUploading } =
     useUpdateUserProfilePicture(() => {
-      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ["userProfile"],
+      });
     });
+  const { mutate: updateProfile, isPending: isUpdating } = useUpdateUserProfile(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["userProfile"],
+    });
+  });
   const form = useForm({
     initialValues: {
       firstName: "",
@@ -41,6 +51,7 @@ export const Profile = ({ isGoogleLogin, profile }) => {
       };
       reader.readAsDataURL(file);
       if (file) {
+        console.log(file);
         updateProfilePicture(file);
       }
     }
@@ -52,28 +63,27 @@ export const Profile = ({ isGoogleLogin, profile }) => {
     if (validation.hasErrors) {
       console.log("Form has errors!");
     } else {
-      console.log(form.values);
+      const formData = {
+        firstName: form.values.firstName,
+        lastName: form.values.lastName
+      };
+      updateProfile(formData);
     }
   };
 
   useEffect(() => {
-    if (data) {
-      if (
-        data?.user?.firstName !== form.values.firstName ||
-        data?.user?.lastName !== form.values.lastName ||
-        data?.user?.email !== form.values.email
-      ) {
-        form.setValues({
-          firstName: data?.user?.firstName || "",
-          lastName: data?.user?.lastName || "",
-          email: data?.user?.email || "",
-        });
-      }
+    if (data && !isGoogleLogin) {
+      form.setValues({
+        firstName: data?.user?.firstName || "",
+        lastName: data?.user?.lastName || "",
+        email: data?.user?.email || "",
+      });
+
       if (data?.user?.profilePicture) {
         setImage(data.user.profilePicture.url);
       }
     }
-  }, [data, form.values.firstName, form.values.lastName, form.values.email]);
+  }, [data, isGoogleLogin]);
 
   // Handle the case when Google login is true
   const handleGoogleLoginProfile = () => {
@@ -99,7 +109,7 @@ export const Profile = ({ isGoogleLogin, profile }) => {
 
   return (
     <>
-      {(isPending || isUploading) && !isGoogleLogin && <LoadingBackdrop />}
+      {(isPending || isUploading || isUpdating) && !isGoogleLogin && <LoadingBackdrop />}
       <div className="md:px-[30px] py-7 lg:w-[53.403vw]">
         <h2 className="text-2xl font-medium mb-4.5">Profile</h2>
 
@@ -149,7 +159,7 @@ export const Profile = ({ isGoogleLogin, profile }) => {
                     input:
                       "w-full border-none outline-none focus:ring-0 focus:border-none",
                   }}
-                  disabled={isGoogleLogin} // Disable input if Google login
+                  disabled={isGoogleLogin} 
                 />
               </div>
             </div>
@@ -168,7 +178,7 @@ export const Profile = ({ isGoogleLogin, profile }) => {
                     input:
                       "w-full border-none outline-none focus:ring-0 focus:border-none",
                   }}
-                  disabled={isGoogleLogin} // Disable input if Google login
+                  disabled={isGoogleLogin} 
                 />
               </div>
             </div>
@@ -186,7 +196,7 @@ export const Profile = ({ isGoogleLogin, profile }) => {
                   input:
                     "w-full border-none outline-none focus:ring-0 focus:border-none",
                 }}
-                disabled={isGoogleLogin} // Disable input if Google login
+                disabled={true} 
               />
             </div>
           </div>
