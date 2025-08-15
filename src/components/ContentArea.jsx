@@ -282,7 +282,7 @@ export default function ContentArea({ inputText, setInputText, outputText, darkM
             )}
           </div>
           <div
-            className={`w-full min-h-80 h-80 lg:h-96 py-2 font-light ${
+            className={`w-full min-h-80 h-80 lg:h-96 py-2 font-light overflow-y-auto ${
               darkMode ? "text-gray-400 bg-black" : "text-black bg-gray-100"
             }`}
           >
