@@ -92,12 +92,8 @@ export const Profile = ({ isGoogleLogin, profile }) => {
   // Handle the case when Google login is true
   const handleGoogleLoginProfile = () => {
     if (profile) {
-      const fullName = profile.given_name.split(" "); 
-      const firstName = fullName.slice(0, -1).join(" ");
-      const lastName = fullName[fullName.length - 1];
       form.setValues({
-        firstName: firstName,
-        lastName: lastName,
+        firstName: profile.given_name,
         email: profile.email,
       });
       setImage(profile.picture); // Setting Google Profile Image
@@ -169,7 +165,9 @@ export const Profile = ({ isGoogleLogin, profile }) => {
             </div>
 
             {/* Last Name Input */}
-            <div className="flex flex-col w-full mb-4">
+            <div className={`flex flex-col w-full mb-4 ${
+              isGoogleLogin && "hidden"
+            }`}>
               <div className="flex flex-col h-[80px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
                 <TextInput
                   {...form.getInputProps("lastName")}
