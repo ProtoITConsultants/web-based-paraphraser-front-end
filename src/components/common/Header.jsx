@@ -10,7 +10,6 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
     if (googleLogin && userProfile?.profile?.picture) {
       setUrl(userProfile.profile.picture);
     } else if (data?.user?.profilePicture?.url) {
-      console.log(data.user.profilePicture.url, "from else");
       setUrl(data.user.profilePicture.url);
     }
   }, [data]); 
