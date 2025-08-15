@@ -25,7 +25,7 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
         <Link to="/" className="flex items-center space-x-3">
           {/* Logo */}
           <div
-            className={`w-8 md:w-12 h-12 rounded-2xl flex items-center justify-center  ${
+            className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center  ${
               darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
