@@ -46,18 +46,19 @@ export const Profile = ({ isGoogleLogin, profile }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const fileSizeInMB = file.size / (1024 * 1024); 
+      const fileSizeInMB = file.size / (1024 * 1024);
       if (fileSizeInMB >= 5) {
         toast.error("Image size should be less than 5MB");
-        return; 
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+        updateProfilePicture(file);
       }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result); 
-      };
-      reader.readAsDataURL(file);
-      updateProfilePicture(file);
     }
+    e.target.value = null;
   };
 
   const handleSubmit = (e) => {
