@@ -17,9 +17,9 @@ export const Profile = ({ isGoogleLogin, profile }) => {
   const { data, isPending } = useGetUserProfile();
   const { mutate: updateProfilePicture, isPending: isUploading } =
     useUpdateUserProfilePicture(() => {
-      queryClient.invalidateQueries({
-        queryKey: ["userProfile"],
-      });
+      console.log("Profile picture updated yomoloko");
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+      queryClient.invalidateQueries({ queryKey: ["authStatus"] });
     });
   const { mutate: updateProfile, isPending: isUpdating } = useUpdateUserProfile(() => {
     queryClient.invalidateQueries({

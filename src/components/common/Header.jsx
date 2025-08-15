@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ showSettings, setShowSettings, darkMode, showLogoutButton }) {
+export default function Header({ showSettings, setShowSettings, darkMode, showLogoutButton, data }) {
+  console.log(data?.user?.profilePicture?.url);
+
   return (
     <div
       className={`flex py-4 px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
@@ -31,13 +33,26 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
       </div>
       {/* Settings Trigger - Green circle that opens settings */}
       <div className="ml-auto flex items-center gap-2">
-        {!showLogoutButton && <Link className="dark:text-white hover:underline" to="/login">Login</Link>}
+        {!showLogoutButton && (
+          <Link className="dark:text-white hover:underline" to="/login">
+            Login
+          </Link>
+        )}
 
-        <button
-          onClick={() => setShowSettings(!showSettings)}
-          className="size-8 md:w-12 lg:h-12 cursor-pointer bg-lime-400 hover:bg-lime-500 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
-          aria-label="Open Settings"
-        ></button>
+        {data?.user?.profilePicture?.url ? (
+          <img
+            src={data.user.profilePicture.url}
+            alt="User avatar"
+            onClick={() => setShowSettings(!showSettings)}
+            className="size-8 md:w-12 lg:h-12 cursor-pointer rounded-full object-cover transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
+          />
+        ) : (
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className="size-8 md:w-12 lg:h-12 cursor-pointer bg-lime-400 hover:bg-lime-500 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
+            aria-label="Open Settings"
+          ></button>
+        )}
       </div>
     </div>
   );

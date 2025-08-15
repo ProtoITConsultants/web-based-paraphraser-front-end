@@ -20,6 +20,7 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
         setShowSettings={setShowSettings}
         darkMode={darkMode}
         showLogoutButton={showLogoutButton}
+        data={data}
       />
 
       {/* Settings Panel - Popup */}
