@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Header({ showSettings, setShowSettings, darkMode, showLogoutButton, data }) {
-  console.log(data?.user?.profilePicture?.url);
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const googleLogin = localStorage.getItem("googleLogin") === "true";
+    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
 
+    if (googleLogin && userProfile?.profile?.picture) {
+      setUrl(userProfile.profile.picture);
+    } else if (data?.user?.profilePicture?.url) {
+      console.log(data.user.profilePicture.url, "from else");
+      setUrl(data.user.profilePicture.url);
+    }
+  }, [data]); 
   return (
     <div
       className={`flex py-4 px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
@@ -39,17 +50,17 @@ export default function Header({ showSettings, setShowSettings, darkMode, showLo
           </Link>
         )}
 
-        {data?.user?.profilePicture?.url ? (
+        {url ? (
           <img
-            src={data.user.profilePicture.url}
+            src={url}
             alt="User avatar"
             onClick={() => setShowSettings(!showSettings)}
-            className="size-8 md:w-12 lg:h-12 cursor-pointer rounded-full object-cover transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
+            className="size-8 md:w-12 md:h-12 cursor-pointer rounded-full object-cover transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
           />
         ) : (
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="size-8 md:w-12 lg:h-12 cursor-pointer bg-lime-400 hover:bg-lime-500 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
+            className="w-8 h-8 md:w-12 md:h-12 cursor-pointer bg-lime-400 hover:bg-lime-500 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
             aria-label="Open Settings"
           ></button>
         )}
