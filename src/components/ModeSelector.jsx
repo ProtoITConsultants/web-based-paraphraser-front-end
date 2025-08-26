@@ -9,16 +9,16 @@ export default function ModeSelector({ activeMode, setActiveMode, darkMode }) {
   ];
 
   return (
-    <div className="flex flex-col space-y-4 font-light">
+    <div className="flex flex-col mt-18 space-y-4 font-light">
       <div className="flex items-center space-x-6">
         <span
           className={`text-sm font-medium px-8 py-2 border rounded-full  ${
-            darkMode ? "text-gray-200 border-lime-400" : "text-black"
+            darkMode ? "text-gray-200 border-[#D2F159]" : "text-black"
           }`}
         >
           Modes
         </span>
-        <div className="flex my-5 space-x-6 relative overflow-x-auto scrollbar-thin scrollbar-thumb-lime-400 scrollbar-track-gray-200 lg:overflow-visible lg:scrollbar-none" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="flex my-5 space-x-6 relative overflow-x-auto scrollbar-thin scrollbar-thumb-[#D2F159] scrollbar-track-gray-200 lg:overflow-visible lg:scrollbar-none" style={{ WebkitOverflowScrolling: 'touch' }}>
           {modes.map((mode) => (
             <button
               key={mode}

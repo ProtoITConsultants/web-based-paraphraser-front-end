@@ -51,7 +51,7 @@ export const Password = () => {
                 <span className="text-[#272727] dark:text-[#E7E7E7] w-full md:w-[280px]">
                   Current Password
                 </span>
-                <div className="flex justify-center flex-1 flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+                <div className="flex w-full justify-center flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
                   <PasswordInput
                     {...form.getInputProps("currentPassword")}
                     placeholder="********"
@@ -73,7 +73,7 @@ export const Password = () => {
                 <span className="text-[#272727] dark:text-[#E7E7E7] w-full md:w-[280px]">
                   New Password
                 </span>
-                <div className="flex justify-center flex-1 flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+                <div className="flex w-full justify-center flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
                   <PasswordInput
                     {...form.getInputProps("newPassword")}
                     placeholder="********"
@@ -96,7 +96,7 @@ export const Password = () => {
                 <span className="text-[#272727] dark:text-[#E7E7E7] w-full md:w-[280px]">
                   Confirm New Password
                 </span>
-                <div className="flex justify-center flex-1 flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
+                <div className="flex justify-center w-full flex-col h-[70px] bg-[#F6F6F6] dark:bg-[#17191C] border border-[#E7E7E7] rounded-[18px] shadow-[0px_0px_20px_0px_#00000005] gap-[9px] p-3">
                   <PasswordInput
                     {...form.getInputProps("confirmPassword")}
                     placeholder="********"

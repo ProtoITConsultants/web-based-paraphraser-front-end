@@ -233,13 +233,13 @@ export default function SignupForm() {
                 {/* Sign up button */}
                 <button
                   onClick={() => navigate("/")}
-                  className="w-full border border-lime-400 cursor-pointet text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full border border-[#D2F159] cursor-pointet text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Continue as Guest
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full bg-[#D2F159] cursor-pointer hover:bg-lime-400 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Sign up
                 </button>
@@ -286,7 +286,7 @@ export default function SignupForm() {
                 <Link
                   to="/login"
                   className={`${
-                    darkMode ? "text-lime-400" : "text-gray-900"
+                    darkMode ? "text-[#D2F159]" : "text-gray-900"
                   } font-medium hover:underline`}
                 >
                   Login

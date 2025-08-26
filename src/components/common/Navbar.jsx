@@ -27,9 +27,9 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
       {showSettings && (
         <>
           {/* Backdrop (no body color change) */}
-          <div className="" onClick={() => setShowSettings(false)} />
+          <div className="relative" onClick={() => setShowSettings(false)} />
           {/* Settings Panel */}
-          <div className="absolute top-16 right-16 z-50">
+          <div className="fixed top-16 right-8 z-50">
             <SettingsPanel
               darkMode={darkMode}
               setDarkMode={setDarkMode}

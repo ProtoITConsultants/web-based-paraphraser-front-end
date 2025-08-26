@@ -178,17 +178,17 @@ export default function LoginForm() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex md:flex-row flex-col-reverse items-center gap-4">
                 {/* Login button */}
                 <button
                   onClick={() => navigate("/")}
-                  className="w-full border border-lime-400 cursor-pointer text-lime-400 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full border border-[#D2F159] cursor-pointer text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Continue as Guest
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-lime-400 cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full bg-[#D2F159] cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Login and Paraphrase
                 </button>
@@ -235,7 +235,7 @@ export default function LoginForm() {
                 <Link
                   to="/signup"
                   className={`${
-                    darkMode ? "text-lime-400" : "text-gray-900"
+                    darkMode ? "text-[#D2F159]" : "text-gray-900"
                   } font-medium hover:underline`}
                 >
                   Sign up
