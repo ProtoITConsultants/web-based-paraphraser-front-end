@@ -1,20 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { Settings, Moon, LogOut, Menu } from "lucide-react";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { useCheckAuthStatus, useLogout } from "../../hooks/user";
+import { useEffect, useRef, } from "react";
+import { Settings, Moon, LogOut, } from "lucide-react";
+import { Link, useNavigate, } from "react-router-dom";
+import {  useLogout } from "../../hooks/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 export default function SettingsPanel({
   darkMode,
   setDarkMode,
-  data,
   onClose,
-  isAuthRoute,
   showLogoutButton,
   isGuest,
 }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const panelRef = useRef(null);
   const { mutate, isPending } = useLogout(() => {
     queryClient.invalidateQueries({
       queryKey: ["authStatus"],
@@ -28,17 +25,6 @@ export default function SettingsPanel({
   });
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (panelRef.current && !panelRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [onClose]);
-  useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark");
     } else {
@@ -48,7 +34,6 @@ export default function SettingsPanel({
 
   return (
     <div
-      ref={panelRef}
       className={`rounded-xl shadow-lg border p-4 w-64  ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
       }`}

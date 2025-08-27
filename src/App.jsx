@@ -31,7 +31,7 @@ export default function App() {
             isAuthRoute={isAuthRoute}
           />
         )}
-        <div className={`relative min-h-[calc(100dvh-160px)]`}>
+        <div className={`relative min-h-[calc(100dvh-160px)] scroll-smooth`}>
           <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />
         </div>
          <Footer darkMode={darkMode} />

@@ -1,6 +1,6 @@
 export function HeroSection() {
   return (
-    <section className="container mx-auto md:px-12 px-4">
+    <section id="Hero" className="container mx-auto md:px-12 px-4">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="hidden md:flex justify-center">
           <img

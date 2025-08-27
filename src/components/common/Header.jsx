@@ -32,6 +32,21 @@ export default function Header({
     );
   }, [data]);
 
+
+  // Toggle settings panel visibility
+  const toggleSettings = () => {
+    if(showSettings){
+      console.log("Closing settings panel");
+      setShowSettings(false);
+    }
+    else{
+      console.log("Opening settings panel");
+      setShowSettings(true);
+    }
+  };
+
+  console.log("Show Settings:", showSettings);
+
   return (
     <div
       className={`flex fixed top-0 z-1 w-full py-4 px-4 md:px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
@@ -77,18 +92,18 @@ export default function Header({
           <img
             src={url}
             alt="User avatar"
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={toggleSettings}
             className="size-8 md:w-12 md:h-12 cursor-pointer rounded-full object-cover transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D2F159] focus:ring-offset-2"
           />
         ) : isNonGoogleSignedIn ? (
           <div
             className="size-8 md:w-12 md:h-12 bg-[#D2F159] cursor-pointer rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D2F159] focus:ring-offset-2"
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={toggleSettings}
             aria-label="Open Settings"
           ></div>
         ) : (
           <EllipsisVertical
-            onClick={() => setShowSettings(!showSettings)}
+            onClick={toggleSettings}
             className="w-7 h-7 cursor-pointer dark:text-white"
             aria-label="Open Settings"
           />

@@ -7,7 +7,7 @@ import { HowItWorks } from "../components/how-it-works";
 
 export default function Landing() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen scroll-smooth">
       {/* ConfidenceSection above HeroSection on large screens */}
       <div className="hidden md:block">
         <ConfidenceSection />

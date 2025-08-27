@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import Header from "./Header"
+import React, { useState, useEffect } from 'react';
+import Header from "./Header";
 import SettingsPanel from "./SettingsPanel";
 
 export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
   const [showLogoutButton, setShowLogoutButton] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+
   useEffect(() => {
     const isUserLoggedIn = localStorage.getItem("isUserLoggedIn");
     if (isUserLoggedIn === "true") {
@@ -13,6 +14,12 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
       setShowLogoutButton(false);
     }
   }, []);
+
+  // Handle backdrop click to close settings panel
+  const handleBackdropClick = (event) => {
+    setShowSettings(false);
+  };
+
   return (
     <>
       <Header
@@ -26,10 +33,10 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
       {/* Settings Panel - Popup */}
       {showSettings && (
         <>
-          {/* Backdrop (no body color change) */}
-          <div className="relative" onClick={() => setShowSettings(false)} />
           {/* Settings Panel */}
-          <div className="fixed top-16 right-8 z-50">
+          <div
+            className="fixed top-16 right-8 z-50"
+          >
             <SettingsPanel
               darkMode={darkMode}
               setDarkMode={setDarkMode}
