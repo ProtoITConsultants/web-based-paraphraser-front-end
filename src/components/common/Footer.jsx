@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -43,7 +42,7 @@ export const Footer = () => {
             </svg>
           </button>
         </div>
-        <p className="text-center text-gray-500 mt-10 text-sm md:text-base">
+        <p className="text-center text-gray-500 mt-7 mb-4 text-sm md:text-base">
           © Copyright 2025 All rights reserved.{" "}
           <Link to="/privacy" className="ml-2 hover:underline">
             Privacy Policy
