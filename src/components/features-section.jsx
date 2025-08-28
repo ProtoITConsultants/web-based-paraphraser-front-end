@@ -1,4 +1,4 @@
-export function FeaturesSection() {
+export function FeaturesSection({darkMode, setDarkMode}) {
   const features = [
     {
       icon: "image 1.png",
@@ -37,18 +37,20 @@ export function FeaturesSection() {
   ]
 
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container md:max-w-[1140px] mx-auto px-4 md:px-0 py-16">
       <div className="text-center mb-12">
-        <h2 className="text-2xl md:text-5xl font-bold mb-4">Why Choose Paraphraser?</h2>
+        <h2 className={`text-2xl md:text-5xl font-bold mb-4 ${darkMode ? "text-white" : "text-black"}`}>Why Choose Paraphraser?</h2>
       </div>
-      <div className="grid lg:w-2/3 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto justify-items-center">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
         {features.map((feature, index) => (
-          <div key={index} className="bg-white p-6 rounded-2xl border border-gray-200 shadow-lg mx-auto">
+          <div key={index} className={`p-6 rounded-2xl shadow-lg mx-auto ${darkMode ? "bg-black text-white" : "bg-white text-black border border-gray-200"}`}>
             <div className="mb-5">
-                <img className="p-2 object-cover rounded-full bg-lime-100 w-16 h-16" src={feature.icon} alt="" />
+                <img className={`p-2 object-cover rounded-full w-16 h-16 ${
+                  darkMode ? "bg-[#D2F159]" : "bg-lime-200/90"
+                }`} src={feature.icon} alt="" />
             </div>
             <h3 className="text-xl font-semibold mb-2 md:mb-3">{feature.title}</h3>
-            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{feature.description}</p>
+            <p className={` leading-relaxed text-sm md:text-base ${darkMode ? "text-white" : "text-gray-600"}`}>{feature.description}</p>
           </div>
         ))}
       </div>

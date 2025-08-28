@@ -6,7 +6,7 @@ export const Disclaimer = () => {
 
   return (
     <div
-      className={darkMode ? "bg-[#101214] text-white" : "bg-white text-black"}
+      className={darkMode ? "bg-[#101214] text-white pt-18" : "bg-white pt-18 text-black"}
     >
       <SubHeader darkMode={darkMode} title="Disclaimer" />
       <div className="md:px-10 px-5 py-6 flex flex-col gap-4">

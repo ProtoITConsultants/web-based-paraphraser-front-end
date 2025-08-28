@@ -6,7 +6,7 @@ export const Privacy = () => {
 
   return (
     <div
-      className={darkMode ? "bg-[#101214] text-white" : "bg-white text-black"}
+      className={darkMode ? "bg-[#101214] text-white pt-18" : "bg-white text-black pt-18"}
     >
       <SubHeader darkMode={darkMode} title="Privacy Policy" />
       <div className="md:px-10 px-5 py-6 flex flex-col gap-4">

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function FAQSection() {
+export function FAQSection({darkMode, setDarkMode}) {
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqs = [
@@ -27,11 +27,11 @@ export function FAQSection() {
   ]
 
   return (
-    <section className="container mx-auto px-4 lg:px-12 py-16">
+    <section className="container mx-auto px-4 lg:px-0 py-16 max-w-[1140px]">
       <div className="grid lg:grid-cols-2 gap-4 md:gap-12 items-center">
         {/* Left Heading */}
         <div className="text-left">
-          <h2 className="text-2xl text-center md:text-left md:text-5xl font-bold leading-snug">
+          <h2 className={`text-2xl text-center md:text-left md:text-5xl font-bold leading-snug ${darkMode ? "text-white" : "text-black"}`}>
             Frequently asked{" "}
             <span className="text-[#D2F159]">questions</span>
           </h2>
@@ -42,7 +42,7 @@ export function FAQSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-gray-100 rounded-2xl shadow-sm"
+              className={`${darkMode ? "bg-black text-white" : "bg-gray-100"} rounded-2xl shadow-sm`}
             >
               <button
                 className="w-full px-3 md:px-6 p-6 flex justify-between items-center"
@@ -67,7 +67,7 @@ export function FAQSection() {
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-4">
-                  <p className="text-gray-600 text-sm">{faq.answer}</p>
+                  <p className={`${darkMode ? "text-white" : "text-gray-600"} text-sm`}>{faq.answer}</p>
                 </div>
               )}
             </div>

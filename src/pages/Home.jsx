@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={`${darkMode ? "bg-[#101214]" : "bg-white"} scroll-smooth`}>
       <ParaphrasingTool darkMode={darkMode} setDarkMode={setDarkMode} data={data} />
-      <Landing/>
+      <Landing darkMode={darkMode} setDarkMode={setDarkMode}/>
     </div>
   );
 }

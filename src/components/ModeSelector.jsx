@@ -9,7 +9,7 @@ export default function ModeSelector({ activeMode, setActiveMode, darkMode }) {
   ];
 
   return (
-    <div className="flex flex-col mt-18 space-y-4 font-light">
+    <div className="flex flex-col mt-17 font-light">
       <div className="flex items-center space-x-6">
         <span
           className={`text-sm font-medium px-8 py-2 border rounded-full  ${

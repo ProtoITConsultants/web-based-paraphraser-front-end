@@ -35,7 +35,7 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
         <>
           {/* Settings Panel */}
           <div
-            className="fixed top-16 right-8 z-50"
+            className="fixed md:top-24 top-16 md:right-12 right-8 z-50"
           >
             <SettingsPanel
               darkMode={darkMode}

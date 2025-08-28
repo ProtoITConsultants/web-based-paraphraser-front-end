@@ -1,4 +1,4 @@
-export function HowItWorks() {
+export function HowItWorks({darkMode, setDarkMode}) {
   const steps = [
     {
       number: "01",
@@ -24,13 +24,13 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="mx-auto px-4 py-16 bg-gray-100">
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className={`${darkMode ? "bg-black" : "bg-gray-100"} mx-auto py-16 px-4 md:px-0`}>
+      <div className="flex flex-col md:flex-row gap-12 items-center justify-between md:max-w-[1140px] mx-auto">
         {/* Left Circle */}
-        <div className="flex sm:justify-self-center lg:justify-self-start xl:justify-self-center ml-0 xl:ml-64">
+        <div className="flex sm:justify-self-center lg:justify-self-start xl:justify-self-center ml-0">
           <div className="relative w-full">
-            <div className="w-60 h-60 md:w-84 md:h-84 rounded-full border-[20px] border-[#D2F159] flex items-center justify-center bg-white mx-auto">
-              <h2 className="text-2xl lg:text-4xl font-bold text-black text-center">
+            <div className={`w-60 h-60 md:w-72 md:h-72 rounded-full border-[20px] border-[#D2F159] flex items-center justify-center mx-auto ${darkMode ? "bg-black text-white" : "bg-white text-black"}`}>
+              <h2 className="text-2xl lg:text-4xl font-bold text-center">
                 How it <br /> works?
               </h2>
             </div>
@@ -42,18 +42,18 @@ export function HowItWorks() {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-3 rounded-2xl bg-[#D2F159] shadow-md xl:w-[53%]"
+              className="flex items-center justify-between p-3 rounded-2xl bg-[#D2F159] shadow-md max-w-[470px]"
             >
               {/* Icon */}
               <div className="flex items-center gap-4">
                 <img src={step.icon} className="p-2 bg-white rounded-full flex items-center justify-center text-2xl w-16 h-16 md:w-20 md:h-20" />
-                <div className="bg-white w-full p-3 rounded-xl flex justify-between items-center gap-2">
+                <div className={`w-full p-3 rounded-xl flex justify-between items-center gap-2 ${darkMode ? "bg-black text-white" : "bg-white"}`}>
                   <div>
                     <h3 className="text-lg font-semibold">{step.title}</h3>
-                    <p className="text-gray-600 text-xs md:text-sm">{step.description}</p>
+                    <p className={`text-xs md:text-sm ${darkMode ? "text-white" : "text-gray-600"}`}>{step.description}</p>
                   </div>
                   {/* Step Number */}
-                  <div className="text-4xl font-bold text-gray-700">
+                  <div className="text-4xl font-bold">
                     {step.number}
                   </div>
                 </div>

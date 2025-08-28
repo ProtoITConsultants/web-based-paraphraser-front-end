@@ -57,7 +57,7 @@ export default function Header({
         <Link to="/" className="flex items-center space-x-3">
           <div
             className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${
-              darkMode ? "bg-gray-700" : "bg-gray-100"
+              darkMode ? "bg-gray-900" : "bg-gray-100"
             }`}
           >
             <img src="/Logo.png" className={`w-8 h-8 rounded-full`} />
@@ -71,17 +71,17 @@ export default function Header({
           </h1>
         </Link>
       </div>
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto flex items-center gap-1 md:gap-3">
         {!showLogoutButton && (
           <>
             <Link
-              className="hover:underline text-sm px-4 md:px-6 md:text-base py-2 bg-gray-100 cursor-pointer rounded-2xl"
+              className="hover:bg-gray-200 transition text-sm px-4 md:px-6 md:text-base py-2 bg-gray-100 cursor-pointer rounded-2xl"
               to="/login"
             >
               Login
             </Link>
             <Link
-              className="hover:underline text-sm px-4 md:px-6 md:text-base py-2 bg-[#D2F159] cursor-pointer rounded-2xl"
+              className="hover:bg-lime-400 transition text-sm px-4 md:px-6 md:text-base py-2 bg-[#D2F159] cursor-pointer rounded-2xl"
               to="/signup"
             >
               Signup
