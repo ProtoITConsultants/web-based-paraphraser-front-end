@@ -1,6 +1,6 @@
 export function HeroSection({darkMode, setDarkMode}) {
   return (
-    <section id="Hero" className="max-w-[1140px] mx-auto md:px-0 px-4">
+    <section id="Hero" className="max-w-[1240px] mx-auto md:px-0 px-4">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="hidden md:flex justify-start">
           <img

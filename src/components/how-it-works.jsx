@@ -25,7 +25,7 @@ export function HowItWorks({darkMode, setDarkMode}) {
 
   return (
     <section className={`${darkMode ? "bg-black" : "bg-gray-100"} mx-auto py-16 px-4 md:px-0`}>
-      <div className="flex flex-col md:flex-row gap-12 items-center justify-between md:max-w-[1140px] mx-auto">
+      <div className="flex flex-col md:flex-row gap-12 items-center justify-between md:max-w-[1240px] mx-auto">
         {/* Left Circle */}
         <div className="flex sm:justify-self-center lg:justify-self-start xl:justify-self-center ml-0">
           <div className="relative w-full">

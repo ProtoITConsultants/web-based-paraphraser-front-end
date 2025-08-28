@@ -37,7 +37,7 @@ export function FeaturesSection({darkMode, setDarkMode}) {
   ]
 
   return (
-    <section className="container md:max-w-[1140px] mx-auto px-4 md:px-0 py-16">
+    <section className="container md:max-w-[1240px] mx-auto px-4 md:px-0 py-16">
       <div className="text-center mb-12">
         <h2 className={`text-2xl md:text-5xl font-bold mb-4 ${darkMode ? "text-white" : "text-black"}`}>Why Choose Paraphraser?</h2>
       </div>

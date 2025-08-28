@@ -27,7 +27,7 @@ export function FAQSection({darkMode, setDarkMode}) {
   ]
 
   return (
-    <section className="container mx-auto px-4 lg:px-0 py-16 max-w-[1140px]">
+    <section className="container mx-auto px-4 lg:px-0 py-16 max-w-[1240px]">
       <div className="grid lg:grid-cols-2 gap-4 md:gap-12 items-center">
         {/* Left Heading */}
         <div className="text-left">

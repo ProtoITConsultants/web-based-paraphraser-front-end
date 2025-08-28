@@ -5,6 +5,7 @@ import { Footer } from "./components/common/Footer";
 import "./App.css";
 import { useCheckAuthStatus } from "./hooks/user";
 import LoadingBackdrop from "./components/common/LoadingBackdrop";
+import ScrollToTop from "./components/ScrollToTop";
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const location = useLocation();
@@ -32,6 +33,7 @@ export default function App() {
           />
         )}
         <div className={`relative min-h-screen scroll-smooth`}>
+          <ScrollToTop/>
           <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />
         </div>
          <Footer darkMode={darkMode} />
