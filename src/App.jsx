@@ -24,14 +24,14 @@ export default function App() {
     <>
       {isPending && !isAuthRoute && <LoadingBackdrop />}{" "}
       <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
-        {!isAuthRoute && (
+        
           <Navbar
             darkMode={darkMode}
             setDarkMode={setDarkMode}
             data={data}
             isAuthRoute={isAuthRoute}
           />
-        )}
+        
         <div className={`relative min-h-screen scroll-smooth`}>
           <ScrollToTop/>
           <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />

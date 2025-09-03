@@ -56,7 +56,7 @@ export default function LoginForm() {
           darkMode ? "" : "bg-white"
         }`}
       >
-        <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)]">
+        <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)] mt-18">
           {/* Left side - Form */}
           <div className="flex-1 flex flex-col justify-center lg:w-[40.417vw]">
             <div className="flex items-center space-x-4 mb-10">

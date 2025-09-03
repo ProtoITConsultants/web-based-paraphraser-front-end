@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { EllipsisVertical } from "lucide-react";
 
@@ -10,7 +10,10 @@ export default function Header({
   data,
 }) {
   const [url, setUrl] = useState("");
+  const location = useLocation();
   const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
+  const [activeMode, setActiveMode] = useState("Home");
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
 
   useEffect(() => {
     const googleLogin = localStorage.getItem("googleLogin") === "true";
@@ -28,28 +31,34 @@ export default function Header({
 
     // Determine if user is signed in but not via Google and has no profile picture
     setIsNonGoogleSignedIn(
-      isUserLoggedIn && !googleLogin && !userProfile?.profile?.picture && !data?.user?.profilePicture?.url
+      isUserLoggedIn &&
+        !googleLogin &&
+        !userProfile?.profile?.picture &&
+        !data?.user?.profilePicture?.url
     );
-  }, [data]);
-
+    setIsLoggedIn(isUserLoggedIn);
+  }, [data, location.pathname]);
 
   // Toggle settings panel visibility
   const toggleSettings = () => {
-    if(showSettings){
+    if (showSettings) {
       console.log("Closing settings panel");
       setShowSettings(false);
-    }
-    else{
+    } else {
       console.log("Opening settings panel");
       setShowSettings(true);
     }
   };
 
-  console.log("Show Settings:", showSettings);
+  // Scroll to bottom on Contact click
+  const handleContactClick = () => {
+    setActiveMode("Contact");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
 
   return (
     <div
-      className={`flex fixed top-0 z-1 w-full py-4 px-4 md:px-8 border-b border-gray-300 items-center justify-between lg:justify-start ${
+      className={`flex fixed top-0 z-1 w-full py-4 px-4 md:px-8 border-b border-gray-300 items-center justify-between ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white"
       } `}
     >
@@ -71,8 +80,84 @@ export default function Header({
           </h1>
         </Link>
       </div>
+      <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
+        <Link
+          to="/"
+          onClick={() => {setActiveMode("Home")
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className={`relative pb-2 text-base md:text-lg self-start cursor-pointer
+            ${darkMode
+              ? activeMode === "Home"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+              : activeMode === "Home"
+              ? "text-black"
+              : "text-gray-400 hover:text-black"}`}
+        >
+          Home
+          <div
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
+              ${darkMode
+                ? activeMode === "Home"
+                  ? "bg-white opacity-100 scale-x-100"
+                  : "bg-gray-400 opacity-0 scale-x-0"
+                : activeMode === "Home"
+                ? "bg-black opacity-100 scale-x-100"
+                : "bg-gray-400 opacity-0 scale-x-0"}`}
+          />
+        </Link>
+        <Link
+          to="/Blogs"
+          onClick={() => setActiveMode("Blogs")}
+          className={`relative pb-2 text-base md:text-lg cursor-pointer
+            ${darkMode
+              ? activeMode === "Blogs"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+              : activeMode === "Blogs"
+              ? "text-black"
+              : "text-gray-400 hover:text-black"}`}
+        >
+          Blogs
+          <div
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
+              ${darkMode
+                ? activeMode === "Blogs"
+                  ? "bg-white opacity-100 scale-x-100"
+                  : "bg-gray-400 opacity-0 scale-x-0"
+                : activeMode === "Blogs"
+                ? "bg-black opacity-100 scale-x-100"
+                : "bg-gray-400 opacity-0 scale-x-0"}`}
+          />
+        </Link>
+        <button
+          key="Contact"
+          onClick={handleContactClick}
+          className={`relative pb-2 text-base md:text-lg cursor-pointer
+            ${darkMode
+              ? activeMode === "Blogs"
+                ? "text-white"
+                : "text-gray-400 hover:text-white"
+              : activeMode === "Blogs"
+              ? "text-black"
+              : "text-gray-400 hover:text-black"}`}
+        >
+          Contact
+          <div
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
+              ${darkMode
+                ? activeMode === "Contact"
+                  ? "bg-white opacity-100 scale-x-100"
+                  : "bg-gray-400 opacity-0 scale-x-0"
+                : activeMode === "Contact"
+                ? "bg-black opacity-100 scale-x-100"
+                : "bg-gray-400 opacity-0 scale-x-0"}`}
+          />
+        </button>
+      </div>
       <div className="ml-auto flex items-center gap-1 md:gap-3">
-        {!showLogoutButton && (
+        {!isLoggedIn && (
           <>
             <Link
               className="hover:bg-gray-200 transition text-sm px-4 md:px-6 md:text-base py-2 bg-gray-100 cursor-pointer rounded-2xl"

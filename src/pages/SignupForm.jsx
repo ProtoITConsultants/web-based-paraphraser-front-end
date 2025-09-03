@@ -51,8 +51,8 @@ export default function SignupForm() {
     <>
       {isPending && <LoadingBackdrop />}
       <div
-        className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] ${
-          darkMode ? "" : "bg-white"
+        className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] mt-18 ${
+          darkMode ? "" : ""
         }`}
       >
         <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)]">

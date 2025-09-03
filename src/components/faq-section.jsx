@@ -5,40 +5,70 @@ export function FAQSection({darkMode, setDarkMode}) {
 
   const faqs = [
     {
-      question: "Is Paraphraser free to use?",
+      question: "Which modes are appropriate for certain purposes?",
       answer:
-        "Yes! Paraphrase up to 500 words anytime with unlimited daily usage. ",
-    },
-    {
-      question: "Will my writing sound natural?",
-      answer:
-        "Absolutely. Our AI is the best AI humanizer free tool designed to make your text flow naturally.",
-    },
-    {
-      question: "Can I use Paraphraser for academic work?",
-      answer:
-        "Yes, it’s perfect for academic writing. Always cite sources when paraphrasing.",
+        "Use Formal for business, Academic for schoolwork, Humanize for natural tone, Simple for easy reading, Fluency for smoothness, and Standard for balanced rephrasing. ",
     },
     {
       question: "How accurate is the paraphrasing?",
       answer:
-        "Our AI maintains 99% accuracy in preserving original meaning while enhancing sentence structure and style.",
+        "Your original meaning will always be retained with clear well-expressed rewrites by our tool.",
+    },
+    {
+      question: "Can one edit the text that has been paraphrased after it is generated?",
+      answer:
+        "Yes the output can be fully edited to allow you to adjust it to the precise taste. ",
+    },
+    {
+      question: "Is Paraphraser free to use?",
+      answer:
+        "Yes, with unlimited access on the free plan and additional features available on Premium.",
+    },
+    {
+      question: "Can I upload documents?",
+      answer:
+        "Absolutely; upload essays, articles, or reports to paraphrase entire documents swiftly. ",
+    },
+    {
+      question: "Does Paraphraser support languages other than English?",
+      answer:
+        "Yes, it supports multiple languages to help you communicate with audiences.",
+    },
+    {
+      question: "Will using Paraphraser change my message?",
+      answer:
+        "No, your core message remains consistent while improving readability and style.",
+    },
+    {
+      question: "Is the platform easy for beginners?",
+      answer:
+        "Designed with simplicity in mind, it’s accessible for all skill levels.",
+    },
+    {
+      question: "How fast is the paraphrasing process?",
+      answer:
+        "Rewritten text is generated instantly to keep your workflow uninterrupted.",
+    },
+    {
+      question: "Is Paraphraser compatible with any device?",
+      answer:
+        "Yes, it is compatible with desktops, tablets and smartphones without any installation.",
     },
   ]
 
   return (
     <section className="container mx-auto px-4 lg:px-0 py-16 max-w-[1240px]">
-      <div className="grid lg:grid-cols-2 gap-4 md:gap-12 items-center">
+      <div className="flex flex-col gap-4 md:gap-12 items-center">
         {/* Left Heading */}
         <div className="text-left">
-          <h2 className={`text-2xl text-center md:text-left md:text-5xl font-bold leading-snug ${darkMode ? "text-white" : "text-black"}`}>
+          <h2 className={`text-2xl text-center md:text-left md:text-5xl font-semibold leading-snug ${darkMode ? "text-white" : "text-black"}`}>
             Frequently asked{" "}
             <span className="text-[#D2F159]">questions</span>
           </h2>
         </div>
 
         {/* Right FAQ Accordion */}
-        <div className="space-y-4">
+        <div className="space-y-4 w-full">
           {faqs.map((faq, index) => (
             <div
               key={index}

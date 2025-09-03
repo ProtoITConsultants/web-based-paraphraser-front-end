@@ -7,6 +7,7 @@ import { Disclaimer } from "./pages/Disclaimer";
 import { Settings } from "./pages/Settings";
 import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
+import Blogs from "./pages/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -22,14 +23,16 @@ export const router = createBrowserRouter([
         element: <Privacy />,
       },
       {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
         path: "terms",
         element: <TermOfService />,
       },
       {
         path: "signup",
         element: <SignupForm />,
-
-
       },
       {
         path: "login",
