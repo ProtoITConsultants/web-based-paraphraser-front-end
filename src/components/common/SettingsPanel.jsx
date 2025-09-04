@@ -1,4 +1,5 @@
-import { useEffect, useRef, } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Settings, Moon, LogOut, } from "lucide-react";
 import { Link, useNavigate, } from "react-router-dom";
 import {  useLogout } from "../../hooks/user";
@@ -7,21 +8,22 @@ export default function SettingsPanel({
   darkMode,
   setDarkMode,
   onClose,
-  showLogoutButton,
-  isGuest,
 }) {
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate, isPending } = useLogout(() => {
     queryClient.invalidateQueries({
       queryKey: ["authStatus"],
     });
-    localStorage.removeItem("isUserLoggedIn");
-    localStorage.removeItem("googleLogin");
-    localStorage.removeItem("userProfile");
-    onClose();
-    navigate("/login");
-    console.error("Logout successful, redirecting to login");
+  localStorage.removeItem("isUserLoggedIn");
+  localStorage.removeItem("googleLogin");
+  localStorage.removeItem("userProfile");
+  window.dispatchEvent(new Event("authChanged"));
+  onClose();
+  navigate("/login");
+  console.error("Logout successful, redirecting to login");
   });
 
   useEffect(() => {
@@ -30,7 +32,8 @@ export default function SettingsPanel({
     } else {
       document.body.classList.remove("dark");
     }
-  }, [darkMode]);
+    setIsLoggedIn(localStorage.getItem("isUserLoggedIn") === "true");
+  }, [darkMode, location.pathname]);
 
   return (
     <div
@@ -66,13 +69,37 @@ export default function SettingsPanel({
           />
         </button>
       </div>
-      {isGuest ? (
-        <div className="mt-6 flex flex-col gap-3">
-          <Link to="/login" className="w-full py-2 rounded bg-lime-400 text-center font-semibold text-gray-900 hover:bg-lime-300">Login</Link>
-          <Link to="/signup" className="w-full py-2 rounded border border-lime-400 text-center font-semibold text-lime-400 hover:bg-lime-50">Sign Up</Link>
-        </div>
-      ) : showLogoutButton && (
+      {!isLoggedIn ? (
         <>
+        </>
+      ) : (
+        <>
+          {/* Mobile navigation options */}
+          <div className="md:hidden block mt-6">
+            <Link
+              to="/"
+              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2`}
+              onClick={onClose}
+            >
+              Home
+            </Link>
+            <Link
+              to="/Blogs"
+              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2`}
+              onClick={onClose}
+            >
+              Blogs
+            </Link>
+            <button
+              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2 w-full text-left`}
+              onClick={() => {
+                onClose();
+                window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+              }}
+            >
+              Contact
+            </button>
+          </div>
           <div className="mt-6">
             <Link
               to="/settings"

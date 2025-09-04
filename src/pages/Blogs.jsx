@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Blogs = ({darkMode, setDarkMode}) => {
+const Blogs = ({ darkMode, setDarkMode }) => {
   return (
-    <div className='min-h-sreen flex items-center justify-center'>
-        <h1 className={`${darkMode ? "text-white" : "text-black"} text-4xl font-bold`}>Blogs Page Coming Soon...</h1>
-    </div>
-  )
-}
+    <>
+      <div
+        className={`${
+          darkMode ? "border-gray-700" : "border-gray-300"
+        } text-black min-h-screen flex justify-center items-center`}
+      >
+        <h1 className={`${darkMode ? "text-white" : "text-black"} md:text-7xl text-center text-2xl font-semibold`}>Blogs will be available soon</h1>
+      </div>
+    </>
+  );
+};
 
-export default Blogs
+export default Blogs;

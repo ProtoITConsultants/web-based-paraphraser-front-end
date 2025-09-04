@@ -6,7 +6,6 @@ export default function Header({
   showSettings,
   setShowSettings,
   darkMode,
-  showLogoutButton,
   data,
 }) {
   const [url, setUrl] = useState("");
@@ -16,38 +15,40 @@ export default function Header({
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
 
   useEffect(() => {
-    const googleLogin = localStorage.getItem("googleLogin") === "true";
-    const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
-    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+    const updateAuthState = () => {
+      const googleLogin = localStorage.getItem("googleLogin") === "true";
+      const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
+      const userProfile = JSON.parse(localStorage.getItem("userProfile") || "{}");
 
-    // Set profile picture URL
-    if (googleLogin && userProfile?.profile?.picture) {
-      setUrl(userProfile.profile.picture);
-    } else if (data?.user?.profilePicture?.url) {
-      setUrl(data.user.profilePicture.url);
-    } else {
-      setUrl("");
-    }
+      // Set profile picture URL
+      let profileUrl = "";
+      if (googleLogin && userProfile?.profile?.picture) {
+        profileUrl = userProfile.profile.picture;
+      } else if (data?.user?.profilePicture?.url) {
+        profileUrl = data.user.profilePicture.url;
+      }
+      setUrl(profileUrl);
 
-    // Determine if user is signed in but not via Google and has no profile picture
-    setIsNonGoogleSignedIn(
-      isUserLoggedIn &&
-        !googleLogin &&
-        !userProfile?.profile?.picture &&
-        !data?.user?.profilePicture?.url
-    );
-    setIsLoggedIn(isUserLoggedIn);
-  }, [data, location.pathname]);
+      // Determine if user is signed in but not via Google and has no profile picture
+      setIsNonGoogleSignedIn(
+        isUserLoggedIn &&
+          !googleLogin &&
+          !userProfile?.profile?.picture &&
+          !data?.user?.profilePicture?.url
+      );
+      setIsLoggedIn(isUserLoggedIn);
+    };
+
+    // Run initially and on auth changes
+    updateAuthState();
+    window.addEventListener("authChanged", updateAuthState);
+    return () => window.removeEventListener("authChanged", updateAuthState);
+  }, [data, location.pathname]); // Removed location.pathname from dependencies to avoid unnecessary re-renders
 
   // Toggle settings panel visibility
   const toggleSettings = () => {
-    if (showSettings) {
-      console.log("Closing settings panel");
-      setShowSettings(false);
-    } else {
-      console.log("Opening settings panel");
-      setShowSettings(true);
-    }
+    console.log(showSettings ? "Closing settings panel" : "Opening settings panel");
+    setShowSettings(!showSettings);
   };
 
   // Scroll to bottom on Contact click
@@ -60,7 +61,7 @@ export default function Header({
     <div
       className={`flex fixed top-0 z-1 w-full py-4 px-4 md:px-8 border-b border-gray-300 items-center justify-between ${
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white"
-      } `}
+      }`}
     >
       <div className="flex items-center space-x-4">
         <Link to="/" className="flex items-center space-x-3">
@@ -69,7 +70,7 @@ export default function Header({
               darkMode ? "bg-gray-900" : "bg-gray-100"
             }`}
           >
-            <img src="/Logo.png" className={`w-8 h-8 rounded-full`} />
+            <img src="/Logo.png" className="w-8 h-8 rounded-full" alt="Logo" />
           </div>
           <h1
             className={`text-lg md:text-2xl lg:text-3xl font-medium ${
@@ -83,76 +84,83 @@ export default function Header({
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
         <Link
           to="/"
-          onClick={() => {setActiveMode("Home")
+          onClick={() => {
+            setActiveMode("Home");
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className={`relative pb-2 text-base md:text-lg self-start cursor-pointer
-            ${darkMode
+          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+            darkMode
               ? activeMode === "Home"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
               : activeMode === "Home"
               ? "text-black"
-              : "text-gray-400 hover:text-black"}`}
+              : "text-gray-400 hover:text-black"
+          }`}
         >
           Home
           <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
-              ${darkMode
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+              darkMode
                 ? activeMode === "Home"
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Home"
                 ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"}`}
+                : "bg-gray-400 opacity-0 scale-x-0"
+            }`}
           />
         </Link>
         <Link
           to="/Blogs"
           onClick={() => setActiveMode("Blogs")}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer
-            ${darkMode
+          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+            darkMode
               ? activeMode === "Blogs"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
               : activeMode === "Blogs"
               ? "text-black"
-              : "text-gray-400 hover:text-black"}`}
+              : "text-gray-400 hover:text-black"
+          }`}
         >
           Blogs
           <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
-              ${darkMode
+            className={`absolute bottom-0 left-0 right-0 hਸ0h-0.5 transition-all duration-300 ease-in-out ${
+              darkMode
                 ? activeMode === "Blogs"
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Blogs"
                 ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"}`}
+                : "bg-gray-400 opacity-0 scale-x-0"
+            }`}
           />
         </Link>
         <button
           key="Contact"
           onClick={handleContactClick}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer
-            ${darkMode
-              ? activeMode === "Blogs"
+          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+            darkMode
+              ? activeMode === "Contact"
                 ? "text-white"
                 : "text-gray-400 hover:text-white"
-              : activeMode === "Blogs"
+              : activeMode === "Contact"
               ? "text-black"
-              : "text-gray-400 hover:text-black"}`}
+              : "text-gray-400 hover:text-black"
+          }`}
         >
           Contact
           <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out
-              ${darkMode
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+              darkMode
                 ? activeMode === "Contact"
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Contact"
                 ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"}`}
+                : "bg-gray-400 opacity-0 scale-x-0"
+            }`}
           />
         </button>
       </div>

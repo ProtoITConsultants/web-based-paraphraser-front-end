@@ -23,16 +23,17 @@ export default function App() {
   return (
     <>
       {isPending && !isAuthRoute && <LoadingBackdrop />}{" "}
-      <div className={`${darkMode ? "bg-[#101214]" : "bg-white"}`}>
+      <div className={`${darkMode ? "bg-[#101214]" : "bg-white"} min-h-screen flex flex-col justify-between gap-8`}>
         
           <Navbar
+            key={location.pathname}
             darkMode={darkMode}
             setDarkMode={setDarkMode}
             data={data}
             isAuthRoute={isAuthRoute}
           />
         
-        <div className={`relative min-h-screen scroll-smooth`}>
+        <div className={`relative scroll-smooth`}>
           <ScrollToTop/>
           <Outlet context={{ darkMode, setDarkMode, data, isAuthRoute }}  />
         </div>
