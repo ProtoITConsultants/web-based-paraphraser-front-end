@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
-const Blogs = ({ darkMode, setDarkMode }) => {
+const Blogs = () => {
+    const { darkMode } = useOutletContext();
   return (
     <>
       <div

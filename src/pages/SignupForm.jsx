@@ -1,33 +1,41 @@
 import { useState } from "react";
 import { useSignUp } from "../hooks/user";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useOutletContext } from "react-router-dom";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
+import { useFetchGoogleUserProfile } from "../hooks/googleOauth";
 import { useQueryClient } from "@tanstack/react-query";
+
 export default function SignupForm() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { darkMode } = useOutletContext(); // Use darkMode from context
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
-  const { mutate, isPending } = useSignUp(()=> {
-    navigate("/");
+
+  const { mutate, isPending } = useSignUp(() => {
     localStorage.setItem("isUserLoggedIn", "true");
+    window.dispatchEvent(new Event("authChanged")); // Dispatch authChanged event
+    navigate("/");
+    queryClient.invalidateQueries({
+      queryKey: ["authStatus"],
+    });
   });
-    const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } =
-      useFetchGoogleUserProfile((data) => {
-        localStorage.setItem("isUserLoggedIn", "true");
-        localStorage.setItem("googleLogin", "true");
-        localStorage.setItem("userProfile", JSON.stringify(data));
-        navigate("/");
-        queryClient.invalidateQueries({
-          queryKey: ["authStatus"],
-        });
-      });
+
+  const { mutate: fetchGoogleProfile, isPending: isFetchingGoogleProfile } = useFetchGoogleUserProfile((data) => {
+    localStorage.setItem("isUserLoggedIn", "true");
+    localStorage.setItem("googleLogin", "true");
+    localStorage.setItem("userProfile", JSON.stringify(data));
+    window.dispatchEvent(new Event("authChanged")); // Dispatch authChanged event
+    navigate("/");
+    queryClient.invalidateQueries({
+      queryKey: ["authStatus"],
+    });
+  });
+
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       localStorage.setItem("isUserLoggedIn", "true");
@@ -35,9 +43,9 @@ export default function SignupForm() {
       fetchGoogleProfile(tokenResponse?.access_token);
     },
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formData = {
       firstName,
       lastName,
@@ -49,10 +57,10 @@ export default function SignupForm() {
 
   return (
     <>
-      {isPending && <LoadingBackdrop />}
+      {(isPending || isFetchingGoogleProfile) && <LoadingBackdrop />}
       <div
         className={`flex items-center justify-center w-full min-h-[calc(100dvh-156px)] mt-18 ${
-          darkMode ? "" : ""
+          darkMode ? "bg-[#101214]" : "bg-white"
         }`}
       >
         <div className="flex gap-10 w-full p-11 min-h-[calc(100vh-85px)]">
@@ -60,19 +68,18 @@ export default function SignupForm() {
           <div className="flex-1 flex flex-col justify-center lg:w-[40.417vw]">
             <div className="flex items-center space-x-4 mb-10">
               {/* Link wrapping the entire Logo and Title */}
-              <Link to="/" className="flex items-center space-x-3 ">
+              <Link to="/" className="flex items-center space-x-3">
                 {/* Logo */}
                 <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center  ${
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
                     darkMode ? "bg-gray-700" : "bg-gray-100"
                   }`}
                 >
-                  <img src="/Logo.png" className={`w-8 h-8 rounded-full `} />
+                  <img src="/Logo.png" className="w-8 h-8 rounded-full" alt="Paraphraser Logo" />
                 </div>
-
                 {/* Title */}
                 <h1
-                  className={`text-2xl lg:text-3xl font-medium  ${
+                  className={`text-2xl lg:text-3xl font-medium ${
                     darkMode ? "text-white" : "text-gray-900"
                   }`}
                 >
@@ -88,7 +95,6 @@ export default function SignupForm() {
             >
               Create an account
             </h1>
-
             {/* Form */}
             <div className="space-y-6">
               {/* Name fields */}
@@ -142,7 +148,6 @@ export default function SignupForm() {
                   />
                 </div>
               </div>
-
               {/* Email field */}
               <div
                 className={`${
@@ -168,7 +173,6 @@ export default function SignupForm() {
                   }`}
                 />
               </div>
-
               {/* Password field */}
               <div
                 className={`${
@@ -228,23 +232,22 @@ export default function SignupForm() {
                   </button>
                 </div>
               </div>
-
               <div className="flex items-center gap-4">
-                {/* Sign up button */}
+                {/* Continue as Guest button */}
                 <button
                   onClick={() => navigate("/")}
-                  className="w-full border border-[#D2F159] cursor-pointet text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full border border-[#D2F159] cursor-pointer text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Continue as Guest
                 </button>
+                {/* Sign up button */}
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-[#D2F159] cursor-pointer hover:bg-lime-400 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  className="w-full bg-[#D2F159] cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
                   Sign up
                 </button>
               </div>
-
               {/* Google sign up button */}
               <button
                 onClick={() => login()}
@@ -252,7 +255,7 @@ export default function SignupForm() {
                 className={`w-full cursor-pointer ${
                   darkMode
                     ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
-                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
+                    : "bg-white border-gr1y-200 hover:bg-gray-900 text-gray-700"
                 } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -275,7 +278,6 @@ export default function SignupForm() {
                 </svg>
                 Continue with Google
               </button>
-
               {/* Login link */}
               <div className="text-center">
                 <span
@@ -294,15 +296,13 @@ export default function SignupForm() {
               </div>
             </div>
           </div>
-
           {/* Right side - Image (hidden on smaller screens) */}
           <div className="hidden lg:block flex-1 relative">
-            <div className="h-full  relative overflow-hidden rounded-4xl">
+            <div className="h-full relative overflow-hidden rounded-4xl">
               {/* Abstract leaf pattern overlay */}
               <div className="absolute inset-0 opacity-80">
-                <img src="signup.jpg" className="w-full h-full object-cover" />
+                <img src="signup.jpg" className="w-full h-full object-cover" alt="Signup background" />
               </div>
-
               {/* Gradient overlay for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-amber-500/10"></div>
             </div>

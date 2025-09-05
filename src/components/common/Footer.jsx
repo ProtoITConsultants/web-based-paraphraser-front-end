@@ -6,7 +6,7 @@ export const Footer = ({darkMode, setDarkMode}) => {
       <div className={`${darkMode ? "border-gray-700": "border-gray-300"} hidden relative md:block text-black pt-5 border-t`}>
         <div className="flex flex-col max-w-[1240px] md:flex-row items-center justify-center mx-auto">
           <div className="flex w-full flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
-            <div className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${darkMode ? "bg-gray-900" : "bg-gray-100"}`}>
+            <div className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${darkMode ? "bg-gray-700" : "bg-gray-100"}`}>
               <img src="/Logo.png" className="w-8 h-8 rounded-full" />
             </div>
             <div>
@@ -61,7 +61,7 @@ export const Footer = ({darkMode, setDarkMode}) => {
         <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
           <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-3">
             <div className="flex items-center gap-2">
-              <div className={`${darkMode ? "bg-gray-900" : "bg-gray-100"} rounded-2xl flex items-center justify-center p-2`}>
+              <div className={`${darkMode ? "bg-gray-700" : "bg-gray-100"} rounded-2xl flex items-center justify-center p-2`}>
                 <img src="/Logo.png" className="w-8 h-8 rounded-full" />
               </div>
               <h1 className={`${darkMode ? "text-white" : "text-black"} text-lg md:text-2xl lg:text-3xl font-medium text-gray-900`}>

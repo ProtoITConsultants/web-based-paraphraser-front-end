@@ -14,6 +14,7 @@ export default function Header({
   const [activeMode, setActiveMode] = useState("Home");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
 
+  // Sync auth state
   useEffect(() => {
     const updateAuthState = () => {
       const googleLogin = localStorage.getItem("googleLogin") === "true";
@@ -39,11 +40,24 @@ export default function Header({
       setIsLoggedIn(isUserLoggedIn);
     };
 
-    // Run initially and on auth changes
     updateAuthState();
     window.addEventListener("authChanged", updateAuthState);
     return () => window.removeEventListener("authChanged", updateAuthState);
-  }, [data, location.pathname]); // Removed location.pathname from dependencies to avoid unnecessary re-renders
+  }, [data]);
+
+  // Sync activeMode with route
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+    if (path === "/") {
+      setActiveMode("Home");
+    } else if (path === "/blogs") {
+      setActiveMode("Blogs");
+    } else if (path === "/contact") {
+      setActiveMode("Contact");
+    } else {
+      setActiveMode(""); // No active link for other routes
+    }
+  }, [location.pathname]);
 
   // Toggle settings panel visibility
   const toggleSettings = () => {
@@ -59,18 +73,18 @@ export default function Header({
 
   return (
     <div
-      className={`flex fixed top-0 z-1 w-full py-4 px-4 md:px-8 border-b border-gray-300 items-center justify-between ${
-        darkMode ? "bg-[#101214] border-gray-700" : "bg-white"
-      }`}
+      className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
+        darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
+      } items-center justify-between`}
     >
       <div className="flex items-center space-x-4">
         <Link to="/" className="flex items-center space-x-3">
           <div
             className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${
-              darkMode ? "bg-gray-900" : "bg-gray-100"
+              darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
-            <img src="/Logo.png" className="w-8 h-8 rounded-full" alt="Logo" />
+            <img src="/Logo.png" className="w-8 h-8 rounded-full" alt="Paraphraser Logo" />
           </div>
           <h1
             className={`text-lg md:text-2xl lg:text-3xl font-medium ${
@@ -84,18 +98,15 @@ export default function Header({
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
         <Link
           to="/"
-          onClick={() => {
-            setActiveMode("Home");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
+          onClick={() => setActiveMode("Home")}
           className={`relative pb-2 text-base md:text-lg cursor-pointer ${
             darkMode
               ? activeMode === "Home"
                 ? "text-white"
-                : "text-gray-400 hover:text-white"
+                : "text-gray-300 hover:text-gray-300"
               : activeMode === "Home"
-              ? "text-black"
-              : "text-gray-400 hover:text-black"
+              ? "text-gray-900"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           Home
@@ -106,8 +117,8 @@ export default function Header({
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Home"
-                ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"
+                ? "bg-gray-900 opacity-100 scale-x-100"
+                : "bg-gray-600 opacity-0 scale-x-0"
             }`}
           />
         </Link>
@@ -118,36 +129,36 @@ export default function Header({
             darkMode
               ? activeMode === "Blogs"
                 ? "text-white"
-                : "text-gray-400 hover:text-white"
+                : "text-gray-300 hover:text-gray-300"
               : activeMode === "Blogs"
-              ? "text-black"
-              : "text-gray-400 hover:text-black"
+              ? "text-gray-900"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           Blogs
           <div
-            className={`absolute bottom-0 left-0 right-0 hਸ0h-0.5 transition-all duration-300 ease-in-out ${
+            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
               darkMode
                 ? activeMode === "Blogs"
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Blogs"
-                ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"
+                ? "bg-gray-900 opacity-100 scale-x-100"
+                : "bg-gray-600 opacity-0 scale-x-0"
             }`}
           />
         </Link>
         <button
           key="Contact"
           onClick={handleContactClick}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+          className={`relative pb-2 text-base md:text-xl cursor-pointer ${
             darkMode
               ? activeMode === "Contact"
                 ? "text-white"
-                : "text-gray-400 hover:text-white"
+                : "text-gray-300 hover:text-gray-300"
               : activeMode === "Contact"
-              ? "text-black"
-              : "text-gray-400 hover:text-black"
+              ? "text-gray-900"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           Contact
@@ -158,8 +169,8 @@ export default function Header({
                   ? "bg-white opacity-100 scale-x-100"
                   : "bg-gray-400 opacity-0 scale-x-0"
                 : activeMode === "Contact"
-                ? "bg-black opacity-100 scale-x-100"
-                : "bg-gray-400 opacity-0 scale-x-0"
+                ? "bg-gray-900 opacity-100 scale-x-100"
+                : "bg-gray-600 opacity-0 scale-x-0"
             }`}
           />
         </button>
@@ -168,13 +179,17 @@ export default function Header({
         {!isLoggedIn && (
           <>
             <Link
-              className="hover:bg-gray-200 transition text-sm px-4 md:px-6 md:text-base py-2 bg-gray-100 cursor-pointer rounded-2xl"
+              className={`${
+                darkMode
+                  ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
+                  : "bg-gray-50 border-gray-200 hover:bg-gray-100 text-gray-700"
+              } transition text-sm px-4 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
               to="/login"
             >
               Login
             </Link>
             <Link
-              className="hover:bg-lime-400 transition text-sm px-4 md:px-6 md:text-base py-2 bg-[#D2F159] cursor-pointer rounded-2xl"
+              className="hover:bg-lime-500 transition text-sm px-4 md:px-6 md:text-base py-2 bg-[#D2F159] text-gray-900 cursor-pointer rounded-2xl"
               to="/signup"
             >
               Signup
@@ -197,7 +212,9 @@ export default function Header({
         ) : (
           <EllipsisVertical
             onClick={toggleSettings}
-            className="w-7 h-7 cursor-pointer dark:text-white"
+            className={`w-7 h-7 cursor-pointer ${
+              darkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
+            }`}
             aria-label="Open Settings"
           />
         )}
