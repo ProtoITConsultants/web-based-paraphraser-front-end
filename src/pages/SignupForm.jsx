@@ -232,7 +232,7 @@ export default function SignupForm() {
                   </button>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex md:flex-row flex-col-reverse items-center gap-4">
                 {/* Continue as Guest button */}
                 <button
                   onClick={() => navigate("/")}
@@ -256,7 +256,7 @@ export default function SignupForm() {
                   darkMode
                     ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
                     : "bg-white border-gr1y-200 hover:bg-gray-900 text-gray-700"
-                } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
+                } border font-medium py-4 px-6 rounded-3xl flex items-center justify-center gap-3`}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path

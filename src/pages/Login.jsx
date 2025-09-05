@@ -202,7 +202,7 @@ export default function LoginForm() {
                   darkMode
                     ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
                     : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
-                } border font-medium py-4 px-6 rounded-3xl transition-colors duration-200 flex items-center justify-center gap-3`}
+                } border font-medium py-4 px-6 rounded-3xl flex items-center justify-center gap-3`}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path

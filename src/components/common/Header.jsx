@@ -80,7 +80,7 @@ export default function Header({
       <div className="flex items-center space-x-4">
         <Link to="/" className="flex items-center space-x-3">
           <div
-            className={`w-8 md:w-12 md:h-12 rounded-2xl flex items-center justify-center ${
+            className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
               darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
@@ -148,10 +148,10 @@ export default function Header({
             }`}
           />
         </Link>
-        <button
+        <div
           key="Contact"
           onClick={handleContactClick}
-          className={`relative pb-2 text-base md:text-xl cursor-pointer ${
+          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
             darkMode
               ? activeMode === "Contact"
                 ? "text-white"
@@ -173,7 +173,7 @@ export default function Header({
                 : "bg-gray-600 opacity-0 scale-x-0"
             }`}
           />
-        </button>
+        </div>
       </div>
       <div className="ml-auto flex items-center gap-1 md:gap-3">
         {!isLoggedIn && (
@@ -183,7 +183,7 @@ export default function Header({
                 darkMode
                   ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
                   : "bg-gray-50 border-gray-200 hover:bg-gray-100 text-gray-700"
-              } transition text-sm px-4 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
+              } text-sm px-4 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
               to="/login"
             >
               Login

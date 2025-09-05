@@ -1,29 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Settings, Moon, LogOut, } from "lucide-react";
-import { Link, useNavigate, } from "react-router-dom";
-import {  useLogout } from "../../hooks/user";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-export default function SettingsPanel({
-  darkMode,
-  setDarkMode,
-  onClose,
-}) {
+import { Settings, Moon, LogOut, Home, Phone, FileText } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogout } from "../../hooks/user";
+import { useQueryClient } from "@tanstack/react-query";
+export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isUserLoggedIn") === "true"
+  );
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate, isPending } = useLogout(() => {
     queryClient.invalidateQueries({
       queryKey: ["authStatus"],
     });
-  localStorage.removeItem("isUserLoggedIn");
-  localStorage.removeItem("googleLogin");
-  localStorage.removeItem("userProfile");
-  window.dispatchEvent(new Event("authChanged"));
-  onClose();
-  navigate("/login");
-  console.error("Logout successful, redirecting to login");
+    localStorage.removeItem("isUserLoggedIn");
+    localStorage.removeItem("googleLogin");
+    localStorage.removeItem("userProfile");
+    window.dispatchEvent(new Event("authChanged"));
+    onClose();
+    navigate("/login");
+    console.error("Logout successful, redirecting to login");
   });
 
   useEffect(() => {
@@ -41,7 +39,7 @@ export default function SettingsPanel({
         darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
       }`}
     >
-      <div className="flex items-center justify-between">
+      <div className={`${darkMode ? "border-b-gray-700" : "border-b-gray-300"} flex pb-3 border-b  items-center justify-between md:border-0 md:pb-0`}>
         <div className="flex items-center space-x-2">
           <Moon
             className={`w-4 h-4  ${
@@ -64,42 +62,64 @@ export default function SettingsPanel({
         >
           <span
             className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
-              darkMode ? "translate-x-6" : "translate-x-1"}
+              darkMode ? "translate-x-6" : "translate-x-1"
+            }
             }`}
           />
         </button>
       </div>
+      <div className="md:hidden block mt-4 space-y-6">
+        <Link to='/' className="flex items-center space-x-2">
+          <Home
+            className={`w-4 h-4  ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Home
+          </span>
+        </Link>
+        <Link to="/blogs" className="flex items-center space-x-2">
+          <FileText
+            className={`w-4 h-4  ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Blogs
+          </span>
+        </Link>
+        <div onClick={()=>{
+          window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'});
+          onClose();
+        }} className="flex items-center space-x-2">
+          <Phone
+            className={`w-4 h-4  ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Contact
+          </span>
+        </div>
+      </div>
       {!isLoggedIn ? (
-        <>
-        </>
+        <></>
       ) : (
         <>
           {/* Mobile navigation options */}
-          <div className="md:hidden block mt-6">
-            <Link
-              to="/"
-              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2`}
-              onClick={onClose}
-            >
-              Home
-            </Link>
-            <Link
-              to="/Blogs"
-              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2`}
-              onClick={onClose}
-            >
-              Blogs
-            </Link>
-            <button
-              className={`${darkMode ? "text-white" : "text-black"} block py-2 px-4 rounded text-sm font-medium hover:bg-lime-50 hover:text-lime-600 mb-2 w-full text-left`}
-              onClick={() => {
-                onClose();
-                window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-              }}
-            >
-              Contact
-            </button>
-          </div>
           <div className="mt-6">
             <Link
               to="/settings"

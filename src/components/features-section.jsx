@@ -39,7 +39,7 @@ export function FeaturesSection({darkMode, setDarkMode}) {
   return (
     <section className="container md:max-w-[1240px] mx-auto px-4 md:px-0 py-16">
       <div className="text-center mb-12">
-        <h2 className={`text-2xl md:text-5xl font-semibold mb-4 ${darkMode ? "text-white" : "text-black"}`}>Why Paraphraser is the <span className="text-lime-500">Best Rewording </span>Tool</h2>
+        <h2 className={`text-2xl md:text-5xl font-semibold mb-4 ${darkMode ? "text-white" : "text-black"}`}>Why Paraphraser is the <span className="text-[#D2F159]">Best Rewording </span>Tool</h2>
         <p className={`${darkMode ? "text-white" : "text-black"} text-base md:text-lg`}>Find the ultimate paraphrasing assistant that is more than a text rewriter. It converts your writing into real, straightforward and humanized texts. Paraphraser is the best tool for rewriting essays, rephrasing sentences, or polishing paragraphs. It makes new, original content that sounds like it was written by a human.</p>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 w-full">
