@@ -8,6 +8,7 @@ import { Settings } from "./pages/Settings";
 import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
 import Blogs from "./pages/Blogs";
+import BlogPost from "./pages/BlogPost";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,14 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/blogs/:slug",
+        element: <BlogPost />,
+      },
+      {
+        path: "/blog/:slug",
+        element: <BlogPost />,
       },
       {
         path: "terms",
