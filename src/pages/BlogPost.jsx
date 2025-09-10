@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { ChevronLeft } from "lucide-react"
 import { Link, useParams, useLocation } from "react-router-dom"
+import { useOutletContext } from "react-router-dom"
 import { getBlogPost } from "../blog-data"
-export default function BlogPost({ darkMode = false }) {
+export default function BlogPost() {
+  const { darkMode } = useOutletContext();
   const { slug } = useParams();
   const location = useLocation();
   const post = getBlogPost(slug);
@@ -10,15 +12,15 @@ export default function BlogPost({ darkMode = false }) {
 
   if (!post) {
     return (
-      <div className={`min-h-screen ${darkMode ? "bg-gray-900" : "bg-white"}`}> 
+      <div className={`min-h-screen ${darkMode ? "" : "bg-white"}`}> 
         <div className="max-w-4xl mx-auto px-6 py-8 text-center">
           <h1 className={`text-3xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}>Blog post not found</h1>
-          <Link to="/blogs" className={`inline-flex items-center mt-8 ${darkMode ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"} transition-colors fixed left-7`}>
+          <Link to="/blogs" className={`inline-flex items-center mt-8 ${darkMode ? "text-gray-300 hover:text-white" : "text-gray-600 hover:text-gray-900"} transition-colors fixed left-7`}>
             <ChevronLeft className="w-7 h-7 mr-1" />
             Back
           </Link>
         </div>
-        <h1 className="text-2xl md:text-5xl font-semibold text-center my-8">Content Not Posted Yet!</h1>
+        <h1 className={`text-2xl md:text-5xl font-semibold text-center my-8 ${darkMode ? "text-white" : "text-gray-900"}`}>Content Not Posted Yet!</h1>
       </div>
     );
   }
@@ -59,7 +61,7 @@ export default function BlogPost({ darkMode = false }) {
             {section.items.map((step, stepIndex) => (
               <div
                 key={stepIndex}
-                className={`${darkMode ? "bg-yellow-900 border-yellow-700" : "bg-yellow-50 border-yellow-200"} border-2 rounded-lg p-6`}
+                className={`${darkMode ? "bg-[#17191C] border-[#D2F159]" : "bg-gray-50 border-[#D2F159]"} border-2 rounded-3xl p-6`}
               >
                 <h3 className={`font-semibold ${darkMode ? "text-white" : "text-gray-900"} mb-3`}>{step.title}</h3>
                 <p className={`${darkMode ? "text-gray-300" : "text-gray-700"} text-sm leading-relaxed`}>
@@ -90,7 +92,7 @@ export default function BlogPost({ darkMode = false }) {
         return (
           <blockquote
             key={index}
-            className={`${darkMode ? "bg-gray-800 border-gray-600" : "bg-gray-50 border-gray-200"} border-l-4 border-lime-400 p-6 mb-8 italic`}
+            className={`${darkMode ? "bg-[#17191C] border-[#D2F159]" : "bg-gray-50 border-[#D2F159]"} border-l-4 p-6 mb-8 italic rounded-3xl`}
           >
             <p className={`${darkMode ? "text-gray-300" : "text-gray-700"} text-lg leading-relaxed mb-2`}>
               "{section.content}"
@@ -113,14 +115,14 @@ export default function BlogPost({ darkMode = false }) {
             )}
             <div className="overflow-x-auto">
               <table
-                className={`w-full ${darkMode ? "bg-gray-800" : "bg-white"} border ${darkMode ? "border-gray-600" : "border-gray-200"} rounded-lg`}
+                className={`w-full ${darkMode ? "bg-[#17191C]" : "bg-white"} border border-[#D2F159] rounded-3xl`}
               >
-                <thead className={`${darkMode ? "bg-gray-700" : "bg-gray-50"}`}>
+                <thead className={`${darkMode ? "bg-gray-700" : "bg-gray-50"} rounded-3xl`}>
                   <tr>
                     {section.headers.map((header, headerIndex) => (
                       <th
                         key={headerIndex}
-                        className={`px-4 py-3 text-left text-sm font-semibold ${darkMode ? "text-white" : "text-gray-900"} border-b ${darkMode ? "border-gray-600" : "border-gray-200"}`}
+                        className={`px-4 py-3 text-left text-sm font-semibold ${darkMode ? "text-white" : "text-gray-900"} border-b border-[#D2F159]`}
                       >
                         {header}
                       </th>
@@ -136,7 +138,7 @@ export default function BlogPost({ darkMode = false }) {
                       {row.map((cell, cellIndex) => (
                         <td
                           key={cellIndex}
-                          className={`px-4 py-3 text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} border-b ${darkMode ? "border-gray-600" : "border-gray-200"}`}
+                          className={`px-4 py-3 text-sm ${darkMode ? "text-gray-300" : "text-gray-700"} border-b border-[#D2F159]`}
                         >
                           {cell}
                         </td>
@@ -157,7 +159,7 @@ export default function BlogPost({ darkMode = false }) {
                 {section.title.includes("questions") ? (
                   <>
                     {section.title.split("questions")[0]}
-                    <span className="text-[#D2F159]">questions</span>
+                    <span className="#D2F159">questions</span>
                   </>
                 ) : (
                   section.title
@@ -168,13 +170,13 @@ export default function BlogPost({ darkMode = false }) {
               {section.items.map((faq, faqIndex) => (
                 <div
                   key={faqIndex}
-                  className={`${darkMode ? "bg-black text-white" : "bg-gray-100"} rounded-2xl shadow-sm`}
+                  className={`${darkMode ? "bg-[#17191C]" : "bg-gray-50"} rounded-3xl shadow-sm`}
                 >
                   <button
-                    className="w-full px-3 md:px-6 p-6 flex justify-between items-center"
+                    className="w-full px-3 md:px-6 py-6 flex justify-between items-center"
                     onClick={() => setOpenFaqIndex(openFaqIndex === faqIndex ? null : faqIndex)}
                   >
-                    <span className="text-sm text-left md:text-base font-semibold">{faq.question}</span>
+                    <span className={`text-sm text-left md:text-base font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>{faq.question}</span>
                     <div className="p-1 bg-[#D2F159] rounded-full flex items-center justify-center">
                       {openFaqIndex === faqIndex ? (
                         <svg
@@ -182,8 +184,8 @@ export default function BlogPost({ darkMode = false }) {
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={2.5}
-                          stroke="white"
-                          className="w-6 h-6 text-black"
+                          stroke="currentColor"
+                          className="w-6 h-6 text-white"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                         </svg>
@@ -193,8 +195,8 @@ export default function BlogPost({ darkMode = false }) {
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={2.5}
-                          stroke="white"
-                          className="w-6 h-6 text-black"
+                          stroke="currentColor"
+                          className="w-6 h-6 text-white"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m-7-7h14" />
                         </svg>
@@ -203,7 +205,7 @@ export default function BlogPost({ darkMode = false }) {
                   </button>
                   {openFaqIndex === faqIndex && (
                     <div className="px-6 pb-4">
-                      <p className={`${darkMode ? "text-white" : "text-gray-600"} text-sm`}>{faq.answer}</p>
+                      <p className={`${darkMode ? "text-gray-300" : "text-gray-600"} text-sm`}>{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -218,14 +220,14 @@ export default function BlogPost({ darkMode = false }) {
   }
 
   return (
-    <div className={`min-h-screen py-16 ${darkMode ? "bg-gray-900" : "bg-white"}`}>
+    <div className={`min-h-screen py-16 ${darkMode ? "" : "bg-white"}`}>
       <div className="max-w-[1240px] mx-auto px-6 py-8">
         {/* Back Button */}
         <Link
           to="/blogs"
-          className={`inline-flex items-center ${darkMode ? "text-gray-400 hover:text-white" : "text-gray-600 hover:text-gray-900"} mb-8 transition-colors fixed left-7`}
+          className={`inline-flex items-center ${darkMode ? "text-gray-300 hover:text-white" : "text-gray-600 hover:text-gray-900"} mb-8 transition-colors absolute md:fixed md:left-7 left-5`}
         >
-          <ChevronLeft className="w-7 h-7 mr-1" />
+          <ChevronLeft className="w-7 h-7" />
           Back
         </Link>
 
@@ -249,7 +251,7 @@ export default function BlogPost({ darkMode = false }) {
           <img
             src={location.state?.img || post.img || "/placeholder.svg?height=320&width=800&query=modern architectural design"}
             alt={post.title}
-            className="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg"
+            className="w-full h-64 md:h-80 object-cover rounded-3xl shadow-lg"
           />
         </div>
 
@@ -261,4 +263,3 @@ export default function BlogPost({ darkMode = false }) {
     </div>
   )
 }
-

@@ -84,7 +84,7 @@ export default function Header({
               darkMode ? "bg-gray-700" : "bg-gray-100"
             }`}
           >
-            <img src="/Logo.png" className="w-8 h-8 rounded-full" alt="Paraphraser Logo" />
+            <img src="/Logo.png" className="rounded-full" alt="Paraphraser Logo" />
           </div>
           <h1
             className={`text-lg md:text-2xl lg:text-3xl font-medium ${
@@ -175,21 +175,21 @@ export default function Header({
           />
         </div>
       </div>
-      <div className="ml-auto flex items-center gap-1 md:gap-3">
+      <div className="ml-auto flex items-center gap-2 md:gap-3">
         {!isLoggedIn && (
           <>
             <Link
               className={`${
                 darkMode
                   ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
-                  : "bg-gray-50 border-gray-200 hover:bg-gray-100 text-gray-700"
-              } text-sm px-4 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
+                  : "bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700"
+              } text-xs px-2 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
               to="/login"
             >
               Login
             </Link>
             <Link
-              className="hover:bg-lime-500 transition text-sm px-4 md:px-6 md:text-base py-2 bg-[#D2F159] text-gray-900 cursor-pointer rounded-2xl"
+              className="hover:bg-lime-500 transition text-xs px-2 md:px-6 md:text-base py-2 bg-[#D2F159] text-gray-900 cursor-pointer rounded-2xl"
               to="/signup"
             >
               Signup
