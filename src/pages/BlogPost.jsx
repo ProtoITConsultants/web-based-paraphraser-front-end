@@ -3,6 +3,7 @@ import { ChevronLeft } from "lucide-react"
 import { Link, useParams, useLocation } from "react-router-dom"
 import { useOutletContext } from "react-router-dom"
 import { getBlogPost } from "../blog-data"
+
 export default function BlogPost() {
   const { darkMode } = useOutletContext();
   const { slug } = useParams();
@@ -28,11 +29,40 @@ export default function BlogPost() {
   const renderSection = (section, index) => {
     switch (section.type) {
       case "paragraph":
+        // Check if the section has a links array for dynamic inline linking
+        if (section.links && section.links.length > 0) {
+          let content = section.content;
+          // Create a regex pattern for all anchor texts in the links array
+          const anchorTexts = section.links.map(link => link.anchorText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+          const regex = new RegExp(`(${anchorTexts})`, 'g');
+          // Split content and insert links
+          const parts = content.split(regex);
+          return (
+            <p key={index} className={`${darkMode ? "text-gray-300" : "text-gray-700"} leading-relaxed mb-6`}>
+              {parts.map((part, partIndex) => {
+                const link = section.links.find(link => link.anchorText === part);
+                if (link) {
+                  return (
+                    <Link
+                      key={partIndex}
+                      to={link.to}
+                      className="text-[#D2F159] hover:underline"
+                    >
+                      {part}
+                    </Link>
+                  );
+                }
+                return part;
+              })}
+            </p>
+          );
+        }
+        // Render plain paragraph if no links are defined
         return (
           <p key={index} className={`${darkMode ? "text-gray-300" : "text-gray-700"} leading-relaxed mb-6`}>
             {section.content}
           </p>
-        )
+        );
 
       case "heading":
         return (
@@ -159,7 +189,7 @@ export default function BlogPost() {
                 {section.title.includes("questions") ? (
                   <>
                     {section.title.split("questions")[0]}
-                    <span className="#D2F159">questions</span>
+                    <span className="text-[#D2F159]">questions</span>
                   </>
                 ) : (
                   section.title
