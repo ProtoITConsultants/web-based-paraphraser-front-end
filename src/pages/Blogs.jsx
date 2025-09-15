@@ -122,37 +122,231 @@ export default function BlogsPage() {
       desc: "Learn how to use a sentence paraphraser to improve clarity, vocabulary, and tone in your writing.",
       date: "September 11, 2025",
     },
+    {
+      slug: "why-paraphraser-website-essential-content-creation",
+      img: "https://img.freepik.com/premium-vector/minimalist-green-botanical-abstract-background-vector-illustration_758746-830.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Person typing on laptop",
+      title:
+        "Why a Paraphraser Website Is a Must-Have for Efficient Content Creation",
+      desc: "Learn why a paraphraser website boosts productivity, ensures originality, and enhances writing quality.",
+      date: "September 11, 2025",
+    },
+    {
+      slug: "paraphraser-and-summarizer-perfect-combo",
+      img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
+      alt: "Person working on laptop with documents",
+      title:
+        "Paraphraser and Summarizer: The Perfect Combo for Content Creation",
+      desc: "Learn how paraphraser and summarizer tools enhance originality, efficiency, and content quality.",
+      date: "September 11, 2025",
+    },
+    {
+      slug: "essay-paraphraser-time-saving-tool",
+      img: "https://img.freepik.com/free-vector/green-tropical-leaves-background_1308-68599.jpg?semt=ais_incoming&w=740&q=80",
+      alt: "Student writing at desk",
+      title: "Essay Paraphraser: Time-Saving Tool for Students & Writers",
+      desc: "Learn how essay paraphrasers improve clarity, save time, and maintain academic integrity.",
+      date: "September 11, 2025",
+    },
+    {
+      slug: "how-to-use-free-online-paraphraser",
+      img: "https://static.vecteezy.com/system/resources/thumbnails/011/426/071/small_2x/aesthetic-white-and-green-background-with-space-for-text-modern-background-design-with-liquid-shape-white-background-with-green-liquid-shapes-free-vector.jpg",
+      alt: "Person typing on keyboard",
+      title: "How to Use a Free Online Paraphraser for Effective Rewriting",
+      desc: "Learn how free online paraphrasers improve clarity and efficiency in your writing.",
+      date: "September 11, 2025",
+    },
+    {
+      slug: "old-english-converter-guide",
+      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Ancient manuscript with text",
+      title:
+        "Old English Converter: A Complete Guide to Translating and Styling Text in 2025",
+      desc: "Explore how Old English converters work, their uses, benefits, and alternatives like Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "Old English converters",
+          to: "/blogs/top-10-ai-paraphrasers-compared-free-vs-paid-options",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "writehuman-guide-2025",
+      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Person using laptop for writing",
+      title: "Writehuman in 2025: A Guide to Human-Centric AI Writing",
+      desc: "Explore Writehuman, the movement toward human-centered AI writing in 2025, and tools like Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "Writehuman",
+          to: "/blogs/top-10-ai-paraphrasers-compared-free-vs-paid-options",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "adjectives-starting-with-o",
+      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Open book with highlighted words",
+      title:
+        "Adjectives Starting with O: A Complete Guide with Examples and Meanings",
+      desc: "Explore adjectives starting with O to enrich writing and vocabulary with tools like Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "adjectives starting with O",
+          to: "/blog/vocabulary-building-tools-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+  slug: "smfh-meaning",
+  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "Person typing on smartphone",
+  title: "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
+  desc: "Discover the true meaning of SMFH, its origins, modern usage, and cultural impact with Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
 {
-  slug: "why-paraphraser-website-essential-content-creation",
-  img: "https://img.freepik.com/premium-vector/minimalist-green-botanical-abstract-background-vector-illustration_758746-830.jpg?semt=ais_hybrid&w=740&q=80",
+  slug: "guichet-automatique-bancaire-2025",
+  img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "ATM machine in use",
+  title: "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
+  desc: "Discover how guichet automatique bancaire evolved in 2025 with security, digital banking, and Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "guichet automatique bancaire",
+      to: "/blog/digital-banking-tools-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
+{
+  slug: "flowers-that-start-with-c",
+  img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "Vibrant flowers in a garden",
+  title: "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
+  desc: "Explore flowers that start with C, their meanings, growing tips, and Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "flowers that start with C",
+      to: "/blog/gardening-guides-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
+{
+  slug: "theirer",
+  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
   alt: "Person typing on laptop",
-  title: "Why a Paraphraser Website Is a Must-Have for Efficient Content Creation",
-  desc: "Learn why a paraphraser website boosts productivity, ensures originality, and enhances writing quality.",
-  date: "September 11, 2025"
+  title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
+  desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "theirer",
+      to: "/blog/internet-slang-guide-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
 },
 {
-  slug: "paraphraser-and-summarizer-perfect-combo",
+  slug: "difference-between-affect-and-effect",
+  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "Notebook with pen for writing",
+  title: "Difference Between Affect and Effect Explained with Examples",
+  desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "affect and effect",
+      to: "/blog/grammar-guides-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
+{
+  slug: "analyze-grammatically-as-a-sentence",
+  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "Person writing in a notebook",
+  title: "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
+  desc: "Learn to analyze grammatically as a sentence with Paraphraser.co for clarity.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "analyze grammatically",
+      to: "/blog/grammar-guides-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
+{
+  slug: "bear-with-me",
+  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  alt: "Person typing on laptop",
+  title: "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
+  desc: "Discover the meaning and origins of 'bear with me' with Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
+},
+{
+  slug: "personification-examples",
   img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
-  alt: "Person working on laptop with documents",
-  title: "Paraphraser and Summarizer: The Perfect Combo for Content Creation",
-  desc: "Learn how paraphraser and summarizer tools enhance originality, efficiency, and content quality.",
-  date: "September 11, 2025"
-},
-{
-  slug: "essay-paraphraser-time-saving-tool",
-  img: "https://img.freepik.com/free-vector/green-tropical-leaves-background_1308-68599.jpg?semt=ais_incoming&w=740&q=80",
-  alt: "Student writing at desk",
-  title: "Essay Paraphraser: Time-Saving Tool for Students & Writers",
-  desc: "Learn how essay paraphrasers improve clarity, save time, and maintain academic integrity.",
-  date: "September 11, 2025"
-},
-{
-  slug: "how-to-use-free-online-paraphraser",
-  img: "https://static.vecteezy.com/system/resources/thumbnails/011/426/071/small_2x/aesthetic-white-and-green-background-with-space-for-text-modern-background-design-with-liquid-shape-white-background-with-green-liquid-shapes-free-vector.jpg",
-  alt: "Person typing on keyboard",
-  title: "How to Use a Free Online Paraphraser for Effective Rewriting",
-  desc: "Learn how free online paraphrasers improve clarity and efficiency in your writing.",
-  date: "September 11, 2025"
+  alt: "Open book with vibrant pages",
+  title: "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
+  desc: "Explore personification examples in literature and speech with Paraphraser.co.",
+  date: "September 15, 2025",
+  links: [
+    {
+      anchorText: "personification",
+      to: "/blog/literary-devices-2025"
+    },
+    {
+      anchorText: "Paraphraser.co",
+      to: "/"
+    }
+  ]
 },
   ];
 
@@ -345,7 +539,9 @@ export default function BlogsPage() {
         <div className="text-center mt-8">
           {blogCards.length > BATCH_SIZE && (
             <button
-              className={`${darkMode ? "text-[#D2F159]" : "text-gray-700"} border border-[#D2F159] font-semibold py-4 px-6 rounded-3xl hover:bg-[#D2F159] hover:text-gray-900 transition-colors`}
+              className={`${
+                darkMode ? "text-[#D2F159]" : "text-gray-700"
+              } border border-[#D2F159] font-semibold py-4 px-6 rounded-3xl hover:bg-[#D2F159] hover:text-gray-900 transition-colors`}
               onClick={handleLoadMore}
             >
               {isAllShown ? "Show Less" : "Load More"}
