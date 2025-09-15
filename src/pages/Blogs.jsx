@@ -345,7 +345,7 @@ export default function BlogsPage() {
         <div className="text-center mt-8">
           {blogCards.length > BATCH_SIZE && (
             <button
-              className={`border border-[#D2F159] text-[#D2F159] font-semibold py-4 px-6 rounded-3xl hover:bg-[#D2F159] hover:text-gray-900 transition-colors`}
+              className={`${darkMode ? "text-[#D2F159]" : "text-gray-700"} border border-[#D2F159] font-semibold py-4 px-6 rounded-3xl hover:bg-[#D2F159] hover:text-gray-900 transition-colors`}
               onClick={handleLoadMore}
             >
               {isAllShown ? "Show Less" : "Load More"}
