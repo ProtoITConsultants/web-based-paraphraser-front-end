@@ -213,141 +213,147 @@ export default function BlogsPage() {
       ],
     },
     {
-  slug: "smfh-meaning",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Person typing on smartphone",
-  title: "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
-  desc: "Discover the true meaning of SMFH, its origins, modern usage, and cultural impact with Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "guichet-automatique-bancaire-2025",
-  img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "ATM machine in use",
-  title: "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
-  desc: "Discover how guichet automatique bancaire evolved in 2025 with security, digital banking, and Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "guichet automatique bancaire",
-      to: "/blog/digital-banking-tools-2025"
+      slug: "smfh-meaning",
+      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Person typing on smartphone",
+      title:
+        "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
+      desc: "Discover the true meaning of SMFH, its origins, modern usage, and cultural impact with Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "flowers-that-start-with-c",
-  img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Vibrant flowers in a garden",
-  title: "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
-  desc: "Explore flowers that start with C, their meanings, growing tips, and Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "flowers that start with C",
-      to: "/blog/gardening-guides-2025"
+      slug: "guichet-automatique-bancaire-2025",
+      img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "ATM machine in use",
+      title:
+        "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
+      desc: "Discover how guichet automatique bancaire evolved in 2025 with security, digital banking, and Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "guichet automatique bancaire",
+          to: "/blog/digital-banking-tools-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "theirer",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Person typing on laptop",
-  title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
-  desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "theirer",
-      to: "/blog/internet-slang-guide-2025"
+      slug: "flowers-that-start-with-c",
+      img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Vibrant flowers in a garden",
+      title:
+        "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
+      desc: "Explore flowers that start with C, their meanings, growing tips, and Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "flowers that start with C",
+          to: "/blog/gardening-guides-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "difference-between-affect-and-effect",
-  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Notebook with pen for writing",
-  title: "Difference Between Affect and Effect Explained with Examples",
-  desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "affect and effect",
-      to: "/blog/grammar-guides-2025"
+      slug: "theirer",
+      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Person typing on laptop",
+      title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
+      desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "theirer",
+          to: "/blog/internet-slang-guide-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "analyze-grammatically-as-a-sentence",
-  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Person writing in a notebook",
-  title: "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
-  desc: "Learn to analyze grammatically as a sentence with Paraphraser.co for clarity.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "analyze grammatically",
-      to: "/blog/grammar-guides-2025"
+      slug: "difference-between-affect-and-effect",
+      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Notebook with pen for writing",
+      title: "Difference Between Affect and Effect Explained with Examples",
+      desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "affect and effect",
+          to: "/blog/grammar-guides-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "bear-with-me",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Person typing on laptop",
-  title: "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
-  desc: "Discover the meaning and origins of 'bear with me' with Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "personification-examples",
-  img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
-  alt: "Open book with vibrant pages",
-  title: "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
-  desc: "Explore personification examples in literature and speech with Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "personification",
-      to: "/blog/literary-devices-2025"
+      slug: "analyze-grammatically-as-a-sentence",
+      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Person writing in a notebook",
+      title:
+        "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
+      desc: "Learn to analyze grammatically as a sentence with Paraphraser.co for clarity.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "analyze grammatically",
+          to: "/blog/grammar-guides-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
     },
     {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
+      slug: "bear-with-me",
+      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      alt: "Person typing on laptop",
+      title:
+        "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
+      desc: "Discover the meaning and origins of 'bear with me' with Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "personification-examples",
+      img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
+      alt: "Open book with vibrant pages",
+      title:
+        "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
+      desc: "Explore personification examples in literature and speech with Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "personification",
+          to: "/blog/literary-devices-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
   ];
 
   const BATCH_SIZE = 6;
