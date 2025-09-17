@@ -9,7 +9,7 @@ export const blogPosts = [
       "Discover the best Quillbot alternatives in 2025—compare features, pricing, and use cases to find smarter paraphrasing tools.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/7853107.jpg",
     excerpt:
       "Explore top Quillbot alternatives in 2025 for smarter paraphrasing, tailored to students, writers, and professionals.",
     metaTitle: "Quillbot Alternatives: Smarter Tools",
@@ -399,7 +399,7 @@ export const blogPosts = [
       "Discover how students use paraphrasing tools responsibly in 2025 to avoid plagiarism while maintaining academic integrity.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
     excerpt:
       "Learn how students use paraphrasing tools in 2025 to avoid plagiarism with ethical strategies and best practices.",
     metaTitle: "How Students Use Paraphrasing Tools Without Plagiarism",
@@ -734,7 +734,7 @@ export const blogPosts = [
       "Originality is important in the content creation. You can be a student writing an essay, you can be a blogger writing interesting posts, you can be a marketer writing good quality text, but you have to write unique text in order to be a success. However, you cannot always invent new ideas and avoid repeating the content.",
     date: "September 10, 2025",
     category: "Education",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/8961158.jpg",
     excerpt:
       "Students face enormous workloads, often balancing academic demands with part-time jobs and personal responsibilities. In this environment, paraphrasing tools have become indispensable.",
     metaTitle: "How to Use a Paraphraser Text Tool for More Unique Content",
@@ -1039,7 +1039,7 @@ export const blogPosts = [
       "In 2025, writing balances creativity, precision, and accessibility. Wordtune and Quillbot, leading AI paraphrasing tools, embody different philosophies—creativity versus consistency—while Paraphraser.co offers a free alternative for students and budget-conscious writers.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/4479.jpg",
     excerpt:
       "Explore Wordtune vs Quillbot in 2025—detailed insights into creativity, consistency, and Paraphraser.co as a free student-friendly alternative.",
     metaTitle:
@@ -1403,7 +1403,7 @@ export const blogPosts = [
       "Discover why students in 2025 choose Paraphraser.co over Quillbot—a free, practical alternative reshaping academic writing with accessibility and simplicity.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/5272.jpg",
     excerpt:
       "Discover why students in 2025 are choosing Paraphraser.co over Quillbot—a free, practical alternative for academic writing.",
     metaTitle:
@@ -1707,7 +1707,7 @@ export const blogPosts = [
       "Explore Spinbot vs Rephrase.info in 2025—comparing free rewriting with AI-powered accuracy, speed, and student-friendly accessibility, alongside Paraphraser.co as a balanced alternative.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/7541.jpg",
     excerpt:
       "Compare Spinbot’s free rewriting with Rephrase.info’s AI-powered accuracy in 2025, plus Paraphraser.co as an alternative.",
     metaTitle:
@@ -2053,7 +2053,7 @@ export const blogPosts = [
       "Compare Quillbot vs Grammarly in 2025 to find the best paraphrasing tool for clarity, originality, and professional writing needs.",
     date: "September 10, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/11684.jpg",
     excerpt:
       "Compare Quillbot vs Grammarly in 2025 to find the best paraphrasing tool for writers, students, and professionals.",
     metaTitle:
@@ -2459,7 +2459,7 @@ export const blogPosts = [
       "Discover the top 10 AI paraphrasers in 2025, comparing free and paid options to find the best tools for students, writers, and professionals seeking clarity, originality, and efficiency.",
     date: "September 12, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/13664.jpg",
     excerpt:
       "Compare the top 10 AI paraphrasers in 2025, from free tools like Paraphraser.co to premium options like Quillbot and Grammarly, for rewriting with ease and precision.",
     metaTitle: "Top 10 AI Paraphrasers Compared: Free vs Paid Options in 2025",
@@ -2912,7 +2912,7 @@ export const blogPosts = [
       "Discover how AI content paraphrasers transform article writing with efficiency, originality, and SEO-friendly content.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/14138 (1).jpg",
     excerpt:
       "Explore how AI paraphrasers revolutionize article writing with speed, originality, and enhanced SEO performance.",
     metaTitle: "AI Content Paraphrasers Revolutionizing Article Writing",
@@ -3146,7 +3146,7 @@ export const blogPosts = [
       "Understanding the key differences between paraphrasing and summarizing can help you choose the right approach for your content creation needs.",
     date: "January 18, 2025",
     category: "Tips",
-    img: "https://img.freepik.com/free-vector/hand-drawn-olive-green-background_23-2149724858.jpg",
+    img: "/14706.jpg",
     excerpt:
       "Explore the distinctions between paraphrasing and summarizing to improve your writing, boost creativity, and achieve plagiarism-free content.",
     sections: [
@@ -3241,7 +3241,7 @@ export const blogPosts = [
       "Discover how paraphraser tools transform your writing with clarity, flow, and engagement.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/19201.jpg",
     excerpt:
       "Learn how paraphrasers enhance your writing by improving clarity, vocabulary, and tone quickly.",
     metaTitle: "How a Paraphraser Can Help You Improve Your Words Quickly",
@@ -3505,7 +3505,7 @@ export const blogPosts = [
       "Discover how a text paraphraser creates unique, high-quality content efficiently.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/25659.jpg",
     excerpt:
       "Learn how a text paraphraser ensures original content, boosts creativity, and saves time.",
     metaTitle:
@@ -3740,7 +3740,7 @@ export const blogPosts = [
       "Discover how AI paraphrasers make your content more human, engaging, and effective.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/38639.jpg",
     excerpt:
       "Learn how AI paraphrasers enhance content readability, engagement, and SEO with natural language.",
     metaTitle: "Humanize Content with AI Paraphrasers for Better Engagement",
@@ -4083,7 +4083,7 @@ export const blogPosts = [
       "Discover how a paragraph paraphraser enhances clarity, refines tone, and overcomes writer's block.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/40605.jpg",
     excerpt:
       "Learn how to use a paragraph paraphraser to improve clarity, tone, and originality in your writing.",
     metaTitle: "How to Use a Paragraph Paraphraser to Improve Your Writing",
@@ -4316,7 +4316,7 @@ export const blogPosts = [
       "Discover how sentence paraphrasers improve clarity, eliminate repetition, and enhance your writing.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/42741.jpg",
     excerpt:
       "Learn how to use a sentence paraphraser to improve clarity, vocabulary, and tone in your writing.",
     metaTitle: "How to Use a Sentence Paraphraser to Enhance Your Writing",
@@ -4600,7 +4600,7 @@ export const blogPosts = [
       "Discover how a paraphraser website boosts productivity, ensures originality, and enhances writing quality.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/61152.jpg",
     excerpt:
       "Learn why a paraphraser website is essential for efficient content creation and better writing.",
     metaTitle:
@@ -4845,7 +4845,7 @@ export const blogPosts = [
       "Discover how paraphraser and summarizer tools enhance productivity and content quality.",
     date: "September 11, 2025",
     category: "Insights",
-    img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+    img: "/61254.jpg",
     excerpt:
       "Learn how paraphraser and summarizer tools boost originality, efficiency, and quality in content creation.",
     metaTitle:
@@ -5908,7 +5908,7 @@ export const blogPosts = [
   subtitle: "Learn how to use Writehuman and other AI tools to create authentic, human-centered writing in 2025.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/95311.jpg",
   excerpt: "Explore Writehuman, the movement toward human-centered AI writing in 2025, and tools like Paraphraser.co.",
   metaTitle: "Writehuman in 2025: A Guide to Human-Centric AI Writing",
   metaDescription: "Explore Writehuman, the movement toward human-centered AI writing in 2025. Learn tools, trends, and why Paraphraser.co matters.",
@@ -6169,7 +6169,7 @@ export const blogPosts = [
   subtitle: "Explore adjectives starting with O to enrich your writing, with meanings, examples, and tools like Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/114743.jpg",
   excerpt: "Explore adjectives starting with O. Discover meanings, examples, and usage to enrich writing and vocabulary.",
   metaTitle: "Adjectives Starting with O: A Complete Guide with Examples and Meanings",
   metaDescription: "Explore adjectives starting with O. Discover meanings, examples, and usage to enrich writing, communication, and vocabulary growth.",
@@ -6440,7 +6440,7 @@ export const blogPosts = [
   subtitle: "Discover the meaning of SMFH, its origins, and its role in digital communication with tools like Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/114743.jpg",
   excerpt: "Discover the true meaning of SMFH, its origins, modern usage, and cultural impact in online communication.",
   metaTitle: "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
   metaDescription: "Discover the true meaning of SMFH, its origins, modern usage, cultural context, and why it matters in online communication.",
@@ -6710,7 +6710,7 @@ export const blogPosts = [
   subtitle: "Discover how guichet automatique bancaire evolved in 2025 and its role in digital banking with tools like Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/18484891_Working_with_Laptop_in_Park.jpg",
   excerpt: "Discover how guichet automatique bancaire evolved in 2025, from convenience to security and digital banking integration.",
   metaTitle: "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
   metaDescription: "Discover how guichet automatique bancaire evolved in 2025, from convenience to security and digital banking integration worldwide.",
@@ -6886,7 +6886,7 @@ export const blogPosts = [
   subtitle: "Explore flowers that start with C, their meanings, growing tips, and cultural value with Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/260542821_658f6eeb-c455-45f5-9623-66afb3512a2e.jpg",
   excerpt: "Explore flowers that start with C, their meanings, growing tips, and cultural value.",
   metaTitle: "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
   metaDescription: "Explore flowers that start with C, their meanings, growing tips, cultural value, and unique beauty in gardening traditions.",
@@ -7117,7 +7117,7 @@ export const blogPosts = [
   subtitle: "Discover the meaning, usage, and digital evolution of 'theirer' with tools like Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/technology-background-texture.jpg",
   excerpt: "Discover the meaning, usage, and evolution of 'theirer' in digital language and culture.",
   metaTitle: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
   metaDescription: "Discover the meaning, usage, and evolution of “theirer,” exploring its role in digital language, culture, and modern communication.",
@@ -7291,7 +7291,7 @@ export const blogPosts = [
   subtitle: "Learn the difference between affect and effect with examples and Paraphraser.co for clear writing.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/digital-art-ai-technology-background.jpg",
   excerpt: "Learn the difference between affect and effect with examples and tips for clear writing.",
   metaTitle: "Difference Between Affect and Effect Explained with Examples",
   metaDescription: "Learn the clear difference between affect and effect, with examples, tips, and easy guidance to avoid confusion in writing.",
@@ -7589,7 +7589,7 @@ export const blogPosts = [
   subtitle: "Learn to analyze grammatically as a sentence with techniques and Paraphraser.co for clear writing.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "7853107.jpg",
   excerpt: "Learn to analyze grammatically as a sentence with techniques for clarity and precision.",
   metaTitle: "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision in Writing",
   metaDescription: "Learn how to analyze grammatically as a sentence with simple techniques, examples, and AI tools for better writing clarity.",
@@ -7807,7 +7807,7 @@ export const blogPosts = [
   subtitle: "Discover the meaning, origins, and usage of 'bear with me' with Paraphraser.co.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
   excerpt: "Discover the meaning, origins, and usage of 'bear with me' in modern communication.",
   metaTitle: "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
   metaDescription: "Discover the meaning, origins, and modern usage of “bear with me” with examples, insights, and practical communication guidance.",
@@ -7983,7 +7983,7 @@ export const blogPosts = [
   subtitle: "Explore personification examples in literature and speech with Paraphraser.co for creative writing.",
   date: "September 15, 2025",
   category: "Insights",
-  img: "https://images.unsplash.com/photo-1507842217343-583bb7275407?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+  img: "8961158.jpg",
   excerpt: "Explore personification examples in literature, speech, and writing with Paraphraser.co.",
   metaTitle: "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
   metaDescription: "Explore detailed personification examples in literature, daily speech, and learning. Discover how Paraphraser.co enhances creative writing effectively.",

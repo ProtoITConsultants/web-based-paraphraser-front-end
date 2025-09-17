@@ -8,7 +8,7 @@ export default function BlogsPage() {
   const blogCards = [
     {
       slug: "students-use-paraphrasing-tools-without-plagiarism",
-      img: "https://img.freepik.com/free-vector/abstract-paper-cut-shape-wave-background_474888-4652.jpg?semt=ais_incoming&w=740&q=80",
+      img: "/7853107.jpg",
       alt: "Student working at desk",
       title: "How Students Use Paraphrasing Tools Without Plagiarism in 2025",
       desc: "Learn how students use paraphrasing tools in 2025 to avoid plagiarism ethically and effectively.",
@@ -16,7 +16,7 @@ export default function BlogsPage() {
     },
     {
       slug: "use-paraphraser-text-tool-for-unique-content",
-      img: "https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80",
+      img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
       alt: "Abstract green background",
       title: "How to Use a Paraphraser Text Tool for More Unique Content",
       desc: "Originality is important in the content creation. You can be a student writing an essay, you can be a blogger writing interesting posts, you can be a marketer writing good quality text, but you have to write unique text in order to be a success.",
@@ -24,7 +24,7 @@ export default function BlogsPage() {
     },
     {
       slug: "wordtune-vs-quillbot-creativity-or-consistency-2025",
-      img: "https://static.vecteezy.com/system/resources/thumbnails/011/426/071/small_2x/aesthetic-white-and-green-background-with-space-for-text-modern-background-design-with-liquid-shape-white-background-with-green-liquid-shapes-free-vector.jpg",
+      img: "/8961158.jpg",
       alt: "Digital workspace with laptop",
       title:
         "Wordtune vs Quillbot in 2025: Creativity or Consistency? Full Guide with Free Alternative",
@@ -33,7 +33,7 @@ export default function BlogsPage() {
     },
     {
       slug: "paraphraserco-vs-quillbot-why-students-prefer-this-free-alternative",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-ODo-z5aIo2lPQaJkocRctlCrUvcgnQdMhPGzK4t_ibr5K-jwuFTw_85Dbou0RnX7gXg&usqp=CAU",
+      img: "/4479.jpg",
       alt: "Notebook and pen on desk",
       title:
         "Paraphraser.co vs Quillbot: Why Students Prefer This Free Alternative in 2025",
@@ -42,7 +42,7 @@ export default function BlogsPage() {
     },
     {
       slug: "spinbot-vs-rephrase-info-free-vs-ai-powered-tools-compared",
-      img: "https://i.pinimg.com/736x/7a/57/11/7a57113203128c356e01bfc003632400.jpg",
+      img: "5272.jpg",
       alt: "Typing on laptop",
       title:
         "Spinbot vs Rephrase.info: Free vs AI-Powered Tools Compared in 2025",
@@ -51,7 +51,7 @@ export default function BlogsPage() {
     },
     {
       slug: "quillbot-vs-grammarly-paraphrasing-2025",
-      img: "https://i.pinimg.com/736x/db/55/84/db55840b70b3bb20de4c45322603270f.jpg",
+      img: "/7541.jpg",
       alt: "Typing on laptop",
       title:
         "Quillbot vs Grammarly in 2025: The Best Paraphrasing Tool for Writers, Students, and Professionals",
@@ -60,7 +60,7 @@ export default function BlogsPage() {
     },
     {
       slug: "top-10-ai-paraphrasers-compared-free-vs-paid-options",
-      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/11684.jpg",
       alt: "Notebook and pen on desk",
       title: "Top 10 AI Paraphrasers in 2025: Free vs Paid Options Compared",
       desc: "Discover the top 10 AI paraphrasers in 2025, comparing free and paid tools for writing.",
@@ -68,7 +68,7 @@ export default function BlogsPage() {
     },
     {
       slug: "ai-content-paraphrasers-revolutionizing-article-writing",
-      img: "https://i.pinimg.com/736x/c1/f1/f6/c1f1f6b66d3af4da36f8ea6e388cffa9.jpg",
+      img: "/13664.jpg",
       alt: "Laptop with digital interface",
       title: "AI Content Paraphrasers Revolutionizing Article Writing",
       desc: "Learn how AI paraphrasers transform article writing with efficiency, originality, and SEO optimization.",
@@ -76,7 +76,7 @@ export default function BlogsPage() {
     },
     {
       slug: "paraphrasing-vs-summarizing",
-      img: "https://img.freepik.com/free-vector/hand-drawn-olive-green-background_23-2149724858.jpg",
+      img: "/14138 (1).jpg",
       alt: "Olive green abstract background",
       title: "Paraphrasing vs. Summarizing: What's the Difference?",
       desc: "Understanding the key differences between paraphrasing and summarizing can help you choose the right approach for your content creation needs.",
@@ -84,7 +84,7 @@ export default function BlogsPage() {
     },
     {
       slug: "how-paraphraser-improves-writing-quickly",
-      img: "https://img.freepik.com/premium-vector/colorful-soft-pastel-abstract-background_552255-3106.jpg",
+      img: "/14706.jpg",
       alt: "Typewriter and paper",
       title: "How a Paraphraser Can Help You Improve Your Words Quickly",
       desc: "Learn how paraphrasers improve writing clarity, flow, and engagement with practical tips.",
@@ -92,7 +92,7 @@ export default function BlogsPage() {
     },
     {
       slug: "text-paraphraser-write-unique-content",
-      img: "https://i.pinimg.com/736x/7a/57/11/7a57113203128c356e01bfc003632400.jpg",
+      img: "/19201.jpg",
       alt: "Notebook with pen and coffee",
       title: "Text Paraphraser: Write Unique Content Every Time",
       desc: "Learn how a text paraphraser creates unique, high-quality content efficiently.",
@@ -100,7 +100,7 @@ export default function BlogsPage() {
     },
     {
       slug: "humanize-content-with-ai-paraphrasers",
-      img: "https://i.pinimg.com/736x/c1/f1/f6/c1f1f6b66d3af4da36f8ea6e388cffa9.jpg",
+      img: "/25659.jpg",
       alt: "Laptop with open document",
       title: "Humanize Content with AI Paraphrasers for Better Engagement",
       desc: "Learn how AI paraphrasers create natural, engaging content to boost readability and SEO.",
@@ -108,7 +108,7 @@ export default function BlogsPage() {
     },
     {
       slug: "transform-text-with-paragraph-paraphraser",
-      img: "https://img.freepik.com/premium-vector/background-with-monstera-leaves-geometric-shapes-vector-illustration-flat-design_1007350-3488.jpg?semt=ais_hybrid&w=740",
+      img: "/38639.jpg",
       alt: "Person writing at desk",
       title: "Transform Your Text with a Paragraph Paraphraser",
       desc: "Discover how a paragraph paraphraser enhances clarity, tone, and originality in your writing.",
@@ -116,7 +116,7 @@ export default function BlogsPage() {
     },
     {
       slug: "how-to-use-sentence-paraphraser",
-      img: "https://img.freepik.com/free-vector/paper-cut-abstract-background_474888-6378.jpg?semt=ais_hybrid&w=740&q=80",
+      img: "/40605.jpg",
       alt: "Notebook with pen and laptop",
       title: "How to Use a Sentence Paraphraser to Enhance Your Writing",
       desc: "Learn how to use a sentence paraphraser to improve clarity, vocabulary, and tone in your writing.",
@@ -124,7 +124,7 @@ export default function BlogsPage() {
     },
     {
       slug: "why-paraphraser-website-essential-content-creation",
-      img: "https://img.freepik.com/premium-vector/minimalist-green-botanical-abstract-background-vector-illustration_758746-830.jpg?semt=ais_hybrid&w=740&q=80",
+      img: "/42741.jpg",
       alt: "Person typing on laptop",
       title:
         "Why a Paraphraser Website Is a Must-Have for Efficient Content Creation",
@@ -133,7 +133,7 @@ export default function BlogsPage() {
     },
     {
       slug: "paraphraser-and-summarizer-perfect-combo",
-      img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
+      img: "/61152.jpg",
       alt: "Person working on laptop with documents",
       title:
         "Paraphraser and Summarizer: The Perfect Combo for Content Creation",
@@ -142,7 +142,7 @@ export default function BlogsPage() {
     },
     {
       slug: "essay-paraphraser-time-saving-tool",
-      img: "https://img.freepik.com/free-vector/green-tropical-leaves-background_1308-68599.jpg?semt=ais_incoming&w=740&q=80",
+      img: "/61254.jpg",
       alt: "Student writing at desk",
       title: "Essay Paraphraser: Time-Saving Tool for Students & Writers",
       desc: "Learn how essay paraphrasers improve clarity, save time, and maintain academic integrity.",
@@ -150,7 +150,7 @@ export default function BlogsPage() {
     },
     {
       slug: "how-to-use-free-online-paraphraser",
-      img: "https://static.vecteezy.com/system/resources/thumbnails/011/426/071/small_2x/aesthetic-white-and-green-background-with-space-for-text-modern-background-design-with-liquid-shape-white-background-with-green-liquid-shapes-free-vector.jpg",
+      img: "/95311.jpg",
       alt: "Person typing on keyboard",
       title: "How to Use a Free Online Paraphraser for Effective Rewriting",
       desc: "Learn how free online paraphrasers improve clarity and efficiency in your writing.",
@@ -158,7 +158,7 @@ export default function BlogsPage() {
     },
     {
       slug: "old-english-converter-guide",
-      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/114743.jpg",
       alt: "Ancient manuscript with text",
       title:
         "Old English Converter: A Complete Guide to Translating and Styling Text in 2025",
@@ -177,7 +177,7 @@ export default function BlogsPage() {
     },
     {
       slug: "writehuman-guide-2025",
-      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/114743.jpg",
       alt: "Person using laptop for writing",
       title: "Writehuman in 2025: A Guide to Human-Centric AI Writing",
       desc: "Explore Writehuman, the movement toward human-centered AI writing in 2025, and tools like Paraphraser.co.",
@@ -195,7 +195,7 @@ export default function BlogsPage() {
     },
     {
       slug: "adjectives-starting-with-o",
-      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/18484891_Working_with_Laptop_in_Park.jpg",
       alt: "Open book with highlighted words",
       title:
         "Adjectives Starting with O: A Complete Guide with Examples and Meanings",
@@ -214,7 +214,7 @@ export default function BlogsPage() {
     },
     {
       slug: "smfh-meaning",
-      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/260542821_658f6eeb-c455-45f5-9623-66afb3512a2e.jpg",
       alt: "Person typing on smartphone",
       title:
         "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
@@ -229,7 +229,7 @@ export default function BlogsPage() {
     },
     {
       slug: "guichet-automatique-bancaire-2025",
-      img: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/technology-background-texture.jpg",
       alt: "ATM machine in use",
       title:
         "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
@@ -248,7 +248,7 @@ export default function BlogsPage() {
     },
     {
       slug: "flowers-that-start-with-c",
-      img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/5272.jpg",
       alt: "Vibrant flowers in a garden",
       title:
         "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
@@ -267,7 +267,7 @@ export default function BlogsPage() {
     },
     {
       slug: "theirer",
-      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/7853107.jpg",
       alt: "Person typing on laptop",
       title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
       desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
@@ -285,7 +285,7 @@ export default function BlogsPage() {
     },
     {
       slug: "difference-between-affect-and-effect",
-      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
       alt: "Notebook with pen for writing",
       title: "Difference Between Affect and Effect Explained with Examples",
       desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
@@ -303,7 +303,7 @@ export default function BlogsPage() {
     },
     {
       slug: "analyze-grammatically-as-a-sentence",
-      img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "8961158.jpg",
       alt: "Person writing in a notebook",
       title:
         "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
@@ -322,7 +322,7 @@ export default function BlogsPage() {
     },
     {
       slug: "bear-with-me",
-      img: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
+      img: "/4479.jpg",
       alt: "Person typing on laptop",
       title:
         "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
@@ -337,7 +337,7 @@ export default function BlogsPage() {
     },
     {
       slug: "personification-examples",
-      img: "https://img.freepik.com/premium-vector/green-monstera-leaf-banner-background-minimal-handdrawn-style_765090-1886.jpg",
+      img: "/digital-art-ai-technology-background.jpg",
       alt: "Open book with vibrant pages",
       title:
         "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
@@ -461,7 +461,7 @@ export default function BlogsPage() {
                 {/* Image Side */}
                 <div className="lg:w-1/2 relative p-6 bg-[#D2F159]">
                   <img
-                    src="https://img.freepik.com/premium-vector/green-background-with-abstract-elements-vector-illustration-place-your-text_1007350-3504.jpg?semt=ais_hybrid&w=740&q=80"
+                    src="8961158.jpg"
                     alt="Abstract blue architectural lines"
                     className="w-full h-64 lg:h-full object-cover rounded-3xl"
                   />
