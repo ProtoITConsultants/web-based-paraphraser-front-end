@@ -24,7 +24,7 @@ export default function BlogsPage() {
     },
     {
       slug: "wordtune-vs-quillbot-creativity-or-consistency-2025",
-      img: "/8961158.jpg",
+      img: "/35005196_6106.jpg",
       alt: "Digital workspace with laptop",
       title:
         "Wordtune vs Quillbot in 2025: Creativity or Consistency? Full Guide with Free Alternative",
@@ -42,7 +42,7 @@ export default function BlogsPage() {
     },
     {
       slug: "spinbot-vs-rephrase-info-free-vs-ai-powered-tools-compared",
-      img: "5272.jpg",
+      img: "/digital-faceart-ai-technology-background.jpg",
       alt: "Typing on laptop",
       title:
         "Spinbot vs Rephrase.info: Free vs AI-Powered Tools Compared in 2025",
@@ -177,7 +177,7 @@ export default function BlogsPage() {
     },
     {
       slug: "writehuman-guide-2025",
-      img: "/114743.jpg",
+      img: "/140003.jpg",
       alt: "Person using laptop for writing",
       title: "Writehuman in 2025: A Guide to Human-Centric AI Writing",
       desc: "Explore Writehuman, the movement toward human-centered AI writing in 2025, and tools like Paraphraser.co.",
@@ -267,7 +267,7 @@ export default function BlogsPage() {
     },
     {
       slug: "theirer",
-      img: "/7853107.jpg",
+      img: "/18653.jpg",
       alt: "Person typing on laptop",
       title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
       desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
@@ -285,7 +285,7 @@ export default function BlogsPage() {
     },
     {
       slug: "difference-between-affect-and-effect",
-      img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
+      img: "/377376685_68db1275-d05f-4e6e-b6fe-05f158c309c7.jpg",
       alt: "Notebook with pen for writing",
       title: "Difference Between Affect and Effect Explained with Examples",
       desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
@@ -303,7 +303,7 @@ export default function BlogsPage() {
     },
     {
       slug: "analyze-grammatically-as-a-sentence",
-      img: "8961158.jpg",
+      img: "/20299.jpg",
       alt: "Person writing in a notebook",
       title:
         "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
@@ -322,7 +322,7 @@ export default function BlogsPage() {
     },
     {
       slug: "bear-with-me",
-      img: "/4479.jpg",
+      img: "/digital-art-ai-technology-background (1).jpg",
       alt: "Person typing on laptop",
       title:
         "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
