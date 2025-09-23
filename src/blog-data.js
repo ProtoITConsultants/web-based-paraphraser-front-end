@@ -8225,6 +8225,7 @@ export const blogPosts = [
 {
   id: "meses-del-ano-en-ingles-2025",
   slug: "meses-del-ano-en-ingles",
+  link: "blogs/meses-del-ano-en-ingles",
   title: "Meses del Año en Inglés: Complete Guide with Grammar, History, Culture, and Practical Usage",
   subtitle: "Learn the months of the year in English with grammar, history, and Paraphraser.co.",
   date: "September 15, 2025",
@@ -8236,7 +8237,7 @@ export const blogPosts = [
   sections: [
     {
       type: "paragraph",
-      content: "When Spanish speakers ask about meses del año en inglés, the expectation is often a simple list. They want to know the twelve names: January, February, March, April, May, June, July, August, September, October, November, and December. That is the core answer. But true understanding requires more. Learning the months in English means recognizing their correct spelling, their rhythm in pronunciation, their grammatical rules, and the cultural meanings attached to each. Each month carries a story, a celebration, and a memory. To study them is to study time itself. This article will not only present the names of the months but also expand on their origins, grammar, cultural uses, and practical examples. By the end, you will be able to use the months fluently in writing, in speech, and in context.",
+      content: "When Spanish speakers ask about meses del año en inglés, the expectation is often a simple list. They want to know the twelve names: January, February, March, April, May, June, July, August, September, October, November, and December. That is the core answer. But true understanding requires more. Learning the months in English means recognizing their correct spelling, their rhythm in pronunciation, their grammatical rules, and the cultural meanings attached to each. Each month carries a story, a celebration, and a memory. To study them is to study time itself. This article will not only present the names of the months but also expand on their origins, grammar, cultural uses, and practical examples. By the end, you will be able to use the months fluently in writing, in speech, and in context."
     },
     {
       type: "heading",
@@ -8518,17 +8519,29 @@ export const blogPosts = [
       ]
     },
     {
-      type: "heading",
-      content: "FAQs"
-    },
-    {
       type: "faq",
+      title: "Frequently Asked Questions",
       items: [
-        "What are the 12 months of the year in English? The months are January, February, March, April, May, June, July, August, September, October, November, and December.",
-        "How do you write dates with months in English? Dates are usually written as Month + Day + Year in American English (e.g., July 4, 2025) and Day + Month + Year in British English (e.g., 4 July 2025).",
-        "Are months always capitalized in English? Yes. In English, all months begin with a capital letter: March, September, December.",
-        "Which preposition is used with months in English? We use “in” with months. For example: I was born in May.",
-        "What are common abbreviations for months in English? Months are often shortened to three letters: Jan., Feb., Mar., Apr., May, Jun., Jul., Aug., Sept., Oct., Nov., Dec."
+        {
+          question: "What are the 12 months of the year in English?",
+          answer: "The months are January, February, March, April, May, June, July, August, September, October, November, and December."
+        },
+        {
+          question: "How do you write dates with months in English?",
+          answer: "Dates are usually written as Month + Day + Year in American English (e.g., July 4, 2025) and Day + Month + Year in British English (e.g., 4 July 2025)."
+        },
+        {
+          question: "Are months always capitalized in English?",
+          answer: "Yes. In English, all months begin with a capital letter: March, September, December."
+        },
+        {
+          question: "Which preposition is used with months in English?",
+          answer: "We use “in” with months. For example: I was born in May."
+        },
+        {
+          question: "What are common abbreviations for months in English?",
+          answer: "Months are often shortened to three letters: Jan., Feb., Mar., Apr., May, Jun., Jul., Aug., Sept., Oct., Nov., Dec."
+        }
       ]
     }
   ]
