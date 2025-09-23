@@ -7,6 +7,139 @@ export default function BlogsPage() {
 
   const blogCards = [
     {
+      slug: "meses-del-ano-en-ingles",
+      img: "https://img.freepik.com/premium-vector/edocuments-abstract-concept-vector-illustration_107173-75466.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Calendar with cultural notes",
+      title:
+        "Meses del Año en Inglés: Complete Guide with Grammar, History, Culture, and Practical Usage",
+      desc: "Learn the months in English with grammar, history, and Paraphraser.co.",
+      date: "September 15, 2025",
+      links: [
+        {
+          anchorText: "meses del año en inglés",
+          to: "/blog/language-learning-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "palabras-con-u-complete-guide",
+      img: "https://img.freepik.com/premium-vector/professional-copywriter-journalist-writing-online-article_1125744-8922.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Open book with Spanish words",
+      title:
+        "Palabras con U: Complete Guide with Meanings, Usage, and Examples in Spanish Vocabulary",
+      desc: "Explore palabras con U in Spanish with Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "palabras con U",
+          to: "/blog/spanish-vocabulary-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "pan-rallado-history-culinary-uses",
+      img: "https://img.freepik.com/free-vector/kids-programming-creating-robot-class-tiny-people-engineering-kids-learn-science-activities-early-development-classes-concept_335657-671.jpg",
+      alt: "Bread crumbs on a rustic table",
+      title:
+        "Pan Rallado: Cultural History, Culinary Uses, and the Evolution of Bread Crumbs Across the World",
+      desc: "Discover pan rallado’s history, culinary uses, and sustainability with Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "pan rallado",
+          to: "/blog/culinary-traditions-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "llaves-history-meaning-symbolism-modern-use",
+      img: "https://img.freepik.com/premium-vector/ai-robot-is-writing-artificial-intelligence-writer-concept-illustration_870049-399.jpg",
+      alt: "Antique keys on a wooden surface",
+      title:
+        "Llaves: History, Meaning, Uses, Symbolism, and Modern Relevance Explained Clearly",
+      desc: "Discover llaves’ history, symbolism, and modern uses with Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "llaves",
+          to: "/blog/language-and-culture-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "dormir-bona-nit-complete-guide",
+      img: "https://media.istockphoto.com/id/1415676185/vector/writing-in-planner.jpg?s=612x612&w=0&k=20&c=0ATRChlrjue5q_ytHqnqGEcqB94P6nbXSdtkUzwP0zM=",
+      alt: "Moonlit night in a Catalan village",
+      title:
+        "Dormir Bona Nit: A Complete Guide to Meaning, Culture, and Everyday Use in Catalan Life",
+      desc: "Learn dormir bona nit’s meaning, cultural roots, and usage with Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "dormir bona nit",
+          to: "/blog/catalan-language-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "dias-de-la-semana-en-ingles",
+      img: "https://img.freepik.com/free-vector/hands-character-writing-letter-desk-with-papers-pencil-envelopes-coffee-cup_74855-10720.jpg?semt=ais_incoming&w=740&q=80",
+      alt: "Calendar with English weekdays",
+      title:
+        "Dias de la Semana en Inglés: Meanings, Usage, Origins, and Cultural Insights Explained Clearly",
+      desc: "Learn dias de la semana en inglés with origins and Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "dias de la semana en inglés",
+          to: "/blog/language-learning-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "las-horas-en-ingles-complete-guide",
+      img: "https://img.freepik.com/premium-vector/copywriting-concept-vector-illustration_107173-16717.jpg",
+      alt: "Clock showing time in English",
+      title:
+        "Las Horas en Inglés Explained: A Complete Guide to Telling Time in English with Tables and Examples",
+      desc: "Learn las horas en inglés with tables, examples, and Paraphraser.co.",
+      date: "September 23, 2025",
+      links: [
+        {
+          anchorText: "las horas en inglés",
+          to: "/blog/language-learning-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
       slug: "students-use-paraphrasing-tools-without-plagiarism",
       img: "/7853107.jpg",
       alt: "Student working at desk",
@@ -354,132 +487,6 @@ export default function BlogsPage() {
         },
       ],
     },
-    {
-  slug: "meses-del-ano-en-ingles",
-  img: "https://images.unsplash.com/photo-1517502884422-41eaead166d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Calendar with cultural notes",
-  title: "Meses del Año en Inglés: Complete Guide with Grammar, History, Culture, and Practical Usage",
-  desc: "Learn the months in English with grammar, history, and Paraphraser.co.",
-  date: "September 15, 2025",
-  links: [
-    {
-      anchorText: "meses del año en inglés",
-      to: "/blog/language-learning-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "palabras-con-u-complete-guide",
-  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNu9uulWIgqP6ax8ikiM4eQUf2cNqGtOMkaQ&s",
-  alt: "Open book with Spanish words",
-  title: "Palabras con U: Complete Guide with Meanings, Usage, and Examples in Spanish Vocabulary",
-  desc: "Explore palabras con U in Spanish with Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "palabras con U",
-      to: "/blog/spanish-vocabulary-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "pan-rallado-history-culinary-uses",
-  img: "https://images.unsplash.com/photo-1543332164-6e82f355badc?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Bread crumbs on a rustic table",
-  title: "Pan Rallado: Cultural History, Culinary Uses, and the Evolution of Bread Crumbs Across the World",
-  desc: "Discover pan rallado’s history, culinary uses, and sustainability with Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "pan rallado",
-      to: "/blog/culinary-traditions-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "llaves-history-meaning-symbolism-modern-use",
-  img: "https://images.unsplash.com/photo-1512485694743-9c9538b4e6e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Antique keys on a wooden surface",
-  title: "Llaves: History, Meaning, Uses, Symbolism, and Modern Relevance Explained Clearly",
-  desc: "Discover llaves’ history, symbolism, and modern uses with Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "llaves",
-      to: "/blog/language-and-culture-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "dormir-bona-nit-complete-guide",
-  img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Moonlit night in a Catalan village",
-  title: "Dormir Bona Nit: A Complete Guide to Meaning, Culture, and Everyday Use in Catalan Life",
-  desc: "Learn dormir bona nit’s meaning, cultural roots, and usage with Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "dormir bona nit",
-      to: "/blog/catalan-language-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "dias-de-la-semana-en-ingles",
-  img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4RGI6CPwUvuOhpuNCKhyZtYliR7CqZhr2dw&s",
-  alt: "Calendar with English weekdays",
-  title: "Dias de la Semana en Inglés: Meanings, Usage, Origins, and Cultural Insights Explained Clearly",
-  desc: "Learn dias de la semana en inglés with origins and Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "dias de la semana en inglés",
-      to: "/blog/language-learning-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
-{
-  slug: "las-horas-en-ingles-complete-guide",
-  img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=740&q=80",
-  alt: "Clock showing time in English",
-  title: "Las Horas en Inglés Explained: A Complete Guide to Telling Time in English with Tables and Examples",
-  desc: "Learn las horas en inglés with tables, examples, and Paraphraser.co.",
-  date: "September 23, 2025",
-  links: [
-    {
-      anchorText: "las horas en inglés",
-      to: "/blog/language-learning-2025"
-    },
-    {
-      anchorText: "Paraphraser.co",
-      to: "/"
-    }
-  ]
-},
   ];
 
   const BATCH_SIZE = 6;
@@ -580,7 +587,7 @@ export default function BlogsPage() {
                       darkMode ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    September 10, 2025
+                    September 23, 2025
                   </div>
                 </div>
 
