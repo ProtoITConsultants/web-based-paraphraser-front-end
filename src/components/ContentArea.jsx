@@ -20,6 +20,21 @@ export default function ContentArea({
     return localStorage.getItem("showLoginPopup") === "true";
   });
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [translatedText, setTranslatedText] = useState("");
+  const supportedLanguages = [
+    { code: "en", name: "English" },
+    { code: "es", name: "Spanish" },
+    { code: "fr", name: "French" },
+    { code: "de", name: "German" },
+    { code: "hi", name: "Hindi" },
+    { code: "zh", name: "Chinese" },
+    { code: "ar", name: "Arabic" },
+    { code: "ru", name: "Russian" },
+    { code: "pt", name: "Portuguese" },
+    { code: "ja", name: "Japanese" },
+    // Add more as needed
+  ];
 
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
@@ -60,7 +75,7 @@ export default function ContentArea({
     doc.setFontSize(12);
     doc.setFont(undefined, "normal");
     doc.setTextColor(50);
-    const splitContent = doc.splitTextToSize(outputText, contentWidth);
+    const splitContent = doc.splitTextToSize(translatedText, contentWidth);
     doc.text(splitContent, margin, 60);
     doc.save(`Paraphrased_Content_${new Date().toISOString().split("T")[0]}.pdf`);
     setShowExportPopup(false);
@@ -101,7 +116,7 @@ export default function ContentArea({
             new Paragraph({
               children: [
                 new TextRun({
-                  text: outputText,
+                  text: translatedText,
                   size: 24,
                   color: "333333",
                 }),
@@ -165,6 +180,43 @@ export default function ContentArea({
     }
   }, []);
 
+  useEffect(() => {
+    if (!outputText) {
+      setTranslatedText("");
+      return;
+    }
+    if (selectedLanguage === "en") {
+      setTranslatedText(outputText);
+      return;
+    }
+    // Google Translate API call
+    const translate = async () => {
+      try {
+        const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
+        const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            q: outputText,
+            target: selectedLanguage
+          })
+        });
+        const result = await response.json();
+        if (result && result.data && result.data.translations && result.data.translations[0]) {
+          setTranslatedText(result.data.translations[0].translatedText);
+        } else {
+          setTranslatedText(outputText);
+        }
+      } catch (err) {
+        setTranslatedText(outputText);
+      }
+    };
+    translate();
+  }, [outputText, selectedLanguage]);
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -190,82 +242,98 @@ export default function ContentArea({
             <h2 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
               Paraphrased Content
             </h2>
-            {outputText && (
-              <button
-                className={`ml-2 px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
-                  ${
-                    copied
-                      ? "bg-[#D2F159] text-black"
-                      : darkMode
-                      ? "bg-[#101214] text-white hover:bg-gray-700"
-                      : "bg-gray-200 text-gray-900 hover:bg-gray-300"
-                  }`}
-                onClick={() => {
-                  navigator.clipboard.writeText(outputText);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 1500);
-                }}
-                title={copied ? "Copied!" : "Copy to clipboard"}
-                disabled={copied}
-              >
-                {copied ? (
-                  <>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="inline-block align-middle"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="inline-block align-middle"
-                    >
-                      <rect
-                        x="9"
-                        y="9"
-                        width="13"
-                        height="13"
-                        rx="2"
-                        strokeWidth="2"
-                        stroke="currentColor"
+            <div className="flex items-center gap-2">
+              {/* Language Dropdown */}
+              {outputText && (
+                <select
+                  value={selectedLanguage}
+                  onChange={e => setSelectedLanguage(e.target.value)}
+                  className={`px-2 py-1 rounded-lg text-sm font-medium border focus:outline-none ${darkMode ? "bg-[#101214] text-white" : "bg-gray-200 text-gray-900"}`}
+                  title="Select language"
+                >
+                  {supportedLanguages.map(lang => (
+                    <option key={lang.code} value={lang.code}>{lang.name}</option>
+                  ))}
+                </select>
+              )}
+              {/* Copy Button */}
+              {outputText && (
+                <button
+                  className={`ml-2 px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
+                    ${
+                      copied
+                        ? "bg-[#D2F159] text-black"
+                        : darkMode
+                        ? "bg-[#101214] text-white hover:bg-gray-700"
+                        : "bg-gray-200 text-gray-900 hover:bg-gray-300"
+                    }`}
+                  onClick={() => {
+                    navigator.clipboard.writeText(translatedText);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1500);
+                  }}
+                  title={copied ? "Copied!" : "Copy to clipboard"}
+                  disabled={copied}
+                >
+                  {copied ? (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
                         fill="none"
-                      />
-                      <rect
-                        x="3"
-                        y="3"
-                        width="13"
-                        height="13"
-                        rx="2"
-                        strokeWidth="2"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
+                        className="inline-block align-middle"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18"
+                        height="18"
                         fill="none"
-                      />
-                    </svg>
-                    Copy
-                  </>
-                )}
-              </button>
-            )}
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="inline-block align-middle"
+                      >
+                        <rect
+                          x="9"
+                          y="9"
+                          width="13"
+                          height="13"
+                          rx="2"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                          fill="none"
+                        />
+                        <rect
+                          x="3"
+                          y="3"
+                          width="13"
+                          height="13"
+                          rx="2"
+                          strokeWidth="2"
+                          stroke="currentColor"
+                          fill="none"
+                        />
+                      </svg>
+                      Copy
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
           <div
             className={`w-full min-h-80 h-80 lg:h-96 py-2 font-light overflow-y-auto ${
@@ -273,7 +341,7 @@ export default function ContentArea({
             }`}
           >
             {outputText ? (
-              outputText
+              translatedText
             ) : (
               <span className={` ${darkMode ? "text-gray-500" : "text-gray-400"}`}></span>
             )}
