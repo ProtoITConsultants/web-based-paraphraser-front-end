@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 import ParaphraseButton from "./ParaphraseButton";
-import { X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import jsPDF from "jspdf";
-import { Document, Packer, Paragraph, TextRun, Header, AlignmentType } from "docx";
+import {
+  Document,
+  Packer,
+  Paragraph,
+  TextRun,
+  Header,
+  AlignmentType,
+} from "docx";
 import { toast } from "sonner";
 
 export default function ContentArea({
@@ -22,19 +29,9 @@ export default function ContentArea({
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [translatedText, setTranslatedText] = useState("");
-  const supportedLanguages = [
-    { code: "en", name: "English" },
-    { code: "es", name: "Spanish" },
-    { code: "fr", name: "French" },
-    { code: "de", name: "German" },
-    { code: "hi", name: "Hindi" },
-    { code: "zh", name: "Chinese" },
-    { code: "ar", name: "Arabic" },
-    { code: "ru", name: "Russian" },
-    { code: "pt", name: "Portuguese" },
-    { code: "ja", name: "Japanese" },
-    // Add more as needed
-  ];
+  const [languages, setLanguages] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
@@ -77,7 +74,9 @@ export default function ContentArea({
     doc.setTextColor(50);
     const splitContent = doc.splitTextToSize(translatedText, contentWidth);
     doc.text(splitContent, margin, 60);
-    doc.save(`Paraphrased_Content_${new Date().toISOString().split("T")[0]}.pdf`);
+    doc.save(
+      `Paraphrased_Content_${new Date().toISOString().split("T")[0]}.pdf`
+    );
     setShowExportPopup(false);
   };
 
@@ -132,7 +131,9 @@ export default function ContentArea({
     const url = URL.createObjectURL(buffer);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `Paraphrased_Content_${new Date().toISOString().split("T")[0]}.docx`;
+    a.download = `Paraphrased_Content_${
+      new Date().toISOString().split("T")[0]
+    }.docx`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -143,7 +144,8 @@ export default function ContentArea({
   const handleParaphrase = () => {
     if (!isUserLoggedIn) {
       let usedCount = parseInt(localStorage.getItem("usedCount") || 0);
-      const usedCountDate = localStorage.getItem("usedCountDate") || getCurrentDate();
+      const usedCountDate =
+        localStorage.getItem("usedCountDate") || getCurrentDate();
       const currentDate = getCurrentDate();
 
       if (usedCountDate !== currentDate) {
@@ -163,11 +165,15 @@ export default function ContentArea({
       usedCount += 1;
       localStorage.setItem("usedCount", usedCount);
       localStorage.setItem("usedCountDate", currentDate);
-      toast.success(`You have used ${usedCount} out of 3 paraphrases for today.`);
+      toast.success(
+        `You have used ${usedCount} out of 3 paraphrases for today.`
+      );
     }
 
     if (!loading && inputText.trim()) {
-      window.dispatchEvent(new CustomEvent("paraphrase", { detail: inputText }));
+      window.dispatchEvent(
+        new CustomEvent("paraphrase", { detail: inputText })
+      );
     }
   };
 
@@ -178,6 +184,34 @@ export default function ContentArea({
     } else {
       setIsUserLoggedIn(false);
     }
+  }, []);
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        const apiKey = "AIzaSyBP21IXIfzz5wHuksQ9r-jfEjW95x2E8YY"; // Replace with your actual API key
+        const url = `https://translation.googleapis.com/language/translate/v2/languages?target=en&key=${apiKey}`;
+        const response = await fetch(url);
+        const result = await response.json();
+        if (result.data && result.data.languages) {
+          // Filter out languages without a name and map to desired format
+          const validLanguages = result.data.languages
+            .filter((lang) => lang.language && lang.name) // Ensure both language and name exist
+            .map((lang) => ({
+              code: lang.language,
+              name: lang.name || lang.language, // Fallback to code if name is missing
+            }));
+          setLanguages(validLanguages);
+        } else {
+          console.error("No languages found in API response");
+          setLanguages([{ code: "en", name: "English" }]); // Fallback to English
+        }
+      } catch (err) {
+        console.error("Failed to fetch languages:", err);
+        setLanguages([{ code: "en", name: "English" }]); // Fallback to English on error
+      }
+    };
+    fetchLanguages();
   }, []);
 
   useEffect(() => {
@@ -192,20 +226,25 @@ export default function ContentArea({
     // Google Translate API call
     const translate = async () => {
       try {
-        const apiKey = "YOUR_GOOGLE_TRANSLATE_API_KEY"; // Replace with your actual API key
+        const apiKey = "AIzaSyBP21IXIfzz5wHuksQ9r-jfEjW95x2E8YY"; // Replace with your actual API key
         const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
         const response = await fetch(url, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             q: outputText,
-            target: selectedLanguage
-          })
+            target: selectedLanguage,
+          }),
         });
         const result = await response.json();
-        if (result && result.data && result.data.translations && result.data.translations[0]) {
+        if (
+          result &&
+          result.data &&
+          result.data.translations &&
+          result.data.translations[0]
+        ) {
           setTranslatedText(result.data.translations[0].translatedText);
         } else {
           setTranslatedText(outputText);
@@ -217,11 +256,25 @@ export default function ContentArea({
     translate();
   }, [outputText, selectedLanguage]);
 
+  const filteredLanguages = languages.filter(
+    (lang) =>
+      lang.name && lang.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const selectedLangName =
+    languages.find((lang) => lang.code === selectedLanguage)?.name || "English";
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className={`rounded-2xl p-6 ${darkMode ? "bg-black" : "bg-gray-100"}`}>
-          <h2 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
+        <div
+          className={`rounded-2xl p-6 ${darkMode ? "bg-black" : "bg-gray-100"}`}
+        >
+          <h2
+            className={`text-xl font-semibold ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
             Paste Content Here
           </h2>
           <textarea
@@ -237,29 +290,87 @@ export default function ContentArea({
           </div>
         </div>
 
-        <div className={`rounded-2xl p-6 relative ${darkMode ? "bg-black" : "bg-gray-100"}`}>
+        <div
+          className={`rounded-2xl p-6 relative ${
+            darkMode ? "bg-black" : "bg-gray-100"
+          }`}
+        >
           <div className="flex items-center justify-between">
-            <h2 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
+            <h2
+              className={`text-xl font-semibold ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
               Paraphrased Content
             </h2>
             <div className="flex items-center gap-2">
               {/* Language Dropdown */}
               {outputText && (
-                <select
-                  value={selectedLanguage}
-                  onChange={e => setSelectedLanguage(e.target.value)}
-                  className={`px-2 py-1 rounded-lg text-sm font-medium border focus:outline-none ${darkMode ? "bg-[#101214] text-white" : "bg-gray-200 text-gray-900"}`}
-                  title="Select language"
-                >
-                  {supportedLanguages.map(lang => (
-                    <option key={lang.code} value={lang.code}>{lang.name}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`py-1 flex gap-2 rounded-lg text-sm font-medium shadow-sm px-3 items-center hover:bg-gray-300 focus:outline-none ${
+                      darkMode
+                        ? "bg-[#101214] text-white"
+                        : "bg-gray-200 text-gray-900"
+                    }`}
+                    title="Select language"
+                  >
+                    {selectedLangName}
+                    <ChevronDown />
+                  </button>
+                  {isDropdownOpen && (
+                    <div
+                      className={`absolute right-0 mt-2 top-10 w-48 rounded-lg shadow-lg z-10 overflow-hidden ${
+                        darkMode
+                          ? "bg-[#101214] text-white"
+                          : "bg-white text-gray-900"
+                      }`}
+                    >
+                      <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder="Search language..."
+                        className={`w-full px-3 py-2 text-sm border-b focus:outline-none ${
+                          darkMode
+                            ? "bg-[#101214] text-white border-gray-700"
+                            : "bg-white text-gray-900 border-gray-200"
+                        }`}
+                      />
+                      <ul className="max-h-60 overflow-y-auto">
+                        {filteredLanguages.length > 0 ? (
+                          filteredLanguages.map((lang) => (
+                            <li
+                              key={lang.code}
+                              onClick={() => {
+                                setSelectedLanguage(lang.code);
+                                setIsDropdownOpen(false);
+                                setSearchTerm("");
+                              }}
+                              className={`px-3 py-2 text-sm cursor-pointer hover:bg-gray-700 hover:text-white ${
+                                darkMode
+                                  ? "hover:bg-gray-700"
+                                  : "hover:bg-gray-100"
+                              }`}
+                            >
+                              {lang.name}
+                            </li>
+                          ))
+                        ) : (
+                          <li className="px-3 py-2 text-sm text-gray-500">
+                            No languages found
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               )}
               {/* Copy Button */}
               {outputText && (
                 <button
-                  className={`ml-2 px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
+                  className={`ml-2 md:block hidden px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
                     ${
                       copied
                         ? "bg-[#D2F159] text-black"
@@ -343,7 +454,9 @@ export default function ContentArea({
             {outputText ? (
               translatedText
             ) : (
-              <span className={` ${darkMode ? "text-gray-500" : "text-gray-400"}`}></span>
+              <span
+                className={` ${darkMode ? "text-gray-500" : "text-gray-400"}`}
+              ></span>
             )}
           </div>
 
@@ -371,6 +484,82 @@ export default function ContentArea({
               Export
             </button>
           )}
+          {outputText && (
+            <button
+              className={`md:hidden absolute bottom-20 right-4 px-4 py-1 rounded-xl flex items-center gap-2 bg-gray-200 cursor-pointer hover:bg-gray-300 transition
+                    ${
+                      copied
+                        ? "bg-[#D2F159] text-black"
+                        : darkMode
+                        ? "bg-[#101214] text-white hover:bg-gray-700"
+                        : "bg-gray-200 text-gray-900 hover:bg-gray-300"
+                    }`}
+              onClick={() => {
+                navigator.clipboard.writeText(translatedText);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 1500);
+              }}
+              title={copied ? "Copied!" : "Copy to clipboard"}
+              disabled={copied}
+            >
+              {copied ? (
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline-block align-middle"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline-block align-middle"
+                  >
+                    <rect
+                      x="9"
+                      y="9"
+                      width="13"
+                      height="13"
+                      rx="2"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                    />
+                    <rect
+                      x="3"
+                      y="3"
+                      width="13"
+                      height="13"
+                      rx="2"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      fill="none"
+                    />
+                  </svg>
+                  Copy
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
 
@@ -383,7 +572,9 @@ export default function ContentArea({
             >
               <X size={24} />
             </button>
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Export your text</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              Export your text
+            </h2>
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={generateDOCX}
@@ -429,7 +620,8 @@ export default function ContentArea({
               You have reached your daily limit of 3 paraphrases
             </h2>
             <p className="text-gray-700 mb-6">
-              To keep rewriting without limits, please <strong>log in or sign up.</strong>
+              To keep rewriting without limits, please{" "}
+              <strong>log in or sign up.</strong>
             </p>
             <div className="flex gap-4 justify-center">
               <Link
