@@ -7,6 +7,118 @@ export default function BlogsPage() {
 
   const blogCards = [
     {
+      slug: "adjectives-that-start-with-j",
+      img: "https://img.freepik.com/free-vector/tiny-creative-people-writing-poems-typewriter-persons-reading-antique-books-feather-ink-bottle-flat-vector-illustration-literature-poetry-concept-banner-website-design-landing-page_74855-23203.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Pen and paper with adjectives starting with J",
+      title:
+        "Adjectives That Start With J: Complete Meanings, Synonyms, and Practical Usage in Writing",
+      desc: "Explore adjectives starting with J, their meanings, synonyms, and usage.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "animals-that-start-with-d",
+      img: "https://img.freepik.com/free-vector/tiny-male-author-screenwriter-writing-story-movie-script-screenplay-writer-vintage-typewriter-with-paper-flat-vector-illustration-creativity-journalism-concept-banner-landing-web-page_74855-25344.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Dolphin leaping from water",
+      title: "Animals That Start With D: A Comprehensive Informational Guide",
+      desc: "Explore animals starting with D, their traits, habitats, and roles.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "adjectives-that-start-with-g",
+      img: "https://img.freepik.com/premium-vector/modern-web-graphics-pack-vector-eps_1348508-15.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Book page with adjectives starting with G",
+      title:
+        "Adjectives That Start With G: Complete 5000-Word Informational Guide With Meanings and Examples",
+      desc: "Discover adjectives starting with G, their meanings, examples, and uses.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "adjectives-that-start-with-h",
+      img: "https://img.freepik.com/free-vector/scientific-articles-writing-flat-composition-with-icons-thought-bubbles-documents-envelopes-with-tablet-hands-vector-illustration_98292-8982.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Notebook with adjectives starting with H",
+      title:
+        "Adjectives That Start With H: Meanings, Examples, and Usage in Writing",
+      desc: "Explore adjectives starting with H, their meanings, examples, and uses.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "adjectives-that-start-with-c",
+      img: "https://img.freepik.com/premium-vector/hands-writing-notes-human-character-palms-holding-pen-share-life-stories-with-diary-fill-todo-list-working_87771-24539.jpg",
+      alt: "Open book with highlighted adjectives starting with C",
+      title:
+        "Adjectives That Start With C: Complete Guide With Meanings, Usage, and Examples",
+      desc: "Learn powerful adjectives starting with C, their meanings, examples, and uses.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "flor-o-fruto-con-b-complete-guide",
+      img: "https://img.freepik.com/free-vector/female-hands-holding-pen-drawing-flowers-notebook-girl-sitting-table-with-cup-tea-mobile-phone-it-taking-notes-diary-flat-vector-illustration-hobby-art-concept_74855-24532.jpg?semt=ais_hybrid&w=740&q=80",
+      alt: "Colorful flowers and fruits starting with B",
+      title:
+        "Flor o Fruto con B: Complete Informational Guide to Flowers, Fruits, Culture, and Language",
+      desc: "Explore flor o fruto con B with examples, symbolism, and cultural insights.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "flor o fruto con b",
+          to: "/blog/language-and-botany-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
+      slug: "pais-con-j-complete-guide",
+      img: "https://img.freepik.com/free-vector/hands-character-writing-letter-desk-with-papers-pencil-envelopes-coffee-cup_74855-10720.jpg?semt=ais_hybrid&w=740",
+      alt: "Map highlighting countries starting with J",
+      title:
+        "Pais Con J: Exploring Countries, Culture, Language, and Geography Beginning With the Letter J",
+      desc: "Explore pais con J with geography, culture, and Paraphraser.co.",
+      date: "September 26, 2025",
+      links: [
+        {
+          anchorText: "pais con J",
+          to: "/blog/language-and-geography-2025",
+        },
+        {
+          anchorText: "Paraphraser.co",
+          to: "/",
+        },
+      ],
+    },
+    {
       slug: "meses-del-ano-en-ingles",
       img: "https://img.freepik.com/premium-vector/edocuments-abstract-concept-vector-illustration_107173-75466.jpg?semt=ais_hybrid&w=740&q=80",
       alt: "Calendar with cultural notes",
@@ -587,7 +699,7 @@ export default function BlogsPage() {
                       darkMode ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
-                    September 23, 2025
+                    September 26, 2025
                   </div>
                 </div>
 
