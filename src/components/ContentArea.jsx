@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ParaphraseButton from "./ParaphraseButton";
 import { ChevronDown, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import jsPDF from "jspdf";
+import html2pdf from "html2pdf.js";
 import {
   Document,
   Packer,
@@ -30,8 +30,10 @@ export default function ContentArea({
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [translatedText, setTranslatedText] = useState("");
   const [languages, setLanguages] = useState([]);
+  const [languagesLoading, setLanguagesLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [translationLoading, setTranslationLoading] = useState(false);
 
   const countWords = (text) => {
     return text.trim().split(/\s+/).length;
@@ -55,29 +57,59 @@ export default function ContentArea({
     });
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const margin = 20;
-    const contentWidth = pageWidth - margin * 2;
-    doc.setFontSize(10);
-    doc.setTextColor(100);
-    doc.text(getCurrentDate(), pageWidth - margin, 20, { align: "right" });
-    doc.setFontSize(20);
-    doc.setTextColor(0);
-    doc.setFont(undefined, "bold");
-    doc.text("Paraphrased Content", margin, 40);
-    doc.setLineWidth(0.5);
-    doc.line(margin, 45, pageWidth - margin, 45);
-    doc.setFontSize(12);
-    doc.setFont(undefined, "normal");
-    doc.setTextColor(50);
-    const splitContent = doc.splitTextToSize(translatedText, contentWidth);
-    doc.text(splitContent, margin, 60);
-    doc.save(
-      `Paraphrased_Content_${new Date().toISOString().split("T")[0]}.pdf`
-    );
-    setShowExportPopup(false);
+  // Helper to detect RTL languages
+  const isRtlLang = (langCode) => {
+    // Common RTL language codes
+    const rtlLangs = [
+      'ar', // Arabic
+      'he', // Hebrew
+      'fa', // Persian
+      'ur', // Urdu
+      'ps', // Pashto
+      'dv', // Divehi
+      'ku', // Kurdish
+      'yi', // Yiddish
+      'ug', // Uyghur
+      'sd', // Sindhi
+    ];
+    return rtlLangs.includes(langCode);
+  };
+
+  const generatePDF = async () => {
+    try {
+      // Determine direction for content only
+      const dir = isRtlLang(selectedLanguage) ? 'rtl' : 'ltr';
+      // Create HTML content with proper styling and direction only on content
+      const element = document.createElement('div');
+      element.innerHTML = `
+        <div style="padding: 40px; font-family: Arial, sans-serif;">
+          <div style="text-align: right; color: #666; font-size: 16px; margin-bottom: 24px;">
+            ${getCurrentDate()}
+          </div>
+          <h1 style="font-size: 32px; font-weight: bold; margin-bottom: 16px; border-bottom: 2px solid #000; padding-bottom: 12px;">
+            Paraphrased Content
+          </h1>
+          <div style="font-size: 20px; line-height: 2; color: #333; white-space: pre-wrap; word-wrap: break-word; direction: ${dir};">
+            ${translatedText}
+          </div>
+        </div>
+      `;
+
+      const opt = {
+        margin: 0,
+        filename: `Paraphrased_Content_${new Date().toISOString().split("T")[0]}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+      setShowExportPopup(false);
+      toast.success("PDF exported successfully!");
+    } catch (error) {
+      console.error("PDF generation error:", error);
+      toast.error("Failed to generate PDF. Please try again.");
+    }
   };
 
   const generateDOCX = async () => {
@@ -188,8 +220,9 @@ export default function ContentArea({
 
   useEffect(() => {
     const fetchLanguages = async () => {
+      setLanguagesLoading(true);
       try {
-        const apiKey = "AIzaSyBP21IXIfzz5wHuksQ9r-jfEjW95x2E8YY"; // Replace with your actual API key
+        const apiKey = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
         const url = `https://translation.googleapis.com/language/translate/v2/languages?target=en&key=${apiKey}`;
         const response = await fetch(url);
         const result = await response.json();
@@ -209,6 +242,8 @@ export default function ContentArea({
       } catch (err) {
         console.error("Failed to fetch languages:", err);
         setLanguages([{ code: "en", name: "English" }]); // Fallback to English on error
+      } finally {
+        setLanguagesLoading(false);
       }
     };
     fetchLanguages();
@@ -225,8 +260,9 @@ export default function ContentArea({
     }
     // Google Translate API call
     const translate = async () => {
+      setTranslationLoading(true);
       try {
-        const apiKey = "AIzaSyBP21IXIfzz5wHuksQ9r-jfEjW95x2E8YY"; // Replace with your actual API key
+        const apiKey = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
         const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
         const response = await fetch(url, {
           method: "POST",
@@ -251,6 +287,8 @@ export default function ContentArea({
         }
       } catch (err) {
         setTranslatedText(outputText);
+      } finally {
+        setTranslationLoading(false);
       }
     };
     translate();
@@ -316,8 +354,17 @@ export default function ContentArea({
                     }`}
                     title="Select language"
                   >
-                    {selectedLangName}
-                    <ChevronDown />
+                    <>
+                      <span>{selectedLangName}</span>
+                      {(languagesLoading || translationLoading) ? (
+                        <svg className="animate-spin h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                        </svg>
+                      ) : (
+                        <ChevronDown />
+                      )}
+                    </>
                   </button>
                   {isDropdownOpen && (
                     <div
@@ -339,7 +386,15 @@ export default function ContentArea({
                         }`}
                       />
                       <ul className="max-h-60 overflow-y-auto">
-                        {filteredLanguages.length > 0 ? (
+                        {languagesLoading ? (
+                          <li className="flex items-center gap-2 px-3 py-2 text-sm text-gray-500">
+                            <svg className="animate-spin h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                            </svg>
+                            Loading languages...
+                          </li>
+                        ) : filteredLanguages.length > 0 ? (
                           filteredLanguages.map((lang) => (
                             <li
                               key={lang.code}
