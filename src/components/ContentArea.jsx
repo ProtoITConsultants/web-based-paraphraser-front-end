@@ -370,7 +370,7 @@ export default function ContentArea({
               {/* Copy Button */}
               {outputText && (
                 <button
-                  className={`ml-2 md:block hidden px-4 py-1 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors duration-200
+                  className={`ml-2 md:flex hidden px-4 py-1 rounded-lg text-sm font-medium items-center gap-2 transition-colors duration-200
                     ${
                       copied
                         ? "bg-[#D2F159] text-black"
