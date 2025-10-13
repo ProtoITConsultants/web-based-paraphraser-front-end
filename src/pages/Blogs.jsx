@@ -1,611 +1,36 @@
 import { ExternalLink } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
+import { BlogsAPI } from "../api/blogs";
 
 export default function BlogsPage() {
-  const { darkMode } = useOutletContext(); // Use useOutletContext for darkMode
-
-  const blogCards = [
-    {
-      slug: "adjectives-that-start-with-j",
-      img: "https://img.freepik.com/free-vector/tiny-creative-people-writing-poems-typewriter-persons-reading-antique-books-feather-ink-bottle-flat-vector-illustration-literature-poetry-concept-banner-website-design-landing-page_74855-23203.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Pen and paper with adjectives starting with J",
-      title:
-        "Adjectives That Start With J: Complete Meanings, Synonyms, and Practical Usage in Writing",
-      desc: "Explore adjectives starting with J, their meanings, synonyms, and usage.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "animals-that-start-with-d",
-      img: "https://img.freepik.com/free-vector/tiny-male-author-screenwriter-writing-story-movie-script-screenplay-writer-vintage-typewriter-with-paper-flat-vector-illustration-creativity-journalism-concept-banner-landing-web-page_74855-25344.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Dolphin leaping from water",
-      title: "Animals That Start With D: A Comprehensive Informational Guide",
-      desc: "Explore animals starting with D, their traits, habitats, and roles.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "adjectives-that-start-with-g",
-      img: "https://img.freepik.com/premium-vector/modern-web-graphics-pack-vector-eps_1348508-15.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Book page with adjectives starting with G",
-      title:
-        "Adjectives That Start With G: Complete 5000-Word Informational Guide With Meanings and Examples",
-      desc: "Discover adjectives starting with G, their meanings, examples, and uses.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "adjectives-that-start-with-h",
-      img: "https://img.freepik.com/free-vector/scientific-articles-writing-flat-composition-with-icons-thought-bubbles-documents-envelopes-with-tablet-hands-vector-illustration_98292-8982.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Notebook with adjectives starting with H",
-      title:
-        "Adjectives That Start With H: Meanings, Examples, and Usage in Writing",
-      desc: "Explore adjectives starting with H, their meanings, examples, and uses.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "adjectives-that-start-with-c",
-      img: "https://img.freepik.com/premium-vector/hands-writing-notes-human-character-palms-holding-pen-share-life-stories-with-diary-fill-todo-list-working_87771-24539.jpg",
-      alt: "Open book with highlighted adjectives starting with C",
-      title:
-        "Adjectives That Start With C: Complete Guide With Meanings, Usage, and Examples",
-      desc: "Learn powerful adjectives starting with C, their meanings, examples, and uses.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "flor-o-fruto-con-b-complete-guide",
-      img: "https://img.freepik.com/free-vector/female-hands-holding-pen-drawing-flowers-notebook-girl-sitting-table-with-cup-tea-mobile-phone-it-taking-notes-diary-flat-vector-illustration-hobby-art-concept_74855-24532.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Colorful flowers and fruits starting with B",
-      title:
-        "Flor o Fruto con B: Complete Informational Guide to Flowers, Fruits, Culture, and Language",
-      desc: "Explore flor o fruto con B with examples, symbolism, and cultural insights.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "flor o fruto con b",
-          to: "/blog/language-and-botany-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "pais-con-j-complete-guide",
-      img: "https://img.freepik.com/free-vector/hands-character-writing-letter-desk-with-papers-pencil-envelopes-coffee-cup_74855-10720.jpg?semt=ais_hybrid&w=740",
-      alt: "Map highlighting countries starting with J",
-      title:
-        "Pais Con J: Exploring Countries, Culture, Language, and Geography Beginning With the Letter J",
-      desc: "Explore pais con J with geography, culture, and Paraphraser.co.",
-      date: "September 26, 2025",
-      links: [
-        {
-          anchorText: "pais con J",
-          to: "/blog/language-and-geography-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "meses-del-ano-en-ingles",
-      img: "https://img.freepik.com/premium-vector/edocuments-abstract-concept-vector-illustration_107173-75466.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Calendar with cultural notes",
-      title:
-        "Meses del Año en Inglés: Complete Guide with Grammar, History, Culture, and Practical Usage",
-      desc: "Learn the months in English with grammar, history, and Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "meses del año en inglés",
-          to: "/blog/language-learning-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "palabras-con-u-complete-guide",
-      img: "https://img.freepik.com/premium-vector/professional-copywriter-journalist-writing-online-article_1125744-8922.jpg?semt=ais_hybrid&w=740&q=80",
-      alt: "Open book with Spanish words",
-      title:
-        "Palabras con U: Complete Guide with Meanings, Usage, and Examples in Spanish Vocabulary",
-      desc: "Explore palabras con U in Spanish with Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "palabras con U",
-          to: "/blog/spanish-vocabulary-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "pan-rallado-history-culinary-uses",
-      img: "https://img.freepik.com/free-vector/kids-programming-creating-robot-class-tiny-people-engineering-kids-learn-science-activities-early-development-classes-concept_335657-671.jpg",
-      alt: "Bread crumbs on a rustic table",
-      title:
-        "Pan Rallado: Cultural History, Culinary Uses, and the Evolution of Bread Crumbs Across the World",
-      desc: "Discover pan rallado’s history, culinary uses, and sustainability with Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "pan rallado",
-          to: "/blog/culinary-traditions-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "llaves-history-meaning-symbolism-modern-use",
-      img: "https://img.freepik.com/premium-vector/ai-robot-is-writing-artificial-intelligence-writer-concept-illustration_870049-399.jpg",
-      alt: "Antique keys on a wooden surface",
-      title:
-        "Llaves: History, Meaning, Uses, Symbolism, and Modern Relevance Explained Clearly",
-      desc: "Discover llaves’ history, symbolism, and modern uses with Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "llaves",
-          to: "/blog/language-and-culture-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "dormir-bona-nit-complete-guide",
-      img: "https://media.istockphoto.com/id/1415676185/vector/writing-in-planner.jpg?s=612x612&w=0&k=20&c=0ATRChlrjue5q_ytHqnqGEcqB94P6nbXSdtkUzwP0zM=",
-      alt: "Moonlit night in a Catalan village",
-      title:
-        "Dormir Bona Nit: A Complete Guide to Meaning, Culture, and Everyday Use in Catalan Life",
-      desc: "Learn dormir bona nit’s meaning, cultural roots, and usage with Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "dormir bona nit",
-          to: "/blog/catalan-language-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "dias-de-la-semana-en-ingles",
-      img: "https://img.freepik.com/free-vector/hands-character-writing-letter-desk-with-papers-pencil-envelopes-coffee-cup_74855-10720.jpg?semt=ais_incoming&w=740&q=80",
-      alt: "Calendar with English weekdays",
-      title:
-        "Dias de la Semana en Inglés: Meanings, Usage, Origins, and Cultural Insights Explained Clearly",
-      desc: "Learn dias de la semana en inglés with origins and Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "dias de la semana en inglés",
-          to: "/blog/language-learning-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "las-horas-en-ingles-complete-guide",
-      img: "https://img.freepik.com/premium-vector/copywriting-concept-vector-illustration_107173-16717.jpg",
-      alt: "Clock showing time in English",
-      title:
-        "Las Horas en Inglés Explained: A Complete Guide to Telling Time in English with Tables and Examples",
-      desc: "Learn las horas en inglés with tables, examples, and Paraphraser.co.",
-      date: "September 23, 2025",
-      links: [
-        {
-          anchorText: "las horas en inglés",
-          to: "/blog/language-learning-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "students-use-paraphrasing-tools-without-plagiarism",
-      img: "/7853107.jpg",
-      alt: "Student working at desk",
-      title: "How Students Use Paraphrasing Tools Without Plagiarism in 2025",
-      desc: "Learn how students use paraphrasing tools in 2025 to avoid plagiarism ethically and effectively.",
-      date: "September 10, 2025",
-    },
-    {
-      slug: "use-paraphraser-text-tool-for-unique-content",
-      img: "/2303_i402_029_s_m004_c13_scientific_articles_writing_flat_composition.jpg",
-      alt: "Abstract green background",
-      title: "How to Use a Paraphraser Text Tool for More Unique Content",
-      desc: "Originality is important in the content creation. You can be a student writing an essay, you can be a blogger writing interesting posts, you can be a marketer writing good quality text, but you have to write unique text in order to be a success.",
-      date: "January 18, 2025",
-    },
-    {
-      slug: "wordtune-vs-quillbot-creativity-or-consistency-2025",
-      img: "/35005196_6106.jpg",
-      alt: "Digital workspace with laptop",
-      title:
-        "Wordtune vs Quillbot in 2025: Creativity or Consistency? Full Guide with Free Alternative",
-      desc: "Explore Wordtune vs Quillbot in 2025—detailed insights into creativity, consistency, and Paraphraser.co as a free alternative.",
-      date: "September 10, 2025",
-    },
-    {
-      slug: "paraphraserco-vs-quillbot-why-students-prefer-this-free-alternative",
-      img: "/4479.jpg",
-      alt: "Notebook and pen on desk",
-      title:
-        "Paraphraser.co vs Quillbot: Why Students Prefer This Free Alternative in 2025",
-      desc: "Discover why students in 2025 choose Paraphraser.co over Quillbot—a free, practical alternative for academic writing.",
-      date: "September 10, 2025",
-    },
-    {
-      slug: "spinbot-vs-rephrase-info-free-vs-ai-powered-tools-compared",
-      img: "/digital-faceart-ai-technology-background.jpg",
-      alt: "Typing on laptop",
-      title:
-        "Spinbot vs Rephrase.info: Free vs AI-Powered Tools Compared in 2025",
-      desc: "Compare Spinbot’s free rewriting with Rephrase.info’s AI-powered accuracy in 2025, plus Paraphraser.co as an alternative.",
-      date: "September 10, 2025",
-    },
-    {
-      slug: "quillbot-vs-grammarly-paraphrasing-2025",
-      img: "/7541.jpg",
-      alt: "Typing on laptop",
-      title:
-        "Quillbot vs Grammarly in 2025: The Best Paraphrasing Tool for Writers, Students, and Professionals",
-      desc: "Compare Quillbot vs Grammarly in 2025 to find the best paraphrasing tool for writers and professionals.",
-      date: "September 10, 2025",
-    },
-    {
-      slug: "top-10-ai-paraphrasers-compared-free-vs-paid-options",
-      img: "/11684.jpg",
-      alt: "Notebook and pen on desk",
-      title: "Top 10 AI Paraphrasers in 2025: Free vs Paid Options Compared",
-      desc: "Discover the top 10 AI paraphrasers in 2025, comparing free and paid tools for writing.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "ai-content-paraphrasers-revolutionizing-article-writing",
-      img: "/13664.jpg",
-      alt: "Laptop with digital interface",
-      title: "AI Content Paraphrasers Revolutionizing Article Writing",
-      desc: "Learn how AI paraphrasers transform article writing with efficiency, originality, and SEO optimization.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "paraphrasing-vs-summarizing",
-      img: "/14138 (1).jpg",
-      alt: "Olive green abstract background",
-      title: "Paraphrasing vs. Summarizing: What's the Difference?",
-      desc: "Understanding the key differences between paraphrasing and summarizing can help you choose the right approach for your content creation needs.",
-      date: "January 18, 2025",
-    },
-    {
-      slug: "how-paraphraser-improves-writing-quickly",
-      img: "/14706.jpg",
-      alt: "Typewriter and paper",
-      title: "How a Paraphraser Can Help You Improve Your Words Quickly",
-      desc: "Learn how paraphrasers improve writing clarity, flow, and engagement with practical tips.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "text-paraphraser-write-unique-content",
-      img: "/19201.jpg",
-      alt: "Notebook with pen and coffee",
-      title: "Text Paraphraser: Write Unique Content Every Time",
-      desc: "Learn how a text paraphraser creates unique, high-quality content efficiently.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "humanize-content-with-ai-paraphrasers",
-      img: "/25659.jpg",
-      alt: "Laptop with open document",
-      title: "Humanize Content with AI Paraphrasers for Better Engagement",
-      desc: "Learn how AI paraphrasers create natural, engaging content to boost readability and SEO.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "transform-text-with-paragraph-paraphraser",
-      img: "/38639.jpg",
-      alt: "Person writing at desk",
-      title: "Transform Your Text with a Paragraph Paraphraser",
-      desc: "Discover how a paragraph paraphraser enhances clarity, tone, and originality in your writing.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "how-to-use-sentence-paraphraser",
-      img: "/40605.jpg",
-      alt: "Notebook with pen and laptop",
-      title: "How to Use a Sentence Paraphraser to Enhance Your Writing",
-      desc: "Learn how to use a sentence paraphraser to improve clarity, vocabulary, and tone in your writing.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "why-paraphraser-website-essential-content-creation",
-      img: "/42741.jpg",
-      alt: "Person typing on laptop",
-      title:
-        "Why a Paraphraser Website Is a Must-Have for Efficient Content Creation",
-      desc: "Learn why a paraphraser website boosts productivity, ensures originality, and enhances writing quality.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "paraphraser-and-summarizer-perfect-combo",
-      img: "/61152.jpg",
-      alt: "Person working on laptop with documents",
-      title:
-        "Paraphraser and Summarizer: The Perfect Combo for Content Creation",
-      desc: "Learn how paraphraser and summarizer tools enhance originality, efficiency, and content quality.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "essay-paraphraser-time-saving-tool",
-      img: "/61254.jpg",
-      alt: "Student writing at desk",
-      title: "Essay Paraphraser: Time-Saving Tool for Students & Writers",
-      desc: "Learn how essay paraphrasers improve clarity, save time, and maintain academic integrity.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "how-to-use-free-online-paraphraser",
-      img: "/95311.jpg",
-      alt: "Person typing on keyboard",
-      title: "How to Use a Free Online Paraphraser for Effective Rewriting",
-      desc: "Learn how free online paraphrasers improve clarity and efficiency in your writing.",
-      date: "September 11, 2025",
-    },
-    {
-      slug: "old-english-converter-guide",
-      img: "/114743.jpg",
-      alt: "Ancient manuscript with text",
-      title:
-        "Old English Converter: A Complete Guide to Translating and Styling Text in 2025",
-      desc: "Explore how Old English converters work, their uses, benefits, and alternatives like Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "Old English converters",
-          to: "/blogs/top-10-ai-paraphrasers-compared-free-vs-paid-options",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "writehuman-guide-2025",
-      img: "/140003.jpg",
-      alt: "Person using laptop for writing",
-      title: "Writehuman in 2025: A Guide to Human-Centric AI Writing",
-      desc: "Explore Writehuman, the movement toward human-centered AI writing in 2025, and tools like Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "Writehuman",
-          to: "/blogs/top-10-ai-paraphrasers-compared-free-vs-paid-options",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "adjectives-starting-with-o",
-      img: "/18484891_Working_with_Laptop_in_Park.jpg",
-      alt: "Open book with highlighted words",
-      title:
-        "Adjectives Starting with O: A Complete Guide with Examples and Meanings",
-      desc: "Explore adjectives starting with O to enrich writing and vocabulary with tools like Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "adjectives starting with O",
-          to: "/blog/vocabulary-building-tools-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "smfh-meaning",
-      img: "/260542821_658f6eeb-c455-45f5-9623-66afb3512a2e.jpg",
-      alt: "Person typing on smartphone",
-      title:
-        "SMFH Meaning Explained: Origins, Usage, and Cultural Impact in 2025",
-      desc: "Discover the true meaning of SMFH, its origins, modern usage, and cultural impact with Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "guichet-automatique-bancaire-2025",
-      img: "/technology-background-texture.jpg",
-      alt: "ATM machine in use",
-      title:
-        "Guichet Automatique Bancaire in 2025: Evolution, Security, and Digital Banking Transformation",
-      desc: "Discover how guichet automatique bancaire evolved in 2025 with security, digital banking, and Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "guichet automatique bancaire",
-          to: "/blog/digital-banking-tools-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "flowers-that-start-with-c",
-      img: "/5272.jpg",
-      alt: "Vibrant flowers in a garden",
-      title:
-        "Flowers That Start With C: A Complete Guide to Beauty, Meaning, and Growing Tips",
-      desc: "Explore flowers that start with C, their meanings, growing tips, and Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "flowers that start with C",
-          to: "/blog/gardening-guides-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "theirer",
-      img: "/18653.jpg",
-      alt: "Person typing on laptop",
-      title: "Theirer: Meaning, Usage, and Digital Evolution of a Modern Word",
-      desc: "Discover the meaning, usage, and digital evolution of 'theirer' with Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "theirer",
-          to: "/blog/internet-slang-guide-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "difference-between-affect-and-effect",
-      img: "/377376685_68db1275-d05f-4e6e-b6fe-05f158c309c7.jpg",
-      alt: "Notebook with pen for writing",
-      title: "Difference Between Affect and Effect Explained with Examples",
-      desc: "Learn the difference between affect and effect with examples and Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "affect and effect",
-          to: "/blog/grammar-guides-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "analyze-grammatically-as-a-sentence",
-      img: "/20299.jpg",
-      alt: "Person writing in a notebook",
-      title:
-        "Analyze Grammatically as a Sentence: A Complete Guide for Clarity and Precision",
-      desc: "Learn to analyze grammatically as a sentence with Paraphraser.co for clarity.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "analyze grammatically",
-          to: "/blog/grammar-guides-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "bear-with-me",
-      img: "/digital-art-ai-technology-background (1).jpg",
-      alt: "Person typing on laptop",
-      title:
-        "Bear With Me: Meaning, Usage, Origins, and Modern Relevance Explained",
-      desc: "Discover the meaning and origins of 'bear with me' with Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-    {
-      slug: "personification-examples",
-      img: "/digital-art-ai-technology-background.jpg",
-      alt: "Open book with vibrant pages",
-      title:
-        "Personification Examples Explained: Creative Uses, Meanings, and Writing Guide",
-      desc: "Explore personification examples in literature and speech with Paraphraser.co.",
-      date: "September 15, 2025",
-      links: [
-        {
-          anchorText: "personification",
-          to: "/blog/literary-devices-2025",
-        },
-        {
-          anchorText: "Paraphraser.co",
-          to: "/",
-        },
-      ],
-    },
-  ];
-
+  const { darkMode } = useOutletContext();
+  const [blogCards, setBlogCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [visibleCount, setVisibleCount] = useState(6);
   const BATCH_SIZE = 6;
-  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
-  const isAllShown = visibleCount >= blogCards.length;
   const gridRef = useRef(null);
   const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        const data = await BlogsAPI.list(); // Fetch only published blogs
+        setBlogCards(data);
+      } catch (err) {
+        setError(err.message || "Failed to load blogs");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const isAllShown = visibleCount >= blogCards.length;
 
   const handleLoadMore = () => {
     if (isAllShown) {
@@ -631,6 +56,16 @@ export default function BlogsPage() {
     }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? "" : "bg-white"}`}>
       <div className="max-w-[1240px] mx-auto px-6 pt-24 md:pt-32 pb-12">
@@ -654,9 +89,15 @@ export default function BlogsPage() {
           </p>
         </div>
 
-        {/* Featured Blog Post */}
-        <div className="mb-12">
-          <Link to="/blog/quillbot-alternatives-paraphrasing-tools">
+        {error && (
+          <div className="mb-8 p-4 bg-red-50 dark:bg-red-900/20 text-red-600 rounded-3xl text-center">
+            {error}
+          </div>
+        )}
+
+        {/* Featured Blog Post - Skeleton or Content */}
+        {loading ? (
+          <div className="mb-12 animate-pulse">
             <div
               className={`${
                 darkMode ? "bg-black" : ""
@@ -665,80 +106,98 @@ export default function BlogsPage() {
               }`}
             >
               <div className="flex flex-col lg:flex-row">
-                {/* Content Side */}
                 <div className="lg:w-1/2 p-6 lg:p-8">
-                  <div className="mb-6">
-                    <span
-                      className={`inline-flex items-center text-sm ${
-                        darkMode ? "text-gray-400" : "text-gray-600"
-                      } mb-4`}
-                    >
-                      <ExternalLink className="w-5 h-5 mr-1" />
-                      Insights
-                    </span>
-                    <h2
-                      className={`text-2xl lg:text-3xl font-bold ${
-                        darkMode ? "text-white" : "text-gray-900"
-                      } mb-4 leading-tight`}
-                    >
-                      Quillbot Alternatives: Exploring Smarter Paraphrasing
-                      Tools in 2025
-                    </h2>
-                    <p
-                      className={`${
-                        darkMode ? "text-gray-300" : "text-gray-700"
-                      } leading-relaxed mb-6 text-sm md:text-base`}
-                    >
-                      Discover the best Quillbot alternatives in 2025—compare
-                      features, pricing, and use cases to find smarter
-                      paraphrasing tools.
-                    </p>
-                  </div>
-                  <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    September 26, 2025
-                  </div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20 mb-4"></div>
+                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-full mb-4"></div>
+                  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-6"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
                 </div>
-
-                {/* Image Side */}
-                <div className="lg:w-1/2 relative p-6 bg-[#D2F159]">
-                  <img
-                    src="8961158.jpg"
-                    alt="Abstract blue architectural lines"
-                    className="w-full h-64 lg:h-full object-cover rounded-3xl"
-                  />
+                <div className="lg:w-1/2 relative p-6 bg-gray-200 dark:bg-gray-700">
+                  <div className="w-full h-64 lg:h-full bg-gray-300 dark:bg-gray-600 rounded-3xl"></div>
                 </div>
               </div>
             </div>
-          </Link>
-        </div>
+          </div>
+        ) : blogCards.length > 0 ? (
+          <div className="mb-12">
+            <Link to={`/blogs/${blogCards[0].slug || blogCards[0].id}`}>
+              <div
+                className={`${
+                  darkMode ? "bg-black" : ""
+                } rounded-3xl overflow-hidden border ${
+                  darkMode ? "border border-gray-700" : "border-gray-200"
+                }`}
+              >
+                <div className="flex flex-col lg:flex-row">
+                  <div className="lg:w-1/2 p-6 lg:p-8">
+                    <div className="mb-6">
+                      <span
+                        className={`inline-flex items-center text-sm ${
+                          darkMode ? "text-gray-400" : "text-gray-600"
+                        } mb-4`}
+                      >
+                        <ExternalLink className="w-5 h-5 mr-1" />
+                        {blogCards[0].category || "Insights"}
+                      </span>
+                      <h2
+                        className={`text-2xl lg:text-3xl font-bold ${
+                          darkMode ? "text-white" : "text-gray-900"
+                        } mb-4 leading-tight`}
+                      >
+                        {blogCards[0].title}
+                      </h2>
+                      <p
+                        className={`${
+                          darkMode ? "text-gray-300" : "text-gray-700"
+                        } leading-relaxed mb-6 text-sm md:text-base`}
+                      >
+                        {blogCards[0].excerpt || blogCards[0].subtitle}
+                      </p>
+                    </div>
+                    <div
+                      className={`text-sm ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
+                      {formatDate(blogCards[0].date)}
+                    </div>
+                  </div>
+                  <div className="lg:w-1/2 relative p-6 bg-[#D2F159]">
+                    <img
+                      src={blogCards[0].img || "/placeholder.svg"}
+                      alt={blogCards[0].title}
+                      className="w-full h-64 lg:h-full object-cover rounded-3xl"
+                    />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ) : null}
+
         <hr
           className={`my-12 ${
             darkMode ? "border-gray-700" : "border-gray-200"
           }`}
         />
 
-        {/* Blog Grid */}
+        {/* Blog Grid - Skeleton or Content */}
         <div
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {blogCards.slice(0, visibleCount).map((card, idx) => (
-            <Link
-              key={idx}
-              to={`/blogs/${card.slug}`}
-              state={{ img: card.img }}
-            >
+          {loading ? (
+            Array.from({ length: 6 }).map((_, idx) => (
               <div
-                ref={(el) => (cardRefs.current[idx] = el)}
+                key={idx}
                 className={`${
                   darkMode ? "bg-black" : ""
                 } rounded-3xl overflow-hidden border ${
                   darkMode ? "border border-gray-700" : "border-gray-200"
-                }`}
+                } animate-pulse`}
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -746,49 +205,92 @@ export default function BlogsPage() {
                 }}
               >
                 <div
-                  className="relative p-4 h-[250px] bg-[#D2F159]"
+                  className="relative p-4 h-[250px] bg-gray-200 dark:bg-gray-700"
                   style={{ width: "100%" }}
                 >
-                  <img
-                    src={card.img || "/placeholder.svg"}
-                    alt={card.alt}
-                    className="w-full h-full object-cover rounded-3xl"
-                  />
-                  <div className="absolute top-6 right-6 p-1 rounded-full flex items-center justify-center">
-                    <ExternalLink className="w-5 h-5 text-black" />
-                  </div>
+                  <div className="w-full h-full bg-gray-300 dark:bg-gray-600 rounded-3xl"></div>
                 </div>
                 <div className="flex flex-col flex-1 px-4 py-3">
-                  <h3
-                    className={`text-lg lg:text-xl font-semibold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    } mb-3`}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    className={`${
-                      darkMode ? "text-gray-300" : "text-gray-700"
-                    } text-sm leading-relaxed mb-4`}
-                  >
-                    {card.desc}
-                  </p>
-                  <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    } mt-auto`}
-                  >
-                    {card.date}
-                  </div>
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-full mb-3"></div>
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-4"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 mt-auto"></div>
                 </div>
               </div>
-            </Link>
-          ))}
+            ))
+          ) : blogCards.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p
+                className={`${
+                  darkMode ? "text-gray-400" : "text-gray-600"
+                } text-lg`}
+              >
+                No blogs found.
+              </p>
+            </div>
+          ) : (
+            blogCards.slice(1, visibleCount + 1).map((card, idx) => (
+              <Link key={card._id || card.id} to={`/blogs/${card.slug || card.id}`}>
+                <div
+                  ref={(el) => (cardRefs.current[idx] = el)}
+                  className={`${
+                    darkMode ? "bg-black" : ""
+                  } rounded-3xl overflow-hidden border ${
+                    darkMode ? "border border-gray-700" : "border-gray-200"
+                  } hover:border-[#D2F159] transition-colors`}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    className="relative p-4 h-[250px] bg-[#D2F159]"
+                    style={{ width: "100%" }}
+                  >
+                    <img
+                      src={card.img || "/placeholder.svg"}
+                      alt={card.title}
+                      className="w-full h-full object-cover rounded-3xl"
+                    />
+                    <div className="absolute top-6 right-6 p-1 rounded-full flex items-center justify-center">
+                      <ExternalLink className="w-5 h-5 text-black" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col flex-1 px-4 py-3">
+                    <h3
+                      className={`text-lg lg:text-xl font-semibold ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      } mb-3`}
+                    >
+                      {card.title}
+                    </h3>
+                    <p
+                      className={`${
+                        darkMode ? "text-gray-300" : "text-gray-700"
+                      } text-sm leading-relaxed mb-4`}
+                    >
+                      {card.excerpt || card.subtitle}
+                    </p>
+                    <div
+                      className={`text-sm ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      } mt-auto`}
+                    >
+                      {formatDate(card.date)}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
 
         {/* Load More / Show Less Button */}
-        <div className="text-center mt-8">
-          {blogCards.length > BATCH_SIZE && (
+        {!loading && blogCards.length > BATCH_SIZE && (
+          <div className="text-center mt-8">
             <button
               className={`${
                 darkMode ? "text-[#D2F159]" : "text-gray-700"
@@ -797,8 +299,8 @@ export default function BlogsPage() {
             >
               {isAllShown ? "Show Less" : "Load More"}
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

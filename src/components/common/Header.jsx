@@ -13,6 +13,12 @@ export default function Header({
   const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
   const [activeMode, setActiveMode] = useState("Home");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
+  
+  // Check if on login page and redirected from admin
+  const isAdminLoginAccess = location.pathname === "/login" && location.state?.from?.startsWith("/admin");
+  
+  // Check if currently on admin route
+  const isOnAdminRoute = location.pathname.startsWith("/admin");
 
   // Sync auth state
   useEffect(() => {
@@ -91,92 +97,126 @@ export default function Header({
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Paraphraser
+            {isAdminLoginAccess || isOnAdminRoute ? "Paraphraser Admin" : "Paraphraser"}
           </h1>
         </Link>
       </div>
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
-        <Link
-          to="/"
-          onClick={() => setActiveMode("Home")}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-            darkMode
-              ? activeMode === "Home"
-                ? "text-white"
-                : "text-gray-300 hover:text-gray-300"
-              : activeMode === "Home"
-              ? "text-gray-900"
-              : "text-gray-600 hover:text-gray-900"
-          }`}
-        >
-          Home
-          <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+        {!isAdminLoginAccess && !isOnAdminRoute && (
+          <Link
+            to="/"
+            onClick={() => setActiveMode("Home")}
+            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
               darkMode
                 ? activeMode === "Home"
-                  ? "bg-white opacity-100 scale-x-100"
-                  : "bg-gray-400 opacity-0 scale-x-0"
+                  ? "text-white"
+                  : "text-gray-300 hover:text-gray-300"
                 : activeMode === "Home"
-                ? "bg-gray-900 opacity-100 scale-x-100"
-                : "bg-gray-600 opacity-0 scale-x-0"
+                ? "text-gray-900"
+                : "text-gray-600 hover:text-gray-900"
             }`}
-          />
-        </Link>
-        <Link
-          to="/Blogs"
-          onClick={() => setActiveMode("Blogs")}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-            darkMode
-              ? activeMode === "Blogs"
-                ? "text-white"
-                : "text-gray-300 hover:text-gray-300"
-              : activeMode === "Blogs"
-              ? "text-gray-900"
-              : "text-gray-600 hover:text-gray-900"
-          }`}
-        >
-          Blogs
-          <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+          >
+            Home
+            <div
+              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                darkMode
+                  ? activeMode === "Home"
+                    ? "bg-white opacity-100 scale-x-100"
+                    : "bg-gray-400 opacity-0 scale-x-0"
+                  : activeMode === "Home"
+                  ? "bg-gray-900 opacity-100 scale-x-100"
+                  : "bg-gray-600 opacity-0 scale-x-0"
+              }`}
+            />
+          </Link>
+        )}
+        {!isOnAdminRoute && !isAdminLoginAccess && (
+          <Link
+            to="/Blogs"
+            onClick={() => setActiveMode("Blogs")}
+            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
               darkMode
                 ? activeMode === "Blogs"
-                  ? "bg-white opacity-100 scale-x-100"
-                  : "bg-gray-400 opacity-0 scale-x-0"
+                  ? "text-white"
+                  : "text-gray-300 hover:text-gray-300"
                 : activeMode === "Blogs"
-                ? "bg-gray-900 opacity-100 scale-x-100"
-                : "bg-gray-600 opacity-0 scale-x-0"
+                ? "text-gray-900"
+                : "text-gray-600 hover:text-gray-900"
             }`}
-          />
-        </Link>
-        <div
-          key="Contact"
-          onClick={handleContactClick}
-          className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-            darkMode
-              ? activeMode === "Contact"
-                ? "text-white"
-                : "text-gray-300 hover:text-gray-300"
-              : activeMode === "Contact"
-              ? "text-gray-900"
-              : "text-gray-600 hover:text-gray-900"
-          }`}
-        >
-          Contact
+          >
+            Blogs
+            <div
+              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                darkMode
+                  ? activeMode === "Blogs"
+                    ? "bg-white opacity-100 scale-x-100"
+                    : "bg-gray-400 opacity-0 scale-x-0"
+                  : activeMode === "Blogs"
+                  ? "bg-gray-900 opacity-100 scale-x-100"
+                  : "bg-gray-600 opacity-0 scale-x-0"
+              }`}
+            />
+          </Link>
+        )}
+        {!isAdminLoginAccess && !isOnAdminRoute && (
           <div
-            className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+            key="Contact"
+            onClick={handleContactClick}
+            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
               darkMode
                 ? activeMode === "Contact"
-                  ? "bg-white opacity-100 scale-x-100"
-                  : "bg-gray-400 opacity-0 scale-x-0"
+                  ? "text-white"
+                  : "text-gray-300 hover:text-gray-300"
                 : activeMode === "Contact"
-                ? "bg-gray-900 opacity-100 scale-x-100"
-                : "bg-gray-600 opacity-0 scale-x-0"
+                ? "text-gray-900"
+                : "text-gray-600 hover:text-gray-900"
             }`}
-          />
-        </div>
+          >
+            Contact
+            <div
+              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                darkMode
+                  ? activeMode === "Contact"
+                    ? "bg-white opacity-100 scale-x-100"
+                    : "bg-gray-400 opacity-0 scale-x-0"
+                  : activeMode === "Contact"
+                  ? "bg-gray-900 opacity-100 scale-x-100"
+                  : "bg-gray-600 opacity-0 scale-x-0"
+              }`}
+            />
+          </div>
+        )}
       </div>
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        {!isLoggedIn && (
+        {(isOnAdminRoute || isAdminLoginAccess) && (
+          <Link
+            to="/Blogs"
+            onClick={() => setActiveMode("Blogs")}
+            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+              darkMode
+                ? activeMode === "Blogs"
+                  ? "text-white"
+                  : "text-gray-300 hover:text-gray-300"
+                : activeMode === "Blogs"
+                ? "text-gray-900"
+                : "text-gray-600 hover:text-gray-900"
+            }`}
+          >
+            Blogs
+            <div
+              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                darkMode
+                  ? activeMode === "Blogs"
+                    ? "bg-white opacity-100 scale-x-100"
+                    : "bg-gray-400 opacity-0 scale-x-0"
+                  : activeMode === "Blogs"
+                  ? "bg-gray-900 opacity-100 scale-x-100"
+                  : "bg-gray-600 opacity-0 scale-x-0"
+              }`}
+            />
+          </Link>
+        )}
+        {!isLoggedIn && !isAdminLoginAccess && (
           <>
             <Link
               className={`${
@@ -210,13 +250,15 @@ export default function Header({
             aria-label="Open Settings"
           ></div>
         ) : (
-          <EllipsisVertical
-            onClick={toggleSettings}
-            className={`w-7 h-7 cursor-pointer ${
-              darkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
-            }`}
-            aria-label="Open Settings"
-          />
+          !isAdminLoginAccess && (
+            <EllipsisVertical
+              onClick={toggleSettings}
+              className={`w-7 h-7 cursor-pointer ${
+                darkMode ? "text-gray-300 hover:text-white" : "text-gray-700 hover:text-gray-900"
+              }`}
+              aria-label="Open Settings"
+            />
+          )
         )}
       </div>
     </div>

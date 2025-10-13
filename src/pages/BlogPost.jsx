@@ -1,15 +1,32 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronLeft } from "lucide-react"
 import { Link, useParams, useLocation } from "react-router-dom"
 import { useOutletContext } from "react-router-dom"
 import { getBlogPost } from "../blog-data"
 
-export default function BlogPost() {
+export default function BlogPost({ previewData }) {
   const { darkMode } = useOutletContext();
   const { slug } = useParams();
   const location = useLocation();
-  const post = getBlogPost(slug);
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  // If previewData is provided, use it instead of fetching from API
+  useEffect(() => {
+    if (previewData) {
+      setPost(previewData);
+      setLoading(false);
+      return;
+    }
+    const fetchedPost = getBlogPost(slug);
+    setPost(fetchedPost);
+    setLoading(false);
+  }, [previewData, slug]);
+
+  if (loading) {
+    return <div className={`min-h-screen ${darkMode ? "" : "bg-white"}`}>Loading...</div>;
+  }
 
   if (!post) {
     return (

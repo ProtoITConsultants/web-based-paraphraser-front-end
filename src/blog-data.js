@@ -3160,7 +3160,7 @@ export const blogPosts = [
           "Both paraphrasing and summarizing are essential skills in content creation, but they serve different purposes and require distinct approaches.",
       },
       {
-        type: "numbered-list",
+        type: "bullet-list",
         items: [
           {
             title: "What is Paraphrasing?",

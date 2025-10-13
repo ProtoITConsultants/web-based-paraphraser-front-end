@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { useOutletContext, useNavigate, Link } from "react-router-dom";
+import { useOutletContext, useNavigate, Link, useLocation } from "react-router-dom";
 import { useLogin } from "../hooks/user";
 import LoadingBackdrop from "../components/common/LoadingBackdrop";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useFetchGoogleUserProfile } from "../hooks/googleOauth";  
+import { useFetchGoogleUserProfile } from "../hooks/googleOauth";
+import axiosInstance from "../utils/axiosInstance";
+
 export default function LoginForm() {
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { darkMode } = useOutletContext();
+  
+  // Check if redirected from admin route
+  const isAdminAccess = location.state?.from?.startsWith("/admin");
+
   const { mutate, isPending } = useLogin(() => {
     navigate("/");
     localStorage.setItem("isUserLoggedIn", "true");
@@ -37,15 +44,36 @@ export default function LoginForm() {
       fetchGoogleProfile(tokenResponse?.access_token);
     },
   });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = {
-      email,
-      password,
-      rememberMe,
-    };
-    mutate(formData);
+    try {
+      const response = await axiosInstance.post("/user/login", {
+        email,
+        password,
+        rememberMe,
+      });
+
+      const data = response.data;
+
+      if (data && data.user) {
+        localStorage.setItem("isUserLoggedIn", "true");
+        queryClient.invalidateQueries({
+          queryKey: ["authStatus"],
+        });
+
+        // Check if user is admin and redirect accordingly
+        if (data.user.isAdmin === true) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Optionally show error message to user
+      alert(error.response?.data?.message || "Login failed. Please try again.");
+    }
   };
 
   return (
@@ -77,7 +105,7 @@ export default function LoginForm() {
                     darkMode ? "text-white" : "text-gray-900"
                   }`}
                 >
-                  Paraphraser
+                  {isAdminAccess ? "Paraphraser Admin" : "Paraphraser"}
                 </h1>
               </Link>
             </div>
@@ -180,31 +208,34 @@ export default function LoginForm() {
 
               <div className="flex md:flex-row flex-col-reverse items-center gap-4">
                 {/* Login button */}
-                <button
-                  onClick={() => navigate("/")}
-                  className="w-full border border-[#D2F159] cursor-pointer text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
-                >
-                  Continue as Guest
-                </button>
+                {!isAdminAccess && (
+                  <button
+                    onClick={() => navigate("/")}
+                    className="w-full border border-[#D2F159] cursor-pointer text-[#D2F159] font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
+                  >
+                    Continue as Guest
+                  </button>
+                )}
                 <button
                   onClick={handleSubmit}
                   className="w-full bg-[#D2F159] cursor-pointer hover:bg-lime-500 text-gray-900 font-semibold py-4 px-6 rounded-3xl transition-colors duration-200"
                 >
-                  Login and Paraphrase
+                  {isAdminAccess ? "Login and Post" : "Login and Paraphrase"}
                 </button>
               </div>
 
               {/* Google login button */}
-              <button
-                onClick={() => login()}
-                type="button"
-                className={`w-full cursor-pointer ${
-                  darkMode
-                    ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
-                    : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
-                } border font-medium py-4 px-6 rounded-3xl flex items-center justify-center gap-3`}
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
+              {!isAdminAccess && (
+                <button
+                  onClick={() => login()}
+                  type="button"
+                  className={`w-full cursor-pointer ${
+                    darkMode
+                      ? "bg-[#17191C] border-gray-700 hover:bg-[#101214] text-gray-300"
+                      : "bg-white border-gray-200 hover:bg-gray-50 text-gray-700"
+                  } border font-medium py-4 px-6 rounded-3xl flex items-center justify-center gap-3`}
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     fill="#4285F4"
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -222,25 +253,28 @@ export default function LoginForm() {
                     d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                   />
                 </svg>
-                Continue with Google
-              </button>
+                  Continue with Google
+                </button>
+              )}
 
               {/* Signup link */}
-              <div className="text-center">
-                <span
-                  className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
-                >
-                  Don't have an account?{" "}
-                </span>
-                <Link
-                  to="/signup"
-                  className={`${
-                    darkMode ? "text-[#D2F159]" : "text-gray-900"
-                  } font-medium hover:underline`}
-                >
-                  Sign up
-                </Link>
-              </div>
+              {!isAdminAccess && (
+                <div className="text-center">
+                  <span
+                    className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}
+                  >
+                    Don't have an account?{" "}
+                  </span>
+                  <Link
+                    to="/signup"
+                    className={`${
+                      darkMode ? "text-[#D2F159]" : "text-gray-900"
+                    } font-medium hover:underline`}
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 

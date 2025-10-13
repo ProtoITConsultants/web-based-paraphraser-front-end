@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://node.paraphraser.co/api",
+    baseURL: "http://localhost:3000/api", // Update the port to match the backend server port
     withCredentials: true,
 });
 
