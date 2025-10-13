@@ -1,27 +1,49 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft } from "lucide-react"
-import { Link, useParams, useLocation } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useOutletContext } from "react-router-dom"
 import { getBlogPost } from "../blog-data"
+import axiosInstance from "../utils/axiosInstance"
 
 export default function BlogPost({ previewData }) {
   const { darkMode } = useOutletContext();
   const { slug } = useParams();
-  const location = useLocation();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
   // If previewData is provided, use it instead of fetching from API
   useEffect(() => {
-    if (previewData) {
-      setPost(previewData);
-      setLoading(false);
-      return;
-    }
-    const fetchedPost = getBlogPost(slug);
-    setPost(fetchedPost);
-    setLoading(false);
+    const fetchBlogPost = async () => {
+      if (previewData) {
+        console.log("Using preview data:", previewData);
+        setPost(previewData);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        console.log("Fetching blog post with slug:", slug);
+        const response = await axiosInstance.get(`/blog/slug/${slug}`);
+        console.log("Blog post API response:", response.data);
+        console.log("Blog post image field:", response.data.img);
+        console.log("Blog post image URL:", response.data.img?.url);
+        console.log("Blog post coverImage:", response.data.coverImage);
+        console.log("Full post object keys:", Object.keys(response.data));
+        setPost(response.data);
+      } catch (error) {
+        console.error("Error fetching blog post:", error);
+        console.error("Error details:", error.response?.data);
+        // Fallback to static data if API fails
+        const fetchedPost = getBlogPost(slug);
+        console.log("Fallback to static data:", fetchedPost);
+        setPost(fetchedPost);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogPost();
   }, [previewData, slug]);
 
   if (loading) {
@@ -293,12 +315,16 @@ export default function BlogPost({ previewData }) {
           <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"} mb-8`}>{post.date}</div>
         </div>
 
-        {/* Featured Image (use card image from router state if available) */}
+        {/* Featured Image */}
         <div className="mb-12">
           <img
-            src={location.state?.img || post.img || "/placeholder.svg?height=320&width=800&query=modern architectural design"}
+            src={post.img?.url || post.img || post.coverImage?.url || post.coverImage}
             alt={post.title}
             className="w-full h-64 md:h-80 object-cover rounded-3xl shadow-lg"
+            onError={(e) => {
+              console.error("Image failed to load:", e.target.src);
+              e.target.src = "/placeholder-image.jpg"; // Optional: Add a placeholder
+            }}
           />
         </div>
 

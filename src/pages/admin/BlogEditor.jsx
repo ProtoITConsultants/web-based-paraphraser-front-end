@@ -242,7 +242,7 @@ export default function BlogEditor() {
             className="w-full bg-transparent border-none outline-none placeholder-gray-400 text-gray-900 dark:text-gray-300 text-sm md:text-base"
             value={blog.img || ""}
             onChange={(e) => updateField("img", e.target.value)}
-            placeholder="/7853107.jpg"
+            placeholder="Please enter image url"
           />
         </div>
         <div className="md:col-span-2 bg-gray-50 dark:bg-[#17191C] rounded-3xl p-3 md:p-4">
