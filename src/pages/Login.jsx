@@ -58,14 +58,20 @@ export default function LoginForm() {
 
       if (data && data.user) {
         localStorage.setItem("isUserLoggedIn", "true");
+        // Store user data including admin status
+        localStorage.setItem("userData", JSON.stringify(data.user));
+        console.log("Login - Stored user data:", data.user);
+        
         queryClient.invalidateQueries({
           queryKey: ["authStatus"],
         });
 
         // Check if user is admin and redirect accordingly
         if (data.user.isAdmin === true) {
+          console.log("Admin user detected, redirecting to /admin");
           navigate("/admin");
         } else {
+          console.log("Non-admin user detected, redirecting to /");
           navigate("/");
         }
       }

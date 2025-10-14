@@ -27,6 +27,17 @@ export default function Header({
       const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
       const userProfile = JSON.parse(localStorage.getItem("userProfile") || "{}");
 
+      console.log("Header - updateAuthState called");
+      console.log("Header - isUserLoggedIn:", isUserLoggedIn);
+
+      // If user is not logged in, clear all state
+      if (!isUserLoggedIn) {
+        setUrl("");
+        setIsNonGoogleSignedIn(false);
+        setIsLoggedIn(false);
+        return;
+      }
+
       // Set profile picture URL
       let profileUrl = "";
       if (googleLogin && userProfile?.profile?.picture) {
@@ -47,8 +58,17 @@ export default function Header({
     };
 
     updateAuthState();
+    
+    // Listen for custom authChanged event
     window.addEventListener("authChanged", updateAuthState);
-    return () => window.removeEventListener("authChanged", updateAuthState);
+    
+    // Listen for storage changes (for multi-tab support)
+    window.addEventListener("storage", updateAuthState);
+    
+    return () => {
+      window.removeEventListener("authChanged", updateAuthState);
+      window.removeEventListener("storage", updateAuthState);
+    };
   }, [data]);
 
   // Sync activeMode with route
