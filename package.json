@@ -27,9 +27,13 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
     "react-transition-group": "^4.4.5",
+    "readability-scores": "^1.0.8",
+    "seord": "^0.0.5-patch.5",
     "sonner": "^2.0.7",
     "sooner": "^1.1.4",
-    "tailwindcss": "^4.1.11"
+    "string-stats": "^0.0.5",
+    "tailwindcss": "^4.1.11",
+    "text-readability": "^1.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
