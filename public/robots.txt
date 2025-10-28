@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /settings
+Sitemap: https://paraphraser.co/sitemap.xml
