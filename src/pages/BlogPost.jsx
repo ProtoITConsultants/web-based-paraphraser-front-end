@@ -324,68 +324,80 @@ export default function BlogPost({ previewData }) {
           />
         </div>
 
-        {/* Render HTML body content */}
+        {/* Render content based on what's available */}
         {(() => {
-          const htmlContent = post.body || '';
+          const htmlContent = post.body;
+          const hasSections = post.sections && post.sections.length > 0;
           
           console.log('=== RENDERING BLOG CONTENT ===');
           console.log('post.body exists:', !!post.body);
           console.log('post.body length:', post.body?.length || 0);
+          console.log('post.sections exists:', !!post.sections);
+          console.log('post.sections length:', post.sections?.length || 0);
           console.log('=== END RENDERING INFO ===');
           
-          if (htmlContent && htmlContent.trim()) {
+          // If body exists and has content, render HTML (new format)
+          if (htmlContent && htmlContent.trim() && htmlContent !== '<p></p>') {
             return (
               <article 
-                className={`blog-content prose prose-lg max-w-none ${
-                  darkMode 
-                    ? 'prose-invert' 
-                    : ''
-                }`}
-                style={{
-                  '--tw-prose-body': darkMode ? '#d1d5db' : '#374151',
-                  '--tw-prose-headings': darkMode ? '#ffffff' : '#111827',
-                  '--tw-prose-links': '#D2F159',
-                  '--tw-prose-bold': darkMode ? '#ffffff' : '#111827',
-                  '--tw-prose-quotes': darkMode ? '#d1d5db' : '#4b5563',
-                  '--tw-prose-quote-borders': '#D2F159',
-                  '--tw-prose-code': '#D2F159',
-                }}
+                className={`blog-content prose prose-lg max-w-none ${darkMode ? 'dark' : ''}`}
               >
                 <div
                   className={`
-                    prose-headings:font-bold prose-headings:mb-4 prose-headings:mt-8
-                    prose-h1:text-4xl prose-h1:leading-tight
-                    prose-h2:text-3xl prose-h2:leading-tight
-                    prose-h3:text-2xl prose-h3:leading-snug
-                    prose-p:text-base prose-p:leading-relaxed prose-p:mb-4
-                    prose-a:text-[#D2F159] prose-a:no-underline hover:prose-a:underline prose-a:transition-all
-                    prose-strong:font-semibold
-                    prose-em:italic
-                    prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4 prose-ul:space-y-2
-                    prose-ol:list-decimal prose-ol:pl-6 prose-ol:my-4 prose-ol:space-y-2
-                    prose-li:text-base prose-li:leading-relaxed
-                    prose-blockquote:border-l-4 prose-blockquote:border-[#D2F159] 
-                    prose-blockquote:pl-6 prose-blockquote:py-2 prose-blockquote:my-6 
-                    prose-blockquote:italic prose-blockquote:text-lg
-                    ${darkMode ? 'prose-blockquote:bg-[#17191C]' : 'prose-blockquote:bg-gray-50'}
-                    prose-blockquote:rounded-r-lg
-                    prose-code:text-[#D2F159] prose-code:font-mono prose-code:text-sm
-                    ${darkMode ? 'prose-code:bg-gray-800' : 'prose-code:bg-gray-100'}
-                    prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-                    prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 
-                    prose-pre:rounded-lg prose-pre:overflow-x-auto prose-pre:my-6
-                    prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8 prose-img:w-full
-                    prose-hr:border-gray-300 dark:prose-hr:border-gray-700 prose-hr:my-8
+                    [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:mb-4 [&_h1]:mt-8
+                    ${darkMode ? '[&_h1]:text-white' : '[&_h1]:text-gray-900'}
+                    [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mb-3 [&_h2]:mt-6
+                    ${darkMode ? '[&_h2]:text-white' : '[&_h2]:text-gray-900'}
+                    [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-5
+                    ${darkMode ? '[&_h3]:text-white' : '[&_h3]:text-gray-900'}
+                    [&_p]:text-base [&_p]:leading-relaxed [&_p]:mb-4
+                    ${darkMode ? '[&_p]:text-gray-300' : '[&_p]:text-gray-700'}
+                    [&_a]:text-[#D2F159] [&_a]:no-underline hover:[&_a]:underline [&_a]:transition-all
+                    [&_strong]:font-semibold
+                    ${darkMode ? '[&_strong]:text-white' : '[&_strong]:text-gray-900'}
+                    [&_em]:italic
+                    ${darkMode ? '[&_em]:text-gray-300' : '[&_em]:text-gray-700'}
+                    [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ul]:space-y-2
+                    [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_ol]:space-y-2
+                    [&_li]:text-base [&_li]:leading-relaxed
+                    ${darkMode ? '[&_li]:text-gray-300' : '[&_li]:text-gray-700'}
+                    [&_blockquote]:border-l-4 [&_blockquote]:border-[#D2F159] 
+                    [&_blockquote]:pl-6 [&_blockquote]:py-2 [&_blockquote]:my-6 
+                    [&_blockquote]:italic [&_blockquote]:text-lg
+                    ${darkMode ? '[&_blockquote]:text-gray-300 [&_blockquote]:bg-[#17191C]' : '[&_blockquote]:text-gray-700 [&_blockquote]:bg-gray-50'}
+                    [&_blockquote]:rounded-r-lg
+                    [&_code]:text-[#D2F159] [&_code]:font-mono [&_code]:text-sm
+                    ${darkMode ? '[&_code]:bg-gray-800' : '[&_code]:bg-gray-100'}
+                    [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded
+                    [&_pre]:bg-gray-900 [&_pre]:text-gray-100 [&_pre]:p-4 
+                    [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:my-6
+                    [&_img]:rounded-xl [&_img]:shadow-lg [&_img]:my-8 [&_img]:w-full
+                    [&_hr]:my-8
+                    ${darkMode ? '[&_hr]:border-gray-700' : '[&_hr]:border-gray-300'}
+                    [&_mark]:px-1 [&_mark]:py-0.5 [&_mark]:rounded
+                    ${darkMode ? '[&_mark]:text-gray-100' : '[&_mark]:text-gray-900'}
+                    [&_u]:underline
+                    [&_s]:line-through
                   `}
                   dangerouslySetInnerHTML={{ __html: htmlContent }}
                 />
               </article>
             );
-          } else {
+          } 
+          // If sections exist, render legacy format
+          else if (hasSections) {
+            return (
+              <div className="prose prose-lg max-w-none">
+                {post.sections.map((section, index) => renderSection(section, index))}
+              </div>
+            );
+          } 
+          // No content available
+          else {
             return (
               <div className={`text-center py-12 ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                 <p>No content available</p>
-                <p className="text-xs mt-2">Debug: body length = {post.body?.length || 0}</p>
+                <p className="text-xs mt-2">This blog post doesn't have any content yet.</p>
               </div>
             );
           }

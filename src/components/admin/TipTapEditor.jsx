@@ -43,6 +43,13 @@ export default function TipTapEditor({ content, onChange }) {
       }),
     ],
     content: content || '<p></p>',
+    editorProps: {
+      handlePaste: (view, event) => {
+        // Let TipTap handle the paste with formatting preserved
+        // This allows HTML content to be pasted with formatting intact
+        return false; // returning false lets TipTap handle it
+      },
+    },
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       console.log('=== RAW HTML FROM TIPTAP EDITOR ===');
@@ -60,7 +67,8 @@ export default function TipTapEditor({ content, onChange }) {
       console.log('=== LOADING CONTENT INTO EDITOR ===');
       console.log(content);
       console.log('=== END LOADING CONTENT ===');
-      editor.commands.setContent(content);
+      // Parse HTML content to render with formatting
+      editor.commands.setContent(content, true); // 'true' emits update
       isInitialMount.current = false;
       return;
     }
@@ -71,7 +79,7 @@ export default function TipTapEditor({ content, onChange }) {
       console.log(content);
       console.log('=== END EXTERNAL CONTENT ===');
       const { from, to } = editor.state.selection;
-      editor.commands.setContent(content);
+      editor.commands.setContent(content, false); // 'false' doesn't emit update
       // Restore cursor position if possible
       try {
         editor.commands.setTextSelection({ from, to });
@@ -352,20 +360,55 @@ export default function TipTapEditor({ content, onChange }) {
           )}
           <EditorContent 
             editor={editor}
-            className="prose prose-lg max-w-none dark:prose-invert
-              prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-              prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+            className="
+              prose prose-lg max-w-none 
+              dark:prose-invert
+              prose-headings:font-bold 
+              prose-headings:text-gray-900 dark:prose-headings:text-white
+              prose-h1:text-4xl prose-h1:mb-4 prose-h1:mt-6
+              prose-h2:text-3xl prose-h2:mb-3 prose-h2:mt-5
+              prose-h3:text-2xl prose-h3:mb-3 prose-h3:mt-4
+              prose-p:text-gray-700 dark:prose-p:text-gray-300 
+              prose-p:leading-relaxed prose-p:mb-4
               prose-a:text-[#D2F159] prose-a:no-underline hover:prose-a:underline
-              prose-strong:text-gray-900 dark:prose-strong:text-white prose-strong:font-semibold
-              prose-ul:list-disc prose-ul:pl-6 prose-ul:text-gray-700 dark:prose-ul:text-gray-300
-              prose-ol:list-decimal prose-ol:pl-6 prose-ol:text-gray-700 dark:prose-ol:text-gray-300
-              prose-li:my-1
-              prose-blockquote:border-l-4 prose-blockquote:border-[#D2F159] prose-blockquote:pl-4 prose-blockquote:italic
+              prose-strong:text-gray-900 dark:prose-strong:text-white 
+              prose-strong:font-semibold
+              prose-em:text-gray-700 dark:prose-em:text-gray-300
+              prose-ul:list-disc prose-ul:pl-6 prose-ul:my-4
+              prose-ul:text-gray-700 dark:prose-ul:text-gray-300
+              prose-ol:list-decimal prose-ol:pl-6 prose-ol:my-4
+              prose-ol:text-gray-700 dark:prose-ol:text-gray-300
+              prose-li:my-1 prose-li:text-gray-700 dark:prose-li:text-gray-300
+              prose-blockquote:border-l-4 prose-blockquote:border-[#D2F159] 
+              prose-blockquote:pl-4 prose-blockquote:italic
               prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-300
-              prose-code:text-[#D2F159] prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:rounded
-              prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800 prose-pre:p-4 prose-pre:rounded-lg
-              prose-img:rounded-lg prose-img:shadow-lg
-              p-6 min-h-[400px] focus:outline-none"
+              prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-800/50
+              prose-blockquote:py-2 prose-blockquote:rounded-r-lg
+              prose-code:text-[#D2F159] 
+              prose-code:bg-gray-100 dark:prose-code:bg-gray-800 
+              prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+              prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-gray-900 prose-pre:text-gray-100
+              prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
+              prose-img:rounded-lg prose-img:shadow-lg prose-img:my-4
+              prose-hr:border-gray-300 dark:prose-hr:border-gray-700
+              p-6 min-h-[500px] 
+              text-gray-900 dark:text-gray-100
+              [&_.ProseMirror]:outline-none
+              [&_.ProseMirror]:min-h-[450px]
+              [&_.ProseMirror]:text-gray-900 dark:[&_.ProseMirror]:text-gray-100
+              [&_.ProseMirror_p]:text-gray-700 dark:[&_.ProseMirror_p]:text-gray-300
+              [&_.ProseMirror_h1]:text-gray-900 dark:[&_.ProseMirror_h1]:text-white
+              [&_.ProseMirror_h2]:text-gray-900 dark:[&_.ProseMirror_h2]:text-white
+              [&_.ProseMirror_h3]:text-gray-900 dark:[&_.ProseMirror_h3]:text-white
+              [&_.ProseMirror_li]:text-gray-700 dark:[&_.ProseMirror_li]:text-gray-300
+              [&_.ProseMirror_blockquote]:text-gray-700 dark:[&_.ProseMirror_blockquote]:text-gray-300
+              [&_.ProseMirror_strong]:text-gray-900 dark:[&_.ProseMirror_strong]:text-white
+              [&_.ProseMirror_em]:text-gray-700 dark:[&_.ProseMirror_em]:text-gray-300
+              [&_.ProseMirror_a]:text-[#D2F159]
+              [&_.ProseMirror_mark]:bg-yellow-200 dark:[&_.ProseMirror_mark]:bg-yellow-900/50
+              [&_.ProseMirror_mark]:text-gray-900 dark:[&_.ProseMirror_mark]:text-gray-100
+            "
           />
         </div>
       </div>

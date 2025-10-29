@@ -229,37 +229,58 @@ export default function AdminDashboard() {
             ) : paginated.length === 0 ? (
               <tr><td className="p-2 md:p-4 text-center text-gray-500 dark:text-gray-400" colSpan={6}>No blogs found.</td></tr>
             ) : (
-              paginated.map((b) => (
-                <tr key={b._id || b.id} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-[#17191C] transition-colors">
-                  <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300" title={b.title}>{truncate(b.title, 40)}</td>
-                  <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden sm:table-cell">{truncate(b.slug, 30)}</td>
-                  <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden md:table-cell">{b.category}</td>
-                  <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden lg:table-cell">{fmt(normalizeDate(b.date))}</td>
-                  <td className="p-2 md:p-4">
-                    <span className={`px-2 md:px-3 py-1 text-xs rounded-full font-medium ${b.published !== false ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"}`}>
-                      {b.published !== false ? "Published" : "Draft"}
-                    </span>
-                  </td>
-                  <td className="p-2 md:p-4">
-                    <div className="flex gap-1 md:gap-2 justify-center">
-                      <button
-                        onClick={() => navigate(`/admin/${b._id || b.id}`)}
-                        className="p-1.5 md:p-2 rounded-full bg-gray-100 dark:bg-[#17191C] hover:bg-gray-200 dark:hover:bg-[#1f2225] transition-colors"
-                        title="Edit"
-                      >
-                        <Pencil className="w-3 h-3 md:w-4 md:h-4 text-gray-700 dark:text-gray-300" />
-                      </button>
-                      <button
-                        onClick={() => openDelete(b)}
-                        className="p-1.5 md:p-2 rounded-full bg-gray-100 dark:bg-[#17191C] hover:bg-gray-200 dark:hover:bg-[#1f2225] transition-colors"
-                        title="Delete"
-                      >
-                        <Trash2 className="w-3 h-3 md:w-4 md:h-4 text-red-600" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
+              paginated.map((b) => {
+                // Check if this is a legacy blog (has sections but no body)
+                const isLegacyBlog = (b.sections && b.sections.length > 0) && (!b.body || b.body.trim() === '' || b.body === '<p></p>');
+                
+                return (
+                  <tr key={b._id || b.id} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-[#17191C] transition-colors">
+                    <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300" title={b.title}>
+                      {truncate(b.title, 40)}
+                      {isLegacyBlog && (
+                        <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                          Legacy
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden sm:table-cell">{truncate(b.slug, 30)}</td>
+                    <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden md:table-cell">{b.category}</td>
+                    <td className="p-2 md:p-4 text-gray-900 dark:text-gray-300 hidden lg:table-cell">{fmt(normalizeDate(b.date))}</td>
+                    <td className="p-2 md:p-4">
+                      <span className={`px-2 md:px-3 py-1 text-xs rounded-full font-medium ${b.published !== false ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"}`}>
+                        {b.published !== false ? "Published" : "Draft"}
+                      </span>
+                    </td>
+                    <td className="p-2 md:p-4">
+                      <div className="flex gap-1 md:gap-2 justify-center">
+                        {!isLegacyBlog ? (
+                          <button
+                            onClick={() => navigate(`/admin/${b._id || b.id}`)}
+                            className="p-1.5 md:p-2 rounded-full bg-gray-100 dark:bg-[#17191C] hover:bg-gray-200 dark:hover:bg-[#1f2225] transition-colors"
+                            title="Edit"
+                          >
+                            <Pencil className="w-3 h-3 md:w-4 md:h-4 text-gray-700 dark:text-gray-300" />
+                          </button>
+                        ) : (
+                          <div 
+                            className="p-1.5 md:p-2 rounded-full bg-gray-100 dark:bg-[#17191C] opacity-50 cursor-not-allowed"
+                            title="Legacy blogs cannot be edited with the new editor"
+                          >
+                            <Pencil className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+                          </div>
+                        )}
+                        <button
+                          onClick={() => openDelete(b)}
+                          className="p-1.5 md:p-2 rounded-full bg-gray-100 dark:bg-[#17191C] hover:bg-gray-200 dark:hover:bg-[#1f2225] transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-3 h-3 md:w-4 md:h-4 text-red-600" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>
