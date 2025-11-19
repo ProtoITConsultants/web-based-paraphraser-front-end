@@ -9,6 +9,7 @@ import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
+import Translator from "./pages/Translator";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/translator",
+        element: <Translator />,
+      },
+      {
+        path: "/paraphraser",
         element: <Home />,
       },
       {

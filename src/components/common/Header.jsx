@@ -20,6 +20,49 @@ export default function Header({
   // Check if currently on admin route
   const isOnAdminRoute = location.pathname.startsWith("/admin");
 
+  // Navigation links configuration
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Paraphraser",
+      path: "/paraphraser",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Translator",
+      path: "/translator",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Blogs",
+      path: "/Blogs",
+      showOnRegular: true,
+      showOnAdmin: true,
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      showOnRegular: true,
+      showOnAdmin: false,
+      isSpecial: true, // For special click handling
+    },
+  ];
+
+  // Filter links based on current route
+  const getVisibleLinks = () => {
+    if (isAdminLoginAccess || isOnAdminRoute) {
+      return navLinks.filter(link => link.showOnAdmin);
+    }
+    return navLinks.filter(link => link.showOnRegular);
+  };
+
   // Sync auth state
   useEffect(() => {
     const updateAuthState = () => {
@@ -74,12 +117,16 @@ export default function Header({
   // Sync activeMode with route
   useEffect(() => {
     const path = location.pathname.toLowerCase();
-    if (path === "/") {
-      setActiveMode("Home");
-    } else if (path === "/blogs") {
-      setActiveMode("Blogs");
-    } else if (path === "/contact") {
-      setActiveMode("Contact");
+    
+    // Find the matching link from navLinks array
+    const matchingLink = navLinks.find(link => {
+      const linkPath = link.path.toLowerCase();
+      // Exact match for paths
+      return path === linkPath || (path === "/" && linkPath === "/");
+    });
+    
+    if (matchingLink) {
+      setActiveMode(matchingLink.name);
     } else {
       setActiveMode(""); // No active link for other routes
     }
@@ -95,6 +142,15 @@ export default function Header({
   const handleContactClick = () => {
     setActiveMode("Contact");
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
+
+  // Handle link click
+  const handleLinkClick = (link) => {
+    if (link.isSpecial && link.name === "Contact") {
+      handleContactClick();
+    } else {
+      setActiveMode(link.name);
+    }
   };
 
   return (
@@ -122,120 +178,76 @@ export default function Header({
         </Link>
       </div>
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <Link
-            to="/"
-            onClick={() => setActiveMode("Home")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Home"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Home"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Home
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+        {getVisibleLinks().map((link) => {
+          const LinkComponent = link.isSpecial ? "div" : Link;
+          const linkProps = link.isSpecial 
+            ? { onClick: () => handleLinkClick(link) }
+            : { to: link.path, onClick: () => handleLinkClick(link) };
+
+          return (
+            <LinkComponent
+              key={link.name}
+              {...linkProps}
+              className={`relative pb-2 text-base md:text-lg cursor-pointer ${
                 darkMode
-                  ? activeMode === "Home"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Home"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
+                  ? activeMode === link.name
+                    ? "text-white"
+                    : "text-gray-300 hover:text-gray-300"
+                  : activeMode === link.name
+                  ? "text-gray-900"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
-            />
-          </Link>
-        )}
-        {!isOnAdminRoute && !isAdminLoginAccess && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <div
-            key="Contact"
-            onClick={handleContactClick}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Contact"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Contact"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Contact
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Contact"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Contact"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </div>
-        )}
+            >
+              {link.name}
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "bg-white opacity-100 scale-x-100"
+                      : "bg-gray-400 opacity-0 scale-x-0"
+                    : activeMode === link.name
+                    ? "bg-gray-900 opacity-100 scale-x-100"
+                    : "bg-gray-600 opacity-0 scale-x-0"
+                }`}
+              />
+            </LinkComponent>
+          );
+        })}
       </div>
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        {(isOnAdminRoute || isAdminLoginAccess) && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
+        {(isOnAdminRoute || isAdminLoginAccess) && 
+          navLinks
+            .filter(link => link.name === "Blogs" && link.showOnAdmin)
+            .map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => handleLinkClick(link)}
+                className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "text-white"
+                      : "text-gray-300 hover:text-gray-300"
+                    : activeMode === link.name
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {link.name}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                    darkMode
+                      ? activeMode === link.name
+                        ? "bg-white opacity-100 scale-x-100"
+                        : "bg-gray-400 opacity-0 scale-x-0"
+                      : activeMode === link.name
+                      ? "bg-gray-900 opacity-100 scale-x-100"
+                      : "bg-gray-600 opacity-0 scale-x-0"
+                  }`}
+                />
+              </Link>
+            ))
+        }
         {!isLoggedIn && !isAdminLoginAccess && (
           <>
             <Link
