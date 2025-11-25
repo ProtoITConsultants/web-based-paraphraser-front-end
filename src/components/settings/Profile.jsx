@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "@mantine/form";
 import { TextInput, Button } from "@mantine/core";
-import EditIcon from "../../assets/icons/editicon";
+import { Pencil } from "lucide-react";
 import {
   useGetUserProfile,
   useUpdateUserProfilePicture,
@@ -131,12 +131,13 @@ export const Profile = ({ isGoogleLogin, profile }) => {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-white">
-              <EditIcon className="w-8 h-8 cursor-pointer" />
+              <Pencil className="w-8 h-8 cursor-pointer" />
             </div>
           )}
           {!isGoogleLogin && (
-            <EditIcon
+            <Pencil
               className="absolute bottom-[-10px] right-[-10px] m-2 cursor-pointer"
+              size={24}
               onClick={() => fileInputRef.current.click()}
             />
           )}

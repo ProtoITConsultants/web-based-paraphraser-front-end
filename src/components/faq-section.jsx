@@ -5,54 +5,24 @@ export function FAQSection({darkMode, setDarkMode}) {
 
   const faqs = [
     {
-      question: "Which modes are appropriate for certain purposes?",
+      question: "Can AI rewriting remove plagiarism?",
       answer:
-        "Use Formal for business, Academic for schoolwork, Humanize for natural tone, Simple for easy reading, Fluency for smoothness, and Standard for balanced rephrasing. ",
+        "Yes. Our AI completely restructures text while preserving meaning, producing unique content. It doesn't just swap synonyms — it recreates human-like phrasing from scratch. This not only makes your text unique but it does not alter the original meaning. Such tools as Paraphraser.co are created to produce Turnitin-safe and plagiarism-free output in real time.",
     },
     {
-      question: "How accurate is the paraphrasing?",
+      question: "Is paraphrasing allowed in university?",
       answer:
-        "Your original meaning will always be retained with clear well-expressed rewrites by our tool.",
+        "In universities, you are allowed to paraphrase if you write the text in your own words and cite the original source. Plagiarism is simply the replacement of a few words. Good paraphrasing demonstrates that you have mastered the content and it is acceptable in academic writing.",
     },
     {
-      question: "Can one edit the text that has been paraphrased after it is generated?",
+      question: "How to bring plagiarism to 0%?",
       answer:
-        "Yes the output can be fully edited to allow you to adjust it to the precise taste. ",
+        "Use our plagiarism remover tool, rewrite major sections, and adjust sentence structures. Rewrite any heavily copied sections by breaking, merging, or restructuring ideas. Do not copy the words or phrases of the original source. After you have rewritten, check your writing with the help of a plagiarism tool to be sure that nothing is similar and your writing is totally original.",
     },
     {
-      question: "Is Paraphraser free to use?",
+      question: "How to make copied text untraceable?",
       answer:
-        "Yes, with unlimited access on the free plan and additional features available on Premium.",
-    },
-    {
-      question: "Can I upload documents?",
-      answer:
-        "Absolutely; upload essays, articles, or reports to paraphrase entire documents swiftly. ",
-    },
-    {
-      question: "Does Paraphraser support languages other than English?",
-      answer:
-        "Yes, it supports multiple languages to help you communicate with audiences.",
-    },
-    {
-      question: "Will using Paraphraser change my message?",
-      answer:
-        "No, your core message remains consistent while improving readability and style.",
-    },
-    {
-      question: "Is the platform easy for beginners?",
-      answer:
-        "Designed with simplicity in mind, it’s accessible for all skill levels.",
-    },
-    {
-      question: "How fast is the paraphrasing process?",
-      answer:
-        "Rewritten text is generated instantly to keep your workflow uninterrupted.",
-    },
-    {
-      question: "Is Paraphraser compatible with any device?",
-      answer:
-        "Yes, it is compatible with desktops, tablets and smartphones without any installation.",
+        "Be sure to paraphrase the text entirely but retain the meaning. Do not leave copied parts or phrases which can be detected by plagiarism detector. Check your document using a plagiarism detector to ensure that it is original.",
     },
   ]
 

@@ -1,10 +1,9 @@
 import { useOutletContext } from "react-router-dom";
 import { SubHeader } from "../components/common/SubHeader";
 import { Tabs } from "@mantine/core";
-import { Profile } from "../components/settings/Profile";
-import { Password } from "../components/settings/Password";
-import ProfileIcon from "../assets/icons/profileicon";
-import PasswordIcon from "../assets/icons/passwordicon";
+import {Profile} from "../components/settings/Profile";
+import {Password} from "../components/settings/Password";
+import { User, Lock } from "lucide-react";
 import { use, useState, useEffect } from "react";
 export const Settings = () => {
   const { darkMode, setDarkMode } = useOutletContext();
@@ -48,7 +47,7 @@ export const Settings = () => {
                     : "text-[#A1A1A1]"
                 }`}
               >
-                <ProfileIcon />
+                <User size={24} />
                 <h4 className="text-[18px]/[100%]">Profile</h4>
               </div>
             </Tabs.Tab>
@@ -66,7 +65,7 @@ export const Settings = () => {
                       : "text-[#A1A1A1]"
                   }`}
                 >
-                  <PasswordIcon />
+                  <Lock size={24} />
                   <h4 className="text-[18px]/[100%]">Password</h4>
                 </div>
               </Tabs.Tab>

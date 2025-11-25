@@ -1,72 +1,101 @@
-export function HowItWorks({ darkMode, setDarkMode }) {
-  const steps = [
-    {
-      number: "01",
-      icon: "/image 7.png", // clipboard icon
-      title: "Professional Tone",
-      description: "Quickly produce professional, formal texts suitable to use in business correspondence.",
-    },
-    {
-      number: "02",
-      icon: "/image 11.png", // arrows icon
-      title: "Enhance Readability",
-      description: "Get a natural and easy flow of reading without any problems.",
-    },
-    {
-      number: "03",
-      icon: "/image 12.jpg", // checkmark icon
-      title: "Academic Precision",
-      description: "Cite precise, academic material with the Academic mode.",
-    },
-    {
-      number: "04",
-      icon: "/image 7.png", // clipboard icon
-      title: "Boost Engagement",
-      description: "Humanized, relatable text helps you connect deeply with your audience.",
-    },
-    {
-      number: "05",
-      icon: "/image 11.png", // arrows icon
-      title: "Save Time",
-      description: "Speed up your writing and concentrate on ideas rather than on the tiresome rewriting.",
-    },
+import { useState } from 'react';
+
+export function HowItWorks({ darkMode = false, setDarkMode }) {
+  const comparisonData = [
+    { feature: "Speed", manual: "Slow", ai: "Instant" },
+    { feature: "Accuracy", manual: "Depends on skill", ai: "High, context-aware" },
+    { feature: "Removes plagiarism", manual: "Not always", ai: "Yes, fully" },
+    { feature: "Reduces similarity index", manual: "Partial", ai: "90–100%" },
+    { feature: "Academic tone", manual: "Hard to maintain", ai: "Built-in" },
+    { feature: "Cost", manual: "Time-consuming", ai: "Free" },
+    { feature: "Turnitin-safe", manual: "Not guaranteed", ai: "Yes" },
   ];
 
   return (
-    <section className={`${darkMode ? "bg-black" : "bg-gray-100"} mx-auto py-16 px-4 md:px-0`}>
-      <div className="flex flex-col md:flex-row gap-12 items-center justify-between md:max-w-[1240px] mx-auto">
-        {/* Left Circle */}
-        <div className="flex sm:justify-self-center lg:justify-self-start xl:justify-self-center ml-0">
-          <div className="relative w-full">
-            <div className="w-60 h-60 md:w-100 md:h-100 rounded-full border-[20px] border-[#D2F159] flex items-center justify-center mx-auto">
-              <h2 className={`${darkMode ? "text-white" : "text-black"} text-2xl lg:text-4xl font-bold text-center`}>
-                <span className="text-[#D2F159]">Benefits</span> of Using Paraphraser
-              </h2>
-            </div>
-          </div>
-        </div>
+   <section className={`${darkMode ? "bg-black" : "bg-gray-100"} mx-auto py-12 px-3 md:px-0`}>
+  <div className="w-full max-w-full sm:max-w-[500px] md:max-w-[860px] lg:max-w-[1240px] mx-auto px-2">
+    
+    <h2
+      className={`${darkMode ? "text-white" : "text-black"} 
+      text-xl sm:text-2xl md:text-3xl lg:text-4xl 
+      font-bold text-center mb-6`}
+    >
+      Manual Paraphrasing vs <span className="text-[#D2F159]">AI Paraphrasing</span>
+    </h2>
 
-        {/* Steps */}
-        <div className="space-y-6">
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-3 rounded-2xl bg-[#D2F159] shadow-md max-w-full"
-            >
-              <div className="flex items-center gap-4 w-full">
-                <img src={step.icon} className="p-2 bg-white rounded-full flex items-center justify-center text-2xl w-16 h-16 md:w-20 md:h-20" />
-                <div className={`w-full p-3 rounded-xl flex justify-between items-center gap-2 ${darkMode ? "bg-black text-white" : "bg-white"}`}>
-                  <div>
-                    <h3 className="text-lg font-semibold">{step.title}</h3>
-                    <p className={`text-xs md:text-sm ${darkMode ? "text-white" : "text-gray-600"}`}>{step.description}</p>
-                  </div>
-                  <div className="text-4xl font-bold">{step.number}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="overflow-x-auto">
+      <div className={`${darkMode ? "bg-gray-900" : "bg-white"} rounded-2xl shadow-lg overflow-hidden`}>
+
+        <table className="w-full text-xs sm:text-sm md:text-base lg:text-lg">
+          <thead>
+            <tr className="bg-[#D2F159]">
+              <th className="px-3 sm:px-4 md:px-6 py-3 text-left font-bold text-black">Feature</th>
+              <th className="px-3 sm:px-4 md:px-6 py-3 text-left font-bold text-black">Manual Paraphrasing</th>
+              <th className="px-3 sm:px-4 md:px-6 py-3 text-left font-bold text-black">AI Paraphrasing (Paraphraser.co)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {comparisonData.map((row, index) => (
+              <tr
+                key={index}
+                className={`border-b ${darkMode ? "border-gray-800" : "border-gray-200"} ${
+                  index % 2 === 0
+                    ? darkMode ? "bg-gray-900" : "bg-gray-50"
+                    : darkMode ? "bg-black" : "bg-white"
+                }`}
+              >
+                <td
+                  className={`px-3 sm:px-4 md:px-6 py-3 font-semibold ${
+                    darkMode ? "text-white" : "text-black"
+                  }`}
+                >
+                  {row.feature}
+                </td>
+
+                <td
+                  className={`px-3 sm:px-4 md:px-6 py-3 ${
+                    darkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  {row.manual}
+                </td>
+
+                <td
+                  className={`px-3 sm:px-4 md:px-6 py-3 ${
+                    darkMode ? "text-[#D2F159]" : "text-gray-700"
+                  }`}
+                >
+                  {row.ai}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+  );
+}
+
+// Demo wrapper
+export default function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  
+  return (
+    <div className="min-h-screen">
+      <div className="fixed top-4 right-4 z-50">
+        <button 
+          onClick={() => setDarkMode(!darkMode)}
+          className="px-4 py-2 bg-[#D2F159] rounded-lg font-semibold"
+        >
+          Toggle {darkMode ? 'Light' : 'Dark'} Mode
+        </button>
+      </div>
+      <HowItWorks darkMode={darkMode} setDarkMode={setDarkMode} />
+    </div>
   );
 }

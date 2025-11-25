@@ -1,9 +1,11 @@
+import { AcademicAndProfessionalFeatures } from "../components/AcademicAndProfessionalFeatures";
 import { CTASection } from "../components/cta-section";
 import { FeaturesThatStandOut } from "../components/FaeturesThatStandOut";
 import { FAQSection } from "../components/faq-section";
 import { FeaturesSection } from "../components/features-section";
 import { HowItWorks } from "../components/how-it-works";
 import { PerfectForAnyNeed } from "../components/PerfectForAnyNeed";
+import { StartParaphrasing } from "../components/StartParaphrasing";
 import { WhatUsersAreSaying } from "../components/WhatUsersAreSaying";
 
 export default function Landing({darkMode, setDarkMode}) {
@@ -22,11 +24,12 @@ export default function Landing({darkMode, setDarkMode}) {
       </div> */}
       <FeaturesSection darkMode={darkMode} setDarkMode={setDarkMode}/>
       <FeaturesThatStandOut darkMode={darkMode} setDarkMode={setDarkMode}/>
+      <AcademicAndProfessionalFeatures darkMode={darkMode} setDarkMode={setDarkMode}/>
       <HowItWorks darkMode={darkMode} setDarkMode={setDarkMode}/>
-      <PerfectForAnyNeed darkMode={darkMode} setDarkMode={setDarkMode}/>
-      <WhatUsersAreSaying darkMode={darkMode} setDarkMode={setDarkMode}/>
-      <CTASection darkMode={darkMode} setDarkMode={setDarkMode}/>
+      {/* <PerfectForAnyNeed darkMode={darkMode} setDarkMode={setDarkMode}/> */}
+      {/* <WhatUsersAreSaying darkMode={darkMode} setDarkMode={setDarkMode}/> */}
       <FAQSection darkMode={darkMode} setDarkMode={setDarkMode}/>
+      <StartParaphrasing darkMode={darkMode} setDarkMode={setDarkMode}/>
     </main>
   )
 }
