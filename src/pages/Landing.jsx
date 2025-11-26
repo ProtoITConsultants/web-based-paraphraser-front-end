@@ -4,6 +4,7 @@ import { FAQSection } from "../components/faq-section";
 import { FeaturesSection } from "../components/features-section";
 import { HowItWorks } from "../components/how-it-works";
 import { PerfectForAnyNeed } from "../components/PerfectForAnyNeed";
+import TranslatorArea from "../components/TranslatorArea";
 import { WhatUsersAreSaying } from "../components/WhatUsersAreSaying";
 
 export default function Landing({darkMode, setDarkMode}) {
@@ -27,6 +28,7 @@ export default function Landing({darkMode, setDarkMode}) {
       <WhatUsersAreSaying darkMode={darkMode} setDarkMode={setDarkMode}/>
       <CTASection darkMode={darkMode} setDarkMode={setDarkMode}/>
       <FAQSection darkMode={darkMode} setDarkMode={setDarkMode}/>
+      <TranslatorArea darkMode={darkMode} setDarkMode={setDarkMode}/>
     </main>
   )
 }

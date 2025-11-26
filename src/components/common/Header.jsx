@@ -2,6 +2,45 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { EllipsisVertical } from "lucide-react";
 
+// Navigation links configuration
+const NAV_LINKS = [
+  {
+    id: "home",
+    label: "Home",
+    path: "/",
+    showOnAdmin: false,
+    onClick: null,
+  },
+  {
+    id: "paraphraser",
+    label: "Paraphraser",
+    path: "/",
+    showOnAdmin: false,
+    onClick: null,
+  },
+  {
+    id: "translator",
+    label: "Translator",
+    path: "#translator",
+    showOnAdmin: false,
+    onClick: null,
+  },
+  {
+    id: "blogs",
+    label: "Blogs",
+    path: "/blogs",
+    showOnAdmin: true, // Show on admin pages
+    onClick: null,
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    path: "#contact",
+    showOnAdmin: false,
+    onClick: "handleContactClick", // Special handler for scroll
+  },
+];
+
 export default function Header({
   showSettings,
   setShowSettings,
@@ -11,14 +50,19 @@ export default function Header({
   const [url, setUrl] = useState("");
   const location = useLocation();
   const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
-  const [activeMode, setActiveMode] = useState("Home");
+  const [activeMode, setActiveMode] = useState("home");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
   
-  // Check if on login page and redirected from admin
   const isAdminLoginAccess = location.pathname === "/login" && location.state?.from?.startsWith("/admin");
-  
-  // Check if currently on admin route
   const isOnAdminRoute = location.pathname.startsWith("/admin");
+
+  // Special handlers for navigation items
+  const navigationHandlers = {
+    handleContactClick: () => {
+      setActiveMode("contact");
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    },
+  };
 
   // Sync auth state
   useEffect(() => {
@@ -27,10 +71,6 @@ export default function Header({
       const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
       const userProfile = JSON.parse(localStorage.getItem("userProfile") || "{}");
 
-      console.log("Header - updateAuthState called");
-      console.log("Header - isUserLoggedIn:", isUserLoggedIn);
-
-      // If user is not logged in, clear all state
       if (!isUserLoggedIn) {
         setUrl("");
         setIsNonGoogleSignedIn(false);
@@ -38,7 +78,6 @@ export default function Header({
         return;
       }
 
-      // Set profile picture URL
       let profileUrl = "";
       if (googleLogin && userProfile?.profile?.picture) {
         profileUrl = userProfile.profile.picture;
@@ -47,7 +86,6 @@ export default function Header({
       }
       setUrl(profileUrl);
 
-      // Determine if user is signed in but not via Google and has no profile picture
       setIsNonGoogleSignedIn(
         isUserLoggedIn &&
           !googleLogin &&
@@ -58,11 +96,7 @@ export default function Header({
     };
 
     updateAuthState();
-    
-    // Listen for custom authChanged event
     window.addEventListener("authChanged", updateAuthState);
-    
-    // Listen for storage changes (for multi-tab support)
     window.addEventListener("storage", updateAuthState);
     
     return () => {
@@ -74,28 +108,85 @@ export default function Header({
   // Sync activeMode with route
   useEffect(() => {
     const path = location.pathname.toLowerCase();
-    if (path === "/") {
-      setActiveMode("Home");
-    } else if (path === "/blogs") {
-      setActiveMode("Blogs");
-    } else if (path === "/contact") {
-      setActiveMode("Contact");
-    } else {
-      setActiveMode(""); // No active link for other routes
-    }
+    const activeLink = NAV_LINKS.find(link => {
+      if (link.path === "/" && path === "/") return true;
+      if (link.path !== "/" && path.startsWith(link.path)) return true;
+      return false;
+    });
+    setActiveMode(activeLink?.id || "");
   }, [location.pathname]);
 
-  // Toggle settings panel visibility
   const toggleSettings = () => {
-    console.log(showSettings ? "Closing settings panel" : "Opening settings panel");
     setShowSettings(!showSettings);
   };
 
-  // Scroll to bottom on Contact click
-  const handleContactClick = () => {
-    setActiveMode("Contact");
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  // Filter links based on current route context
+  const getVisibleLinks = () => {
+    if (isAdminLoginAccess || isOnAdminRoute) {
+      return NAV_LINKS.filter(link => link.showOnAdmin);
+    }
+    return NAV_LINKS.filter(link => !link.showOnAdmin || link.path === "/blogs");
   };
+
+  // Render a single navigation link
+  const renderNavLink = (link) => {
+    const isActive = activeMode === link.id;
+    const linkClasses = `relative pb-2 text-base md:text-lg cursor-pointer ${
+      darkMode
+        ? isActive
+          ? "text-white"
+          : "text-gray-300 hover:text-gray-300"
+        : isActive
+        ? "text-gray-900"
+        : "text-gray-600 hover:text-gray-900"
+    }`;
+
+    const underlineClasses = `absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+      darkMode
+        ? isActive
+          ? "bg-white opacity-100 scale-x-100"
+          : "bg-gray-400 opacity-0 scale-x-0"
+        : isActive
+        ? "bg-gray-900 opacity-100 scale-x-100"
+        : "bg-gray-600 opacity-0 scale-x-0"
+    }`;
+
+    const handleClick = () => {
+      setActiveMode(link.id);
+      if (link.onClick && navigationHandlers[link.onClick]) {
+        navigationHandlers[link.onClick]();
+      }
+    };
+
+    // If link has special onClick handler (like Contact)
+    if (link.onClick) {
+      return (
+        <div
+          key={link.id}
+          onClick={handleClick}
+          className={linkClasses}
+        >
+          {link.label}
+          <div className={underlineClasses} />
+        </div>
+      );
+    }
+
+    // Regular link
+    return (
+      <Link
+        key={link.id}
+        to={link.path}
+        onClick={handleClick}
+        className={linkClasses}
+      >
+        {link.label}
+        <div className={underlineClasses} />
+      </Link>
+    );
+  };
+
+  const visibleLinks = getVisibleLinks();
 
   return (
     <div
@@ -121,121 +212,14 @@ export default function Header({
           </h1>
         </Link>
       </div>
+
+      {/* Desktop Navigation */}
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <Link
-            to="/"
-            onClick={() => setActiveMode("Home")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Home"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Home"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Home
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Home"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Home"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
-        {!isOnAdminRoute && !isAdminLoginAccess && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <div
-            key="Contact"
-            onClick={handleContactClick}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Contact"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Contact"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Contact
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Contact"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Contact"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </div>
-        )}
+        {visibleLinks.map(link => renderNavLink(link))}
       </div>
+
+      {/* Right side: Auth buttons or Profile */}
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        {(isOnAdminRoute || isAdminLoginAccess) && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
         {!isLoggedIn && !isAdminLoginAccess && (
           <>
             <Link
