@@ -38,7 +38,7 @@ export function FeaturesThatStandOut({ darkMode, setDarkMode }) {
     <section className={`md:bg-[#D2F159] md:p-4`}>
       <div className={`${darkMode ? "md:bg-black" : "bg-white"} md:max-w-full md:p-8 mx-auto p-4`}>
         <div className="md:max-w-[1240px] mx-auto">
-          <h2 className="text-2xl md:text-5xl font-semibold text-center mb-4 text-[#D2F159]">
+          <h2 className="text-2xl md:text-5xl font-bold text-center mb-4 text-[#D2F159]">
             <span className={`${darkMode ? "text-white" : "text-black"}`}>What Makes Our AI Paraphrasing Tool</span>{" "}
             Unique?
           </h2>

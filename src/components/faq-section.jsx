@@ -31,7 +31,7 @@ export function FAQSection({darkMode, setDarkMode}) {
       <div className="flex flex-col gap-4 md:gap-12 items-center">
         {/* Left Heading */}
         <div className="text-left">
-          <h2 className={`text-2xl text-center md:text-left md:text-5xl font-semibold leading-snug ${darkMode ? "text-white" : "text-black"}`}>
+          <h2 className={`text-2xl text-center md:text-left md:text-5xl font-bold leading-snug ${darkMode ? "text-white" : "text-black"}`}>
             Frequently asked{" "}
             <span className="text-[#D2F159]">questions</span>
           </h2>

@@ -30,6 +30,7 @@ export default function TranslatorArea({ darkMode }) {
   const [sourceSearchTerm, setSourceSearchTerm] = useState("");
   const [targetSearchTerm, setTargetSearchTerm] = useState("");
   const [translationLoading, setTranslationLoading] = useState(false);
+  const [hasTranslated, setHasTranslated] = useState(false); // Track if user has translated at least once
 
   const countWords = (text) => {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
@@ -152,6 +153,43 @@ export default function TranslatorArea({ darkMode }) {
     setShowExportPopup(false);
   };
 
+  const performTranslation = async () => {
+    if (!inputText.trim()) {
+      return;
+    }
+
+    setTranslationLoading(true);
+    try {
+      const apiKey = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
+      const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          q: inputText,
+          source: sourceLanguage,
+          target: targetLanguage,
+        }),
+      });
+      const result = await response.json();
+      if (result?.data?.translations?.[0]) {
+        setTranslatedText(result.data.translations[0].translatedText);
+        if (!hasTranslated) {
+          toast.success("Translation completed!");
+        }
+      } else {
+        toast.error("Translation failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Translation error:", err);
+      toast.error("Translation failed. Please try again.");
+    } finally {
+      setTranslationLoading(false);
+    }
+  };
+
   const handleTranslate = async () => {
     if (!inputText.trim()) {
       toast.error("Please enter text to translate!");
@@ -183,35 +221,16 @@ export default function TranslatorArea({ darkMode }) {
       toast.success(`You have used ${usedCount} out of 3 translations for today.`);
     }
 
-    setTranslationLoading(true);
-    try {
-      const apiKey = import.meta.env.VITE_GOOGLE_TRANSLATE_API_KEY;
-      const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          q: inputText,
-          source: sourceLanguage,
-          target: targetLanguage,
-        }),
-      });
-      const result = await response.json();
-      if (result?.data?.translations?.[0]) {
-        setTranslatedText(result.data.translations[0].translatedText);
-        toast.success("Translation completed!");
-      } else {
-        toast.error("Translation failed. Please try again.");
-      }
-    } catch (err) {
-      console.error("Translation error:", err);
-      toast.error("Translation failed. Please try again.");
-    } finally {
-      setTranslationLoading(false);
-    }
+    setHasTranslated(true);
+    await performTranslation();
   };
+
+  // Auto-translate when language changes (only if user has already translated once)
+  useEffect(() => {
+    if (hasTranslated && translatedText && inputText.trim()) {
+      performTranslation();
+    }
+  }, [sourceLanguage, targetLanguage]);
 
   useEffect(() => {
     const isUserLoggedIn = localStorage.getItem("isUserLoggedIn");
@@ -258,12 +277,24 @@ export default function TranslatorArea({ darkMode }) {
   const sourceLangName = languages.find((lang) => lang.code === sourceLanguage)?.name || "English";
   const targetLangName = languages.find((lang) => lang.code === targetLanguage)?.name || "Spanish";
 
+  const handleSourceLanguageChange = (langCode) => {
+    setSourceLanguage(langCode);
+    setIsSourceDropdownOpen(false);
+    setSourceSearchTerm("");
+  };
+
+  const handleTargetLanguageChange = (langCode) => {
+    setTargetLanguage(langCode);
+    setIsTargetDropdownOpen(false);
+    setTargetSearchTerm("");
+  };
+
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div id="translator" className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8">
         {/* Input Area */}
         <div className={`rounded-2xl p-6 ${darkMode ? "bg-black" : "bg-gray-100"}`}>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between">
             <h2 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
               Enter Text
             </h2>
@@ -298,11 +329,7 @@ export default function TranslatorArea({ darkMode }) {
                       filteredSourceLanguages.map((lang) => (
                         <li
                           key={lang.code}
-                          onClick={() => {
-                            setSourceLanguage(lang.code);
-                            setIsSourceDropdownOpen(false);
-                            setSourceSearchTerm("");
-                          }}
+                          onClick={() => handleSourceLanguageChange(lang.code)}
                           className={`px-3 py-2 text-sm cursor-pointer ${
                             darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
                           }`}
@@ -352,14 +379,19 @@ export default function TranslatorArea({ darkMode }) {
               <div className="relative">
                 <button
                   onClick={() => setIsTargetDropdownOpen(!isTargetDropdownOpen)}
+                  disabled={translationLoading}
                   className={`py-1 flex gap-2 rounded-lg text-sm font-medium shadow-sm px-3 items-center hover:bg-gray-300 focus:outline-none ${
-                    darkMode ? "bg-[#101214] text-white" : "bg-gray-200 text-gray-900"
-                  }`}
+                    translationLoading ? "opacity-70 cursor-wait" : ""
+                  } ${darkMode ? "bg-[#101214] text-white" : "bg-gray-200 text-gray-900"}`}
                 >
                   <span>{targetLangName}</span>
-                  <ChevronDown />
+                  {translationLoading ? (
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-gray-300 border-t-transparent"></div>
+                  ) : (
+                    <ChevronDown className="w-4 h-4" />
+                  )}
                 </button>
-                {isTargetDropdownOpen && (
+                {isTargetDropdownOpen && !translationLoading && (
                   <div className={`absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-10 overflow-hidden ${
                     darkMode ? "bg-[#101214] text-white" : "bg-white text-gray-900"
                   }`}>
@@ -379,11 +411,7 @@ export default function TranslatorArea({ darkMode }) {
                         filteredTargetLanguages.map((lang) => (
                           <li
                             key={lang.code}
-                            onClick={() => {
-                              setTargetLanguage(lang.code);
-                              setIsTargetDropdownOpen(false);
-                              setTargetSearchTerm("");
-                            }}
+                            onClick={() => handleTargetLanguageChange(lang.code)}
                             className={`px-3 py-2 text-sm cursor-pointer ${
                               darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
                             }`}
@@ -399,7 +427,7 @@ export default function TranslatorArea({ darkMode }) {
                 )}
               </div>
               {/* Copy Button */}
-              {translatedText && (
+              {translatedText && !translationLoading && (
                 <button
                   className={`ml-2 md:flex hidden px-4 py-1 rounded-lg text-sm font-medium items-center gap-2 transition-colors duration-200 ${
                     copied
@@ -443,7 +471,7 @@ export default function TranslatorArea({ darkMode }) {
             )}
           </div>
 
-          {translatedText && (
+          {translatedText && !translationLoading && (
             <>
               <button
                 onClick={() => setShowExportPopup(true)}

@@ -17,7 +17,7 @@ export function HowItWorks({ darkMode = false, setDarkMode }) {
     
     <h2
       className={`${darkMode ? "text-white" : "text-black"} 
-      text-xl sm:text-2xl md:text-3xl lg:text-4xl 
+      text-xl sm:text-2xl md:text-3xl lg:text-5xl 
       font-bold text-center mb-6`}
     >
       Manual Paraphrasing vs <span className="text-[#D2F159]">AI Paraphrasing</span>
