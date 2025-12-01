@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical, Menu, X } from "lucide-react";
 
 export default function Header({
   showSettings,
@@ -13,12 +13,56 @@ export default function Header({
   const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
   const [activeMode, setActiveMode] = useState("Home");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Check if on login page and redirected from admin
   const isAdminLoginAccess = location.pathname === "/login" && location.state?.from?.startsWith("/admin");
   
   // Check if currently on admin route
   const isOnAdminRoute = location.pathname.startsWith("/admin");
+
+  // Navigation links configuration
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Paraphraser",
+      path: "/paraphraser",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Translator",
+      path: "/translator",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Blogs",
+      path: "/Blogs",
+      showOnRegular: true,
+      showOnAdmin: true,
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      showOnRegular: true,
+      showOnAdmin: false,
+      isSpecial: true, // For special click handling
+    },
+  ];
+
+  // Filter links based on current route
+  const getVisibleLinks = () => {
+    if (isAdminLoginAccess || isOnAdminRoute) {
+      return navLinks.filter(link => link.showOnAdmin);
+    }
+    return navLinks.filter(link => link.showOnRegular);
+  };
 
   // Sync auth state
   useEffect(() => {
@@ -74,12 +118,16 @@ export default function Header({
   // Sync activeMode with route
   useEffect(() => {
     const path = location.pathname.toLowerCase();
-    if (path === "/") {
-      setActiveMode("Home");
-    } else if (path === "/blogs") {
-      setActiveMode("Blogs");
-    } else if (path === "/contact") {
-      setActiveMode("Contact");
+    
+    // Find the matching link from navLinks array
+    const matchingLink = navLinks.find(link => {
+      const linkPath = link.path.toLowerCase();
+      // Exact match for paths
+      return path === linkPath || (path === "/" && linkPath === "/");
+    });
+    
+    if (matchingLink) {
+      setActiveMode(matchingLink.name);
     } else {
       setActiveMode(""); // No active link for other routes
     }
@@ -97,145 +145,112 @@ export default function Header({
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
+  // Handle link click
+  const handleLinkClick = (link) => {
+    if (link.isSpecial && link.name === "Contact") {
+      handleContactClick();
+    } else {
+      setActiveMode(link.name);
+    }
+    setIsMobileMenuOpen(false); // Close mobile menu on link click
+  };
+
   return (
-    <div
-      className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
-        darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
-      } items-center justify-between`}
-    >
-      <div className="flex items-center space-x-4">
-        <Link to="/" className="flex items-center space-x-3">
-          <div
-            className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
-              darkMode ? "bg-gray-700" : "bg-gray-100"
-            }`}
-          >
-            <img src="/Logo.png" className="rounded-full" alt="Paraphraser Logo" />
-          </div>
-          <h1
-            className={`text-lg md:text-2xl lg:text-3xl font-medium ${
-              darkMode ? "text-white" : "text-gray-900"
-            }`}
-          >
-            {isAdminLoginAccess || isOnAdminRoute ? "Paraphraser Admin" : "Paraphraser"}
-          </h1>
-        </Link>
-      </div>
-      <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <Link
-            to="/"
-            onClick={() => setActiveMode("Home")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Home"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Home"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Home
+    <>
+      <div
+        className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
+          darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
+        } items-center justify-between`}
+      >
+        <div className="flex items-center space-x-4">
+          <Link to="/" className="flex items-center space-x-3">
             <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Home"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Home"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
+              className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
+                darkMode ? "bg-gray-700" : "bg-gray-100"
               }`}
-            />
+            >
+              <img src="/Logo.png" className="rounded-full" alt="Paraphraser Logo" />
+            </div>
+            <h1
+              className={`text-lg md:text-2xl lg:text-3xl font-medium ${
+                darkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {isAdminLoginAccess || isOnAdminRoute ? "Paraphraser Admin" : "Paraphraser"}
+            </h1>
           </Link>
-        )}
-        {!isOnAdminRoute && !isAdminLoginAccess && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+        </div>
+        <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
+        {getVisibleLinks().map((link) => {
+          const LinkComponent = link.isSpecial ? "div" : Link;
+          const linkProps = link.isSpecial 
+            ? { onClick: () => handleLinkClick(link) }
+            : { to: link.path, onClick: () => handleLinkClick(link) };
+
+          return (
+            <LinkComponent
+              key={link.name}
+              {...linkProps}
+              className={`relative pb-2 text-base md:text-lg cursor-pointer ${
                 darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
+                  ? activeMode === link.name
+                    ? "text-white"
+                    : "text-gray-300 hover:text-gray-300"
+                  : activeMode === link.name
+                  ? "text-gray-900"
+                  : "text-gray-600 hover:text-gray-900"
               }`}
-            />
-          </Link>
-        )}
-        {!isAdminLoginAccess && !isOnAdminRoute && (
-          <div
-            key="Contact"
-            onClick={handleContactClick}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Contact"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Contact"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Contact
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Contact"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Contact"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </div>
-        )}
+            >
+              {link.name}
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "bg-white opacity-100 scale-x-100"
+                      : "bg-gray-400 opacity-0 scale-x-0"
+                    : activeMode === link.name
+                    ? "bg-gray-900 opacity-100 scale-x-100"
+                    : "bg-gray-600 opacity-0 scale-x-0"
+                }`}
+              />
+            </LinkComponent>
+          );
+        })}
       </div>
       <div className="ml-auto flex items-center gap-2 md:gap-3">
-        {(isOnAdminRoute || isAdminLoginAccess) && (
-          <Link
-            to="/Blogs"
-            onClick={() => setActiveMode("Blogs")}
-            className={`relative pb-2 text-base md:text-lg cursor-pointer ${
-              darkMode
-                ? activeMode === "Blogs"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-gray-300"
-                : activeMode === "Blogs"
-                ? "text-gray-900"
-                : "text-gray-600 hover:text-gray-900"
-            }`}
-          >
-            Blogs
-            <div
-              className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-                darkMode
-                  ? activeMode === "Blogs"
-                    ? "bg-white opacity-100 scale-x-100"
-                    : "bg-gray-400 opacity-0 scale-x-0"
-                  : activeMode === "Blogs"
-                  ? "bg-gray-900 opacity-100 scale-x-100"
-                  : "bg-gray-600 opacity-0 scale-x-0"
-              }`}
-            />
-          </Link>
-        )}
+        {(isOnAdminRoute || isAdminLoginAccess) && 
+          navLinks
+            .filter(link => link.name === "Blogs" && link.showOnAdmin)
+            .map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => handleLinkClick(link)}
+                className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "text-white"
+                      : "text-gray-300 hover:text-gray-300"
+                    : activeMode === link.name
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {link.name}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                    darkMode
+                      ? activeMode === link.name
+                        ? "bg-white opacity-100 scale-x-100"
+                        : "bg-gray-400 opacity-0 scale-x-0"
+                      : activeMode === link.name
+                      ? "bg-gray-900 opacity-100 scale-x-100"
+                      : "bg-gray-600 opacity-0 scale-x-0"
+                  }`}
+                />
+              </Link>
+            ))
+        }
         {!isLoggedIn && !isAdminLoginAccess && (
           <>
             <Link
@@ -282,5 +297,62 @@ export default function Header({
         )}
       </div>
     </div>
+    
+    {/* Mobile Menu Overlay */}
+    {isMobileMenuOpen && (
+      <div
+        className={`fixed inset-0 z-20 md:hidden ${
+          darkMode ? "bg-[#101214]" : "bg-white"
+        }`}
+        style={{ top: '72px' }} // Adjust based on header height
+      >
+        <div className="flex flex-col p-6 space-y-4">
+          {getVisibleLinks().map((link) => {
+            const LinkComponent = link.isSpecial ? "div" : Link;
+            const linkProps = link.isSpecial 
+              ? { onClick: () => handleLinkClick(link) }
+              : { to: link.path, onClick: () => handleLinkClick(link) };
+
+            return (
+              <LinkComponent
+                key={link.name}
+                {...linkProps}
+                className={`text-xl py-3 border-b cursor-pointer ${
+                  darkMode
+                    ? `border-gray-700 ${activeMode === link.name ? "text-white font-semibold" : "text-gray-300"}`
+                    : `border-gray-200 ${activeMode === link.name ? "text-gray-900 font-semibold" : "text-gray-600"}`
+                }`}
+              >
+                {link.name}
+              </LinkComponent>
+            );
+          })}
+          
+          {!isLoggedIn && !isAdminLoginAccess && (
+            <div className="flex flex-col gap-3 pt-4">
+              <Link
+                to="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-center ${
+                  darkMode
+                    ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
+                    : "bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700"
+                } px-6 py-3 rounded-2xl text-base`}
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-center hover:bg-lime-500 transition px-6 py-3 bg-[#D2F159] text-gray-900 rounded-2xl text-base"
+              >
+                Signup
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </>
   );
 }

@@ -41,7 +41,7 @@ export default function ParaphrasingTool( { darkMode, setDarkMode, data } ) {
   return (
     <>
         {/* Mode Selector */}
-        <div className="px-8 lg:py-5">
+        <div className="px-8">
           <ModeSelector activeMode={activeMode} setActiveMode={setActiveMode} darkMode={darkMode} />
         </div>
 
