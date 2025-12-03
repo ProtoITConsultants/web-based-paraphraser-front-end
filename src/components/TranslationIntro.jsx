@@ -26,8 +26,8 @@ export default function TranslationIntro({ darkMode }) {
             Communication becomes easier when language barriers fade. That is why we added a dedicated translation tool that helps you change text from any language to English and from English to any language with accuracy and ease.
           </p>
 
-          <p className={`text-base md:text-lg text-center font-medium ${
-            darkMode ? "text-gray-200" : "text-gray-800"
+          <p className={`text-base md:text-lg text-center ${
+            darkMode ? "text-gray-200" : "text-gray-700"
           }`}>
             The goal is simple: help you understand, write, and express yourself clearly, no matter the language you start with.
           </p>
@@ -53,17 +53,6 @@ export default function TranslationIntro({ darkMode }) {
               Every sentence you translate stays true to its meaning while becoming easy to read and ready to use.
             </p>
           </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center mt-8">
-          <Link
-            onClick={scrollToTop}
-            to="/translator"
-            className="bg-[#D2F159] cursor-pointer text-black text-base md:text-lg font-semibold px-8 py-3 rounded-full hover:bg-[#c5e14a] transition-colors shadow-lg"
-          >
-            Try Our Translator Now
-          </Link>
         </div>
       </div>
     </div>

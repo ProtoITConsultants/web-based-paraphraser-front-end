@@ -72,9 +72,9 @@ export default function ParaphraserWebCopy({ darkMode }) {
   ];
 
   return (
-    <div className="mx-auto px-4 md:px-8">
+    <div className="mx-auto">
       {/* Hero Section */}
-      <div className="mt-16 text-center md:max-w-[1240px] mx-auto">
+      <div className="mt-16 text-center md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -93,7 +93,7 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* Key Features */}
-      <div className="mt-12 mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mt-12 mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12`}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {features.map((feature, index) => (
@@ -109,7 +109,7 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* Why Best Tool */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-6 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -163,7 +163,7 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* What Makes Unique */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -192,7 +192,7 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* Built for Students */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-6 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -219,7 +219,7 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* Turnitin & AI Detection */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -262,14 +262,113 @@ export default function ParaphraserWebCopy({ darkMode }) {
         </div>
       </div>
 
+      {/* Perfect for Bloggers, Writers & Professionals */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-6 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Perfect for <span className="text-[#D2F159]">Bloggers, Writers & Professionals</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12`}>
+          <p className={`text-lg mb-6 ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}>
+            Whether you write for business or content marketing, our AI paraphrasing tool helps you:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+              <span className={`${darkMode ? "text-white" : "text-gray-900"}`}>
+                Repurpose articles
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+              <span className={`${darkMode ? "text-white" : "text-gray-900"}`}>
+                Improve readability
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+              <span className={`${darkMode ? "text-white" : "text-gray-900"}`}>
+                Rewrite old posts
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+              <span className={`${darkMode ? "text-white" : "text-gray-900"}`}>
+                Create SEO friendly variants
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+              <span className={`${darkMode ? "text-white" : "text-gray-900"}`}>
+                Fix duplicated content
+              </span>
+            </div>
+          </div>
+          <p className={`text-lg ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}>
+            You can also rewrite article without plagiarism to refresh outdated blog posts and boost rankings.
+          </p>
+        </div>
+      </div>
+
+      {/* Extra Tools We Offer */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Extra Tools <span className="text-[#D2F159]">We Offer</span>
+        </h2>
+        <p className={`text-lg text-center mb-8 ${
+          darkMode ? "text-gray-300" : "text-gray-700"
+        }`}>
+          Along with advanced paraphrasing, we help users with:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 border-l-4 border-[#D2F159]`}>
+            <h3 className={`font-bold text-xl mb-3 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              How to Check Plagiarism for Free
+            </h3>
+            <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              We provide free methods and tools to help you test originality.
+            </p>
+          </div>
+          <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 border-l-4 border-[#D2F159]`}>
+            <h3 className={`font-bold text-xl mb-3 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              TurnAI Plagiarism Remover
+            </h3>
+            <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              A special mode designed to rewrite text safely for Turnitin detection.
+            </p>
+          </div>
+          <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 border-l-4 border-[#D2F159]`}>
+            <h3 className={`font-bold text-xl mb-3 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              Rewrite Academic Text to Remove Plagiarism
+            </h3>
+            <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+              We ensure compliance with academic style guidelines using our academic paraphrasing tool online.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Comparison Table */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
           Manual Paraphrasing vs <span className="text-[#D2F159]">AI Paraphrasing</span>
         </h2>
-        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12 overflow-x-auto`}>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-6 overflow-x-auto`}>
           <table className="w-full">
             <thead>
               <tr className={`border-b-2 ${darkMode ? "border-gray-700" : "border-gray-200"}`}>
@@ -292,11 +391,11 @@ export default function ParaphraserWebCopy({ darkMode }) {
       </div>
 
       {/* FAQs */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto px-4 md:px-8">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
-          Frequently Asked <span className="text-[#D2F159]">Questions</span>
+          FAQs
         </h2>
         <div className="space-y-6">
           {faqs.map((faq, index) => (

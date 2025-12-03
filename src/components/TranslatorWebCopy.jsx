@@ -69,18 +69,18 @@ export default function TranslatorWebCopy({ darkMode }) {
   return (
     <div className="mx-auto">
       {/* Hero Section */}
-      <div className="m-12 mt-16 text-center md:max-w-[1240px] mx-auto">
+      <div className="m-12 mt-16 text-center md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
           Translate Any Language to <span className="text-[#D2F159]">English</span> & English to Any Language
         </h1>
-        <p className={`text-lg md:text-xl mx-auto mb-4 ${
+        <p className={`text-lg md:text-xl mx-auto md:px-8 px-4 mb-4 ${
           darkMode ? "text-gray-400" : "text-gray-600"
         }`}>
           Whether you are working with a single sentence or a long paragraph. It only takes a few seconds to translate any text between English and other languages whether you are working with a single sentence or a long paragraph. The Translator tool will translate your words in a readable version in the language of your choice.
         </p>
-        <p className={`text-lg md:text-xl mx-auto ${
+        <p className={`text-lg md:text-xl mx-auto md:px-8 px-4 ${
           darkMode ? "text-gray-400" : "text-gray-600"
         }`}>
           You can simply translate text between English and any language or between other languages and English, be it Portuguese to English any other language. Our tool makes sure that your message remains clear and easy to comprehend.
@@ -88,13 +88,13 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* What Makes Us Different */}
-      <div className="mt-16 mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mt-16 mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-6 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
           What Makes Our Translator <span className="text-[#D2F159]">Different</span>
         </h2>
-        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12 mx-auto`}>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12 mx-auto md:px-8 px-4`}>
           <p className={`text-lg md:text-xl text-center mb-4 ${
             darkMode ? "text-gray-300" : "text-gray-700"
           }`}>
@@ -126,7 +126,7 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* Supported Languages */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -170,13 +170,13 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* What You Can Translate */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
           What You Can <span className="text-[#D2F159]">Translate</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto md:px-8 px-4">
           {[
             { title: "Academic content", desc: "Translate study notes, research papers, or reference material." },
             { title: "Business documents", desc: "Emails, proposals, agreements, and reports." },
@@ -200,13 +200,13 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* How to Use */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
           Step by Step Instructions to Use <span className="text-[#D2F159]">Translator</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mx-auto md:px-8 px-4">
           {[
             { step: "01", title: "Paste Your Text", desc: "Paste your sentence, paragraph, or long content into the input box." },
             { step: "02", title: "Choose Your Language", desc: "Select from English, Korean, Vietnamese, Portuguese, Somali, Burmese, Dutch, Arabic, Bengali, Farsi, Malayalam, and more." },
@@ -218,7 +218,7 @@ export default function TranslatorWebCopy({ darkMode }) {
               key={index}
               className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 text-center`}
             >
-              <div className="w-12 h-12 bg-[#D2F159] rounded-full flex items-center justify-center mx-auto mb-4 text-black font-bold text-xl">
+              <div className="w-12 h-12 bg-[#D2F159] rounded-full flex items-center justify-center mx-auto md:px-8 px-4 mb-4 text-black font-bold text-xl">
                 {item.step}
               </div>
               <h3 className={`font-bold text-lg mb-2 ${darkMode ? "text-white" : "text-gray-900"}`}>
@@ -233,7 +233,7 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* Why Students Prefer */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -264,7 +264,7 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* Why Professionals Trust */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -295,7 +295,7 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* Why Researchers Use */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>
@@ -326,7 +326,7 @@ export default function TranslatorWebCopy({ darkMode }) {
       </div>
 
       {/* Benefits */}
-      <div className="mb-16 md:max-w-[1240px] mx-auto">
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
         <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}>

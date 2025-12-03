@@ -73,13 +73,13 @@ export default function TranslatorWebCopyTranslator({ darkMode }) {
           }`}>
             You can translate English to Vietnamese, English to Dutch, English to Polish, English to Burmese, English to Hmong, or even English to Creole. You can also switch from Portuguese to English, Somali to English, Haitian Creole to English, Taiwanese to English, Kinyarwanda to English, or convert Portugal language translation to English with complete clarity.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-6 md:gap-3 items-center">
             {languagePairs.map((pair, index) => (
               <span
                 key={index}
-                className={`${darkMode ? "bg-black" : "bg-white"} px-4 py-2 rounded-full text-sm font-medium ${
+                className={`${darkMode ? "bg-black" : "bg-white"} w-40 h-10 flex items-center justify-center rounded-full text-sm font-medium ${
                   darkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                } shadow-sm text-center `}
               >
                 {pair}
               </span>
@@ -152,7 +152,7 @@ export default function TranslatorWebCopyTranslator({ darkMode }) {
             {academicLanguages.map((lang, index) => (
               <div
                 key={index}
-                className={`${darkMode ? "bg-black" : "bg-white"} rounded-xl p-4 text-center`}
+                className={`${darkMode ? "bg-black" : "bg-white"} rounded-xl p-4 text-center shadow-sm`}
               >
                 <p className={`font-medium ${darkMode ? "text-white" : "text-gray-900"}`}>
                   {lang}
@@ -187,7 +187,7 @@ export default function TranslatorWebCopyTranslator({ darkMode }) {
                 key={index}
                 className={`${darkMode ? "bg-black" : "bg-white"} px-4 py-2 rounded-full text-sm font-medium ${
                   darkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                } shadow-sm`}
               >
                 {lang}
               </span>
@@ -257,6 +257,12 @@ export default function TranslatorWebCopyTranslator({ darkMode }) {
             className="bg-transparent border-2 border-[#D2F159] cursor-pointer text-[#D2F159] text-lg px-8 py-4 rounded-full hover:bg-[#D2F159] hover:text-black transition-colors"
           >
             Try Paraphraser
+          </Link>
+          <Link
+            to="/translator"
+            className="bg-transparent border-2 border-[#D2F159] cursor-pointer text-[#D2F159] text-lg px-8 py-4 rounded-full hover:bg-[#D2F159] hover:text-black transition-colors"
+          >
+            Try Translator
           </Link>
         </div>
       </div>

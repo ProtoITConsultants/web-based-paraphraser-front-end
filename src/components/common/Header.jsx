@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { EllipsisVertical, Menu, X } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 
 export default function Header({
   showSettings,
@@ -13,7 +13,6 @@ export default function Header({
   const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
   const [activeMode, setActiveMode] = useState("Home");
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isUserLoggedIn") === "true");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Check if on login page and redirected from admin
   const isAdminLoginAccess = location.pathname === "/login" && location.state?.from?.startsWith("/admin");
@@ -152,35 +151,33 @@ export default function Header({
     } else {
       setActiveMode(link.name);
     }
-    setIsMobileMenuOpen(false); // Close mobile menu on link click
   };
 
   return (
-    <>
-      <div
-        className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
-          darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
-        } items-center justify-between`}
-      >
-        <div className="flex items-center space-x-4">
-          <Link to="/" className="flex items-center space-x-3">
-            <div
-              className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
-                darkMode ? "bg-gray-700" : "bg-gray-100"
-              }`}
-            >
-              <img src="/Logo.png" className="rounded-full" alt="Paraphraser Logo" />
-            </div>
-            <h1
-              className={`text-lg md:text-2xl lg:text-3xl font-medium ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              {isAdminLoginAccess || isOnAdminRoute ? "Paraphraser Admin" : "Paraphraser"}
-            </h1>
-          </Link>
-        </div>
-        <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
+    <div
+      className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
+        darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
+      } items-center justify-between`}
+    >
+      <div className="flex items-center space-x-4">
+        <Link to="/" className="flex items-center space-x-3">
+          <div
+            className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
+              darkMode ? "bg-gray-700" : "bg-gray-100"
+            }`}
+          >
+            <img src="/Logo.png" className="rounded-full" alt="Paraphraser Logo" />
+          </div>
+          <h1
+            className={`text-lg md:text-2xl lg:text-3xl font-medium ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {isAdminLoginAccess || isOnAdminRoute ? "Paraphraser Admin" : "Paraphraser"}
+          </h1>
+        </Link>
+      </div>
+      <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
         {getVisibleLinks().map((link) => {
           const LinkComponent = link.isSpecial ? "div" : Link;
           const linkProps = link.isSpecial 
@@ -297,62 +294,5 @@ export default function Header({
         )}
       </div>
     </div>
-    
-    {/* Mobile Menu Overlay */}
-    {isMobileMenuOpen && (
-      <div
-        className={`fixed inset-0 z-20 md:hidden ${
-          darkMode ? "bg-[#101214]" : "bg-white"
-        }`}
-        style={{ top: '72px' }} // Adjust based on header height
-      >
-        <div className="flex flex-col p-6 space-y-4">
-          {getVisibleLinks().map((link) => {
-            const LinkComponent = link.isSpecial ? "div" : Link;
-            const linkProps = link.isSpecial 
-              ? { onClick: () => handleLinkClick(link) }
-              : { to: link.path, onClick: () => handleLinkClick(link) };
-
-            return (
-              <LinkComponent
-                key={link.name}
-                {...linkProps}
-                className={`text-xl py-3 border-b cursor-pointer ${
-                  darkMode
-                    ? `border-gray-700 ${activeMode === link.name ? "text-white font-semibold" : "text-gray-300"}`
-                    : `border-gray-200 ${activeMode === link.name ? "text-gray-900 font-semibold" : "text-gray-600"}`
-                }`}
-              >
-                {link.name}
-              </LinkComponent>
-            );
-          })}
-          
-          {!isLoggedIn && !isAdminLoginAccess && (
-            <div className="flex flex-col gap-3 pt-4">
-              <Link
-                to="/login"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-center ${
-                  darkMode
-                    ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
-                    : "bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700"
-                } px-6 py-3 rounded-2xl text-base`}
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-center hover:bg-lime-500 transition px-6 py-3 bg-[#D2F159] text-gray-900 rounded-2xl text-base"
-              >
-                Signup
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
-    )}
-  </>
   );
 }

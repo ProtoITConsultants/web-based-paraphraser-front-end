@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Settings, Moon, LogOut, Home, Phone, FileText } from "lucide-react";
+import { Settings, Moon, LogOut, Home, Phone, FileText, Type, Languages } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLogout } from "../../hooks/user";
 import { useQueryClient } from "@tanstack/react-query";
@@ -81,6 +81,34 @@ export default function SettingsPanel({ darkMode, setDarkMode, onClose }) {
             }`}
           >
             Home
+          </span>
+        </Link>
+        <Link to='/paraphraser' className="flex items-center space-x-2">
+          <Type
+            className={`w-4 h-4  ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Paraphraser
+          </span>
+        </Link>
+        <Link to='/translator' className="flex items-center space-x-2">
+          <Languages
+            className={`w-4 h-4  ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              darkMode ? "text-gray-200" : "text-gray-700"
+            }`}
+          >
+            Translator
           </span>
         </Link>
         <Link to="/blogs" className="flex items-center space-x-2">
