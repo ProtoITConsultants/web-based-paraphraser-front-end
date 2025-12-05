@@ -32,6 +32,16 @@ export default function TranslatorArea({ darkMode }) {
   const [translationLoading, setTranslationLoading] = useState(false);
   const [hasTranslated, setHasTranslated] = useState(false); // Track if user has translated at least once
 
+  // Frequently used languages
+  const frequentlyUsedLanguages = [
+    { code: "en", name: "English" },
+    { code: "es", name: "Spanish" },
+    { code: "zh-CN", name: "Chinese" },
+    { code: "fr", name: "French" },
+    { code: "de", name: "German" },
+    { code: "ar", name: "Arabic" }
+  ];
+
   const countWords = (text) => {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
   };
@@ -177,7 +187,7 @@ export default function TranslatorArea({ darkMode }) {
       if (result?.data?.translations?.[0]) {
         setTranslatedText(result.data.translations[0].translatedText);
         if (!hasTranslated) {
-          toast.success("Translation completed!");
+          
         }
       } else {
         toast.error("Translation failed. Please try again.");
@@ -287,14 +297,40 @@ export default function TranslatorArea({ darkMode }) {
     setTargetLanguage(langCode);
     setIsTargetDropdownOpen(false);
     setTargetSearchTerm("");
+    
+    // Count as usage when changing language if not logged in
+    if (!isUserLoggedIn && hasTranslated) {
+      let usedCount = parseInt(localStorage.getItem("translatorUsedCount") || 0);
+      const usedCountDate = localStorage.getItem("translatorUsedCountDate") || getCurrentDate();
+      const currentDate = getCurrentDate();
+
+      if (usedCountDate !== currentDate) {
+        usedCount = 0;
+        localStorage.setItem("translatorUsedCount", 0);
+        localStorage.setItem("translatorUsedCountDate", currentDate);
+        localStorage.setItem("showTranslatorLoginPopup", "false");
+        setShowLoginPopup(false);
+      }
+
+      if (usedCount >= 3) {
+        setShowLoginPopup(true);
+        localStorage.setItem("showTranslatorLoginPopup", "true");
+        return;
+      }
+
+      usedCount += 1;
+      localStorage.setItem("translatorUsedCount", usedCount);
+      localStorage.setItem("translatorUsedCountDate", currentDate);
+      toast.success(`You have used ${usedCount} out of 3 translations for today.`);
+    }
   };
 
   return (
     <>
-      <div id="translator" className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-8">
+      <div id="translator" className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 md:px-8">
         {/* Input Area */}
         <div className={`rounded-2xl p-6 ${darkMode ? "bg-black" : "bg-gray-100"}`}>
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between">
             <h2 className={`text-xl font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
               Enter Text
             </h2>
@@ -310,35 +346,68 @@ export default function TranslatorArea({ darkMode }) {
                 <ChevronDown />
               </button>
               {isSourceDropdownOpen && (
-                <div className={`absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-10 overflow-hidden ${
+                <div className={`absolute right-0 mt-2 w-[440px] rounded-lg shadow-lg z-10 overflow-hidden ${
                   darkMode ? "bg-[#101214] text-white" : "bg-white text-gray-900"
                 }`}>
                   <input
                     type="text"
                     value={sourceSearchTerm}
                     onChange={(e) => setSourceSearchTerm(e.target.value)}
-                    placeholder="Search language..."
-                    className={`w-full px-3 py-2 text-sm border-b focus:outline-none ${
-                      darkMode ? "bg-[#101214] text-white border-gray-700" : "bg-white text-gray-900 border-gray-200"
+                    placeholder="Search"
+                    className={`w-full px-4 py-3 text-sm border-b focus:outline-none ${
+                      darkMode ? "bg-[#101214] text-white border-gray-700 placeholder-gray-500" : "bg-white text-gray-900 border-gray-200 placeholder-gray-400"
                     }`}
                   />
-                  <ul className="max-h-60 overflow-y-auto">
+                  <ul className="max-h-80 overflow-y-auto">
                     {languagesLoading ? (
-                      <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>
-                    ) : filteredSourceLanguages.length > 0 ? (
-                      filteredSourceLanguages.map((lang) => (
-                        <li
-                          key={lang.code}
-                          onClick={() => handleSourceLanguageChange(lang.code)}
-                          className={`px-3 py-2 text-sm cursor-pointer ${
-                            darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                          }`}
-                        >
-                          {lang.name}
-                        </li>
-                      ))
+                      <li className="px-4 py-2 text-sm text-gray-500">Loading...</li>
                     ) : (
-                      <li className="px-3 py-2 text-sm text-gray-500">No languages found</li>
+                      <>
+                        {!sourceSearchTerm && (
+                          <>
+                            <li className={`px-4 py-2 text-xs font-medium uppercase tracking-wider ${
+                              darkMode ? "text-gray-400" : "text-gray-500"
+                            }`}>
+                              SUGGESTED LANGUAGES
+                            </li>
+                            <li className="px-4 pb-2">
+                              <div className="grid grid-cols-3 gap-2">
+                                {frequentlyUsedLanguages.map((lang) => (
+                                  <button
+                                    key={`freq-${lang.code}`}
+                                    onClick={() => handleSourceLanguageChange(lang.code)}
+                                    className={`px-3 py-2 text-sm cursor-pointer rounded-lg text-center transition ${
+                                      darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                                    } ${sourceLanguage === lang.code ? (darkMode ? "bg-blue-900/30" : "bg-blue-50") : ""}`}
+                                  >
+                                    {lang.name}
+                                  </button>
+                                ))}
+                              </div>
+                            </li>
+                            <li className={`px-4 py-2 text-xs font-medium uppercase tracking-wider border-t mt-2 ${
+                              darkMode ? "text-gray-400 border-gray-700" : "text-gray-500 border-gray-200"
+                            }`}>
+                              ALL LANGUAGES
+                            </li>
+                          </>
+                        )}
+                        {filteredSourceLanguages.length > 0 ? (
+                          filteredSourceLanguages.map((lang) => (
+                            <li
+                              key={lang.code}
+                              onClick={() => handleSourceLanguageChange(lang.code)}
+                              className={`px-4 py-2.5 text-sm cursor-pointer ${
+                                darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                              } ${sourceLanguage === lang.code ? (darkMode ? "bg-blue-900/30" : "bg-blue-50") : ""}`}
+                            >
+                              {lang.name}
+                            </li>
+                          ))
+                        ) : (
+                          <li className="px-4 py-2 text-sm text-gray-500">No languages found</li>
+                        )}
+                      </>
                     )}
                   </ul>
                 </div>
@@ -357,13 +426,17 @@ export default function TranslatorArea({ darkMode }) {
             <button
               onClick={handleTranslate}
               disabled={translationLoading || !inputText.trim()}
-              className={`px-6 py-2 rounded-xl font-medium transition-colors ${
-                translationLoading || !inputText.trim()
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-[#D2F159] text-gray-900 hover:bg-lime-500"
+              className={`bg-lime-300 cursor-pointer hover:bg-[#D2F159] text-gray-900 font-medium px-8 py-3 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D2F159] focus:ring-offset-1 flex items-center justify-center gap-2 ${
+                translationLoading || !inputText.trim() ? 'opacity-60 cursor-not-allowed' : ''
               }`}
             >
-              {translationLoading ? "Translating..." : "Translate"}
+              {translationLoading ? (
+                <svg className="animate-spin h-5 w-5 text-gray-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+              ) : null}
+              {translationLoading ? 'Translating...' : 'Translate'}
             </button>
           </div>
         </div>
@@ -386,41 +459,77 @@ export default function TranslatorArea({ darkMode }) {
                 >
                   <span>{targetLangName}</span>
                   {translationLoading ? (
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-gray-300 border-t-transparent"></div>
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
                   ) : (
                     <ChevronDown className="w-4 h-4" />
                   )}
                 </button>
                 {isTargetDropdownOpen && !translationLoading && (
-                  <div className={`absolute right-0 mt-2 w-48 rounded-lg shadow-lg z-10 overflow-hidden ${
+                  <div className={`absolute right-0 mt-2 w-[440px] rounded-lg shadow-lg z-10 overflow-hidden ${
                     darkMode ? "bg-[#101214] text-white" : "bg-white text-gray-900"
                   }`}>
                     <input
                       type="text"
                       value={targetSearchTerm}
                       onChange={(e) => setTargetSearchTerm(e.target.value)}
-                      placeholder="Search language..."
-                      className={`w-full px-3 py-2 text-sm border-b focus:outline-none ${
-                        darkMode ? "bg-[#101214] text-white border-gray-700" : "bg-white text-gray-900 border-gray-200"
+                      placeholder="Search"
+                      className={`w-full px-4 py-3 text-sm border-b focus:outline-none ${
+                        darkMode ? "bg-[#101214] text-white border-gray-700 placeholder-gray-500" : "bg-white text-gray-900 border-gray-200 placeholder-gray-400"
                       }`}
                     />
-                    <ul className="max-h-60 overflow-y-auto">
+                    <ul className="max-h-80 overflow-y-auto">
                       {languagesLoading ? (
-                        <li className="px-3 py-2 text-sm text-gray-500">Loading...</li>
-                      ) : filteredTargetLanguages.length > 0 ? (
-                        filteredTargetLanguages.map((lang) => (
-                          <li
-                            key={lang.code}
-                            onClick={() => handleTargetLanguageChange(lang.code)}
-                            className={`px-3 py-2 text-sm cursor-pointer ${
-                              darkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                            }`}
-                          >
-                            {lang.name}
-                          </li>
-                        ))
+                        <li className="px-4 py-2 text-sm text-gray-500">Loading...</li>
                       ) : (
-                        <li className="px-3 py-2 text-sm text-gray-500">No languages found</li>
+                        <>
+                          {!targetSearchTerm && (
+                            <>
+                              <li className={`px-4 py-2 text-xs font-medium uppercase tracking-wider ${
+                                darkMode ? "text-gray-400" : "text-gray-500"
+                              }`}>
+                                SUGGESTED LANGUAGES
+                              </li>
+                              <li className="px-4 pb-2">
+                                <div className="grid grid-cols-3 gap-2">
+                                  {frequentlyUsedLanguages.map((lang) => (
+                                    <button
+                                      key={`freq-${lang.code}`}
+                                      onClick={() => handleTargetLanguageChange(lang.code)}
+                                      className={`px-3 py-2 text-sm cursor-pointer rounded-lg text-center transition ${
+                                        darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                                      } ${targetLanguage === lang.code ? (darkMode ? "bg-blue-900/30" : "bg-blue-50") : ""}`}
+                                    >
+                                      {lang.name}
+                                    </button>
+                                  ))}
+                                </div>
+                              </li>
+                              <li className={`px-4 py-2 text-xs font-medium uppercase tracking-wider border-t mt-2 ${
+                                darkMode ? "text-gray-400 border-gray-700" : "text-gray-500 border-gray-200"
+                              }`}>
+                                ALL LANGUAGES
+                              </li>
+                            </>
+                          )}
+                          {filteredTargetLanguages.length > 0 ? (
+                            filteredTargetLanguages.map((lang) => (
+                              <li
+                                key={lang.code}
+                                onClick={() => handleTargetLanguageChange(lang.code)}
+                                className={`px-4 py-2.5 text-sm cursor-pointer ${
+                                  darkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                                } ${targetLanguage === lang.code ? (darkMode ? "bg-blue-900/30" : "bg-blue-50") : ""}`}
+                              >
+                                {lang.name}
+                              </li>
+                            ))
+                          ) : (
+                            <li className="px-4 py-2 text-sm text-gray-500">No languages found</li>
+                          )}
+                        </>
                       )}
                     </ul>
                   </div>

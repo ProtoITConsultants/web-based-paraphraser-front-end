@@ -56,12 +56,47 @@ export default function Header({
   const isAdminLoginAccess = location.pathname === "/login" && location.state?.from?.startsWith("/admin");
   const isOnAdminRoute = location.pathname.startsWith("/admin");
 
-  // Special handlers for navigation items
-  const navigationHandlers = {
-    handleContactClick: () => {
-      setActiveMode("contact");
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  // Navigation links configuration
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+      showOnRegular: true,
+      showOnAdmin: false,
     },
+    {
+      name: "Paraphraser",
+      path: "/paraphraser",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Translator",
+      path: "/translator",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Blogs",
+      path: "/Blogs",
+      showOnRegular: true,
+      showOnAdmin: true,
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      showOnRegular: true,
+      showOnAdmin: false,
+      isSpecial: true, // For special click handling
+    },
+  ];
+
+  // Filter links based on current route
+  const getVisibleLinks = () => {
+    if (isAdminLoginAccess || isOnAdminRoute) {
+      return navLinks.filter(link => link.showOnAdmin);
+    }
+    return navLinks.filter(link => link.showOnRegular);
   };
 
   // Sync auth state
@@ -108,12 +143,19 @@ export default function Header({
   // Sync activeMode with route
   useEffect(() => {
     const path = location.pathname.toLowerCase();
-    const activeLink = NAV_LINKS.find(link => {
-      if (link.path === "/" && path === "/") return true;
-      if (link.path !== "/" && path.startsWith(link.path)) return true;
-      return false;
+    
+    // Find the matching link from navLinks array
+    const matchingLink = navLinks.find(link => {
+      const linkPath = link.path.toLowerCase();
+      // Exact match for paths
+      return path === linkPath || (path === "/" && linkPath === "/");
     });
-    setActiveMode(activeLink?.id || "");
+    
+    if (matchingLink) {
+      setActiveMode(matchingLink.name);
+    } else {
+      setActiveMode(""); // No active link for other routes
+    }
   }, [location.pathname]);
 
   const toggleSettings = () => {
@@ -128,65 +170,14 @@ export default function Header({
     return NAV_LINKS.filter(link => !link.showOnAdmin || link.path === "/blogs");
   };
 
-  // Render a single navigation link
-  const renderNavLink = (link) => {
-    const isActive = activeMode === link.id;
-    const linkClasses = `relative pb-2 text-base md:text-lg cursor-pointer ${
-      darkMode
-        ? isActive
-          ? "text-white"
-          : "text-gray-300 hover:text-gray-300"
-        : isActive
-        ? "text-gray-900"
-        : "text-gray-600 hover:text-gray-900"
-    }`;
-
-    const underlineClasses = `absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
-      darkMode
-        ? isActive
-          ? "bg-white opacity-100 scale-x-100"
-          : "bg-gray-400 opacity-0 scale-x-0"
-        : isActive
-        ? "bg-gray-900 opacity-100 scale-x-100"
-        : "bg-gray-600 opacity-0 scale-x-0"
-    }`;
-
-    const handleClick = () => {
-      setActiveMode(link.id);
-      if (link.onClick && navigationHandlers[link.onClick]) {
-        navigationHandlers[link.onClick]();
-      }
-    };
-
-    // If link has special onClick handler (like Contact)
-    if (link.onClick) {
-      return (
-        <div
-          key={link.id}
-          onClick={handleClick}
-          className={linkClasses}
-        >
-          {link.label}
-          <div className={underlineClasses} />
-        </div>
-      );
+  // Handle link click
+  const handleLinkClick = (link) => {
+    if (link.isSpecial && link.name === "Contact") {
+      handleContactClick();
+    } else {
+      setActiveMode(link.name);
     }
-
-    // Regular link
-    return (
-      <Link
-        key={link.id}
-        to={link.path}
-        onClick={handleClick}
-        className={linkClasses}
-      >
-        {link.label}
-        <div className={underlineClasses} />
-      </Link>
-    );
   };
-
-  const visibleLinks = getVisibleLinks();
 
   return (
     <div
@@ -215,11 +206,78 @@ export default function Header({
 
       {/* Desktop Navigation */}
       <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
-        {visibleLinks.map(link => renderNavLink(link))}
+        {getVisibleLinks().map((link) => {
+          const LinkComponent = link.isSpecial ? "div" : Link;
+          const linkProps = link.isSpecial 
+            ? { onClick: () => handleLinkClick(link) }
+            : { to: link.path, onClick: () => handleLinkClick(link) };
+
+          return (
+            <LinkComponent
+              key={link.name}
+              {...linkProps}
+              className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                darkMode
+                  ? activeMode === link.name
+                    ? "text-white"
+                    : "text-gray-300 hover:text-gray-300"
+                  : activeMode === link.name
+                  ? "text-gray-900"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              {link.name}
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "bg-white opacity-100 scale-x-100"
+                      : "bg-gray-400 opacity-0 scale-x-0"
+                    : activeMode === link.name
+                    ? "bg-gray-900 opacity-100 scale-x-100"
+                    : "bg-gray-600 opacity-0 scale-x-0"
+                }`}
+              />
+            </LinkComponent>
+          );
+        })}
       </div>
 
       {/* Right side: Auth buttons or Profile */}
       <div className="ml-auto flex items-center gap-2 md:gap-3">
+        {(isOnAdminRoute || isAdminLoginAccess) && 
+          navLinks
+            .filter(link => link.name === "Blogs" && link.showOnAdmin)
+            .map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => handleLinkClick(link)}
+                className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "text-white"
+                      : "text-gray-300 hover:text-gray-300"
+                    : activeMode === link.name
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {link.name}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                    darkMode
+                      ? activeMode === link.name
+                        ? "bg-white opacity-100 scale-x-100"
+                        : "bg-gray-400 opacity-0 scale-x-0"
+                      : activeMode === link.name
+                      ? "bg-gray-900 opacity-100 scale-x-100"
+                      : "bg-gray-600 opacity-0 scale-x-0"
+                  }`}
+                />
+              </Link>
+            ))
+        }
         {!isLoggedIn && !isAdminLoginAccess && (
           <>
             <Link

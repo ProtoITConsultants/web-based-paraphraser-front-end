@@ -1,10 +1,10 @@
 import { useOutletContext, useLocation } from "react-router-dom";
 import ParaphrasingTool from "../components/ParaphrasingTool";
 import Landing from "./Landing";
+import ParaphraserWebCopy from "../components/ParaphraserWebCopy";
 import { useEffect, useState } from "react";
-import { TranslatorWrapper } from "./TranslatorWrapper";
 
-export default function Home() {
+export default function Paraphraser() {
   const { darkMode, setDarkMode, data } = useOutletContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const location = useLocation();
@@ -24,8 +24,7 @@ export default function Home() {
         setDarkMode={setDarkMode}
         data={data}
       />
-      {!isUserLoggedIn && <Landing darkMode={darkMode} setDarkMode={setDarkMode} />}
-      {!isUserLoggedIn && isHomeRoute && <TranslatorWrapper darkMode={darkMode} setDarkMode={setDarkMode} />}
+      {!isUserLoggedIn && <ParaphraserWebCopy darkMode={darkMode} />}
     </div>
   );
 }

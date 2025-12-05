@@ -9,6 +9,9 @@ import SignupForm from "./pages/SignupForm";
 import LoginForm from "./pages/Login";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
+import Translator from "./pages/Translator";
+import { TranslatorWrapper } from "./pages/TranslatorWrapper";
+import Paraphraser from "./pages/Paraphraser";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +21,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/translator",
+        element: <TranslatorWrapper />,
+      },
+      {
+        path: "/paraphraser",
+        element: <Paraphraser />,
       },
       {
         path: "/privacy",
