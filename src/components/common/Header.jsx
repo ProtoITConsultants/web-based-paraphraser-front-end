@@ -162,13 +162,6 @@ export default function Header({
     setShowSettings(!showSettings);
   };
 
-  // Filter links based on current route context
-  const getVisibleLinks = () => {
-    if (isAdminLoginAccess || isOnAdminRoute) {
-      return NAV_LINKS.filter(link => link.showOnAdmin);
-    }
-    return NAV_LINKS.filter(link => !link.showOnAdmin || link.path === "/blogs");
-  };
 
   // Handle link click
   const handleLinkClick = (link) => {
