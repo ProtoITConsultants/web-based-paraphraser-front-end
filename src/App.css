@@ -1,0 +1,47 @@
+.settings-tabs .mantine-Tabs-list {
+    width: 229px;
+}
+
+.settings-tabs .mantine-Tabs-list button {
+    border: none;
+}
+
+.settings-tabs .mantine-focus-auto {
+    padding: 0;
+}
+
+.settings-tabs .mantine-TextInput-error {
+    color: red;
+    font-size: 12px;
+}
+
+.mantine-Tabs-tab[data-active='true']:focus {
+    outline: none;
+    background: transparent !important;
+}
+
+.settings-tabs .mantine-Tabs-list::before {
+    display: none;
+}
+
+.mantine-PasswordInput-input {
+    background: transparent !important;
+    border: none !important;
+}
+
+.dark .mantine-PasswordInput-input {
+    color: white;
+}
+
+@media screen and (max-width: 767px) {
+    .settings-tabs .mantine-Tabs-root {
+        flex-direction: column;
+    }
+
+    .settings-tabs .mantine-Tabs-list {
+        flex-direction: row;
+        width: 100%;
+    }
+
+
+}

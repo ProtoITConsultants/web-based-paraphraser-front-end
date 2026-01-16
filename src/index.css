@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+/* Remove outline from TipTap editor */
+.ProseMirror:focus {
+  outline: none !important;
+}
+
+/* Blog Content Rendering - Enhanced Dark Mode Support */
+.blog-content.dark h1,
+.blog-content.dark h2,
+.blog-content.dark h3,
+.blog-content.dark h4,
+.blog-content.dark h5,
+.blog-content.dark h6 {
+  color: #ffffff !important;
+}
+
+.blog-content.dark p,
+.blog-content.dark li,
+.blog-content.dark td,
+.blog-content.dark th {
+  color: #d1d5db !important;
+}
+
+.blog-content.dark strong,
+.blog-content.dark b {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.blog-content.dark em,
+.blog-content.dark i {
+  color: #d1d5db !important;
+}
+
+.blog-content.dark a {
+  color: #D2F159 !important;
+}
+
+.blog-content.dark blockquote {
+  color: #d1d5db !important;
+  background-color: rgba(23, 25, 28, 0.5) !important;
+  border-left-color: #D2F159 !important;
+}
+
+.blog-content.dark code {
+  color: #D2F159 !important;
+  background-color: #1f2937 !important;
+}
+
+.blog-content.dark mark {
+  color: #111827 !important;
+  background-color: rgba(254, 240, 138, 0.3) !important;
+}
+
+.blog-content.dark ul,
+.blog-content.dark ol {
+  color: #d1d5db !important;
+}
+
+.blog-content.dark table {
+  color: #d1d5db !important;
+}
+
+/* Ensure all text elements have proper contrast in dark mode */
+.blog-content.dark * {
+  border-color: #374151;
+}
+
+/* TipTap Editor Styles - Enhanced Visual Formatting */
+.ProseMirror {
+  min-height: 500px;
+  outline: none !important;
+  color: #111827;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.dark .ProseMirror {
+  color: #f3f4f6;
+}
+
+.ProseMirror:focus {
+  outline: none !important;
+}
+
+/* Headings - Very Distinct */
+.ProseMirror h1 {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  margin: 0rem 0 1rem 0 !important;
+  color: #111827 !important;
+  letter-spacing: -0.02em;
+}
+
+.dark .ProseMirror h1 {
+  color: #ffffff !important;
+}
+
+.ProseMirror h2 {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 0rem 0 0.875rem 0 !important;
+  color: #111827 !important;
+  letter-spacing: -0.01em;
+}
+
+.dark .ProseMirror h2 {
+  color: #ffffff !important;
+}
+
+.ProseMirror h3 {
+  font-size: 1.625rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  margin: 0rem 0 0.75rem 0 !important;
+  color: #111827 !important;
+}
+
+.dark .ProseMirror h3 {
+  color: #ffffff !important;
+}
+
+/* Paragraphs - Clear Spacing */
+.ProseMirror p {
+  margin: 0 0 1.25rem 0 !important;
+  line-height: 1.8 !important;
+  color: #374151 !important;
+  font-size: 1rem !important;
+}
+
+.dark .ProseMirror p {
+  color: #d1d5db !important;
+}
+
+/* Lists - Clearly Visible */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 0 0 2rem !important;
+  margin: 1rem 0 !important;
+  color: #374151 !important;
+}
+
+.dark .ProseMirror ul,
+.dark .ProseMirror ol {
+  color: #d1d5db !important;
+}
+
+.ProseMirror ul {
+  list-style-type: disc !important;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal !important;
+}
+
+.ProseMirror ul li::marker {
+  color: #6b7280 !important;
+  font-size: 1.2em;
+}
+
+.dark .ProseMirror ul li::marker {
+  color: #9ca3af !important;
+}
+
+.ProseMirror ol li::marker {
+  color: #6b7280 !important;
+  font-weight: 600;
+}
+
+.dark .ProseMirror ol li::marker {
+  color: #9ca3af !important;
+}
+
+.ProseMirror ul ul {
+  list-style-type: circle !important;
+  margin: 0.5rem 0 !important;
+}
+
+.ProseMirror ol ol {
+  list-style-type: lower-alpha !important;
+  margin: 0.5rem 0 !important;
+}
+
+.ProseMirror li {
+  margin: 0.5rem 0 !important;
+  line-height: 1.75 !important;
+  color: #374151 !important;
+  padding-left: 0.5rem !important;
+}
+
+.dark .ProseMirror li {
+  color: #d1d5db !important;
+}
+
+.ProseMirror li p {
+  margin: 0.25rem 0 !important;
+}
+
+/* Blockquotes - Highly Visible */
+.ProseMirror blockquote {
+  border-left: 5px solid #D2F159 !important;
+  padding: 1rem 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  font-style: italic !important;
+  color: #4b5563 !important;
+  background: linear-gradient(90deg, #f9fafb 0%, transparent 100%) !important;
+  border-radius: 0 0.75rem 0.75rem 0 !important;
+  font-size: 1.05rem !important;
+}
+
+.dark .ProseMirror blockquote {
+  color: #d1d5db !important;
+  background: linear-gradient(90deg, rgba(31, 41, 55, 0.8) 0%, transparent 100%) !important;
+}
+
+/* Links - Bright and Obvious */
+.ProseMirror a {
+  color: #D2F159 !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+}
+
+.ProseMirror a:hover {
+  opacity: 0.8 !important;
+  text-decoration: underline !important;
+}
+
+/* Images - Clear Borders */
+.ProseMirror img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.75rem !important;
+  margin: 2rem 0 !important;
+  display: block !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  border: 2px solid #e5e7eb !important;
+}
+
+.dark .ProseMirror img {
+  border-color: #374151 !important;
+}
+
+/* Highlights - Very Visible */
+.ProseMirror mark {
+  padding: 0.15rem 0.35rem !important;
+  border-radius: 0.25rem !important;
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+
+.dark .ProseMirror mark {
+  color: #111827 !important;
+}
+
+/* Code - Distinct Appearance */
+.ProseMirror code {
+  background-color: #f3f4f6 !important;
+  color: #D2F159 !important;
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.9em !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-weight: 500 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.dark .ProseMirror code {
+  background-color: #1f2937 !important;
+  color: #D2F159 !important;
+  border-color: #374151 !important;
+}
+
+.ProseMirror pre {
+  background-color: #1f2937 !important;
+  color: #e5e7eb !important;
+  padding: 1.5rem !important;
+  border-radius: 0.75rem !important;
+  overflow-x: auto !important;
+  margin: 1.5rem 0 !important;
+  border: 1px solid #374151 !important;
+}
+
+.ProseMirror pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: 1em !important;
+  border: none !important;
+}
+
+/* Horizontal Rule */
+.ProseMirror hr {
+  border: none !important;
+  border-top: 3px solid #e5e7eb !important;
+  margin: 3rem 0 !important;
+  border-radius: 2px !important;
+}
+
+.dark .ProseMirror hr {
+  border-top-color: #374151 !important;
+}
+
+/* Text Styles - Bold and Clear */
+.ProseMirror strong,
+.ProseMirror b {
+  font-weight: 700 !important;
+  color: #111827 !important;
+}
+
+.dark .ProseMirror strong,
+.dark .ProseMirror b {
+  color: #ffffff !important;
+}
+
+.ProseMirror em,
+.ProseMirror i {
+  font-style: italic !important;
+  color: #374151 !important;
+}
+
+.dark .ProseMirror em,
+.dark .ProseMirror i {
+  color: #d1d5db !important;
+}
+
+.ProseMirror s {
+  text-decoration: line-through !important;
+  opacity: 0.7;
+}
+
+.ProseMirror u {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 2px !important;
+}

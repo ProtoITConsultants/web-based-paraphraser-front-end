@@ -1,0 +1,342 @@
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { EllipsisVertical } from "lucide-react";
+
+export default function Header({
+  showSettings,
+  setShowSettings,
+  darkMode,
+  data,
+}) {
+  const [url, setUrl] = useState("");
+  const location = useLocation();
+  const [isNonGoogleSignedIn, setIsNonGoogleSignedIn] = useState(false);
+  const [activeMode, setActiveMode] = useState("Home");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isUserLoggedIn") === "true"
+  );
+  const settingsTriggerRef = useRef(null);
+
+  // Check if on login page and redirected from admin
+  const isAdminLoginAccess =
+    location.pathname === "/login" &&
+    location.state?.from?.startsWith("/admin");
+
+  // Check if currently on admin route
+  const isOnAdminRoute = location.pathname.startsWith("/admin");
+
+  // Navigation links configuration
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Paraphraser",
+      path: "/AI-paraphrasing-tool/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Translator",
+      path: "/AI-translation/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Summarizer",
+      path: "/AI-generated-summaries/",
+      showOnRegular: true,
+      showOnAdmin: false,
+    },
+    {
+      name: "Blogs",
+      path: "/Blogs",
+      showOnRegular: true,
+      showOnAdmin: true,
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+      showOnRegular: true,
+      showOnAdmin: false,
+      isSpecial: true, // For special click handling
+    },
+  ];
+
+  // Filter links based on current route
+  const getVisibleLinks = () => {
+    if (isAdminLoginAccess || isOnAdminRoute) {
+      return navLinks.filter((link) => link.showOnAdmin);
+    }
+    return navLinks.filter((link) => link.showOnRegular);
+  };
+
+  // Sync auth state
+  useEffect(() => {
+    const updateAuthState = () => {
+      const googleLogin = localStorage.getItem("googleLogin") === "true";
+      const isUserLoggedIn = localStorage.getItem("isUserLoggedIn") === "true";
+      const userProfile = JSON.parse(
+        localStorage.getItem("userProfile") || "{}"
+      );
+
+      console.log("Header - updateAuthState called");
+      console.log("Header - isUserLoggedIn:", isUserLoggedIn);
+
+      // If user is not logged in, clear all state
+      if (!isUserLoggedIn) {
+        setUrl("");
+        setIsNonGoogleSignedIn(false);
+        setIsLoggedIn(false);
+        return;
+      }
+
+      // Set profile picture URL
+      let profileUrl = "";
+      if (googleLogin && userProfile?.profile?.picture) {
+        profileUrl = userProfile.profile.picture;
+      } else if (data?.user?.profilePicture?.url) {
+        profileUrl = data.user.profilePicture.url;
+      }
+      setUrl(profileUrl);
+
+      // Determine if user is signed in but not via Google and has no profile picture
+      setIsNonGoogleSignedIn(
+        isUserLoggedIn &&
+          !googleLogin &&
+          !userProfile?.profile?.picture &&
+          !data?.user?.profilePicture?.url
+      );
+      setIsLoggedIn(isUserLoggedIn);
+    };
+
+    updateAuthState();
+
+    // Listen for custom authChanged event
+    window.addEventListener("authChanged", updateAuthState);
+
+    // Listen for storage changes (for multi-tab support)
+    window.addEventListener("storage", updateAuthState);
+
+    return () => {
+      window.removeEventListener("authChanged", updateAuthState);
+      window.removeEventListener("storage", updateAuthState);
+    };
+  }, [data]);
+
+  // Sync activeMode with route
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+
+    // Find the matching link from navLinks array
+    const matchingLink = navLinks.find((link) => {
+      const linkPath = link.path.toLowerCase();
+      // Check if path contains the linkPath
+      if (linkPath === "/") {
+        return path === "/";
+      }
+      return path.includes(linkPath);
+    });
+
+    if (matchingLink) {
+      setActiveMode(matchingLink.name);
+    } else {
+      setActiveMode(""); // No active link for other routes
+    }
+  }, [location.pathname]);
+
+  // Close settings panel when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (settingsTriggerRef.current && !settingsTriggerRef.current.contains(event.target)) {
+        if (showSettings) {
+          setShowSettings(false);
+        }
+      }
+    };
+
+    if (showSettings) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSettings, setShowSettings]);
+
+  // Toggle settings panel visibility
+  const toggleSettings = () => {
+    console.log(
+      showSettings ? "Closing settings panel" : "Opening settings panel"
+    );
+    setShowSettings(!showSettings);
+  };
+
+  // Scroll to bottom on Contact click
+  const handleContactClick = () => {
+    setActiveMode("Contact");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
+
+  // Handle link click
+  const handleLinkClick = (link) => {
+    if (link.isSpecial && link.name === "Contact") {
+      handleContactClick();
+    } else {
+      setActiveMode(link.name);
+    }
+  };
+
+  return (
+    <div
+      className={`flex fixed top-0 z-10 w-full py-4 px-4 md:px-8 border-b ${
+        darkMode ? "bg-[#101214] border-gray-700" : "bg-white border-gray-200"
+      } items-center justify-between z-100`}
+    >
+      <div className="flex items-center space-x-4">
+        <Link to="/" className="flex items-center space-x-3">
+          <div
+            className={` md:w-12 md:h-12 rounded-2xl flex items-center justify-center p-2 ${
+              darkMode ? "bg-gray-700" : "bg-gray-100"
+            }`}
+          >
+            <img
+              src="/Logo.png"
+              className="rounded-full"
+              alt="Paraphraser Logo"
+            />
+          </div>
+          <h1
+            className={`text-lg md:text-2xl lg:text-3xl font-medium ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
+            {isAdminLoginAccess || isOnAdminRoute
+              ? "Paraphraser Admin"
+              : "Paraphraser"}
+          </h1>
+        </Link>
+      </div>
+      <div className="md:flex hidden items-center justify-center gap-10 flex-grow">
+        {getVisibleLinks().map((link) => {
+          const LinkComponent = link.isSpecial ? "div" : Link;
+          const linkProps = link.isSpecial
+            ? { onClick: () => handleLinkClick(link) }
+            : { to: link.path, onClick: () => handleLinkClick(link) };
+
+          return (
+            <LinkComponent
+              key={link.name}
+              {...linkProps}
+              className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                darkMode
+                  ? activeMode === link.name
+                    ? "text-white"
+                    : "text-gray-300 hover:text-gray-300"
+                  : activeMode === link.name
+                  ? "text-gray-900"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              {link.name}
+              <div
+                className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "bg-white opacity-100 scale-x-100"
+                      : "bg-gray-400 opacity-0 scale-x-0"
+                    : activeMode === link.name
+                    ? "bg-gray-900 opacity-100 scale-x-100"
+                    : "bg-gray-600 opacity-0 scale-x-0"
+                }`}
+              />
+            </LinkComponent>
+          );
+        })}
+      </div>
+      <div className="ml-auto flex items-center gap-2 md:gap-3" ref={settingsTriggerRef}>
+        {(isOnAdminRoute || isAdminLoginAccess) &&
+          navLinks
+            .filter((link) => link.name === "Blogs" && link.showOnAdmin)
+            .map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                onClick={() => handleLinkClick(link)}
+                className={`relative pb-2 text-base md:text-lg cursor-pointer ${
+                  darkMode
+                    ? activeMode === link.name
+                      ? "text-white"
+                      : "text-gray-300 hover:text-gray-300"
+                    : activeMode === link.name
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {link.name}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-0.5 transition-all duration-300 ease-in-out ${
+                    darkMode
+                      ? activeMode === link.name
+                        ? "bg-white opacity-100 scale-x-100"
+                        : "bg-gray-400 opacity-0 scale-x-0"
+                      : activeMode === link.name
+                      ? "bg-gray-900 opacity-100 scale-x-100"
+                      : "bg-gray-600 opacity-0 scale-x-0"
+                  }`}
+                />
+              </Link>
+            ))}
+        {!isLoggedIn && !isAdminLoginAccess && (
+          <>
+            <Link
+              className={`${
+                darkMode
+                  ? "bg-gray-900 hover:bg-gray-800 text-gray-300"
+                  : "bg-gray-100 border-gray-200 hover:bg-gray-200 text-gray-700"
+              } text-xs px-2 md:px-6 md:text-base py-2 cursor-pointer rounded-2xl`}
+              to="/login"
+            >
+              Login
+            </Link>
+            <Link
+              className="hover:bg-lime-500 transition text-xs px-2 md:px-6 md:text-base py-2 bg-[#D2F159] text-gray-900 cursor-pointer rounded-2xl"
+              to="/signup"
+            >
+              Signup
+            </Link>
+          </>
+        )}
+        {url ? (
+          <img
+            src={url}
+            alt="User avatar"
+            onClick={toggleSettings}
+            className="size-8 md:w-12 md:h-12 cursor-pointer rounded-full object-cover transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D2F159] focus:ring-offset-2"
+          />
+        ) : isNonGoogleSignedIn ? (
+          <div
+            className="size-8 md:w-12 md:h-12 bg-[#D2F159] cursor-pointer rounded-full flex items-center justify-center transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#D2F159] focus:ring-offset-2"
+            onClick={toggleSettings}
+            aria-label="Open Settings"
+          ></div>
+        ) : (
+          !isAdminLoginAccess && (
+            <EllipsisVertical
+              onClick={toggleSettings}
+              className={`w-7 h-7 cursor-pointer z-900${
+                darkMode
+                  ? "text-gray-300 hover:text-white"
+                  : "text-gray-700 hover:text-gray-900"
+              }`}
+              aria-label="Open Settings"
+            />
+          )
+        )}
+      </div>
+    </div>
+  );
+}

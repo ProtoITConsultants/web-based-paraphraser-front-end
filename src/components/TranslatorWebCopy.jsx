@@ -1,0 +1,374 @@
+import { Link } from "react-router-dom";
+
+export default function TranslatorWebCopy({ darkMode }) {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const languageCategories = [
+    {
+      title: "From English",
+      languages: [
+        "Korean",
+        "Vietnamese",
+        "Dutch",
+        "Romanian",
+        "Albanian",
+        "Burmese",
+        "Chinese Simplified",
+        "Bengali",
+        "Farsi",
+        "Arabic",
+        "Gujarati",
+        "Egyptian",
+        "Uzbek",
+        "Hmong"
+      ]
+    },
+    {
+      title: "To English",
+      languages: [
+        "Vietnamese",
+        "Somali",
+        "Portuguese",
+        "Haitian Creole",
+        "Italian",
+        "Kinyarwanda",
+        "Norwegian",
+        "Taiwanese",
+        "Cantonese",
+        "Norse",
+        "Khmer"
+      ]
+    }
+  ];
+
+  const userTypes = [
+    "Students",
+    "Professionals",
+    "Researchers",
+    "Freelancers",
+    "Businesses",
+    "Writers"
+  ];
+
+  const benefits = [
+    "Natural sentence flow",
+    "True meaning is maintained",
+    "Supports rare languages",
+    "Clean, simple wording",
+    "Fast results",
+    "No complicated steps",
+    "Suitable for long documents",
+    "Balanced tone"
+  ];
+
+  return (
+    <div className="mx-auto">
+      {/* Hero Section */}
+      <div className="m-12 mt-16 text-center md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Translate Any Language to <span className="text-[#D2F159]">English</span> & English to Any Language
+        </h1>
+        <p className={`text-lg md:text-xl mx-auto md:px-8 px-4 mb-4 ${
+          darkMode ? "text-gray-400" : "text-gray-600"
+        }`}>
+          Whether you are working with a single sentence or a long paragraph. It only takes a few seconds to translate any text between English and other languages whether you are working with a single sentence or a long paragraph. The Translator tool will translate your words in a readable version in the language of your choice.
+        </p>
+        <p className={`text-lg md:text-xl mx-auto md:px-8 px-4 ${
+          darkMode ? "text-gray-400" : "text-gray-600"
+        }`}>
+          You can simply translate text between English and any language or between other languages and English, be it Portuguese to English any other language. Our tool makes sure that your message remains clear and easy to comprehend.
+        </p>
+      </div>
+
+      {/* What Makes Us Different */}
+      <div className="mt-16 mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-6 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          What Makes Our Translator <span className="text-[#D2F159]">Different</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12 mx-auto md:px-8 px-4`}>
+          <p className={`text-lg md:text-xl text-center mb-4 ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}>
+            Many tools translate word by word. We focus on <span className="font-bold text-[#D2F159]">meaning, clarity, and proper sentence structure</span>. Your translated content will sound natural, readable, and ready to use.
+          </p>
+          <p className={`text-lg text-center mb-8 ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}>
+            Our translator works equally well for:
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {userTypes.map((user, index) => (
+              <div
+                key={index}
+                className={`${darkMode ? "bg-black" : "bg-white"} rounded-xl p-4 text-center shadow-md`}
+              >
+                <p className={`font-semibold ${darkMode ? "text-white" : "text-gray-900"}`}>
+                  {user}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className={`text-center mt-6 ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}>
+            No matter what language you work with, our goal is to help you get an accurate and clean translation.
+          </p>
+        </div>
+      </div>
+
+      {/* Supported Languages */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Supported <span className="text-[#D2F159]">Languages</span>
+        </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {languageCategories.map((category, idx) => (
+            <div
+              key={idx}
+              className={`rounded-3xl p-8 border-2 ${
+                darkMode ? "bg-black border-gray-800" : "bg-white border-gray-200"
+              }`}
+            >
+              <h3 className={`text-2xl font-bold mb-6 text-center ${
+                darkMode ? "text-[#D2F159]" : "text-[#D2F159]"
+              }`}>
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {category.languages.map((lang, index) => (
+                  <span
+                    key={index}
+                    className={`px-4 py-2 rounded-full text-sm font-medium border ${
+                      darkMode 
+                        ? "bg-gray-900 border-gray-700 text-gray-300" 
+                        : "bg-gray-50 border-gray-200 text-gray-700"
+                    }`}
+                  >
+                    {lang}
+                  </span>
+                ))}
+                <span
+                  className={`px-4 py-2 rounded-full text-sm font-bold border-2 border-[#D2F159] text-[#D2F159]`}
+                >
+                  and more...
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* What You Can Translate */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          What You Can <span className="text-[#D2F159]">Translate</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto md:px-8 px-4">
+          {[
+            { title: "Academic content", desc: "Translate study notes, research papers, or reference material." },
+            { title: "Business documents", desc: "Emails, proposals, agreements, and reports." },
+            { title: "Creative content", desc: "Stories, blogs, captions, and listings." },
+            { title: "Technical content", desc: "Instructions, manuals, and guides." },
+            { title: "Personal content", desc: "Messages, letters, and everyday communication." }
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 border-l-4 border-[#D2F159]`}
+            >
+              <h3 className={`font-bold text-xl mb-3 ${darkMode ? "text-white" : "text-gray-900"}`}>
+                ✔ {item.title}
+              </h3>
+              <p className={`${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* How to Use */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Step by Step Instructions to Use <span className="text-[#D2F159]">Translator</span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mx-auto md:px-8 px-4">
+          {[
+            { step: "01", title: "Paste Your Text", desc: "Paste your sentence, paragraph, or long content into the input box." },
+            { step: "02", title: "Choose Your Language", desc: "Select from English, Korean, Vietnamese, Portuguese, Somali, Burmese, Dutch, Arabic, Bengali, Farsi, Malayalam, and more." },
+            { step: "03", title: 'Click "Translate"', desc: "Your new text appears instantly in English or any selected language." },
+            { step: "04", title: "Review the Result", desc: "Your translation will be smooth, clear, and easy to understand." },
+            { step: "05", title: "Copy or Download", desc: "Use your translated content anywhere — in assignments, emails, research, or business work." }
+          ].map((item, index) => (
+            <div
+              key={index}
+              className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-2xl p-6 text-center`}
+            >
+              <div className="w-12 h-12 bg-[#D2F159] rounded-full flex items-center justify-center mx-auto md:px-8 px-4 mb-4 text-black font-bold text-xl">
+                {item.step}
+              </div>
+              <h3 className={`font-bold text-lg mb-2 ${darkMode ? "text-white" : "text-gray-900"}`}>
+                {item.title}
+              </h3>
+              <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Why Students Prefer */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Why Students Prefer Our <span className="text-[#D2F159]">Translator</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12`}>
+          <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            Students work with multilingual books, online sources, and research. Our translator helps them:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              "Understand foreign content",
+              "Convert Portuguese language translation to English",
+              "Translate English to Korean for projects",
+              "Simplify complex paragraphs",
+              "Convert English to Vietnamese study material"
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+                <span className={`${darkMode ? "text-gray-300" : "text-gray-700"}`}>{item}</span>
+              </div>
+            ))}
+          </div>
+          <p className={`text-lg mt-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            It keeps meaning clear so learning becomes easier.
+          </p>
+        </div>
+      </div>
+
+      {/* Why Professionals Trust */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Why Professionals Trust Our <span className="text-[#D2F159]">Translator</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12`}>
+          <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            Writers, marketers, and businesses use our tool to:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              "Translate emails",
+              "Prepare multilingual proposals",
+              "Convert Somali or Kinyarwanda content",
+              "Translate client messages quickly",
+              "Work with global audiences"
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+                <span className={`${darkMode ? "text-gray-300" : "text-gray-700"}`}>{item}</span>
+              </div>
+            ))}
+          </div>
+          <p className={`text-lg mt-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            It saves time and adds clarity to communication.
+          </p>
+        </div>
+      </div>
+
+      {/* Why Researchers Use */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Why Researchers Use Our <span className="text-[#D2F159]">Tool</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12`}>
+          <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            Researchers often come across papers written in different languages. Our translator helps them read:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              "Arabic articles",
+              "Chinese references",
+              "Italian journals",
+              "Portuguese reports",
+              "Bengali or Vietnamese studies"
+            ].map((item, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+                <span className={`${darkMode ? "text-gray-300" : "text-gray-700"}`}>{item}</span>
+              </div>
+            ))}
+          </div>
+          <p className={`text-lg mt-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+            You get clean and readable translation without losing context.
+          </p>
+        </div>
+      </div>
+
+      {/* Benefits */}
+      <div className="mb-16 md:max-w-[1240px] mx-auto md:px-8 px-4">
+        <h2 className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Benefits of Using Our <span className="text-[#D2F159]">Translator</span>
+        </h2>
+        <div className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} rounded-3xl p-8 md:p-12 mx-auto`}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3"
+              >
+                <div className="w-2 h-2 bg-[#D2F159] rounded-full flex-shrink-0"></div>
+                <span className={`text-lg ${darkMode ? "text-white" : "text-gray-900"}`}>
+                  {benefit}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className={`${darkMode ? "bg-black" : "bg-gray-100"} mx-auto py-16 flex flex-col items-center text-center`}>
+        <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+          darkMode ? "text-white" : "text-gray-900"
+        }`}>
+          Translate without <span className="text-[#D2F159]">confusion</span>
+        </h2>
+        <p className={`text-xl mb-2 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+          Work with any language.
+        </p>
+        <p className={`text-xl mb-6 ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+          Understand global content easily.
+        </p>
+        <Link
+          onClick={scrollToTop}
+          className="bg-[#D2F159] cursor-pointer text-black text-lg px-8 py-4 rounded-full hover:bg-[#c5e14a] transition-colors"
+        >
+          Try our Translator today — fast, simple, and free
+        </Link>
+      </div>
+    </div>
+  );
+}
