@@ -33,9 +33,16 @@ export const Navbar = ({ darkMode, setDarkMode, data, isAuthRoute }) => {
       {/* Settings Panel - Popup */}
       {showSettings && (
         <>
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 z-40"
+            onClick={handleBackdropClick}
+          />
+          
           {/* Settings Panel */}
           <div
-            className="fixed md:top-24 top-16 md:right-12 right-8 z-1000"
+            className="fixed md:top-24 top-16 md:right-12 right-8 z-50"
+            onClick={(e) => e.stopPropagation()}
           >
             <SettingsPanel
               darkMode={darkMode}

@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className={`${darkMode ? "bg-[#101214]" : "bg-white"} scroll-smooth`}>
-      <h1 className="text-3xl md:text-4xl font-semibold md:mt-24 mt-22 px-8">Paraphraser</h1>
+      <h1 className={`${darkMode ? "text-white" : "text-gray-900"} text-3xl md:text-4xl font-semibold md:mt-24 mt-22 px-8`}>Paraphraser</h1>
       <ParaphrasingTool
         darkMode={darkMode}
         setDarkMode={setDarkMode}

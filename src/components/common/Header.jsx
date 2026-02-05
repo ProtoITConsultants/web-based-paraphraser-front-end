@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { EllipsisVertical } from "lucide-react";
 
 export default function Header({
@@ -15,7 +15,6 @@ export default function Header({
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isUserLoggedIn") === "true"
   );
-  const settingsTriggerRef = useRef(null);
 
   // Check if on login page and redirected from admin
   const isAdminLoginAccess =
@@ -148,25 +147,6 @@ export default function Header({
     }
   }, [location.pathname]);
 
-  // Close settings panel when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (settingsTriggerRef.current && !settingsTriggerRef.current.contains(event.target)) {
-        if (showSettings) {
-          setShowSettings(false);
-        }
-      }
-    };
-
-    if (showSettings) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showSettings, setShowSettings]);
-
   // Toggle settings panel visibility
   const toggleSettings = () => {
     console.log(
@@ -257,7 +237,7 @@ export default function Header({
           );
         })}
       </div>
-      <div className="ml-auto flex items-center gap-2 md:gap-3" ref={settingsTriggerRef}>
+      <div className="ml-auto flex items-center gap-2 md:gap-3">
         {(isOnAdminRoute || isAdminLoginAccess) &&
           navLinks
             .filter((link) => link.name === "Blogs" && link.showOnAdmin)
@@ -327,7 +307,7 @@ export default function Header({
           !isAdminLoginAccess && (
             <EllipsisVertical
               onClick={toggleSettings}
-              className={`w-7 h-7 cursor-pointer z-900${
+              className={`w-7 h-7 cursor-pointer z-900 ${
                 darkMode
                   ? "text-gray-300 hover:text-white"
                   : "text-gray-700 hover:text-gray-900"
